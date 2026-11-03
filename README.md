@@ -204,8 +204,13 @@ flutter:
   uses-material-design: true
   assets:
     - asset/
+    - asset/categories/
+    - asset/subcategories/
+    - asset/campaigns/
+    - assets/
+    - assets/campaigns/
 ```
-All 44 image assets, including transparent PNG cutouts and high-resolution JPEG banners, reside in `asset/` and are resolved using `Image.asset('asset/<filename>')`.
+Over 1,080 verified high-definition product, category, and promotional campaign assets are organized into dedicated directory structures (`asset/categories/`, `asset/subcategories/`, `asset/campaigns/`) and resolved using native Flutter asset pipelines.
 
 ---
 
@@ -378,12 +383,11 @@ Mounted at the bottom of the shell is a custom-engineered floating pill bar:
 #### SCR-01: Splash Screen
 - **File:** [`lib/authentication/splash_screen.dart`](file:///c:/Users/user/OneDrive/Desktop/techkart/lib/authentication/splash_screen.dart)
 - **Route:** `/`
-- **Visual Structure:** Festive Diwali edition. Features dual procedural glowing clay Diyas (`DiyaPainter`), realistic flame oscillations, metallic gold brand lettering, and charm pill tags ("Audio & Sound", "Super Fast Charging").
-- **Interactive Elements:**
-  - `Get Started` Button: Prominent full-width button at the bottom of the screen.
-  - Button Action: Invokes `AppNavigator.pushReplacementNamed(context, AppRoutes.onboarding)`.
-- **Precache Lifecycle:** Precaches critical assets (`app_logo.png`, `diwali_banner.png`) during animation controller run.
-- **State & Error Handling:** Graceful fallback if asset loading is delayed; animation repeats indefinitely until user interaction.
+- **Visual Structure:** Modern minimalist TechKart hero screen (`asset/splash_screen_new.png`). Features official TechKart branding, podium gadget arrangement, ambient floating canvas glow, and deep midnight navy styling.
+- **Interactive Lifecycle & Navigation:**
+  - **User-Controlled Action (Timer Removed):** The automatic timer/delayed auto-navigation has been intentionally disabled (`autoNavigate = false`). The user advances purposefully by pressing the primary **"Get Started"** button.
+  - **Button Action:** Executes `_navigateToNext()`, validating session tokens via `SessionManager()`. Authenticated sessions navigate directly to `AppRoutes.mainShell`, completed onboarding routes to `AppRoutes.login`, and first-time launches transition into `AppRoutes.onboarding`.
+- **Asset Pre-caching:** Precaches `asset/splash_screen_new.png`, `asset/TechKart_Logo.png`, and `asset/app_logo.png` on mount.
 
 #### SCR-02: Onboarding Flow
 - **File:** [`lib/authentication/onboarding.dart`](file:///c:/Users/user/OneDrive/Desktop/techkart/lib/authentication/onboarding.dart)
@@ -446,16 +450,30 @@ Mounted at the bottom of the shell is a custom-engineered floating pill bar:
 #### SCR-09: Flagship Home Screen
 - **File:** [`lib/navigation/home.dart`](file:///c:/Users/user/OneDrive/Desktop/techkart/lib/navigation/home.dart)
 - **Route:** `/home`
-- **Visual Structure:** Full-length scrollable discovery feed with custom festive canvas backdrops (`ResponsiveFestiveBackgroundPainter`).
+- **Visual Structure:** Storefront discovery feed in soft `#F5FAFF` background with precision top branding, search bar, promotional campaign carousel, category rail, curated 2x2 grid showcases, and verified hardware guarantee banner.
 - **Sections Audited:**
-  1. **Top Bar & Delivery Selector:** Location pin icon with active delivery address selector. Displays modal sheet allowing switching between metropolitan hubs (e.g., Bengaluru 560001, Mumbai 400051, Delhi 110001, Hyderabad 500081, San Francisco 94103). Notification bell with badge count.
-  2. **Search Bar:** Tapping opens `/search_overlay`. Integrated camera icon triggers `/ai_visual_search_camera`.
-  3. **Flagship Carousel:** 8-slide auto-sliding carousel with progress indicator bars. Features Apple Watch Ultra 2, Sennheiser Momentum 4, ROG Ally X, and Sony WH-1000XM5.
-  4. **15m Hyper-Express Delivery Row:** Horizontal pill cards displaying products available for sub-15-minute fulfillment.
-  5. **Diwali Festive Utsav Deals:** Countdown timer ("Ends in 04h : 18m : 32s"), gold-bordered cards, festive diya badges, and deep percentage discounts.
-  6. **Ace Brands / Brand Spotlight:** Horizontal circular avatar carousel (Apple, Sony, Sennheiser, Samsung, Bose, Anker, ASUS ROG, Logitech).
-  7. **TechKart Live / Video Teardowns:** Interactive video thumbnail cards showing live teardown streams with real-time viewer count badges.
-  8. **Curated Bundles:** Multi-item discounted packages (e.g., "Audiophile Travel Bundle: Sony WH-1000XM5 + Anker 737 GaN").
+  1. **Top Header & Brand Bar:** Official TechKart brand mark + typography, real-time unread notification badge bell (`/notifications`), and live customer `ProfileAvatar` linking directly to `/customer_profile_hub`.
+  2. **Hyper-Local Logistics Strip:** Real-time delivery pin ("Delivering to Mumbai 400001") alongside express delivery SLA badge ("⚡ 24-h Fast").
+  3. **Search Bar:** Rounded search pill (`#EAF5FF`) with voice search mic and AI camera visual search shortcut (`/ai_visual_search_camera`).
+  4. **10-Campaign Promotional Carousel (Reference Layout & Studio Photography):**
+     - Full-bleed rounded banner cards (`BorderRadius.circular(22)`) with deep slate-to-navy background gradients.
+     - **Native Flutter Typography:** Category pill tags (e.g., `LIMITED EDITION`, `STUDIO ACOUSTICS`, `AEROSPACE GRADE`), Domine bold headlines, italic Playfair Display script sub-headlines, and specs body text.
+     - **CTA Pill Button:** Glowing orange gradient button with enclosed circular arrow (`→`) linking to target product details.
+     - **10 Distinct Gadget Campaigns:**
+       1. *Ultimate Tech Collection* (`asset/campaigns/ultimate_tech_collection.png`)
+       2. *Sound Without Limits* (`asset/campaigns/sound_without_limits.png`)
+       3. *Upgrade Your Wrist* (`asset/campaigns/upgrade_your_wrist.png`)
+       4. *Power Your Setup* (`asset/campaigns/power_your_setup.png`)
+       5. *Next-Level Smartphones* (`asset/campaigns/next_level_smartphones.png`)
+       6. *Charge Faster* (`asset/campaigns/charge_faster.png`)
+       7. *Power That Travels* (`asset/campaigns/power_that_travels.png`)
+       8. *Future in Your Hands* (`asset/campaigns/future_in_your_hands.png`)
+       9. *Build Your Dream Setup* (`asset/campaigns/build_your_dream_setup.png`)
+       10. *Discover What's Next* (`asset/campaigns/discover_whats_next.png`)
+     - **Carousel Mechanics:** 4-second auto-rotation via `Timer.periodic`, smooth `easeInOutCubic` curves, interactive 10-dot pagination bar with active elongated pill, and top-right wishlist heart button synced with backend API.
+  5. **Category Rail:** Quick-access circular icon rails (Audio, Phones, Docks, Wearables) with total catalog link (`BROWSE ALL (24)`).
+  6. **Curated Drops & Flagship Deals:** 2x2 responsive product grids (Aura Studio ANC, Lumina Fold OLED, Chronos Ultra X, Volta 65W GaN, Apex Fold, Omni Dock Station, HyperDrive GaN, Nova Buds Case).
+  7. **Hardware Guarantee Footer:** TechKart Direct 1-Year replacement warranty badge with zero-question return policy link.
 
 #### SCR-10: Categories Screen
 - **File:** [`lib/navigation/categories.dart`](file:///c:/Users/user/OneDrive/Desktop/techkart/lib/navigation/categories.dart)
@@ -1271,4 +1289,4 @@ flutter test
 
 
 ## Project Overview
-TechKart � Discover Tech. Shop Smart. An AI-powered electronics e-commerce app featuring visual gadget discovery, image-based product search, conversational shopping assistance, personalized recommendations, and order tracking.
+TechKart  Discover Tech. Shop Smart. An AI-powered electronics e-commerce app featuring visual gadget discovery, image-based product search, conversational shopping assistance, personalized recommendations, and order tracking.
