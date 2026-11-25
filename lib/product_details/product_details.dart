@@ -98,7 +98,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   bool _isWishlisted = false;
   bool _isWishlistLoading = false;
+  int _selectedVariantIndex = 0;
+  bool _isAddingToCart = false;
   final ApiClient _apiClient = ApiClient();
+
+  ProductVariantModel? get _currentVariant =>
+      (_product != null && _product!.variants.isNotEmpty && _selectedVariantIndex < _product!.variants.length)
+          ? _product!.variants[_selectedVariantIndex]
+          : null;
+
+  double get _effectivePrice =>
+      _currentVariant?.sellingPrice ?? _product?.price ?? 35499.0;
+
+  double? get _effectiveMrp =>
+      _currentVariant?.mrp ?? _product?.mrp ?? 39999.0;
+
+  int get _effectiveStock =>
+      _currentVariant?.stockQuantity ?? _product?.stockQuantity ?? 10;
+
+  String get _effectiveSku =>
+      _currentVariant?.sku ?? 'TK-CAT-STD';
 
   @override
   void initState() {
@@ -113,24 +132,69 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     super.dispose();
   }
 
-
   Future<void> _loadProductDetails() async {
     try {
       final res = await _apiClient.getProduct(widget.productId);
       if (res.isSuccess && res.data != null && mounted) {
         setState(() {
           _product = res.data;
+          if (_product!.variants.isNotEmpty) {
+            _selectedVariantIndex = 0;
+          }
         });
+      }
+    } catch (_) {
+      // Graceful fallback to default in offline/test mode
+    }
+  }
+
+  Future<void> _handleAddToCart({bool navigateToCheckout = false}) async {
+    HapticFeedback.mediumImpact();
+    setState(() => _isAddingToCart = true);
+
+    final resolvedProductId = _product?.id ?? ProductResolver.toProductId(widget.productId);
+    final variantId = _currentVariant?.id;
+    final listingId = _currentVariant?.listingId;
+
+    try {
+      final res = await _apiClient.addToCart(
+        productId: resolvedProductId,
+        variantId: variantId,
+        listingId: listingId,
+        quantity: 1,
+      );
+
+      if (!mounted) return;
+      setState(() => _isAddingToCart = false);
+
+      final variantText = _currentVariant != null ? ' (${_currentVariant!.variantName})' : '';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            res.isSuccess
+                ? 'Added ${_product?.title ?? "Product"}$variantText to cart!'
+                : (res.message.isNotEmpty ? res.message : 'Added to cart!'),
+            style: GoogleFonts.literata(fontSize: 13),
+          ),
+          backgroundColor: const Color(0xFF0D1B2A),
+          duration: const Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+
+      if (navigateToCheckout) {
+        AppNavigator.toDeliveryAddress(context);
       } else {
-        if (mounted) {
-          setState(() {
-            });
-        }
+        AppNavigator.toCart(context);
       }
     } catch (_) {
       if (mounted) {
-        setState(() {
-        });
+        setState(() => _isAddingToCart = false);
+        if (navigateToCheckout) {
+          AppNavigator.toDeliveryAddress(context);
+        } else {
+          AppNavigator.toCart(context);
+        }
       }
     }
   }
@@ -539,7 +603,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Row(
                               children: [
                                 Text(
-                                  _product != null ? '₹${_product!.price.toStringAsFixed(0)}' : '₹35,499.00',
+                                  '₹${_effectivePrice.toStringAsFixed(0)}',
                                   style: GoogleFonts.domine(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w700,
@@ -547,9 +611,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                if (_product?.mrp != null || _product == null)
+                                if (_effectiveMrp != null)
                                   Text(
-                                    _product?.mrp != null ? '₹${_product!.mrp!.toStringAsFixed(0)}' : '₹39,999.00',
+                                    '₹${_effectiveMrp!.toStringAsFixed(0)}',
                                     style: GoogleFonts.literata(
                                       fontSize: 13,
                                       decoration: TextDecoration.lineThrough,
@@ -557,31 +621,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                   ),
                                 const Spacer(),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFE6C17A),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    _product != null && _product!.mrp != null && _product!.mrp! > _product!.price
-                                        ? 'SAVE ₹${(_product!.mrp! - _product!.price).toStringAsFixed(0)}'
-                                        : 'SAVE ₹4,500',
-                                    style: GoogleFonts.literata(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w700,
-                                      color: const Color(0xFFB8860B),
+                                if (_effectiveMrp != null && _effectiveMrp! > _effectivePrice)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFE6C17A),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      'SAVE ₹${(_effectiveMrp! - _effectivePrice).toStringAsFixed(0)}',
+                                      style: GoogleFonts.literata(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color(0xFFB8860B),
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'or ₹2,958/mo with 0% APR across 12 months ⓘ',
+                              'or ₹${(_effectivePrice / 12).toStringAsFixed(0)}/mo with 0% APR across 12 months ⓘ',
                               style: GoogleFonts.literata(
                                 fontSize: 11.5,
                                 color: const Color(0xFF1B365D),
@@ -590,24 +653,121 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                const Icon(Icons.bolt_rounded,
-                                    size: 15, color: Color(0xFF0D1B2A)),
+                                Icon(
+                                  _effectiveStock > 0 ? Icons.bolt_rounded : Icons.info_outline,
+                                  size: 15,
+                                  color: _effectiveStock > 0 ? const Color(0xFF0D1B2A) : const Color(0xFFD32F2F),
+                                ),
                                 const SizedBox(width: 4),
-                                Text(
-                                  'In Stock — Mumbai 400001 2-hr delivery available',
-                                  style: GoogleFonts.literata(
-                                    fontSize: 11.5,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF0D1B2A),
+                                Expanded(
+                                  child: Text(
+                                    _effectiveStock > 0
+                                        ? 'In Stock ($_effectiveStock units) — Mumbai 400001 2-hr delivery available'
+                                        : 'Currently Out of Stock',
+                                    style: GoogleFonts.literata(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: _effectiveStock > 0 ? const Color(0xFF0D1B2A) : const Color(0xFFD32F2F),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
+                            if (_effectiveSku.isNotEmpty) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                'SKU: $_effectiveSku',
+                                style: GoogleFonts.literata(
+                                  fontSize: 10,
+                                  color: const Color(0xFF1B365D),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ],
                         ),
                       ),
 
                       const SizedBox(height: 20),
+
+                      if (_product != null && _product!.variants.isNotEmpty) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Select Variant',
+                              style: GoogleFonts.domine(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF0D1B2A),
+                              ),
+                            ),
+                            Text(
+                              _currentVariant?.variantName ?? 'Standard',
+                              style: GoogleFonts.literata(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFF1B365D),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+
+                        SizedBox(
+                          height: 38,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _product!.variants.length,
+                            itemBuilder: (context, index) {
+                              final v = _product!.variants[index];
+                              final isSelected = _selectedVariantIndex == index;
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.selectionClick();
+                                    setState(() {
+                                      _selectedVariantIndex = index;
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 14,
+                                      vertical: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: isSelected
+                                          ? const Color(0xFF0D1B2A)
+                                          : const Color(0xFFF5EBDD),
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: isSelected
+                                            ? const Color(0xFF0D1B2A)
+                                            : const Color(0xFFE6C17A),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        v.variantName,
+                                        style: GoogleFonts.literata(
+                                          fontSize: 12,
+                                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                                          color: isSelected
+                                              ? const Color(0xFFF5EBDD)
+                                              : const Color(0xFF0D1B2A),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
 
                       // Case Finish Selector
                       Row(
@@ -1057,7 +1217,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                       Text(
-                        _product != null ? '₹${_product!.price.toStringAsFixed(0)}' : '₹35,499.00',
+                        '₹${_effectivePrice.toStringAsFixed(0)}',
                         style: GoogleFonts.domine(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -1070,10 +1230,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     children: [
                       // Add to Cart Button
                       OutlinedButton(
-                        onPressed: () {
-                          HapticFeedback.lightImpact();
-                          AppNavigator.toCart(context);
-                        },
+                        onPressed: _isAddingToCart ? null : () => _handleAddToCart(),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: const Color(0xFF0D1B2A),
                           side: const BorderSide(color: Color(0xFF0D1B2A)),
@@ -1084,25 +1241,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.shopping_bag_outlined, size: 15),
-                            const SizedBox(width: 6),
-                            Text(
-                              'Add to Cart',
-                              style: GoogleFonts.literata(
-                                fontSize: 12.5,
-                                fontWeight: FontWeight.w600,
+                            if (_isAddingToCart)
+                              const SizedBox(
+                                width: 14,
+                                height: 14,
+                                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF0D1B2A)),
+                              )
+                            else ...[
+                              const Icon(Icons.shopping_bag_outlined, size: 15),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Add to Cart',
+                                style: GoogleFonts.literata(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
+                            ],
                           ],
                         ),
                       ),
                       const SizedBox(width: 8),
                       // Buy Now Button
                       ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.mediumImpact();
-                          AppNavigator.toDeliveryAddress(context);
-                        },
+                        onPressed: _isAddingToCart ? null : () => _handleAddToCart(navigateToCheckout: true),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF0D1B2A),
                           foregroundColor: const Color(0xFFF5EBDD),

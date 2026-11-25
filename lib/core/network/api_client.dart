@@ -522,6 +522,82 @@ class ApiClient {
     );
   }
 
+  /// Fetch verified brands for a subcategory
+  /// GET /customer/subcategories/{id}/brands
+  Future<ApiResponse<List<BrandModel>>> getSubcategoryBrands(int subcategoryId) async {
+    return get<List<BrandModel>>(
+      'customer/subcategories/$subcategoryId/brands',
+      requiresAuth: false,
+      fromJsonData: (data) {
+        if (data is Map && data['brands'] is List) {
+          return (data['brands'] as List)
+              .map((b) => BrandModel.fromJson(b as Map<String, dynamic>))
+              .toList();
+        } else if (data is List) {
+          return data
+              .map((b) => BrandModel.fromJson(b as Map<String, dynamic>))
+              .toList();
+        }
+        return [];
+      },
+    );
+  }
+
+  /// Fetch verified brands for a category
+  /// GET /customer/brands?category_id={categoryId}
+  Future<ApiResponse<List<BrandModel>>> getCategoryBrands(int categoryId) async {
+    return get<List<BrandModel>>(
+      'customer/brands',
+      queryParameters: {'category_id': categoryId},
+      requiresAuth: false,
+      fromJsonData: (data) {
+        if (data is Map && data['brands'] is List) {
+          return (data['brands'] as List)
+              .map((b) => BrandModel.fromJson(b as Map<String, dynamic>))
+              .toList();
+        } else if (data is List) {
+          return data
+              .map((b) => BrandModel.fromJson(b as Map<String, dynamic>))
+              .toList();
+        }
+        return [];
+      },
+    );
+  }
+
+  /// Add item to cart with variant support
+  /// POST /customer/cart
+  Future<ApiResponse<Map<String, dynamic>>> addToCart({
+    required int productId,
+    int? variantId,
+    int? listingId,
+    int quantity = 1,
+  }) async {
+    final body = <String, dynamic>{
+      'product_id': productId,
+      'quantity': quantity,
+    };
+    if (variantId != null) body['variant_id'] = variantId;
+    if (listingId != null) body['listing_id'] = listingId;
+
+    return post<Map<String, dynamic>>(
+      'customer/cart',
+      body: body,
+      requiresAuth: true,
+      fromJsonData: (data) => data is Map<String, dynamic> ? data : <String, dynamic>{},
+    );
+  }
+
+  /// Get customer cart
+  /// GET /customer/cart
+  Future<ApiResponse<Map<String, dynamic>>> getCart() async {
+    return get<Map<String, dynamic>>(
+      'customer/cart',
+      requiresAuth: true,
+      fromJsonData: (data) => data is Map<String, dynamic> ? data : <String, dynamic>{},
+    );
+  }
+
   void close() {
     _httpClient.close();
   }

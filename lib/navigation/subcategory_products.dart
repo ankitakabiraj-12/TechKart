@@ -41,6 +41,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   List<CategoryModel> _subcategories = [];
+  List<BrandModel> _brands = [];
   bool _isLoading = true;
   String? _errorMessage;
   int _selectedFilterIndex = 0;
@@ -65,6 +66,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
           slug: 'mobiles-smartphones',
         );
     _loadSubcategories();
+    _loadCategoryBrands();
   }
 
   @override
@@ -72,6 +74,20 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
     _searchController.dispose();
     _apiClient.close();
     super.dispose();
+  }
+
+  Future<void> _loadCategoryBrands() async {
+    try {
+      final res = await _apiClient.getCategoryBrands(_effectiveCategory.id);
+      if (!mounted) return;
+      if (res.success && res.data != null) {
+        setState(() {
+          _brands = res.data!;
+        });
+      }
+    } catch (_) {
+      // Graceful fallback
+    }
   }
 
   Future<void> _loadSubcategories() async {
@@ -544,6 +560,71 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                 },
               ),
             ),
+
+            if (_brands.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    const Icon(Icons.corporate_fare_outlined, size: 14, color: Color(0xFF1B365D)),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Popular Brands:',
+                      style: GoogleFonts.literata(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF1B365D),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 6),
+              SizedBox(
+                height: 28,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _brands.length,
+                  itemBuilder: (context, index) {
+                    final b = _brands[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: GestureDetector(
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                          AppNavigator.toSearchResult(
+                            context,
+                            query: b.brandName,
+                            categoryId: _effectiveCategory.id,
+                            categoryName: b.brandName,
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF5EBDD),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+                          ),
+                          child: Center(
+                            child: Text(
+                              b.brandName,
+                              style: GoogleFonts.literata(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFF0D1B2A),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
 
             const SizedBox(height: 12),
 
