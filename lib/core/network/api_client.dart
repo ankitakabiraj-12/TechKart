@@ -11,6 +11,13 @@ import 'wishlist_models.dart';
 import 'catalog_models.dart';
 
 class ApiClient {
+  // Performance: In-memory cache for idempotent GET requests with TTL
+  static final Map<String, _CachedResponse> _responseCache = {};
+
+  static void clearCache() {
+    _responseCache.clear();
+  }
+
   final http.Client _httpClient;
   final TokenStorage _tokenStorage;
   String _baseUrl;
@@ -424,11 +431,12 @@ class ApiClient {
     }
   }
 
-  /// Fetch active categories from backend
-  /// GET /customer/categories
-  Future<ApiResponse<List<CategoryModel>>> getCategories() async {
+  /// Fetch active categories from backend (defaults to root 45 categories)
+  /// GET /customer/categories?parent_id=root
+  Future<ApiResponse<List<CategoryModel>>> getCategories({String parentId = 'root'}) async {
     return get<List<CategoryModel>>(
       'customer/categories',
+      queryParameters: {'parent_id': parentId},
       requiresAuth: false,
       fromJsonData: (data) {
         if (data is List) {
@@ -478,7 +486,10 @@ class ApiClient {
     };
     if (categoryId != null) query['category_id'] = categoryId;
     if (subcategoryId != null) query['subcategory_id'] = subcategoryId;
-    if (search != null && search.isNotEmpty) query['q'] = search;
+    if (search != null && search.isNotEmpty) {
+      query['search'] = search;
+      query['q'] = search;
+    }
     if (sort != null && sort.isNotEmpty) query['sort'] = sort;
 
     return get<List<ProductModel>>(
@@ -513,4 +524,15 @@ class ApiClient {
   void close() {
     _httpClient.close();
   }
+}
+
+
+class _CachedResponse {
+  final dynamic response;
+  final DateTime timestamp;
+  final Duration ttl;
+
+  _CachedResponse(this.response, this.ttl) : timestamp = DateTime.now();
+
+  bool get isExpired => DateTime.now().difference(timestamp) > ttl;
 }

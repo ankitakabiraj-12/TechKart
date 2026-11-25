@@ -45,6 +45,21 @@ class ApiConfig {
   /// Active base URL. Can be reassigned at startup or runtime (e.g., custom LAN IP).
   static String baseUrl = defaultBaseUrl;
 
+  /// Returns the base origin without /api/v1 (e.g. 'http://127.0.0.1:8000')
+  static String get serverOrigin {
+    final uri = Uri.parse(baseUrl);
+    return '${uri.scheme}://${uri.authority}';
+  }
+
+  /// Resolves an image path into a fully qualified URL or asset path
+  static String resolveImageUrl(String path) {
+    if (path.isEmpty) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    final clean = path.startsWith('/') ? path.substring(1) : path;
+    return '$serverOrigin/$clean';
+  }
+
+
   /// Separate connection and response timeout durations:
   /// - connectTimeout: TCP socket connection establishment limit
   /// - responseTimeout: Server processing & data stream reception limit

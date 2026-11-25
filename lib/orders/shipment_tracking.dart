@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../app_routes/app_navigator.dart';
 import '../theme/profile_avatar.dart';
 
 /// TechKart Orders - Shipment Tracking Screen (SCR-32)
@@ -60,7 +61,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -95,10 +96,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -107,10 +105,10 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -120,20 +118,43 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.speed, size: 22, color: Color(0xFF0F172A)),
-            onPressed: widget.onGaugePressed ?? () {},
+            icon: const Icon(Icons.speed, size: 22, color: Color(0xFF0D1B2A)),
+            onPressed: widget.onGaugePressed ??
+                () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Fast Delivery Priority active. On schedule.',
+                        style: GoogleFonts.literata(),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
           const SizedBox(width: 12),
           IconButton(
-            icon: const Icon(Icons.share_outlined, size: 22, color: Color(0xFF0F172A)),
-            onPressed: widget.onShare ?? () {},
+            icon: const Icon(Icons.share_outlined, size: 22, color: Color(0xFF0D1B2A)),
+            onPressed: widget.onShare ??
+                () {
+                  Clipboard.setData(ClipboardData(text: 'Tracking #${widget.trackingId} for order ${widget.orderId}'));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Tracking info copied to clipboard.',
+                        style: GoogleFonts.literata(),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
@@ -151,9 +172,9 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFD3E7F8)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,12 +185,12 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFF5EBDD),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.bolt, size: 14, color: Color(0xFF00344B)),
+                    const Icon(Icons.bolt, size: 14, color: Color(0xFF0D1B2A)),
                     const SizedBox(width: 4),
                     Text(
                       'EXPRESS PRIORITY',
@@ -177,7 +198,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ],
@@ -189,7 +210,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     width: 7,
                     height: 7,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF0284C7),
+                      color: Color(0xFFB8860B),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -199,7 +220,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                 ],
@@ -212,21 +233,21 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             style: GoogleFonts.domine(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF0F172A),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
           const SizedBox(height: 4),
           Row(
             children: [
               const Icon(Icons.access_time_rounded,
-                  size: 14, color: Color(0xFF00344B)),
+                  size: 14, color: Color(0xFF0D1B2A)),
               const SizedBox(width: 6),
               Text(
                 widget.estimatedTime,
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
@@ -235,7 +256,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFFF5EBDD),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -243,11 +264,11 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFDCEEFB),
+                    color: Color(0xFFE6C17A),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.local_shipping,
-                      size: 16, color: Color(0xFF00344B)),
+                      size: 16, color: Color(0xFF0D1B2A)),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -259,7 +280,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       const SizedBox(height: 1),
@@ -267,7 +288,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                         'Next stop: ${widget.nextStop}',
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF64748B),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                     ],
@@ -284,7 +305,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 'Step 3 of 4',
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               Text(
@@ -292,7 +313,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF00344B),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
@@ -303,8 +324,8 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             child: const LinearProgressIndicator(
               value: 0.75,
               minHeight: 5,
-              backgroundColor: Color(0xFFDCEEFB),
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3B4875)),
+              backgroundColor: Color(0xFFE6C17A),
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1B365D)),
             ),
           ),
         ],
@@ -319,9 +340,9 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,7 +359,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.5,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -347,7 +368,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     style: GoogleFonts.domine(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                 ],
@@ -357,19 +378,19 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEAF5FF),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.copy_rounded, size: 13, color: Color(0xFF00344B)),
+                      const Icon(Icons.copy_rounded, size: 13, color: Color(0xFF0D1B2A)),
                       const SizedBox(width: 4),
                       Text(
                         'Copy',
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
@@ -385,11 +406,11 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEAF5FF),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.inventory_2_outlined,
-                    size: 16, color: Color(0xFF00344B)),
+                    size: 16, color: Color(0xFF0D1B2A)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -401,14 +422,14 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     Text(
                       'Standard Courier Partner • Order #${widget.orderId}',
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                   ],
@@ -417,11 +438,11 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEAF5FF),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.phone_outlined,
-                    size: 16, color: Color(0xFF00344B)),
+                    size: 16, color: Color(0xFF0D1B2A)),
               ),
             ],
           ),
@@ -430,7 +451,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
+              color: const Color(0xFFFDFBCF),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -456,14 +477,14 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       Text(
                         'Chronos Ultra 2 + VoltFast GaN Cha...',
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF64748B),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                     ],
@@ -478,7 +499,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(Icons.location_on_outlined,
-                  size: 16, color: Color(0xFF00344B)),
+                  size: 16, color: Color(0xFF0D1B2A)),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
@@ -489,7 +510,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(height: 1),
@@ -497,7 +518,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                       '${widget.recipientName} • ${widget.recipientAddress}',
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                   ],
@@ -517,9 +538,9 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,7 +553,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 style: GoogleFonts.domine(
                   fontSize: 14.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               Text(
@@ -540,7 +561,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -618,21 +639,21 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 height: 24,
                 decoration: BoxDecoration(
                   color: isActive
-                      ? const Color(0xFF3B4875)
-                      : (isDone ? const Color(0xFF00344B) : const Color(0xFFEAF5FF)),
+                      ? const Color(0xFF1B365D)
+                      : (isDone ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A)),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   icon,
                   size: 13,
-                  color: (isActive || isDone) ? Colors.white : const Color(0xFF00344B),
+                  color: (isActive || isDone) ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                 ),
               ),
               if (!isLast)
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: const Color(0xFFE2EDF3),
+                    color: const Color(0xFFE6C17A),
                   ),
                 ),
             ],
@@ -652,7 +673,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF64748B),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       if (tag != null) ...[
@@ -661,7 +682,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 1.5),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEAF5FF),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -670,7 +691,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                               fontFamily: 'Literata',
                               fontSize: 9.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -683,7 +704,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     style: GoogleFonts.domine(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -691,7 +712,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     description,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                       height: 1.35,
                     ),
                   ),
@@ -711,20 +732,20 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFFF3EEE4),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.notifications_active_outlined,
-                size: 18, color: Color(0xFF8B6B2B)),
+                size: 18, color: Color(0xFFB8860B)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -736,14 +757,14 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 Text(
                   'Real-time status updates enabled',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ],
@@ -752,7 +773,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
           Switch(
             value: _whatsappAlerts,
             onChanged: (val) => setState(() => _whatsappAlerts = val),
-            activeThumbColor: const Color(0xFF00344B),
+            activeThumbColor: const Color(0xFF0D1B2A),
           ),
         ],
       ),
@@ -769,10 +790,22 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
           child: SizedBox(
             height: 44,
             child: ElevatedButton.icon(
-              onPressed: widget.onShare ?? () {},
+              onPressed: widget.onShare ??
+                  () {
+                    Clipboard.setData(ClipboardData(text: 'Tracking #${widget.trackingId} for order ${widget.orderId}'));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Tracking link copied to clipboard.',
+                          style: GoogleFonts.literata(),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFEAF5FF),
-                foregroundColor: const Color(0xFF00344B),
+                backgroundColor: const Color(0xFFE6C17A),
+                foregroundColor: const Color(0xFF0D1B2A),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22),
@@ -794,10 +827,10 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
           child: SizedBox(
             height: 44,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => AppNavigator.toConversationalShoppingAssistant(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF00344B),
-                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF0D1B2A),
+                foregroundColor: const Color(0xFFF5EBDD),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22),

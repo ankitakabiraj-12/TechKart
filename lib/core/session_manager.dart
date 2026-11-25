@@ -81,10 +81,28 @@ class SessionManager {
     }
   }
 
+  /// Quick check for local cached session without waiting for a network round-trip.
+  /// Used for instant app startup transitions.
+  Future<bool> hasCachedSession() async {
+    final token = await _tokenStorage.getToken();
+    if (token == null || token.trim().isEmpty) {
+      return false;
+    }
+    final cachedUser = await _tokenStorage.getUserData();
+    if (cachedUser != null && cachedUser.isNotEmpty) {
+      try {
+        _currentUser = jsonDecode(cachedUser) as Map<String, dynamic>;
+        currentUserNotifier.value = _currentUser;
+        return true;
+      } catch (_) {}
+    }
+    return false;
+  }
+
   /// Validate current session against MySQL backend.
   /// Returns true if token is valid and session is active.
   /// Refreshes user profile (including gender) from database.
-  Future<bool> validateSession() async {
+  Future<bool> validateSession({Duration timeout = const Duration(seconds: 4)}) async {
     final token = await _tokenStorage.getToken();
     if (token == null || token.trim().isEmpty) {
       await clearSession();
@@ -95,6 +113,8 @@ class SessionManager {
       final response = await _apiClient.get<Map<String, dynamic>>(
         '/customer/auth/profile',
         requiresAuth: true,
+        connectTimeout: timeout,
+        responseTimeout: timeout,
         fromJsonData: (data) =>
             data is Map<String, dynamic> ? data : <String, dynamic>{},
       );

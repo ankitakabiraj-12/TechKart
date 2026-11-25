@@ -123,13 +123,13 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -151,7 +151,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                     },
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -163,8 +163,9 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                     child: Container(
                       height: 48,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEAF5FF),
+                        color: const Color(0xFFF5EBDD),
                         borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: const Color(0xFFE6C17A)),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Row(
@@ -172,7 +173,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                           const Icon(
                             Icons.search_rounded,
                             size: 20,
-                            color: Color(0xFF4A5568),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -182,10 +183,12 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               onSubmitted: _onSearchSubmitted,
                               style: GoogleFonts.literata(
                                 fontSize: 14.5,
-                                color: const Color(0xFF00344B),
+                                color: const Color(0xFF0D1B2A),
                                 fontWeight: FontWeight.w500,
                               ),
                               decoration: const InputDecoration(
+                                filled: false,
+                                fillColor: Colors.transparent,
                                 isDense: true,
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.zero,
@@ -201,14 +204,14 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               width: 18,
                               height: 18,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFCCE4F5),
+                                color: Color(0xFFE6C17A),
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
                                 child: Icon(
                                   Icons.close_rounded,
                                   size: 13,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
@@ -217,7 +220,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                           const Icon(
                             Icons.mic_none_rounded,
                             size: 20,
-                            color: Color(0xFF4A5568),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 10),
                           GestureDetector(
@@ -228,7 +231,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                             child: const Icon(
                               Icons.camera_alt_outlined,
                               size: 20,
-                              color: Color(0xFF4A5568),
+                              color: Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -268,8 +271,8 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF00344B)
-                              : const Color(0xFFEAF5FF),
+                              ? const Color(0xFF0D1B2A)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
@@ -280,8 +283,8 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               fontWeight:
                                   isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: isSelected
-                                  ? Colors.white
-                                  : const Color(0xFF00344B),
+                                  ? const Color(0xFFF5EBDD)
+                                  : const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -323,11 +326,11 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                             vertical: 14,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color(0xFFF5EBDD),
                             borderRadius: BorderRadius.circular(18),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                                color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),
@@ -340,14 +343,14 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                 width: 44,
                                 height: 44,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFFEAF5FF),
+                                  color: Color(0xFFE6C17A),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Center(
                                   child: Icon(
                                     Icons.watch_outlined,
                                     size: 22,
-                                    color: Color(0xFF00344B),
+                                    color: Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ),
@@ -365,7 +368,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                             style: GoogleFonts.domine(
                                               fontSize: 14.5,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
@@ -377,7 +380,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                             vertical: 4,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFF3EEE4),
+                                            color: const Color(0xFFE6C17A),
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
@@ -387,7 +390,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                             style: GoogleFonts.literata(
                                               fontSize: 8.5,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF8B6B2B),
+                                              color: const Color(0xFFB8860B),
                                               height: 1.1,
                                               letterSpacing: 0.6,
                                             ),
@@ -397,7 +400,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                         const Icon(
                                           Icons.north_east_rounded,
                                           size: 18,
-                                          color: Color(0xFF4A5568),
+                                          color: Color(0xFF1B365D),
                                         ),
                                       ],
                                     ),
@@ -407,7 +410,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF718096),
+                                        color: const Color(0xFF1B365D),
                                       ),
                                     ),
                                   ],
@@ -431,7 +434,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -446,7 +449,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                               ),
                             ),
                           ),
@@ -467,7 +470,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFEAF5FF),
+                                color: const Color(0xFFE6C17A),
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               child: Row(
@@ -476,7 +479,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                   const Icon(
                                     Icons.history_rounded,
                                     size: 16,
-                                    color: Color(0xFF4A5568),
+                                    color: Color(0xFF1B365D),
                                   ),
                                   const SizedBox(width: 6),
                                   Text(
@@ -484,7 +487,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                     style: GoogleFonts.literata(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   const SizedBox(width: 8),
@@ -497,7 +500,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                     child: const Icon(
                                       Icons.close_rounded,
                                       size: 14,
-                                      color: Color(0xFF718096),
+                                      color: Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -517,7 +520,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                           const Icon(
                             Icons.local_fire_department_rounded,
                             size: 18,
-                            color: Color(0xFF00344B),
+                            color: Color(0xFF0D1B2A),
                           ),
                           const SizedBox(width: 6),
                           Text(
@@ -525,7 +528,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -538,11 +541,11 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -570,7 +573,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                         style: GoogleFonts.literata(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                       ),
                                     ),
@@ -585,7 +588,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                               style: GoogleFonts.literata(
                                                 fontSize: 13.5,
                                                 fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF2D3748),
+                                                color: const Color(0xFF1B365D),
                                               ),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -600,7 +603,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                                 vertical: 3,
                                               ),
                                               decoration: BoxDecoration(
-                                                color: const Color(0xFFF3EEE4),
+                                                color: const Color(0xFFE6C17A),
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                               ),
@@ -610,7 +613,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w600,
                                                   color:
-                                                      const Color(0xFF8B6B2B),
+                                                      const Color(0xFFB8860B),
                                                 ),
                                               ),
                                             ),
@@ -622,7 +625,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                     const Icon(
                                       Icons.north_east_rounded,
                                       size: 17,
-                                      color: Color(0xFF718096),
+                                      color: Color(0xFF1B365D),
                                     ),
                                   ],
                                 ),
@@ -641,7 +644,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(22),
                         ),
                         child: Column(
@@ -653,14 +656,14 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                   width: 36,
                                   height: 36,
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color(0xFFF5EBDD),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.auto_awesome_rounded,
                                       size: 18,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ),
@@ -670,7 +673,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                   style: GoogleFonts.domine(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ],
@@ -681,7 +684,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                                 height: 1.4,
                               ),
                             ),
@@ -697,13 +700,13 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                           context);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: const Color(0xFF00344B),
+                                  backgroundColor: const Color(0xFFF5EBDD),
+                                  foregroundColor: const Color(0xFF0D1B2A),
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(22),
                                     side: const BorderSide(
-                                      color: Color(0xFFCBD5E1),
+                                      color: Color(0xFFE6C17A),
                                       width: 1,
                                     ),
                                   ),
@@ -716,14 +719,14 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                     const SizedBox(width: 8),
                                     const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 16,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ],
                                 ),
@@ -741,7 +744,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                           width: 134,
                           height: 4,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFCBD5E1),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

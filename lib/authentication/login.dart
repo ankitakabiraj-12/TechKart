@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen>
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: const Color(0xFF00344B),
+        backgroundColor: const Color(0xFF0D1B2A),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -244,13 +244,13 @@ class _LoginScreenState extends State<LoginScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -294,29 +294,36 @@ class _LoginScreenState extends State<LoginScreen>
                                 width: 44,
                                 height: 44,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFFEBF5FE),
+                                  color: Color(0xFFE6C17A),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Center(
                                   child: Icon(
                                     Icons.arrow_back_ios_new_rounded,
                                     size: 16,
-                                    color: Color(0xFF00344B),
+                                    color: Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ),
                             ),
 
                             // TechKart Logo Mark
-                            Image.asset(
-                              'asset/app_logo.png',
+                            Container(
+                              width: 38,
                               height: 38,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Image.asset(
-                                'asset/app_launcher_icon.png',
-                                height: 38,
-                                fit: BoxFit.contain,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'asset/app_logo.png',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset(
+                                    'asset/app_launcher_icon.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -333,7 +340,7 @@ class _LoginScreenState extends State<LoginScreen>
                             vertical: 7,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEBF5FE),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -342,7 +349,7 @@ class _LoginScreenState extends State<LoginScreen>
                               const Icon(
                                 Icons.verified_user_outlined,
                                 size: 14,
-                                color: Color(0xFF00344B),
+                                color: Color(0xFF0D1B2A),
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -351,7 +358,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   fontSize: 10.5,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: 0.9,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                 ),
                               ),
                             ],
@@ -368,7 +375,7 @@ class _LoginScreenState extends State<LoginScreen>
                           style: GoogleFonts.domine(
                             fontSize: 34,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF00344B),
+                            color: const Color(0xFF0D1B2A),
                             letterSpacing: -0.6,
                           ),
                         ),
@@ -383,7 +390,7 @@ class _LoginScreenState extends State<LoginScreen>
                           style: GoogleFonts.literata(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF4A5568),
+                            color: const Color(0xFF1B365D),
                             height: 1.45,
                           ),
                         ),
@@ -398,14 +405,14 @@ class _LoginScreenState extends State<LoginScreen>
                           style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF2D3748),
+                            color: const Color(0xFF1B365D),
                           ),
                         ),
                         const SizedBox(height: 8),
                         Container(
                           height: 56,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEAF5FF),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           alignment: Alignment.center,
@@ -414,7 +421,7 @@ class _LoginScreenState extends State<LoginScreen>
                             keyboardType: TextInputType.emailAddress,
                             style: GoogleFonts.literata(
                               fontSize: 14.5,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
@@ -425,7 +432,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 child: Icon(
                                   Icons.alternate_email_rounded,
                                   size: 19,
-                                  color: Color(0xFF2D3748),
+                                  color: Color(0xFF1B365D),
                                 ),
                               ),
                               prefixIconConstraints: const BoxConstraints(
@@ -435,7 +442,7 @@ class _LoginScreenState extends State<LoginScreen>
                               hintText: 'aarav.sharma@techkart.in',
                               hintStyle: GoogleFonts.literata(
                                 fontSize: 14.5,
-                                color: const Color(0xFFA0AEC0),
+                                color: const Color(0xFF1B365D),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -455,14 +462,14 @@ class _LoginScreenState extends State<LoginScreen>
                           style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF2D3748),
+                            color: const Color(0xFF1B365D),
                           ),
                         ),
                         const SizedBox(height: 8),
                         Container(
                           height: 56,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEAF5FF),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           alignment: Alignment.center,
@@ -471,7 +478,7 @@ class _LoginScreenState extends State<LoginScreen>
                             obscureText: _obscurePassword,
                             style: GoogleFonts.literata(
                               fontSize: 14.5,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
@@ -482,7 +489,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 child: Icon(
                                   Icons.lock_outline_rounded,
                                   size: 19,
-                                  color: Color(0xFF2D3748),
+                                  color: Color(0xFF1B365D),
                                 ),
                               ),
                               prefixIconConstraints: const BoxConstraints(
@@ -495,7 +502,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
                                   size: 20,
-                                  color: const Color(0xFF2D3748),
+                                  color: const Color(0xFF1B365D),
                                 ),
                                 onPressed: () {
                                   setState(() {
@@ -506,7 +513,7 @@ class _LoginScreenState extends State<LoginScreen>
                               hintText: '••••••••••••',
                               hintStyle: GoogleFonts.literata(
                                 fontSize: 14.5,
-                                color: const Color(0xFFA0AEC0),
+                                color: const Color(0xFF1B365D),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -531,7 +538,7 @@ class _LoginScreenState extends State<LoginScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xFF4C6682),
+                                color: const Color(0xFF1B365D),
                               ),
                             ),
                           ),
@@ -548,10 +555,10 @@ class _LoginScreenState extends State<LoginScreen>
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : _handleSignIn,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF00344B),
-                              foregroundColor: Colors.white,
+                              backgroundColor: const Color(0xFF0D1B2A),
+                              foregroundColor: const Color(0xFFF5EBDD),
                               disabledBackgroundColor:
-                                  const Color(0xFF00344B).withValues(alpha: 0.6),
+                                  const Color(0xFF0D1B2A).withValues(alpha: 0.6),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(28),
@@ -564,7 +571,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
                                       valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white),
+                                          Color(0xFFF5EBDD)),
                                     ),
                                   )
                                 : Row(
@@ -575,7 +582,7 @@ class _LoginScreenState extends State<LoginScreen>
                                         style: GoogleFonts.literata(
                                           fontSize: 15.5,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white,
+                                          color: const Color(0xFFF5EBDD),
                                           letterSpacing: 0.2,
                                         ),
                                       ),
@@ -583,7 +590,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       const Icon(
                                         Icons.arrow_forward_rounded,
                                         size: 18,
-                                        color: Colors.white,
+                                        color: Color(0xFFF5EBDD),
                                       ),
                                     ],
                                   ),
@@ -599,11 +606,11 @@ class _LoginScreenState extends State<LoginScreen>
                           width: double.infinity,
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color(0xFFF5EBDD),
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                                color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                                 blurRadius: 16,
                                 offset: const Offset(0, 6),
                               ),
@@ -617,14 +624,14 @@ class _LoginScreenState extends State<LoginScreen>
                                 width: 44,
                                 height: 44,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFFF3EEE4),
+                                  color: Color(0xFFE6C17A),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Center(
                                   child: Icon(
                                     Icons.shield_outlined,
                                     size: 20,
-                                    color: Color(0xFF8B6B2B),
+                                    color: Color(0xFFB8860B),
                                   ),
                                 ),
                               ),
@@ -640,7 +647,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFF2D3748),
+                                        color: const Color(0xFF1B365D),
                                       ),
                                     ),
                                     const SizedBox(height: 3),
@@ -649,7 +656,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF4A5568),
+                                        color: const Color(0xFF1B365D),
                                         height: 1.35,
                                       ),
                                     ),
@@ -674,7 +681,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 style: GoogleFonts.literata(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF2D3748),
+                                  color: const Color(0xFF1B365D),
                                 ),
                               ),
                               GestureDetector(
@@ -685,9 +692,9 @@ class _LoginScreenState extends State<LoginScreen>
                                   style: GoogleFonts.domine(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                     decoration: TextDecoration.underline,
-                                    decorationColor: const Color(0xFF00344B),
+                                    decorationColor: const Color(0xFF0D1B2A),
                                     decorationThickness: 1.5,
                                   ),
                                 ),
@@ -706,7 +713,7 @@ class _LoginScreenState extends State<LoginScreen>
                             width: 134,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFCBD5E1),
+                              color: const Color(0xFFE6C17A),
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),

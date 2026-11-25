@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
+import '../theme/profile_avatar.dart';
 import '../checkout/delivery_address.dart';
 
 /// TechKart Profile & Settings - Address Book Screen
@@ -84,7 +85,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -117,10 +118,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -129,10 +127,10 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -142,26 +140,28 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0F172A)),
-            onPressed: () {},
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Address data stored securely with 256-bit encryption.',
+                    style: GoogleFonts.literata(),
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
           const SizedBox(width: 12),
-          Container(
-            width: 32,
-            height: 32,
-            decoration: const BoxDecoration(
-              color: Color(0xFF64748B),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(Icons.person, size: 18, color: Colors.white),
-          ),
+          const ProfileAvatar(size: 32),
         ],
       ),
     );
@@ -178,14 +178,14 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
         const SizedBox(width: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2.5),
           decoration: BoxDecoration(
-            color: const Color(0xFFEAF5FF),
+            color: const Color(0xFFE6C17A),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
@@ -193,7 +193,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
             style: GoogleFonts.literata(
               fontSize: 10.5,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF00344B),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
         ),
@@ -201,14 +201,14 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
         Row(
           children: [
             const Icon(Icons.verified_outlined,
-                size: 13, color: Color(0xFF00344B)),
+                size: 13, color: Color(0xFF0D1B2A)),
             const SizedBox(width: 4),
             Text(
               'Verified City Zone',
               style: GoogleFonts.literata(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF00344B),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ],
@@ -227,9 +227,9 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -246,10 +246,10 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFF3EEE4),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(address.labelIcon, size: 14, color: const Color(0xFF8B6B2B)),
+                child: Icon(address.labelIcon, size: 14, color: const Color(0xFFB8860B)),
               ),
               const SizedBox(width: 8),
               Text(
@@ -257,7 +257,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                 style: GoogleFonts.domine(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               if (isDefault) ...[
@@ -265,7 +265,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E293B),
+                    color: const Color(0xFF0D1B2A),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Row(
@@ -278,14 +278,14 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                           fontSize: 8.5,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0.5,
-                          color: Colors.white,
+                          color: Color(0xFFF5EBDD),
                         ),
                       ),
                     ],
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.check_circle, size: 16, color: Color(0xFF0284C7)),
+                const Icon(Icons.check_circle, size: 16, color: Color(0xFFB8860B)),
               ] else ...[
                 const Spacer(),
                 GestureDetector(
@@ -295,7 +295,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                 ),
@@ -312,14 +312,14 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                 style: GoogleFonts.domine(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               Text(
                 address.phone,
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -330,7 +330,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
             style: GoogleFonts.literata(
               fontSize: 12,
               height: 1.35,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
           if (address.deliveryEstimate != null) ...[
@@ -338,18 +338,18 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFEAF5FF),
+                color: const Color(0xFFE6C17A),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 13, color: Color(0xFF00344B)),
+                  const Icon(Icons.info_outline, size: 13, color: Color(0xFF0D1B2A)),
                   const SizedBox(width: 6),
                   Text(
                     address.deliveryEstimate!,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                 ],
@@ -365,7 +365,7 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11,
                     fontStyle: FontStyle.italic,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               const Spacer(),
@@ -373,11 +373,11 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Icon(Icons.delete_outline,
-                      size: 16, color: Color(0xFF64748B)),
+                      size: 16, color: Color(0xFF1B365D)),
                 ),
                 const SizedBox(width: 8),
               ],
@@ -389,20 +389,20 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEAF5FF),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
                     children: [
                       const Icon(Icons.edit_outlined,
-                          size: 13, color: Color(0xFF00344B)),
+                          size: 13, color: Color(0xFF0D1B2A)),
                       const SizedBox(width: 4),
                       Text(
                         'Edit',
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
@@ -423,20 +423,20 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
         children: [
           const Icon(Icons.local_shipping_outlined,
-              size: 16, color: Color(0xFF00344B)),
+              size: 16, color: Color(0xFF0D1B2A)),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
               'Addresses are verified for guaranteed express dispatch across Mumbai metropolitan region.',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF64748B),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ),
@@ -456,8 +456,8 @@ class _AddressBookScreenState extends State<AddressBookScreen> {
         onPressed: widget.onAddNewAddress ??
             () => AppNavigator.toEditAddress(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF1C1917), // Deep dark button
-          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF0D1B2A), // Deep dark button
+          foregroundColor: const Color(0xFFF5EBDD),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),

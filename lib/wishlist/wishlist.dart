@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -97,12 +97,12 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'Chronos Ultra 2 (49mm GPS)',
       'subtitle': 'Titanium Smartwatch • LTPO',
       'status': '• In Stock (3 units left)',
-      'statusColor': const Color(0xFF4A5568),
+      'statusColor': const Color(0xFF1B365D),
       'price': '₹35,499.00',
       'cutPrice': '₹39,999.00',
       'badge': '↓ Price dropped by ₹5,800 since saved',
-      'badgeBg': const Color(0xFFF3EEE4),
-      'badgeColor': const Color(0xFF8B6B2B),
+      'badgeBg': const Color(0xFFE6C17A),
+      'badgeColor': const Color(0xFFB8860B),
       'footer': 'Grade 5 Titanium • 3000 Nit LTPO',
       'image': 'asset/chronos_ultra_2.jpg',
       'btnText': 'Move',
@@ -113,12 +113,12 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'VoltFast 65W GaN Dual USB-C',
       'subtitle': 'Ultra-compact • 45W+20W split',
       'status': '• In Stock',
-      'statusColor': const Color(0xFF4A5568),
+      'statusColor': const Color(0xFF1B365D),
       'price': '₹3,999.00',
       'cutPrice': null,
       'badge': 'Next-day dispatch',
-      'badgeBg': const Color(0xFFD9ECFE),
-      'badgeColor': const Color(0xFF00344B),
+      'badgeBg': const Color(0xFFE6C17A),
+      'badgeColor': const Color(0xFF0D1B2A),
       'badgeIcon': Icons.local_shipping_outlined,
       'footer': 'Dual charging • Foldable pins',
       'image': 'asset/carousel_fast_gan_charger.jpg',
@@ -134,8 +134,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'price': '₹9,899.00',
       'cutPrice': '₹11,499.00',
       'badge': '↓ Price drop (₹1,650 saved)',
-      'badgeBg': const Color(0xFFF3EEE4),
-      'badgeColor': const Color(0xFF8B6B2B),
+      'badgeBg': const Color(0xFFE6C17A),
+      'badgeColor': const Color(0xFFB8860B),
       'badge2': 'Only 2 left',
       'badge2Bg': const Color(0xFFFFECEC),
       'badge2Color': const Color(0xFFE53E3E),
@@ -149,12 +149,12 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'Aura Fold Pro Smartphone',
       'subtitle': '7.9" Foldable OLED • 512GB',
       'status': '• In Stock',
-      'statusColor': const Color(0xFF4A5568),
+      'statusColor': const Color(0xFF1B365D),
       'price': '₹1,24,999.00',
       'cutPrice': null,
       'badge': 'TechKart Verified Care Included',
-      'badgeBg': const Color(0xFFD9ECFE),
-      'badgeColor': const Color(0xFF00344B),
+      'badgeBg': const Color(0xFFE6C17A),
+      'badgeColor': const Color(0xFF0D1B2A),
       'badgeIcon': Icons.verified_user_outlined,
       'footer': 'Titanium Grey • 120Hz LTPO',
       'image': 'asset/apex_fold_buds_pro.jpg',
@@ -215,14 +215,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
       final priceDiff = priceDrop ? (item.mrp! - item.price).toInt() : 0;
 
       String badgeText = '';
-      Color badgeBg = const Color(0xFFD9ECFE);
-      Color badgeColor = const Color(0xFF00344B);
+      Color badgeBg = const Color(0xFFE6C17A);
+      Color badgeColor = const Color(0xFF0D1B2A);
       IconData? badgeIcon;
 
       if (priceDrop) {
         badgeText = '↓ Price dropped by ₹$priceDiff since saved';
-        badgeBg = const Color(0xFFF3EEE4);
-        badgeColor = const Color(0xFF8B6B2B);
+        badgeBg = const Color(0xFFE6C17A);
+        badgeColor = const Color(0xFFB8860B);
       } else {
         badgeText = 'Next-day dispatch';
         badgeIcon = Icons.local_shipping_outlined;
@@ -234,7 +234,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               : '• In Stock')
           : '• Out of Stock';
       Color statusColor = item.isInStock
-          ? const Color(0xFF4A5568)
+          ? const Color(0xFF1B365D)
           : const Color(0xFFE53E3E);
 
       _savedItems.add({
@@ -333,7 +333,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               '${removed['title']} removed from wishlist.',
               style: GoogleFonts.literata(fontSize: 13),
             ),
-            backgroundColor: const Color(0xFF00344B),
+            backgroundColor: const Color(0xFF0D1B2A),
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 2),
           ),
@@ -381,7 +381,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
           '${item['title']} moved to your cart.',
           style: GoogleFonts.literata(fontSize: 13.5),
         ),
-        backgroundColor: const Color(0xFF00344B),
+        backgroundColor: const Color(0xFF0D1B2A),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
       ),
@@ -397,13 +397,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -422,7 +422,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -432,11 +432,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
                   const SizedBox(width: 8),
 
                   Text(
-                    'Cart',
+                    'Wishlist',
                     style: GoogleFonts.domine(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   const Spacer(),
@@ -446,7 +446,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     icon: const Icon(
                       Icons.search_rounded,
                       size: 21,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -461,7 +461,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         icon: const Icon(
                           Icons.shopping_bag_outlined,
                           size: 22,
-                          color: Color(0xFF2D3748),
+                          color: Color(0xFF1B365D),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -483,7 +483,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                color: const Color(0xFFF5EBDD),
                               ),
                             ),
                           ),
@@ -513,7 +513,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       style: GoogleFonts.domine(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -525,7 +525,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFD9ECFE),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -533,7 +533,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -560,8 +560,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           AppNavigator.toCart(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00344B),
-                          foregroundColor: Colors.white,
+                          backgroundColor: const Color(0xFF0D1B2A),
+                          foregroundColor: const Color(0xFFF5EBDD),
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           shape: RoundedRectangleBorder(
@@ -603,7 +603,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       child: Container(
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(22),
                         ),
                         child: Row(
@@ -611,7 +611,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.tune_rounded,
-                                size: 15, color: Color(0xFF00344B)),
+                                size: 15, color: Color(0xFF0D1B2A)),
                             const SizedBox(width: 5),
                             Flexible(
                               child: Text(
@@ -619,7 +619,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -662,8 +662,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF00344B)
-                              : const Color(0xFFEAF5FF),
+                              ? const Color(0xFF0D1B2A)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -672,8 +672,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               Icon(Icons.trending_down_rounded,
                                   size: 14,
                                   color: isSelected
-                                      ? Colors.white
-                                      : const Color(0xFF00344B)),
+                                      ? const Color(0xFFF5EBDD)
+                                      : const Color(0xFF0D1B2A)),
                               const SizedBox(width: 4),
                             ],
                             Text(
@@ -684,8 +684,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                     ? FontWeight.w600
                                     : FontWeight.w500,
                                 color: isSelected
-                                    ? Colors.white
-                                    : const Color(0xFF00344B),
+                                    ? const Color(0xFFF5EBDD)
+                                    : const Color(0xFF0D1B2A),
                               ),
                             ),
                           ],
@@ -704,8 +704,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
             // ---------------------------------------------------------------
             Expanded(
               child: RefreshIndicator(
-                color: const Color(0xFF00344B),
-                backgroundColor: Colors.white,
+                color: const Color(0xFF0D1B2A),
+                backgroundColor: const Color(0xFFF5EBDD),
                 onRefresh: _fetchWishlist,
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(
@@ -721,7 +721,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             child: Center(
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
-                                color: Color(0xFF00344B),
+                                color: Color(0xFF0D1B2A),
                               ),
                             ),
                           )
@@ -735,14 +735,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   width: 64,
                                   height: 64,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFFEAF5FF),
+                                    color: Color(0xFFE6C17A),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.favorite_border_rounded,
                                       size: 30,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ),
@@ -752,7 +752,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   style: GoogleFonts.domine(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
@@ -760,7 +760,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   'Tap the heart on any product to save it for later.',
                                   style: GoogleFonts.literata(
                                     fontSize: 12,
-                                    color: const Color(0xFF718096),
+                                    color: const Color(0xFF1B365D),
                                   ),
                                 ),
                               ],
@@ -774,11 +774,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(14),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: const Color(0xFFF5EBDD),
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF00344B)
+                                      color: const Color(0xFF0D1B2A)
                                           .withValues(alpha: 0.04),
                                       blurRadius: 10,
                                       offset: const Offset(0, 3),
@@ -884,19 +884,21 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                       child: Container(
                                         width: 78,
                                         height: 78,
-                                        color: const Color(0xFFF1F5F9),
+                                        color: const Color(0xFFE6C17A),
                                         child: (item['image'] as String).startsWith('http')
                                             ? Image.network(
                                                 item['image'] as String,
+                                                cacheWidth: 350,
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (context, error, stackTrace) =>
-                                                    const Icon(Icons.devices_rounded, color: Color(0xFF00344B)),
+                                                    const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
                                               )
                                             : Image.asset(
                                                 item['image'] as String,
+                                                cacheWidth: 350,
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (context, error, stackTrace) =>
-                                                    const Icon(Icons.devices_rounded, color: Color(0xFF00344B)),
+                                                    const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
                                               ),
                                       ),
                                     ),
@@ -912,7 +914,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                             style: GoogleFonts.domine(
                                               fontSize: 13.5,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
@@ -920,7 +922,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                             item['subtitle'] as String,
                                             style: GoogleFonts.literata(
                                               fontSize: 11,
-                                              color: const Color(0xFF718096),
+                                              color: const Color(0xFF1B365D),
                                             ),
                                           ),
                                           const SizedBox(height: 4),
@@ -944,7 +946,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w700,
                                                     color:
-                                                        const Color(0xFF00344B),
+                                                        const Color(0xFF0D1B2A),
                                                   ),
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
@@ -959,7 +961,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                                       decoration: TextDecoration
                                                           .lineThrough,
                                                       color:
-                                                          const Color(0xFF718096),
+                                                          const Color(0xFF1B365D),
                                                     ),
                                                     overflow: TextOverflow.ellipsis,
                                                   ),
@@ -985,7 +987,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                         item['footer'] as String,
                                         style: GoogleFonts.literata(
                                           fontSize: 10.5,
-                                          color: const Color(0xFF718096),
+                                          color: const Color(0xFF1B365D),
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -997,8 +999,8 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                         onPressed: () => _onMoveToCart(item),
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
-                                              const Color(0xFF00344B),
-                                          foregroundColor: Colors.white,
+                                              const Color(0xFF0D1B2A),
+                                          foregroundColor: const Color(0xFFF5EBDD),
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 14),
                                           shape: RoundedRectangleBorder(
@@ -1038,7 +1040,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -1050,14 +1052,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                   width: 32,
                                   height: 32,
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color(0xFFF5EBDD),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.smart_toy_outlined,
                                       size: 17,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ),
@@ -1068,7 +1070,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 13.5,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -1080,7 +1082,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                               'Ask TechKart AI to find matching accessories, cables, or bundled offers for your saved gear.',
                               style: GoogleFonts.literata(
                                 fontSize: 11.5,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                                 height: 1.35,
                               ),
                             ),
@@ -1095,7 +1097,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -1104,7 +1106,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 70),
                     ],
                   ),
                 ),

@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -125,7 +125,7 @@ class _SharedFestiveBackgroundState extends State<SharedFestiveBackground>
       Color(0xFFFDE047), // Gold
       Color(0xFFF97316), // Orange
       Color(0xFFEF4444), // Crimson
-      Color(0xFF38BDF8), // Cyan
+      Color(0xFF1B365D), // Cyan
       Color(0xFFEC4899), // Pink
     ];
     final baseColor = colors[random.nextInt(colors.length)];
@@ -199,7 +199,7 @@ class _SharedFestiveBackgroundState extends State<SharedFestiveBackground>
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
                   errorBuilder: (context, error, stackTrace) => Container(
-                    color: const Color(0xFFFBF4E6),
+                    color: const Color(0xFFFDFBCF),
                   ),
                 ),
                 AnimatedBuilder(
@@ -525,7 +525,7 @@ class _SharedFestiveOverlayPainter extends CustomPainter {
       final bulbPos = tuniBulbs[i];
       final bulbFlicker = 0.45 + 0.55 * math.sin((animationValue * speed * 2 * math.pi) + (i * 0.8));
       final bulbColor = i % 4 == 0
-          ? const Color(0xFF38BDF8)
+          ? const Color(0xFF1B365D)
           : (i % 4 == 1
               ? const Color(0xFFFDE047)
               : (i % 4 == 2 ? const Color(0xFFF43F5E) : const Color(0xFF10B981)));
@@ -533,7 +533,7 @@ class _SharedFestiveOverlayPainter extends CustomPainter {
       final bulbPaint = Paint()..color = bulbColor.withValues(alpha: 0.55 * bulbFlicker);
       canvas.drawCircle(bulbPos, 5.0 * bulbFlicker, bulbPaint);
 
-      final corePaint = Paint()..color = Colors.white.withValues(alpha: 0.95 * bulbFlicker);
+      final corePaint = Paint()..color = const Color(0xFFF5EBDD).withValues(alpha: 0.95 * bulbFlicker);
       canvas.drawCircle(bulbPos, 1.8, corePaint);
     }
 
@@ -561,7 +561,7 @@ class _SharedFestiveOverlayPainter extends CustomPainter {
       if (i % 2 == 0) {
         final sparkPaint = Paint()..color = const Color(0xFFFDE047).withValues(alpha: alpha);
         canvas.drawCircle(pos, 2.4, sparkPaint);
-        canvas.drawCircle(pos, 1.0, Paint()..color = Colors.white.withValues(alpha: alpha));
+        canvas.drawCircle(pos, 1.0, Paint()..color = const Color(0xFFF5EBDD).withValues(alpha: alpha));
       } else {
         final petalPaint = Paint()..color = const Color(0xFFEC4899).withValues(alpha: alpha * 0.75);
         canvas.drawOval(Rect.fromCenter(center: pos, width: 4.8, height: 2.8), petalPaint);
@@ -605,7 +605,7 @@ class _SharedFestiveOverlayPainter extends CustomPainter {
 
       rayPaint.color = (i % 2 == 0 ? fw.baseColor : fw.sparkleColor).withValues(alpha: fadeAlpha);
       canvas.drawLine(center, Offset(x2, y2), rayPaint);
-      canvas.drawCircle(Offset(x2, y2), 1.5 * fadeAlpha, Paint()..color = Colors.white.withValues(alpha: fadeAlpha));
+      canvas.drawCircle(Offset(x2, y2), 1.5 * fadeAlpha, Paint()..color = const Color(0xFFF5EBDD).withValues(alpha: fadeAlpha));
     }
   }
 

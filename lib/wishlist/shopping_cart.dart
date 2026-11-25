@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -13,11 +13,16 @@ class ShoppingCartScreen extends StatefulWidget {
   final VoidCallback? onCheckout;
   final int initialTabIndex;
 
+  final bool showBottomNav;
+  final ValueChanged<int>? onNavTabSelected;
+
   const ShoppingCartScreen({
     super.key,
     this.onBack,
     this.onCheckout,
     this.initialTabIndex = 3,
+    this.showBottomNav = true,
+    this.onNavTabSelected,
   });
 
   @override
@@ -104,8 +109,18 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -129,19 +144,24 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   _buildCheckoutButton(),
                   const SizedBox(height: 12),
                   _buildTrustSafetyNote(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 70),
                 ],
               ),
             ),
-            TechKartBottomNavBar(
-              currentIndex: 3,
-              onTabSelected: (index) {
-                if (index == 0) AppNavigator.toHome(context);
-                if (index == 1) AppNavigator.toCategories(context);
-                if (index == 2) AppNavigator.toAiChatSessions(context);
-                if (index == 4) AppNavigator.toProfile(context);
-              },
-            ),
+            if (widget.showBottomNav)
+              TechKartBottomNavBar(
+                currentIndex: 3,
+                onTabSelected: (index) {
+                  if (widget.onNavTabSelected != null) {
+                    widget.onNavTabSelected!(index);
+                  } else {
+                    if (index == 0) AppNavigator.toHome(context);
+                    if (index == 1) AppNavigator.toCategories(context);
+                    if (index == 2) AppNavigator.toAiChatSessions(context);
+                    if (index == 4) AppNavigator.toProfile(context);
+                  }
+                },
+              ),
           ],
         ),
       ),
@@ -149,16 +169,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   }
 
   // ---------------------------------------------------------------------------
-  // APP BAR
+  // CLEAN MINIMAL APP BAR
   // ---------------------------------------------------------------------------
   Widget _buildAppBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -167,10 +184,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -180,12 +197,12 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.search, size: 22, color: Color(0xFF0F172A)),
+            icon: const Icon(Icons.search, size: 22, color: Color(0xFF0D1B2A)),
             onPressed: () => AppNavigator.toSearchOverlay(context),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
@@ -194,11 +211,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              const Icon(Icons.shopping_bag_outlined,
-                  color: Color(0xFF0F172A), size: 22),
+              IconButton(
+                icon: const Icon(Icons.shopping_bag_outlined,
+                    size: 22, color: Color(0xFF0D1B2A)),
+                onPressed: () {},
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+              ),
               Positioned(
-                right: -6,
-                top: -6,
+                right: -4,
+                top: -4,
                 child: Container(
                   padding: const EdgeInsets.all(3.5),
                   decoration: const BoxDecoration(
@@ -210,7 +232,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     style: const TextStyle(
                       fontSize: 9,
                       fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      color: Color(0xFFF5EBDD),
                     ),
                   ),
                 ),
@@ -218,60 +240,66 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             ],
           ),
           const SizedBox(width: 14),
-          const ProfileAvatar(size: 32),
+          GestureDetector(
+            onTap: () => AppNavigator.toCustomerProfileHub(context),
+            child: const ProfileAvatar(size: 32),
+          ),
         ],
       ),
     );
   }
 
   // ---------------------------------------------------------------------------
-  // HEADER ROW ("My Cart" + "Clear")
-  // ---------------------------------------------------------------------------
   Widget _buildHeaderRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'My Cart',
-              style: GoogleFonts.domine(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'My Cart',
+                style: GoogleFonts.domine(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: const Color(0xFF0D1B2A),
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              '${_items.length} items selected for checkout',
-              style: GoogleFonts.literata(
-                fontSize: 12,
-                color: const Color(0xFF64748B),
+              const SizedBox(height: 2),
+              Text(
+                '${_items.length} items selected for checkout',
+                style: GoogleFonts.literata(
+                  fontSize: 12,
+                  color: const Color(0xFF1B365D),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        const SizedBox(width: 8),
         GestureDetector(
           onTap: _clearCart,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color(0xFFEAF5FF),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.delete_outline, size: 14, color: Color(0xFF00344B)),
+                const Icon(Icons.delete_outline, size: 14, color: Color(0xFF0D1B2A)),
                 const SizedBox(width: 4),
                 Text(
                   'Clear',
                   style: GoogleFonts.literata(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ],
@@ -289,9 +317,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -308,11 +336,11 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3EEE4),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.local_shipping_outlined,
-                    size: 16, color: Color(0xFF8B6B2B)),
+                    size: 16, color: Color(0xFFB8860B)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -321,7 +349,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ),
@@ -331,7 +359,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   fontSize: 10.5,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -342,8 +370,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             child: const LinearProgressIndicator(
               value: 1.0,
               minHeight: 5,
-              backgroundColor: Color(0xFFE2EDF3),
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3B4875)),
+              backgroundColor: Color(0xFFE6C17A),
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1B365D)),
             ),
           ),
           const SizedBox(height: 8),
@@ -351,7 +379,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             'Next-day priority dispatch guaranteed for your order.',
             style: GoogleFonts.literata(
               fontSize: 11.5,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
         ],
@@ -367,9 +395,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -389,9 +417,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 child: Container(
                   width: 84,
                   height: 84,
-                  color: const Color(0xFFF1F5F9),
+                  color: const Color(0xFFE6C17A),
                   child: Image.asset(
                     item['image'] as String,
+                    cacheWidth: 350,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
                         const Center(child: Icon(Icons.devices, color: Colors.grey)),
@@ -405,8 +434,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: item['badge'] == 'SALE'
-                        ? const Color(0xFFDCEEFB)
-                        : const Color(0xFFF3EEE4),
+                        ? const Color(0xFFE6C17A)
+                        : const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -416,8 +445,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       fontSize: 9,
                       fontWeight: FontWeight.w700,
                       color: item['badge'] == 'SALE'
-                          ? const Color(0xFF0284C7)
-                          : const Color(0xFF8B6B2B),
+                          ? const Color(0xFFB8860B)
+                          : const Color(0xFFB8860B),
                     ),
                   ),
                 ),
@@ -439,7 +468,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -448,7 +477,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       child: const Padding(
                         padding: EdgeInsets.only(left: 4),
                         child: Icon(Icons.delete_outline,
-                            size: 18, color: Color(0xFF64748B)),
+                            size: 18, color: Color(0xFF1B365D)),
                       ),
                     ),
                   ],
@@ -458,43 +487,45 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   item['subtitle'] as String,
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          '₹${(item['price'] as double).toStringAsFixed(2)}',
-                          style: GoogleFonts.domine(
-                            fontSize: 14.5,
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0F172A),
-                          ),
-                        ),
-                        if (item['originalPrice'] != null) ...[
-                          const SizedBox(width: 6),
+                    Expanded(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
                           Text(
-                            '₹${(item['originalPrice'] as double).toStringAsFixed(2)}',
-                            style: GoogleFonts.literata(
-                              fontSize: 11,
-                              color: const Color(0xFF94A3B8),
-                              decoration: TextDecoration.lineThrough,
+                            '₹${(item['price'] as double).toStringAsFixed(2)}',
+                            style: GoogleFonts.domine(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
+                          if (item['originalPrice'] != null) ...[
+                            const SizedBox(width: 4),
+                            Text(
+                              '₹${(item['originalPrice'] as double).toStringAsFixed(2)}',
+                              style: GoogleFonts.literata(
+                                fontSize: 11,
+                                color: const Color(0xFF1B365D),
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                          ],
                         ],
-                      ],
+                      ),
                     ),
+                    const SizedBox(width: 6),
                     // Stepper (- qty +)
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEAF5FF),
+                        color: const Color(0xFFE6C17A),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -509,7 +540,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
@@ -519,7 +550,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0F172A),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           GestureDetector(
@@ -531,7 +562,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
@@ -556,14 +587,14 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
           const Icon(Icons.local_offer_outlined,
-              size: 20, color: Color(0xFF0F172A)),
+              size: 20, color: Color(0xFF0D1B2A)),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
@@ -572,7 +603,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 fontSize: 13.5,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 1.0,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -586,8 +617,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
                 color: _couponApplied
-                    ? const Color(0xFFDCEEFB)
-                    : const Color(0xFF00344B),
+                    ? const Color(0xFFE6C17A)
+                    : const Color(0xFF0D1B2A),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
@@ -596,8 +627,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   color: _couponApplied
-                      ? const Color(0xFF00344B)
-                      : Colors.white,
+                      ? const Color(0xFF0D1B2A)
+                      : const Color(0xFFF5EBDD),
                 ),
               ),
             ),
@@ -614,9 +645,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(
         children: [
@@ -631,14 +662,14 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 'Bundle Promotion',
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const SizedBox(width: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3EEE4),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -647,7 +678,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     fontFamily: 'Literata',
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B6B2B),
+                    color: const Color(0xFFB8860B),
                   ),
                 ),
               ),
@@ -657,7 +688,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
@@ -674,57 +705,63 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 'Express Delivery',
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const SizedBox(width: 6),
-              const Icon(Icons.bolt, size: 14, color: Color(0xFF8B6B2B)),
+              const Icon(Icons.bolt, size: 14, color: Color(0xFFB8860B)),
               const Spacer(),
               Text(
                 'FREE',
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
-            child: Divider(color: Color(0xFFE2EDF3), height: 1),
+            child: Divider(color: Color(0xFFE6C17A), height: 1),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total',
-                    style: GoogleFonts.domine(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total',
+                      style: GoogleFonts.domine(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF0D1B2A),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Including GST & duties',
-                    style: GoogleFonts.literata(
-                      fontSize: 11,
-                      color: const Color(0xFF64748B),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Including GST & duties',
+                      style: GoogleFonts.literata(
+                        fontSize: 11,
+                        color: const Color(0xFF1B365D),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Text(
-                '₹${_total.toStringAsFixed(2)}',
-                style: GoogleFonts.domine(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  '₹${_total.toStringAsFixed(2)}',
+                  style: GoogleFonts.domine(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF0D1B2A),
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -738,19 +775,23 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: GoogleFonts.literata(
-            fontSize: 12.5,
-            color: const Color(0xFF64748B),
+        Expanded(
+          child: Text(
+            label,
+            style: GoogleFonts.literata(
+              fontSize: 12.5,
+              color: const Color(0xFF1B365D),
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
+        const SizedBox(width: 8),
         Text(
           value,
           style: GoogleFonts.literata(
             fontSize: 12.5,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
       ],
@@ -767,8 +808,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       child: ElevatedButton(
         onPressed: widget.onCheckout ?? () => AppNavigator.toDeliveryAddress(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF00344B),
-          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF0D1B2A),
+          foregroundColor: const Color(0xFFF5EBDD),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -776,7 +817,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         ),
         child: Row(
           children: [
-            const Icon(Icons.lock_outline, size: 16, color: Colors.white),
+            const Icon(Icons.lock_outline, size: 16, color: Color(0xFFF5EBDD)),
             const SizedBox(width: 8),
             Text(
               'Checkout',
@@ -794,7 +835,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
+            const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
           ],
         ),
       ),
@@ -809,13 +850,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Icon(Icons.verified_user_outlined,
-            size: 14, color: Color(0xFF64748B)),
+            size: 14, color: Color(0xFF1B365D)),
         const SizedBox(width: 6),
         Text(
           'Guaranteed Safe & 256-Bit Encrypted Checkout',
           style: GoogleFonts.literata(
             fontSize: 11,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
       ],

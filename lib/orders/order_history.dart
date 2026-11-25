@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
+import '../core/network/network.dart';
 import '../theme/profile_avatar.dart';
 
 /// TechKart Orders - Order History Screen
@@ -37,15 +38,18 @@ class OrderHistoryScreen extends StatefulWidget {
 class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   String _selectedTab = 'all'; // 'all', 'in_progress', 'delivered'
   final TextEditingController _searchController = TextEditingController();
+  final ApiClient _apiClient = ApiClient();
+  bool _isLoading = false;
+  List<Map<String, dynamic>> _liveOrders = [];
 
-  final List<Map<String, dynamic>> _orders = [
+  final List<Map<String, dynamic>> _fallbackOrders = [
     {
       'orderId': 'TK-89421',
       'date': 'Today, Oct 26, 2024',
       'status': 'Preparing Dispatch',
       'statusType': 'in_progress',
-      'statusBg': const Color(0xFFF3EEE4),
-      'statusColor': const Color(0xFF8B6B2B),
+      'statusBg': const Color(0xFFE6C17A),
+      'statusColor': const Color(0xFFB8860B),
       'hasDot': true,
       'title': 'Chronos Ultra 2 (49...',
       'subtitle': '+ 1 other item (VoltFast 6...)',
@@ -64,8 +68,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': 'Oct 14, 2024',
       'status': 'Delivered',
       'statusType': 'delivered',
-      'statusBg': const Color(0xFFDCEEFB),
-      'statusColor': const Color(0xFF00344B),
+      'statusBg': const Color(0xFFE6C17A),
+      'statusColor': const Color(0xFF0D1B2A),
       'hasCheck': true,
       'title': 'KeyPro Wireless Mechani...',
       'subtitle': 'Tactile Brown Switch • Midnight Slate',
@@ -83,8 +87,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': 'Sep 28, 2024',
       'status': 'Delivered',
       'statusType': 'delivered',
-      'statusBg': const Color(0xFFDCEEFB),
-      'statusColor': const Color(0xFF00344B),
+      'statusBg': const Color(0xFFE6C17A),
+      'statusColor': const Color(0xFF0D1B2A),
       'hasCheck': true,
       'title': 'Aura Pro ANC Headphones',
       'subtitle': 'Ivory White • Spatial Audio',
@@ -99,42 +103,190 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _fetchLiveOrders();
+  }
+
+  Future<void> _fetchLiveOrders() async {
+    setState(() => _isLoading = true);
+    try {
+      final response = await _apiClient.get('/customer/orders');
+      if (response.isSuccess && response.data is List) {
+        final list = (response.data as List).map<Map<String, dynamic>>((raw) {
+          final m = Map<String, dynamic>.from(raw as Map);
+          final ordNum = m['order_number']?.toString() ?? 'TK-ORD';
+          final orderStatus = (m['order_status']?.toString() ?? 'placed').toLowerCase();
+          final isDelivered = orderStatus == 'delivered';
+          final isCancelled = orderStatus == 'cancelled';
+          final isProcessing = orderStatus == 'processing' || orderStatus == 'placed' || orderStatus == 'shipped';
+
+          final statusLabel = isDelivered
+              ? 'Delivered'
+              : (isCancelled
+                  ? 'Cancelled'
+                  : (orderStatus == 'shipped'
+                      ? 'In Transit'
+                      : (orderStatus == 'processing' ? 'Processing Hub' : 'Order Placed')));
+
+          final statusType = isDelivered ? 'delivered' : (isCancelled ? 'cancelled' : 'in_progress');
+          final statusBg = isDelivered
+              ? const Color(0xFFE6C17A)
+              : (isCancelled ? const Color(0xFFFDE8E5) : const Color(0xFFE6C17A));
+          final statusColor = isDelivered
+              ? const Color(0xFF0D1B2A)
+              : (isCancelled ? const Color(0xFFB52E1D) : const Color(0xFFB8860B));
+
+          final previewItems = (m['preview_items'] as List?) ?? [];
+          final firstTitle = previewItems.isNotEmpty ? previewItems.first['title']?.toString() ?? 'Tech Hardware' : 'Tech Hardware';
+          final otherCount = previewItems.length > 1 ? previewItems.length - 1 : 0;
+          final subtitle = otherCount > 0 ? '+ $otherCount other item${otherCount > 1 ? "s" : ""}' : 'Verified Certified Unit';
+
+          final total = double.tryParse(m['total_amount']?.toString() ?? '0') ?? 0.0;
+          final itemsCount = '${m['items_count'] ?? previewItems.length} item${(m['items_count'] ?? 1) == 1 ? "" : "s"}';
+
+          final thumbs = <String>[];
+          for (final item in previewItems) {
+            final img = item['image_url']?.toString();
+            if (img != null && img.isNotEmpty) {
+              thumbs.add(img);
+            }
+          }
+          if (thumbs.isEmpty) {
+            thumbs.add('asset/chronos_ultra_2.jpg');
+          }
+
+          return {
+            'orderId': ordNum,
+            'dbId': m['id'],
+            'date': m['created_at'] != null ? m['created_at'].toString().split(' ').first : 'Today',
+            'status': statusLabel,
+            'statusType': statusType,
+            'statusBg': statusBg,
+            'statusColor': statusColor,
+            'hasDot': isProcessing,
+            'hasCheck': isDelivered,
+            'title': firstTitle,
+            'subtitle': subtitle,
+            'price': '₹${total.toStringAsFixed(2)}',
+            'itemsCount': itemsCount,
+            'expectedDelivery': m['estimated_delivery']?.toString() ?? 'Standard Transit',
+            'thumbnails': thumbs,
+            'primaryAction': isDelivered ? 'Reorder' : 'Track Order',
+            'secondaryAction': 'View Details',
+          };
+        }).toList();
+
+        if (mounted) {
+          setState(() {
+            _liveOrders = list;
+            _isLoading = false;
+          });
+        }
+      } else {
+        if (mounted) setState(() => _isLoading = false);
+      }
+    } catch (e) {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
   void dispose() {
+    _apiClient.close();
     _searchController.dispose();
     super.dispose();
   }
 
+  List<Map<String, dynamic>> get _orders => _liveOrders.isNotEmpty ? _liveOrders : _fallbackOrders;
+
   List<Map<String, dynamic>> get _filteredOrders {
+    final query = _searchController.text.trim().toLowerCase();
+    var list = _orders;
+
     if (_selectedTab == 'in_progress') {
-      return _orders.where((o) => o['statusType'] == 'in_progress').toList();
+      list = list.where((o) => o['statusType'] == 'in_progress').toList();
+    } else if (_selectedTab == 'delivered') {
+      list = list.where((o) => o['statusType'] == 'delivered').toList();
     }
-    if (_selectedTab == 'delivered') {
-      return _orders.where((o) => o['statusType'] == 'delivered').toList();
+
+    if (query.isNotEmpty) {
+      list = list.where((o) {
+        final id = (o['orderId'] ?? '').toString().toLowerCase();
+        final title = (o['title'] ?? '').toString().toLowerCase();
+        return id.contains(query) || title.contains(query);
+      }).toList();
     }
-    return _orders;
+
+    return list;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
             _buildAppBar(),
             Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                children: [
-                  _buildSearchBar(),
-                  const SizedBox(height: 14),
-                  _buildFilterTabs(),
-                  const SizedBox(height: 16),
-                  ..._filteredOrders.map(_buildOrderCard),
-                  const SizedBox(height: 16),
-                  _buildNeedAssistanceCard(),
-                  const SizedBox(height: 24),
-                ],
+              child: RefreshIndicator(
+                onRefresh: _fetchLiveOrders,
+                color: const Color(0xFF0D1B2A),
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics(),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  children: [
+                    _buildSearchBar(),
+                    const SizedBox(height: 14),
+                    _buildFilterTabs(),
+                    const SizedBox(height: 16),
+                    if (_isLoading)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 24),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF0D1B2A),
+                          ),
+                        ),
+                      )
+                    else if (_filteredOrders.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 36),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              const Icon(Icons.shopping_bag_outlined, size: 48, color: Color(0xFF1B365D)),
+                              const SizedBox(height: 12),
+                              Text(
+                                'No orders found',
+                                style: GoogleFonts.domine(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF0D1B2A),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Items you purchase will appear here in real time.',
+                                style: GoogleFonts.literata(
+                                  fontSize: 12,
+                                  color: const Color(0xFF1B365D),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    else
+                      ..._filteredOrders.map(_buildOrderCard),
+                    const SizedBox(height: 16),
+                    _buildNeedAssistanceCard(),
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
           ],
@@ -150,10 +302,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -162,10 +311,10 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -175,13 +324,24 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0F172A)),
-            onPressed: widget.onLockPressed ?? () {},
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            onPressed: widget.onLockPressed ??
+                () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Secure order vault active with end-to-end encryption.',
+                        style: GoogleFonts.literata(),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
@@ -199,32 +359,34 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.search, size: 20, color: Color(0xFF64748B)),
+          const Icon(Icons.search, size: 20, color: Color(0xFF1B365D)),
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
               controller: _searchController,
               style: GoogleFonts.literata(
                 fontSize: 13,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
               decoration: InputDecoration(
+                filled: false,
+                fillColor: Colors.transparent,
                 border: InputBorder.none,
                 hintText: 'Search orders, items or serials...',
                 hintStyle: GoogleFonts.literata(
                   fontSize: 13,
-                  color: const Color(0xFF94A3B8),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ),
           ),
-          const Icon(Icons.tune, size: 18, color: Color(0xFF00344B)),
+          const Icon(Icons.tune, size: 18, color: Color(0xFF0D1B2A)),
         ],
       ),
     );
@@ -264,14 +426,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF00344B) : const Color(0xFFEAF5FF),
+          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 14, color: isSelected ? Colors.white : const Color(0xFF00344B)),
+              Icon(icon, size: 14, color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A)),
               const SizedBox(width: 6),
             ],
             if (hasDot) ...[
@@ -279,7 +441,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 width: 6,
                 height: 6,
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.white : const Color(0xFF00344B),
+                  color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -290,7 +452,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: isSelected ? Colors.white : const Color(0xFF00344B),
+                color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
               ),
             ),
           ],
@@ -310,9 +472,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -336,14 +498,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                     style: GoogleFonts.domine(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   Text(
                     order['date'] as String,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                 ],
@@ -391,7 +553,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
+              color: const Color(0xFFFDFBCF),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -404,7 +566,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       height: 48,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: const Color(0xFFE2EDF3)),
+                        border: Border.all(color: const Color(0xFFE6C17A)),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
@@ -428,14 +590,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       Text(
                         order['subtitle'] as String,
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF64748B),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -444,7 +606,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
@@ -458,19 +620,19 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFEAF5FF),
+                color: const Color(0xFFE6C17A),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
                   const Icon(Icons.access_time_rounded,
-                      size: 13, color: Color(0xFF00344B)),
+                      size: 13, color: Color(0xFF0D1B2A)),
                   const SizedBox(width: 6),
                   RichText(
                     text: TextSpan(
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                       children: [
                         const TextSpan(text: 'Expected Delivery: '),
@@ -494,8 +656,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () => AppNavigator.toOrderDetails(context, orderId: orderId),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00344B),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF0D1B2A),
+                      foregroundColor: const Color(0xFFF5EBDD),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -524,8 +686,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFEAF5FF),
-                      foregroundColor: const Color(0xFF00344B),
+                      backgroundColor: const Color(0xFFE6C17A),
+                      foregroundColor: const Color(0xFF0D1B2A),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -548,8 +710,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () => AppNavigator.toWriteReviews(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFEAF5FF),
-                      foregroundColor: const Color(0xFF00344B),
+                      backgroundColor: const Color(0xFFE6C17A),
+                      foregroundColor: const Color(0xFF0D1B2A),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -571,8 +733,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton(
                     onPressed: () => AppNavigator.toOrderDetails(context, orderId: orderId),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFEAF5FF),
-                      foregroundColor: const Color(0xFF00344B),
+                      backgroundColor: const Color(0xFFE6C17A),
+                      foregroundColor: const Color(0xFF0D1B2A),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -600,11 +762,11 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEAF5FF),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Icon(Icons.receipt_outlined,
-                      size: 16, color: Color(0xFF00344B)),
+                      size: 16, color: Color(0xFF0D1B2A)),
                 ),
               ],
             ],
@@ -621,20 +783,20 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFD3E7F8)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color(0xFFF5EBDD),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.headset_mic_outlined,
-                size: 18, color: Color(0xFF00344B)),
+                size: 18, color: Color(0xFF0D1B2A)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -646,14 +808,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 Text(
                   'TechKart 24/7 concierge is here',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ],
@@ -662,16 +824,16 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFFF5EBDD),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFCBD5E1)),
+              border: Border.all(color: const Color(0xFFE6C17A)),
             ),
             child: Text(
               'Contact',
               style: GoogleFonts.literata(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),

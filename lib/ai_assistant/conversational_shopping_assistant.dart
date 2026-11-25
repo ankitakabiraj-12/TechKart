@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
 import '../theme/profile_avatar.dart';
@@ -31,6 +32,32 @@ class ConversationalShoppingAssistantScreen extends StatefulWidget {
 class _ConversationalShoppingAssistantScreenState
     extends State<ConversationalShoppingAssistantScreen> {
   final TextEditingController _inputController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  bool _isTyping = false;
+
+  final List<Map<String, dynamic>> _messages = [
+    {
+      'type': 'ai_welcome',
+      'text':
+          'Hello! I can help you find compatible accessories, compare flagship specs, or track the best tech deals today. What are you looking to upgrade?',
+    },
+    {
+      'type': 'user',
+      'text':
+          'I need a durable titanium smartwatch for outdoor trail running, plus a fast GaN charger.',
+    },
+    {
+      'type': 'ai_response',
+      'text':
+          'I found 2 top-tier matches with aerospace titanium chassis and high-speed GaN fast-charging efficiency in stock right now:',
+      'showProducts': true,
+    },
+    {
+      'type': 'ai_followup',
+      'text':
+          'Would you like me to add both to your cart with the bundle discount applied, or compare battery endurance against the Chronos Active Pro?',
+    },
+  ];
 
   final List<Map<String, dynamic>> _matchedProducts = [
     {
@@ -55,61 +82,204 @@ class _ConversationalShoppingAssistantScreenState
   @override
   void dispose() {
     _inputController.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent + 80,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  void _handleSendMessage([String? manualText]) {
+    final text = manualText ?? _inputController.text.trim();
+    if (text.isEmpty) return;
+
+    _inputController.clear();
+    setState(() {
+      _messages.add({
+        'type': 'user',
+        'text': text,
+      });
+      _isTyping = true;
+    });
+    _scrollToBottom();
+
+    // Generate responsive intelligent AI reply
+    Future.delayed(const Duration(milliseconds: 700), () {
+      if (!mounted) return;
+      setState(() {
+        _isTyping = false;
+        _messages.add({
+          'type': 'ai_response',
+          'text': _generateAiReply(text),
+        });
+      });
+      _scrollToBottom();
+    });
+  }
+
+  String _generateAiReply(String query) {
+    final lower = query.toLowerCase();
+    if (lower.contains('battery')) {
+      return 'The Chronos Ultra 2 offers up to 72 hours of continuous multi-band GPS endurance with low-power battery optimization mode enabled.';
+    } else if (lower.contains('gps') || lower.contains('trail')) {
+      return 'Precision dual-frequency L1 & L5 GPS ensures accurate route tracking even through dense tree canopies and deep valleys.';
+    } else if (lower.contains('charger') || lower.contains('gan')) {
+      return 'The VoltFast 65W GaN dual-port charger can fast charge both your Chronos smartwatch and laptop simultaneously with full surge protection.';
+    } else if (lower.contains('delivery') || lower.contains('shipping') || lower.contains('price')) {
+      return 'Free express next-day delivery is included on all verified TechKart flagship purchases, backed by official local manufacturer warranty.';
+    }
+    return 'I checked our live catalog: your request matches certified TechKart hardware specs. Would you like me to reserve units or inspect technical benchmarks?';
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final bottomInset = mediaQuery.viewInsets.bottom;
+    final bottomPadding = mediaQuery.padding.bottom;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
             _buildAppBar(),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                children: [
-                  _buildTimestampHeader('Today, 10:24 AM'),
-                  const SizedBox(height: 14),
-                  _buildAiWelcomeBubble(),
-                  const SizedBox(height: 14),
-                  _buildUserBubble(
-                    'I need a durable titanium smartwatch for outdoor trail running, plus a fast GaN charger.',
+                Expanded(
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    itemCount: _messages.length + 1 + (_isTyping ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 14),
+                          child: _buildTimestampHeader('Today, 10:24 AM'),
+                        );
+                      }
+                      final msgIndex = index - 1;
+                      if (msgIndex < _messages.length) {
+                        final msg = _messages[msgIndex];
+                        final type = msg['type'] as String;
+                        final text = msg['text'] as String;
+                        final showProducts = msg['showProducts'] == true;
+
+                        if (type == 'ai_welcome') {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: _buildAiWelcomeBubble(text),
+                          );
+                        } else if (type == 'user') {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: _buildUserBubble(text),
+                          );
+                        } else if (type == 'ai_response') {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildAiResponseBubble(text),
+                                if (showProducts) ...[
+                                  const SizedBox(height: 12),
+                                  ..._matchedProducts.map(_buildProductCard),
+                                ],
+                              ],
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 14),
+                            child: _buildAiFollowUpBubble(text),
+                          );
+                        }
+                      }
+
+                      // Typing indicator
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 14),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 28,
+                              height: 28,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFE6C17A),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF0D1B2A)),
+                            ),
+                            const SizedBox(width: 10),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF5EBDD),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: const Color(0xFFE6C17A)),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(
+                                    width: 12,
+                                    height: 12,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Color(0xFF0D1B2A),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'TechKart AI is thinking...',
+                                    style: GoogleFonts.literata(
+                                      fontSize: 11,
+                                      color: const Color(0xFF1B365D),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 16),
-                  _buildAiResponseBubble(
-                    'I found 2 top-tier matches with aerospace titanium chassis and high-speed GaN fast-charging efficiency in stock right now:',
-                  ),
-                  const SizedBox(height: 12),
-                  ..._matchedProducts.map(_buildProductCard),
-                  const SizedBox(height: 12),
-                  _buildAiFollowUpBubble(
-                    'Would you like me to add both to your cart with the bundle discount applied, or compare battery endurance against the Chronos Active Pro?',
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
+                ),
+                _buildSuggestedQuestionsRail(),
+                _buildChatInputBar(bottomInset: bottomInset, bottomPadding: bottomPadding),
+              ],
             ),
-            _buildSuggestedQuestionsRail(),
-            _buildChatInputBar(),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
   }
 
   // ---------------------------------------------------------------------------
-  // APP BAR
+  // CLEAN MINIMAL TOP APP BAR
   // ---------------------------------------------------------------------------
   Widget _buildAppBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -118,10 +288,10 @@ class _ConversationalShoppingAssistantScreenState
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -131,12 +301,12 @@ class _ConversationalShoppingAssistantScreenState
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.camera_alt_outlined, size: 22, color: Color(0xFF0F172A)),
+            icon: const Icon(Icons.camera_alt_outlined, size: 22, color: Color(0xFF0D1B2A)),
             onPressed: widget.onCameraPressed ??
                 () => AppNavigator.toAiVisualSearchCamera(context),
             padding: EdgeInsets.zero,
@@ -144,14 +314,18 @@ class _ConversationalShoppingAssistantScreenState
           ),
           const SizedBox(width: 12),
           IconButton(
-            icon: const Icon(Icons.notifications_none_outlined, size: 22, color: Color(0xFF0F172A)),
+            icon: const Icon(Icons.notifications_none_outlined, size: 22, color: Color(0xFF0D1B2A)),
             onPressed: widget.onNotificationPressed ??
                 () => AppNavigator.toNotifications(context),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
           const SizedBox(width: 12),
-          const ProfileAvatar(size: 32),
+          GestureDetector(
+            onTap: widget.onProfilePressed ??
+                () => AppNavigator.toCustomerProfileHub(context),
+            child: const ProfileAvatar(size: 32),
+          ),
         ],
       ),
     );
@@ -165,7 +339,7 @@ class _ConversationalShoppingAssistantScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          color: const Color(0xFFEAF5FF),
+          color: const Color(0xFFE6C17A),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
@@ -173,7 +347,7 @@ class _ConversationalShoppingAssistantScreenState
           style: GoogleFonts.literata(
             fontSize: 10.5,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
       ),
@@ -183,7 +357,7 @@ class _ConversationalShoppingAssistantScreenState
   // ---------------------------------------------------------------------------
   // AI WELCOME BUBBLE
   // ---------------------------------------------------------------------------
-  Widget _buildAiWelcomeBubble() {
+  Widget _buildAiWelcomeBubble(String message) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -191,30 +365,30 @@ class _ConversationalShoppingAssistantScreenState
           width: 28,
           height: 28,
           decoration: const BoxDecoration(
-            color: Color(0xFFDCEEFB),
+            color: Color(0xFFE6C17A),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF00344B)),
+          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF0D1B2A)),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFFF5EBDD),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              border: Border.all(color: const Color(0xFFE2EDF3)),
+              border: Border.all(color: const Color(0xFFE6C17A)),
             ),
             child: Text(
-              'Hello! I can help you find compatible accessories, compare flagship specs, or track the best tech deals today. What are you looking to upgrade?',
+              message,
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 height: 1.45,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -233,7 +407,7 @@ class _ConversationalShoppingAssistantScreenState
         constraints: const BoxConstraints(maxWidth: 300),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFF00344B),
+          color: const Color(0xFF0D1B2A),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(4),
@@ -247,7 +421,7 @@ class _ConversationalShoppingAssistantScreenState
             fontSize: 12.5,
             height: 1.4,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: const Color(0xFFF5EBDD),
           ),
         ),
       ),
@@ -265,30 +439,30 @@ class _ConversationalShoppingAssistantScreenState
           width: 28,
           height: 28,
           decoration: const BoxDecoration(
-            color: Color(0xFFDCEEFB),
+            color: Color(0xFFE6C17A),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF00344B)),
+          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF0D1B2A)),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFFF5EBDD),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              border: Border.all(color: const Color(0xFFE2EDF3)),
+              border: Border.all(color: const Color(0xFFE6C17A)),
             ),
             child: Text(
               message,
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 height: 1.45,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -305,9 +479,9 @@ class _ConversationalShoppingAssistantScreenState
       margin: const EdgeInsets.only(left: 38, bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -327,10 +501,11 @@ class _ConversationalShoppingAssistantScreenState
                     child: Container(
                       width: 58,
                       height: 58,
-                      color: const Color(0xFFF1F5F9),
+                      color: const Color(0xFFE6C17A),
                       child: Image.asset(
                         product['image'] as String,
                         fit: BoxFit.cover,
+                        cacheWidth: 200,
                         errorBuilder: (context, error, stackTrace) =>
                             const Icon(Icons.devices, size: 24, color: Colors.grey),
                       ),
@@ -342,7 +517,7 @@ class _ConversationalShoppingAssistantScreenState
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEAF5FF),
+                        color: const Color(0xFFE6C17A),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
@@ -351,7 +526,7 @@ class _ConversationalShoppingAssistantScreenState
                           fontFamily: 'Literata',
                           fontSize: 8.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -368,14 +543,14 @@ class _ConversationalShoppingAssistantScreenState
                       style: GoogleFonts.domine(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     Text(
                       product['subtitle'] as String,
                       style: GoogleFonts.literata(
                         fontSize: 10.5,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -386,7 +561,7 @@ class _ConversationalShoppingAssistantScreenState
                           style: GoogleFonts.domine(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0F172A),
+                            color: const Color(0xFF0D1B2A),
                           ),
                         ),
                         if (product['cutPrice'] != null) ...[
@@ -395,7 +570,7 @@ class _ConversationalShoppingAssistantScreenState
                             product['cutPrice'] as String,
                             style: GoogleFonts.literata(
                               fontSize: 10.5,
-                              color: const Color(0xFF94A3B8),
+                              color: const Color(0xFF1B365D),
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
@@ -405,7 +580,7 @@ class _ConversationalShoppingAssistantScreenState
                           product['status'] as String,
                           style: GoogleFonts.literata(
                             fontSize: 10,
-                            color: const Color(0xFF64748B),
+                            color: const Color(0xFF1B365D),
                           ),
                         ),
                       ],
@@ -424,8 +599,8 @@ class _ConversationalShoppingAssistantScreenState
                   child: ElevatedButton(
                     onPressed: () => AppNavigator.toProductDetails(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00344B),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF0D1B2A),
+                      foregroundColor: const Color(0xFFF5EBDD),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(19),
@@ -453,11 +628,11 @@ class _ConversationalShoppingAssistantScreenState
                 height: 38,
                 width: 38,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(19),
                 ),
                 child: const Icon(Icons.bookmark_border,
-                    size: 16, color: Color(0xFF00344B)),
+                    size: 16, color: Color(0xFF0D1B2A)),
               ),
             ],
           ),
@@ -474,16 +649,16 @@ class _ConversationalShoppingAssistantScreenState
       margin: const EdgeInsets.only(left: 38),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Text(
         message,
         style: GoogleFonts.literata(
           fontSize: 12.5,
           height: 1.45,
-          color: const Color(0xFF0F172A),
+          color: const Color(0xFF0D1B2A),
         ),
       ),
     );
@@ -507,19 +682,19 @@ class _ConversationalShoppingAssistantScreenState
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.8,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               Row(
                 children: [
-                  const Icon(Icons.tune, size: 12, color: Color(0xFF64748B)),
+                  const Icon(Icons.tune, size: 12, color: Color(0xFF1B365D)),
                   const SizedBox(width: 4),
                   Text(
                     'Refine',
                     style: GoogleFonts.literata(
                       fontSize: 10.5,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                 ],
@@ -543,27 +718,33 @@ class _ConversationalShoppingAssistantScreenState
   }
 
   Widget _buildPromptChip(String label, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 13, color: const Color(0xFF00344B)),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: GoogleFonts.literata(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF0F172A),
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        _handleSendMessage(label);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF5EBDD),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xFFE6C17A)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 13, color: const Color(0xFF0D1B2A)),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: GoogleFonts.literata(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF0D1B2A),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -571,56 +752,74 @@ class _ConversationalShoppingAssistantScreenState
   // ---------------------------------------------------------------------------
   // CHAT INPUT BAR
   // ---------------------------------------------------------------------------
-  Widget _buildChatInputBar() {
+  Widget _buildChatInputBar({double bottomInset = 0.0, double bottomPadding = 0.0}) {
+    // If keyboard is open, add bottomInset; if closed, add bottomPadding so it stays comfortably above Android gesture bar
+    final double effectiveBottomPadding = bottomInset > 0 ? bottomInset + 8.0 : (bottomPadding > 0 ? bottomPadding + 10.0 : 16.0);
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: EdgeInsets.fromLTRB(16, 10, 16, effectiveBottomPadding),
       decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xFFE2EDF3), width: 1)),
+        color: Colors.transparent,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: const Color(0xFFF1F5F9),
+          color: const Color(0xFFE6C17A),
           borderRadius: BorderRadius.circular(24),
         ),
         child: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
-                shape: BoxShape.circle,
+            GestureDetector(
+              onTap: () {
+                HapticFeedback.lightImpact();
+                AppNavigator.toAiVisualSearchCamera(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFE6C17A),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.image_outlined,
+                    size: 18, color: Color(0xFF0D1B2A)),
               ),
-              child: const Icon(Icons.image_outlined,
-                  size: 18, color: Color(0xFF00344B)),
             ),
             const SizedBox(width: 8),
             Expanded(
               child: TextField(
                 controller: _inputController,
+                textInputAction: TextInputAction.send,
+                onSubmitted: (value) => _handleSendMessage(value),
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
                 decoration: InputDecoration(
+                  filled: false,
+                  fillColor: Colors.transparent,
                   border: InputBorder.none,
                   hintText: 'Ask about specs, compatibility, deals...',
                   hintStyle: GoogleFonts.literata(
                     fontSize: 12,
-                    color: const Color(0xFF94A3B8),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ),
             ),
-            Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                color: Color(0xFF00344B),
-                shape: BoxShape.circle,
+            GestureDetector(
+              onTap: () {
+                HapticFeedback.lightImpact();
+                _handleSendMessage();
+              },
+              child: Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF0D1B2A),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.arrow_upward, size: 16, color: Color(0xFFF5EBDD)),
               ),
-              child: const Icon(Icons.arrow_upward, size: 16, color: Colors.white),
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -69,7 +69,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -79,14 +79,14 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFD3E7F8)),
+                  border: Border.all(color: const Color(0xFFE6C17A)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.lock_outline, size: 14, color: Color(0xFF00344B)),
+                    const Icon(Icons.lock_outline, size: 14, color: Color(0xFF0D1B2A)),
                     const SizedBox(width: 6),
                     Text(
                       '256-BIT SSL ENCRYPTED SESSION',
@@ -94,7 +94,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                         fontSize: 10.5,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.8,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ],
@@ -110,7 +110,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: const Color(0xFFDCEEFB),
+                      color: const Color(0xFFE6C17A),
                       width: 4,
                     ),
                   ),
@@ -119,14 +119,14 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                       width: 100,
                       height: 100,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFEAF5FF),
+                        color: Color(0xFFE6C17A),
                         shape: BoxShape.circle,
                       ),
                       child: const Center(
                         child: Icon(
                           Icons.security,
                           size: 38,
-                          color: Color(0xFF00344B),
+                          color: Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -145,7 +145,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                     style: GoogleFonts.domine(
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -154,7 +154,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                     style: GoogleFonts.literata(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                 ],
@@ -164,7 +164,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3EEE4),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -173,7 +173,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                     fontFamily: 'Literata',
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B6B2B),
+                    color: const Color(0xFFB8860B),
                   ),
                 ),
               ),
@@ -186,7 +186,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
                   height: 1.25,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               const SizedBox(height: 12),
@@ -196,7 +196,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                 style: GoogleFonts.literata(
                   fontSize: 13,
                   height: 1.45,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const Spacer(),
@@ -205,25 +205,25 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFD3E7F8)),
+                  border: Border.all(color: const Color(0xFFE6C17A)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.credit_card, size: 16, color: Color(0xFF00344B)),
+                    const Icon(Icons.credit_card, size: 16, color: Color(0xFF0D1B2A)),
                     const SizedBox(width: 8),
                     Text(
                       'Authorizing card ending in •••• ${widget.cardLast4}',
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Text('•••', style: TextStyle(letterSpacing: 2, color: Color(0xFF00344B))),
+                    const Text('•••', style: TextStyle(letterSpacing: 2, color: Color(0xFF0D1B2A))),
                   ],
                 ),
               ),
@@ -231,13 +231,13 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF64748B)),
+                  const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF1B365D)),
                   const SizedBox(width: 6),
                   Text(
                     'TechKart End-to-End Buyer Protection',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                 ],

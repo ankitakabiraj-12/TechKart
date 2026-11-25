@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -304,7 +304,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: const Color(0xFF00344B),
+        backgroundColor: const Color(0xFF0D1B2A),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -340,7 +340,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
@@ -348,7 +348,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     final pinText = _pinController.text;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -389,29 +389,36 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               width: 44,
                               height: 44,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFEBF5FE),
+                                color: Color(0xFFE6C17A),
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
                                 child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
                                   size: 16,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
                           ),
 
-                          Image.asset(
-                            'asset/app_logo.png',
+                          Container(
+                            width: 38,
                             height: 38,
-                            fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'asset/app_logo.png',
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(
                                   'asset/app_launcher_icon.png',
-                                  height: 38,
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.cover,
                                 ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -427,7 +434,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEBF5FE),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -436,7 +443,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                             const Icon(
                               Icons.verified_user_outlined,
                               size: 14,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                             const SizedBox(width: 6),
                             Text(
@@ -445,7 +452,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.9,
-                                color: const Color(0xFF00344B),
+                                color: const Color(0xFF0D1B2A),
                               ),
                             ),
                           ],
@@ -462,7 +469,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         style: GoogleFonts.domine(
                           fontSize: 34,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                           letterSpacing: -0.6,
                         ),
                       ),
@@ -477,7 +484,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           style: GoogleFonts.literata(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF4A5568),
+                            color: const Color(0xFF1B365D),
                             height: 1.45,
                           ),
                           children: [
@@ -488,7 +495,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               text: target,
                               style: GoogleFonts.literata(
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFF00344B),
+                                color: const Color(0xFF0D1B2A),
                               ),
                             ),
                             const TextSpan(
@@ -512,7 +519,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                   style: GoogleFonts.literata(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF4C6682),
+                                    color: const Color(0xFF1B365D),
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
@@ -609,12 +616,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                     ),
                                     decoration: BoxDecoration(
                                       color: isActive
-                                          ? Colors.white
-                                          : const Color(0xFFEAF5FF),
+                                          ? const Color(0xFFF5EBDD)
+                                          : const Color(0xFFE6C17A),
                                       borderRadius: BorderRadius.circular(14),
                                       border: isActive
                                           ? Border.all(
-                                              color: const Color(0xFFCBD5E1),
+                                              color: const Color(0xFFE6C17A),
                                               width: 1.5,
                                             )
                                           : null,
@@ -637,7 +644,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                               style: GoogleFonts.domine(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
-                                                color: const Color(0xFF00344B),
+                                                color: const Color(0xFF0D1B2A),
                                               ),
                                             )
                                           : isActive
@@ -663,7 +670,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                               width: 6,
                                               height: 6,
                                               decoration: const BoxDecoration(
-                                                color: Color(0xFFCBD5E1),
+                                                color: Color(0xFFE6C17A),
                                                 shape: BoxShape.circle,
                                               ),
                                             ),
@@ -689,14 +696,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               const Icon(
                                 Icons.access_time_rounded,
                                 size: 16,
-                                color: Color(0xFF4C6682),
+                                color: Color(0xFF1B365D),
                               ),
                               const SizedBox(width: 6),
                               RichText(
                                 text: TextSpan(
                                   style: GoogleFonts.literata(
                                     fontSize: 12.5,
-                                    color: const Color(0xFF4A5568),
+                                    color: const Color(0xFF1B365D),
                                   ),
                                   children: [
                                     const TextSpan(text: 'Resend code in '),
@@ -704,7 +711,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                       text: _formatTimer(_secondsRemaining),
                                       style: GoogleFonts.literata(
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                   ],
@@ -722,8 +729,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w500,
                                 color: _secondsRemaining == 0
-                                    ? const Color(0xFF00344B)
-                                    : const Color(0xFFA0AEC0),
+                                    ? const Color(0xFF0D1B2A)
+                                    : const Color(0xFF1B365D),
                               ),
                             ),
                           ),
@@ -739,7 +746,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -749,14 +756,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               width: 44,
                               height: 44,
                               decoration: const BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0xFFF5EBDD),
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
                                 child: Icon(
                                   Icons.shield_outlined,
                                   size: 20,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
@@ -772,7 +779,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                         style: GoogleFonts.literata(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                       ),
                                       const SizedBox(width: 5),
@@ -780,7 +787,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                         width: 5,
                                         height: 5,
                                         decoration: const BoxDecoration(
-                                          color: Color(0xFF4C6682),
+                                          color: Color(0xFF1B365D),
                                           shape: BoxShape.circle,
                                         ),
                                       ),
@@ -792,7 +799,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                     style: GoogleFonts.literata(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w400,
-                                      color: const Color(0xFF4A5568),
+                                      color: const Color(0xFF1B365D),
                                       height: 1.35,
                                     ),
                                   ),
@@ -814,10 +821,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _handleVerify,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF00344B),
-                            foregroundColor: Colors.white,
+                            backgroundColor: const Color(0xFF0D1B2A),
+                            foregroundColor: const Color(0xFFF5EBDD),
                             disabledBackgroundColor: const Color(
-                              0xFF00344B,
+                              0xFF0D1B2A,
                             ).withValues(alpha: 0.6),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -831,7 +838,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.white,
+                                      Color(0xFFF5EBDD),
                                     ),
                                   ),
                                 )
@@ -843,7 +850,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 15.5,
                                         fontWeight: FontWeight.w600,
-                                        color: Colors.white,
+                                        color: const Color(0xFFF5EBDD),
                                         letterSpacing: 0.2,
                                       ),
                                     ),
@@ -851,7 +858,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                     const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 18,
-                                      color: Colors.white,
+                                      color: Color(0xFFF5EBDD),
                                     ),
                                   ],
                                 ),
@@ -872,7 +879,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF2D3748),
+                                color: const Color(0xFF1B365D),
                               ),
                             ),
                             GestureDetector(
@@ -886,9 +893,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 style: GoogleFonts.domine(
                                   fontSize: 13.5,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                   decoration: TextDecoration.underline,
-                                  decorationColor: const Color(0xFF00344B),
+                                  decorationColor: const Color(0xFF0D1B2A),
                                   decorationThickness: 1.5,
                                 ),
                               ),
@@ -907,7 +914,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           width: 134,
                           height: 4,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFCBD5E1),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

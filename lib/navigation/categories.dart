@@ -16,12 +16,14 @@ class CategoriesScreen extends StatefulWidget {
   final int initialTabIndex;
   final bool showBottomNav;
   final ValueChanged<int>? onNavTabSelected;
+  final ValueChanged<bool>? onSearchStateChanged;
 
   const CategoriesScreen({
     super.key,
     this.initialTabIndex = 1,
     this.showBottomNav = true,
     this.onNavTabSelected,
+    this.onSearchStateChanged,
   });
 
   @override
@@ -30,6 +32,7 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   final TextEditingController _filterController = TextEditingController();
+  final FocusNode _filterFocusNode = FocusNode();
   final ApiClient _apiClient = ApiClient();
 
   int _selectedPillIndex = 0;
@@ -104,11 +107,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   void initState() {
     super.initState();
+    _filterFocusNode.addListener(_onSearchFocusChanged);
     _fetchCategories();
+  }
+
+  void _onSearchFocusChanged() {
+    final isSearching = _filterFocusNode.hasFocus || _searchQuery.isNotEmpty;
+    widget.onSearchStateChanged?.call(isSearching);
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    _filterFocusNode.removeListener(_onSearchFocusChanged);
+    _filterFocusNode.dispose();
     _filterController.dispose();
     _apiClient.close();
     super.dispose();
@@ -179,6 +191,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     final assetPath = 'asset/categories/${category.slug}.jpg';
     return Image.asset(
       assetPath,
+      cacheWidth: 350,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
         // Fallback to general icon
@@ -188,7 +201,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             child: Icon(
               Icons.devices_other_rounded,
               size: 28,
-              color: Color(0xFF00344B),
+              color: Color(0xFF0D1B2A),
             ),
           ),
         );
@@ -205,7 +218,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
@@ -213,7 +226,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     final filteredList = _getFilteredCategories();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -241,7 +254,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     },
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -254,7 +267,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       style: GoogleFonts.domine(
                         fontSize: 19,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -273,7 +286,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         icon: const Icon(
                           Icons.notifications_none_rounded,
                           size: 23,
-                          color: Color(0xFF2D3748),
+                          color: Color(0xFF1B365D),
                         ),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
@@ -319,7 +332,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 height: 44,
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: const Color(0xFFD0E6F9),
@@ -331,26 +344,34 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     const Icon(
                       Icons.search_rounded,
                       size: 19,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF1B365D),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
                         controller: _filterController,
+                        focusNode: _filterFocusNode,
                         onChanged: (val) {
                           setState(() {
                             _searchQuery = val.trim();
                           });
+                          final isSearching =
+                              _filterFocusNode.hasFocus ||
+                                  _searchQuery.isNotEmpty;
+                          widget.onSearchStateChanged?.call(isSearching);
                         },
                         style: GoogleFonts.literata(
                           fontSize: 13.5,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Filter 45 hardware categories...',
+                          filled: false,
+                          fillColor: Colors.transparent,
+                          hintText:
+                              'Search across all 45 engineering categories...',
                           hintStyle: GoogleFonts.literata(
-                            fontSize: 13.5,
-                            color: const Color(0xFFA0AEC0),
+                            fontSize: 13,
+                            color: const Color(0xFF1B365D),
                           ),
                           border: InputBorder.none,
                           isDense: true,
@@ -365,11 +386,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           setState(() {
                             _searchQuery = '';
                           });
+                          final isSearching = _filterFocusNode.hasFocus;
+                          widget.onSearchStateChanged?.call(isSearching);
                         },
                         child: const Icon(
                           Icons.clear_rounded,
                           size: 18,
-                          color: Color(0xFF718096),
+                          color: Color(0xFF1B365D),
                         ),
                       ),
                   ],
@@ -406,8 +429,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF48587E)
-                              : const Color(0xFFEAF5FF),
+                              ? const Color(0xFF1B365D)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
@@ -416,7 +439,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                              color: isSelected ? Colors.white : const Color(0xFF00344B),
+                              color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -434,8 +457,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             // ---------------------------------------------------------------
             Expanded(
               child: RefreshIndicator(
-                color: const Color(0xFF48587E),
-                backgroundColor: Colors.white,
+                color: const Color(0xFF1B365D),
+                backgroundColor: const Color(0xFFF5EBDD),
                 onRefresh: _fetchCategories,
                 child: _buildBody(filteredList),
               ),
@@ -444,7 +467,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             // ---------------------------------------------------------------
             // BOTTOM NAVIGATION BAR
             // ---------------------------------------------------------------
-            if (widget.showBottomNav)
+            if (widget.showBottomNav &&
+                !_filterFocusNode.hasFocus &&
+                _searchQuery.isEmpty)
               TechKartBottomNavBar(
                 currentIndex: 1, // Categories tab active
                 onTabSelected: (index) {
@@ -454,7 +479,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     if (index == 0) {
                       AppNavigator.toHome(context);
                     } else if (index == 2) {
-                      AppNavigator.toAiVisualSearchCamera(context);
+                      AppNavigator.toConversationalShoppingAssistant(context);
                     } else if (index == 3) {
                       AppNavigator.toCart(context);
                     } else if (index == 4) {
@@ -473,7 +498,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(
-          color: Color(0xFF48587E),
+          color: Color(0xFF1B365D),
           strokeWidth: 2.5,
         ),
       );
@@ -489,7 +514,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               const Icon(
                 Icons.cloud_off_rounded,
                 size: 48,
-                color: Color(0xFF718096),
+                color: Color(0xFF1B365D),
               ),
               const SizedBox(height: 12),
               Text(
@@ -497,7 +522,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.literata(
                   fontSize: 14,
-                  color: const Color(0xFF4A5568),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const SizedBox(height: 16),
@@ -506,8 +531,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 icon: const Icon(Icons.refresh_rounded, size: 16),
                 label: const Text('Try Again'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF48587E),
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFF1B365D),
+                  foregroundColor: const Color(0xFFF5EBDD),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -527,14 +552,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             const Icon(
               Icons.search_off_rounded,
               size: 48,
-              color: Color(0xFFA0AEC0),
+              color: Color(0xFF1B365D),
             ),
             const SizedBox(height: 12),
             Text(
               'No categories match "$_searchQuery"',
               style: GoogleFonts.literata(
                 fontSize: 14,
-                color: const Color(0xFF718096),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
@@ -561,11 +586,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: const Color(0xFFF5EBDD),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                          color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),
@@ -598,7 +623,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                       style: GoogleFonts.domine(
                                         fontSize: 14.5,
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -612,7 +637,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         vertical: 2.5,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFD9ECFE),
+                                        color: const Color(0xFFE6C17A),
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(
@@ -620,7 +645,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         style: GoogleFonts.literata(
                                           fontSize: 9.5,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                       ),
                                     ),
@@ -633,7 +658,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF4A5568),
+                                  color: const Color(0xFF1B365D),
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -644,7 +669,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF718096),
+                                  color: const Color(0xFF1B365D),
                                 ),
                               ),
                             ],
@@ -656,14 +681,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           width: 30,
                           height: 30,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFEAF5FF),
+                            color: Color(0xFFE6C17A),
                             shape: BoxShape.circle,
                           ),
                           child: const Center(
                             child: Icon(
                               Icons.arrow_forward_rounded,
                               size: 15,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -684,7 +709,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFFEAF5FF),
+                color: const Color(0xFFE6C17A),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Stack(
@@ -697,7 +722,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: const Icon(
                         Icons.hub_rounded,
                         size: 100,
-                        color: Color(0xFF00344B),
+                        color: Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -710,7 +735,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           vertical: 3,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF48587E),
+                          color: const Color(0xFF1B365D),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -718,7 +743,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 9.5,
                             fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            color: const Color(0xFFF5EBDD),
                             letterSpacing: 0.8,
                           ),
                         ),
@@ -729,7 +754,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -738,7 +763,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w400,
-                          color: const Color(0xFF4A5568),
+                          color: const Color(0xFF1B365D),
                           height: 1.35,
                         ),
                       ),
@@ -751,8 +776,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             AppNavigator.toSubcategoryProducts(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF48587E),
-                            foregroundColor: Colors.white,
+                            backgroundColor: const Color(0xFF1B365D),
+                            foregroundColor: const Color(0xFFF5EBDD),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18),
@@ -769,14 +794,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white,
+                                  color: const Color(0xFFF5EBDD),
                                 ),
                               ),
                               const SizedBox(width: 6),
                               const Icon(
                                 Icons.arrow_forward_rounded,
                                 size: 14,
-                                color: Colors.white,
+                                color: Color(0xFFF5EBDD),
                               ),
                             ],
                           ),
@@ -788,7 +813,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 70),
           ],
         ),
       ),

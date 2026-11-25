@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
 import '../core/network/api_client.dart';
+import '../core/network/api_config.dart';
+import '../core/network/catalog_models.dart';
 import '../core/network/product_resolver.dart';
 import '../core/session_manager.dart';
 import '../theme/profile_avatar.dart';
@@ -64,10 +66,11 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  ProductModel? _product;
   int _selectedFinishIndex = 0;
   final List<Map<String, dynamic>> _finishes = [
     {'name': 'Natural', 'color': Color(0xFF6B655C)},
-    {'name': 'Space Black', 'color': Color(0xFF1E293B)},
+    {'name': 'Space Black', 'color': const Color(0xFF0D1B2A)},
     {'name': 'Starlight', 'color': Color(0xFFE2D9C8)},
   ];
 
@@ -77,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       'title': 'Midnight Ocean Band — 49mm',
       'subtitle': 'High-performance elastomer for water sports',
       'icon': Icons.watch_outlined,
-      'color': Color(0xFF00344B),
+      'color': const Color(0xFF0D1B2A),
     },
     {
       'title': 'Alpine Loop — Orange 49mm',
@@ -89,7 +92,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       'title': 'Trail Loop — Grey 49mm',
       'subtitle': 'Ultra-thin lightweight textile tab for runners',
       'icon': Icons.directions_run_rounded,
-      'color': Color(0xFF718096),
+      'color': const Color(0xFF1B365D),
     },
   ];
 
@@ -101,12 +104,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   void initState() {
     super.initState();
     _checkWishlistStatus();
+    _loadProductDetails();
   }
 
   @override
   void dispose() {
     _apiClient.close();
     super.dispose();
+  }
+
+
+  Future<void> _loadProductDetails() async {
+    try {
+      final res = await _apiClient.getProduct(widget.productId);
+      if (res.isSuccess && res.data != null && mounted) {
+        setState(() {
+          _product = res.data;
+        });
+      } else {
+        if (mounted) {
+          setState(() {
+            });
+        }
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+        });
+      }
+    }
   }
 
   Future<void> _checkWishlistStatus() async {
@@ -149,7 +175,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   'Added to your saved wishlist.',
                   style: GoogleFonts.literata(fontSize: 13),
                 ),
-                backgroundColor: const Color(0xFF00344B),
+                backgroundColor: const Color(0xFF0D1B2A),
                 duration: const Duration(seconds: 2),
                 behavior: SnackBarBehavior.floating,
               ),
@@ -167,7 +193,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   'Removed from your saved wishlist.',
                   style: GoogleFonts.literata(fontSize: 13),
                 ),
-                backgroundColor: const Color(0xFF00344B),
+                backgroundColor: const Color(0xFF0D1B2A),
                 duration: const Duration(seconds: 2),
                 behavior: SnackBarBehavior.floating,
               ),
@@ -201,13 +227,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: Color(0xFFF5EBDD),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -226,7 +252,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -241,7 +267,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     icon: const Icon(
                       Icons.share_outlined,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -255,7 +281,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             height: 16,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                           )
                         : Icon(
@@ -265,7 +291,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             size: 20,
                             color: _isWishlisted
                                 ? const Color(0xFFE53E3E)
-                                : const Color(0xFF2D3748),
+                                : const Color(0xFF1B365D),
                           ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -300,11 +326,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color(0xFFF5EBDD),
                             borderRadius: BorderRadius.circular(24),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00344B)
+                                color: const Color(0xFF0D1B2A)
                                     .withValues(alpha: 0.04),
                                 blurRadius: 14,
                                 offset: const Offset(0, 4),
@@ -318,15 +344,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
-                                  Image.asset(
-                                    'asset/chronos_ultra_2.jpg',
-                                    fit: BoxFit.cover,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Container(
-                                      color: const Color(0xFFF1F5F9),
-                                    ),
-                                  ),
+                                  Builder(builder: (context) {
+                                    final img = _product?.primaryImageUrl ?? 'asset/chronos_ultra_2.jpg';
+                                    if (img.startsWith('asset/')) {
+                                      return Image.asset(
+                                        img,
+                                        fit: BoxFit.cover,
+                                        cacheWidth: 800,
+                                        errorBuilder: (context, error, stackTrace) => Image.network(
+                                          ApiConfig.resolveImageUrl(img),
+                                          fit: BoxFit.cover,
+                                          cacheWidth: 800,
+                                          errorBuilder: (context, error2, stackTrace2) => Container(
+                                            color: const Color(0xFFE6C17A),
+                                            child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final url = img.startsWith('http') ? img : ApiConfig.resolveImageUrl(img);
+                                    return Image.network(
+                                      url,
+                                      fit: BoxFit.cover,
+                                      cacheWidth: 800,
+                                      errorBuilder: (context, error, stackTrace) => Container(
+                                        color: const Color(0xFFE6C17A),
+                                        child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
+                                      ),
+                                    );
+                                  }),
                                   Positioned(
                                     top: 12,
                                     left: 12,
@@ -340,7 +386,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             vertical: 4,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: Colors.white
+                                            color: const Color(0xFFF5EBDD)
                                                 .withValues(alpha: 0.9),
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -350,7 +396,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             style: GoogleFonts.literata(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                         ),
@@ -361,7 +407,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             vertical: 4,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFD9ECFE)
+                                            color: const Color(0xFFE6C17A)
                                                 .withValues(alpha: 0.9),
                                             borderRadius:
                                                 BorderRadius.circular(12),
@@ -371,7 +417,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             style: GoogleFonts.literata(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                         ),
@@ -385,14 +431,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       width: 32,
                                       height: 32,
                                       decoration: const BoxDecoration(
-                                        color: Colors.white,
+                                        color: Color(0xFFF5EBDD),
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Center(
                                         child: Icon(
                                           Icons.rotate_right_rounded,
                                           size: 18,
-                                          color: Color(0xFF00344B),
+                                          color: Color(0xFF0D1B2A),
                                         ),
                                       ),
                                     ),
@@ -409,7 +455,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           width: 18,
                                           height: 4,
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                             borderRadius:
                                                 BorderRadius.circular(2),
                                           ),
@@ -419,7 +465,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           width: 5,
                                           height: 4,
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFCCE4F5),
+                                            color: const Color(0xFFE6C17A),
                                             borderRadius:
                                                 BorderRadius.circular(2),
                                           ),
@@ -438,22 +484,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                       // Breadcrumbs
                       Text(
-                        'Wearables  >  Watches  >  Chronos Series',
+                        _product != null
+                            ? '${_product!.categoryName ?? 'Electronics'}  >  ${_product!.subcategoryName ?? 'Catalog'}'
+                            : 'Wearables  >  Watches  >  Chronos Series',
                         style: GoogleFonts.literata(
                           fontSize: 11,
                           fontWeight: FontWeight.w400,
-                          color: const Color(0xFF718096),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       const SizedBox(height: 6),
 
                       // Title
                       Text(
-                        'Chronos Ultra 2',
+                        _product?.title ?? 'Chronos Ultra 2',
                         style: GoogleFonts.domine(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -462,14 +510,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Row(
                         children: [
                           const Icon(Icons.star_border_rounded,
-                              size: 14, color: Color(0xFF4A5568)),
+                              size: 14, color: Color(0xFF1B365D)),
                           const SizedBox(width: 3),
                           Text(
                             '4.9 (420 reviews)  •  98% recommendation',
                             style: GoogleFonts.literata(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF4A5568),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -482,7 +530,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -491,22 +539,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Row(
                               children: [
                                 Text(
-                                  '₹35,499.00',
+                                  _product != null ? '₹${_product!.price.toStringAsFixed(0)}' : '₹35,499.00',
                                   style: GoogleFonts.domine(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                Text(
-                                  '₹39,999.00',
-                                  style: GoogleFonts.literata(
-                                    fontSize: 13,
-                                    decoration: TextDecoration.lineThrough,
-                                    color: const Color(0xFF718096),
+                                if (_product?.mrp != null || _product == null)
+                                  Text(
+                                    _product?.mrp != null ? '₹${_product!.mrp!.toStringAsFixed(0)}' : '₹39,999.00',
+                                    style: GoogleFonts.literata(
+                                      fontSize: 13,
+                                      decoration: TextDecoration.lineThrough,
+                                      color: const Color(0xFF1B365D),
+                                    ),
                                   ),
-                                ),
                                 const Spacer(),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
@@ -514,15 +563,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     vertical: 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFF3EEE4),
+                                    color: const Color(0xFFE6C17A),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
-                                    'SAVE ₹4,500',
+                                    _product != null && _product!.mrp != null && _product!.mrp! > _product!.price
+                                        ? 'SAVE ₹${(_product!.mrp! - _product!.price).toStringAsFixed(0)}'
+                                        : 'SAVE ₹4,500',
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF8B6B2B),
+                                      color: const Color(0xFFB8860B),
                                     ),
                                   ),
                                 ),
@@ -533,21 +584,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               'or ₹2,958/mo with 0% APR across 12 months ⓘ',
                               style: GoogleFonts.literata(
                                 fontSize: 11.5,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                               ),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
                                 const Icon(Icons.bolt_rounded,
-                                    size: 15, color: Color(0xFF00344B)),
+                                    size: 15, color: Color(0xFF0D1B2A)),
                                 const SizedBox(width: 4),
                                 Text(
                                   'In Stock — Mumbai 400001 2-hr delivery available',
                                   style: GoogleFonts.literata(
                                     fontSize: 11.5,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ],
@@ -567,14 +618,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           Text(
                             'Natural Titanium',
                             style: GoogleFonts.literata(
                               fontSize: 12,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -601,13 +652,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? const Color(0xFFEAF5FF)
-                                      : Colors.white,
+                                      ? const Color(0xFFE6C17A)
+                                      : const Color(0xFFF5EBDD),
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: isSelected
-                                        ? const Color(0xFF00344B)
-                                        : const Color(0xFFE2E8F0),
+                                        ? const Color(0xFF0D1B2A)
+                                        : const Color(0xFFE6C17A),
                                     width: 1,
                                   ),
                                 ),
@@ -629,7 +680,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         fontWeight: isSelected
                                             ? FontWeight.w600
                                             : FontWeight.w400,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                   ],
@@ -651,14 +702,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           Text(
                             'Size Guide',
                             style: GoogleFonts.literata(
                               fontSize: 12,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                               decoration: TextDecoration.underline,
                             ),
                           ),
@@ -683,13 +734,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? const Color(0xFFEAF5FF)
-                                      : Colors.white,
+                                      ? const Color(0xFFE6C17A)
+                                      : const Color(0xFFF5EBDD),
                                   borderRadius: BorderRadius.circular(16),
                                   border: Border.all(
                                     color: isSelected
-                                        ? const Color(0xFF00344B)
-                                        : const Color(0xFFE2E8F0),
+                                        ? const Color(0xFF0D1B2A)
+                                        : const Color(0xFFE6C17A),
                                     width: 1,
                                   ),
                                 ),
@@ -700,8 +751,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       height: 36,
                                       decoration: BoxDecoration(
                                         color: isSelected
-                                            ? const Color(0xFF00344B)
-                                            : const Color(0xFFF1F5F9),
+                                            ? const Color(0xFF0D1B2A)
+                                            : const Color(0xFFE6C17A),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Center(
@@ -709,8 +760,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           b['icon'] as IconData,
                                           size: 18,
                                           color: isSelected
-                                              ? Colors.white
-                                              : const Color(0xFF718096),
+                                              ? const Color(0xFFF5EBDD)
+                                              : const Color(0xFF1B365D),
                                         ),
                                       ),
                                     ),
@@ -725,7 +776,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             style: GoogleFonts.domine(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
@@ -733,7 +784,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             b['subtitle'] as String,
                                             style: GoogleFonts.literata(
                                               fontSize: 11,
-                                              color: const Color(0xFF718096),
+                                              color: const Color(0xFF1B365D),
                                             ),
                                           ),
                                         ],
@@ -745,8 +796,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           : Icons.radio_button_unchecked_rounded,
                                       size: 18,
                                       color: isSelected
-                                          ? const Color(0xFF00344B)
-                                          : const Color(0xFFCBD5E1),
+                                          ? const Color(0xFF0D1B2A)
+                                          : const Color(0xFFE6C17A),
                                     ),
                                   ],
                                 ),
@@ -767,7 +818,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -779,7 +830,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             child: const Icon(
                               Icons.arrow_forward_rounded,
                               size: 16,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                           ),
                         ],
@@ -824,7 +875,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -836,14 +887,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   width: 32,
                                   height: 32,
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: Color(0xFFF5EBDD),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.smart_toy_outlined,
                                       size: 18,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ),
@@ -853,7 +904,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   style: GoogleFonts.domine(
                                     fontSize: 13.5,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ],
@@ -863,7 +914,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               'Unsure about wrist drape or band swapping? Our AI assistant verifies lug compatibility & circumference instantly.',
                               style: GoogleFonts.literata(
                                 fontSize: 12,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                                 height: 1.35,
                               ),
                             ),
@@ -878,7 +929,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -894,13 +945,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           children: [
                             const Icon(Icons.local_shipping_outlined,
-                                size: 18, color: Color(0xFF00344B)),
+                                size: 18, color: Color(0xFF0D1B2A)),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(
@@ -911,14 +962,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   Text(
                                     'Arrives tomorrow, 2:00 PM to Mumbai 400001',
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -933,13 +984,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           children: [
                             const Icon(Icons.verified_user_outlined,
-                                size: 18, color: Color(0xFF00344B)),
+                                size: 18, color: Color(0xFF0D1B2A)),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(
@@ -950,14 +1001,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   Text(
                                     'Hassle-free coverage & 30-day trial returns',
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -981,7 +1032,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               padding: EdgeInsets.fromLTRB(
                   20, 12, 20, bottomPadding > 0 ? bottomPadding + 8 : 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFF5EBDD),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.05),
@@ -1002,48 +1053,79 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF718096),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       Text(
-                        '₹35,499.00',
+                        _product != null ? '₹${_product!.price.toStringAsFixed(0)}' : '₹35,499.00',
                         style: GoogleFonts.domine(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        AppNavigator.toCart(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2D3748),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.shopping_bag_outlined, size: 16),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Add to Cart',
-                            style: GoogleFonts.literata(
-                              fontSize: 13.5,
-                              fontWeight: FontWeight.w600,
-                            ),
+                  Row(
+                    children: [
+                      // Add to Cart Button
+                      OutlinedButton(
+                        onPressed: () {
+                          HapticFeedback.lightImpact();
+                          AppNavigator.toCart(context);
+                        },
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: const Color(0xFF0D1B2A),
+                          side: const BorderSide(color: Color(0xFF0D1B2A)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
                           ),
-                        ],
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.shopping_bag_outlined, size: 15),
+                            const SizedBox(width: 6),
+                            Text(
+                              'Add to Cart',
+                              style: GoogleFonts.literata(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      // Buy Now Button
+                      ElevatedButton(
+                        onPressed: () {
+                          HapticFeedback.mediumImpact();
+                          AppNavigator.toDeliveryAddress(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0D1B2A),
+                          foregroundColor: const Color(0xFFF5EBDD),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.flash_on_rounded, size: 15, color: Color(0xFFFFD700)),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Buy Now',
+                              style: GoogleFonts.literata(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -1062,21 +1144,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 17, color: const Color(0xFF00344B)),
+          Icon(icon, size: 17, color: const Color(0xFF0D1B2A)),
           const SizedBox(height: 4),
           Text(
             title,
             style: GoogleFonts.literata(
               fontSize: 9.5,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF718096),
+              color: const Color(0xFF1B365D),
             ),
           ),
           Text(
@@ -1084,7 +1166,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             style: GoogleFonts.literata(
               fontSize: 11,
               fontWeight: FontWeight.w500,
-              color: const Color(0xFF00344B),
+              color: const Color(0xFF0D1B2A),
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

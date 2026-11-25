@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 import '../system/currency_service.dart';
@@ -126,8 +126,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
         stock: 142,
         minSafety: 30,
         statusText: 'Optimal Stock (142 units)',
-        statusBg: const Color(0xFFE0F2FE),
-        statusTextColor: const Color(0xFF0284C7),
+        statusBg: const Color(0xFFE6C17A),
+        statusTextColor: const Color(0xFFB8860B),
         statusIcon: Icons.check_circle_outline,
         rightFooterText: 'Count Verified',
         rightFooterIcon: Icons.verified_outlined,
@@ -143,8 +143,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
         stock: 38,
         minSafety: 15,
         statusText: 'Healthy (38 units)',
-        statusBg: const Color(0xFFE0F2FE),
-        statusTextColor: const Color(0xFF0369A1),
+        statusBg: const Color(0xFFE6C17A),
+        statusTextColor: const Color(0xFFB8860B),
         statusIcon: Icons.inventory_2_outlined,
         rightFooterText: 'Auto-saved',
         imagePath: 'asset/aura_pro_headphones.jpg',
@@ -218,7 +218,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
     final displayedItems = _filteredItems;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FC),
+      backgroundColor: const Color(0xFFFDFBCF),
       appBar: _buildTopAppBar(context),
       body: SafeArea(
         top: false,
@@ -274,7 +274,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   // ---------------------------------------------------------------------------
   PreferredSizeWidget _buildTopAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFF4F8FC),
+      backgroundColor: const Color(0xFFFDFBCF),
       elevation: 0,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -283,7 +283,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       title: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Color(0xFF1E293B), size: 20),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Color(0xFF0D1B2A), size: 20),
             onPressed: () => AppNavigator.pop(context),
             tooltip: 'Back',
           ),
@@ -294,8 +294,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              color: const Color(0xFFF5EBDD),
+              shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.05),
@@ -309,7 +309,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               'asset/app_logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFF0284C7), size: 18),
+                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFFB8860B), size: 18),
               ),
             ),
           ),
@@ -321,7 +321,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               Text(
                 'TechKart ',
                 style: TextStyle(
-                  color: Color(0xFF0F172A),
+                  color: Color(0xFF0D1B2A),
                   fontSize: 14.5,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.2,
@@ -330,7 +330,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               Text(
                 'Inventory Co...',
                 style: TextStyle(
-                  color: Color(0xFF1E293B),
+                  color: Color(0xFF0D1B2A),
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'serif',
@@ -351,13 +351,13 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             width: 34,
             height: 34,
             decoration: BoxDecoration(
-              color: const Color(0xFFE0F2FE),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
               Icons.assignment_turned_in_outlined,
               size: 18,
-              color: Color(0xFF0369A1),
+              color: Color(0xFFB8860B),
             ),
           ),
         ),
@@ -369,12 +369,12 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
           height: 34,
           margin: const EdgeInsets.only(right: 14),
           decoration: const BoxDecoration(
-            color: Color(0xFF475569),
+            color: Color(0xFF1B365D),
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.person,
-            color: Colors.white,
+            color: Color(0xFFF5EBDD),
             size: 20,
           ),
         ),
@@ -392,7 +392,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFEBF4FD),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFD6E8FA), width: 1),
+        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -403,12 +403,12 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             children: [
               Row(
                 children: const [
-                  Icon(Icons.warehouse_outlined, size: 16, color: Color(0xFF1E3A8A)),
+                  Icon(Icons.warehouse_outlined, size: 16, color: Color(0xFF0D1B2A)),
                   SizedBox(width: 6),
                   Text(
                     'LIVE INVENTORY STATUS',
                     style: TextStyle(
-                      color: Color(0xFF1E293B),
+                      color: Color(0xFF0D1B2A),
                       fontSize: 11.5,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 0.4,
@@ -422,7 +422,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                     width: 6,
                     height: 6,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF2563EB),
+                      color: Color(0xFF1B365D),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -430,7 +430,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   const Text(
                     'Synced 2m ago',
                     style: TextStyle(
-                      color: Color(0xFF2563EB),
+                      color: Color(0xFF1B365D),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
@@ -450,7 +450,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color(0xFFF5EBDD),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Column(
@@ -458,7 +458,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                     children: [
                       const Text(
                         'Total Stock Value',
-                        style: TextStyle(color: Color(0xFF64748B), fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(color: Color(0xFF1B365D), fontSize: 11, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -467,7 +467,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           fontFamily: 'serif',
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF0F172A),
+                          color: Color(0xFF0D1B2A),
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -493,7 +493,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color(0xFFF5EBDD),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Column(
@@ -501,7 +501,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                     children: [
                       const Text(
                         'Units on Hand',
-                        style: TextStyle(color: Color(0xFF64748B), fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(color: Color(0xFF1B365D), fontSize: 11, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(height: 4),
                       Row(
@@ -514,13 +514,13 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                               fontFamily: 'serif',
                               fontSize: 18,
                               fontWeight: FontWeight.w800,
-                              color: Color(0xFF0F172A),
+                              color: Color(0xFF0D1B2A),
                             ),
                           ),
                           SizedBox(width: 3),
                           Text(
                             'pcs',
-                            style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.w500),
+                            style: TextStyle(color: Color(0xFF1B365D), fontSize: 12, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -528,12 +528,12 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE0F2FE),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Text(
                           'Across 3 Hubs',
-                          style: TextStyle(color: Color(0xFF0284C7), fontSize: 9.5, fontWeight: FontWeight.w700),
+                          style: TextStyle(color: Color(0xFFB8860B), fontSize: 9.5, fontWeight: FontWeight.w700),
                         ),
                       ),
                     ],
@@ -564,7 +564,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                         children: const [
                           Text(
                             'Low Stock Alert',
-                            style: TextStyle(color: Color(0xFF78716C), fontSize: 11, fontWeight: FontWeight.w500),
+                            style: TextStyle(color: Color(0xFF1B365D), fontSize: 11, fontWeight: FontWeight.w500),
                           ),
                           Icon(Icons.warning_amber_rounded, size: 14, color: Color(0xFF9A3412)),
                         ],
@@ -576,13 +576,13 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           fontFamily: 'serif',
                           fontSize: 16.5,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF1C1917),
+                          color: Color(0xFF0D1B2A),
                         ),
                       ),
                       const SizedBox(height: 2),
                       const Text(
                         'Below min safety buffer',
-                        style: TextStyle(color: Color(0xFF78716C), fontSize: 9.5, fontWeight: FontWeight.w500),
+                        style: TextStyle(color: Color(0xFF1B365D), fontSize: 9.5, fontWeight: FontWeight.w500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -597,9 +597,9 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE0F2FE),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFBAE6FD)),
+                    border: Border.all(color: const Color(0xFFE6C17A)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -609,9 +609,9 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                         children: const [
                           Text(
                             'Inbound Transit',
-                            style: TextStyle(color: Color(0xFF0369A1), fontSize: 11, fontWeight: FontWeight.w500),
+                            style: TextStyle(color: Color(0xFFB8860B), fontSize: 11, fontWeight: FontWeight.w500),
                           ),
-                          Icon(Icons.local_shipping_outlined, size: 14, color: Color(0xFF0369A1)),
+                          Icon(Icons.local_shipping_outlined, size: 14, color: Color(0xFFB8860B)),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -629,7 +629,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       const SizedBox(height: 2),
                       const Text(
                         '50 units expected soon',
-                        style: TextStyle(color: Color(0xFF0284C7), fontSize: 9.5, fontWeight: FontWeight.w500),
+                        style: TextStyle(color: Color(0xFFB8860B), fontSize: 9.5, fontWeight: FontWeight.w500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -659,8 +659,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF505C7D),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF1B365D),
+                      foregroundColor: const Color(0xFFF5EBDD),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(22),
@@ -698,12 +698,12 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFDDF0FD),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(
                     Icons.sync_rounded,
-                    color: Color(0xFF0F172A),
+                    color: Color(0xFF0D1B2A),
                     size: 20,
                   ),
                 ),
@@ -722,23 +722,23 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
     return Container(
       height: 44,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: TextField(
         controller: _searchController,
         onChanged: (_) => setState(() {}),
-        style: const TextStyle(fontSize: 13, color: Color(0xFF0F172A)),
+        style: const TextStyle(fontSize: 13, color: Color(0xFF0D1B2A)),
         decoration: InputDecoration(
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 12),
           hintText: 'Search SKU, product or bin location...',
-          hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontSize: 13),
-          prefixIcon: const Icon(Icons.search, color: Color(0xFF94A3B8), size: 20),
+          hintStyle: const TextStyle(color: Color(0xFF1B365D), fontSize: 13),
+          prefixIcon: const Icon(Icons.search, color: Color(0xFF1B365D), size: 20),
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
-                  icon: const Icon(Icons.cancel_outlined, color: Color(0xFF94A3B8), size: 18),
+                  icon: const Icon(Icons.cancel_outlined, color: Color(0xFF1B365D), size: 18),
                   onPressed: () {
                     _searchController.clear();
                     setState(() {});
@@ -774,8 +774,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
         Color textColor;
 
         if (isSelected) {
-          bgColor = const Color(0xFF505C7D);
-          textColor = Colors.white;
+          bgColor = const Color(0xFF1B365D);
+          textColor = const Color(0xFFF5EBDD);
         } else if (isWarn) {
           bgColor = const Color(0xFFF7ECE0);
           textColor = const Color(0xFF9A3412);
@@ -783,8 +783,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
           bgColor = const Color(0xFFFEE2E2);
           textColor = const Color(0xFFB91C1C);
         } else {
-          bgColor = const Color(0xFFE0F2FE);
-          textColor = const Color(0xFF0F172A);
+          bgColor = const Color(0xFFE6C17A);
+          textColor = const Color(0xFF0D1B2A);
         }
 
         return Padding(
@@ -837,9 +837,9 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   Widget _buildInventoryCard(BuildContext context, _InventoryProductModel item) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE5EDF5), width: 1),
+        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -861,16 +861,16 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   width: 70,
                   height: 70,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFE2E8F0)),
+                    border: Border.all(color: const Color(0xFFE6C17A)),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Image.asset(
                     item.imagePath,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => const Center(
-                      child: Icon(Icons.inventory_2_outlined, color: Color(0xFF94A3B8), size: 26),
+                      child: Icon(Icons.inventory_2_outlined, color: Color(0xFF1B365D), size: 26),
                     ),
                   ),
                 ),
@@ -891,7 +891,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                                 fontFamily: 'serif',
                                 fontSize: 14.5,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF0F172A),
+                                color: Color(0xFF0D1B2A),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -899,7 +899,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           ),
                           InkWell(
                             onTap: () => _showItemActionsMenu(context, item),
-                            child: const Icon(Icons.more_vert, size: 18, color: Color(0xFF64748B)),
+                            child: const Icon(Icons.more_vert, size: 18, color: Color(0xFF1B365D)),
                           ),
                         ],
                       ),
@@ -911,7 +911,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           Text(
                             'SKU: ${item.sku} • Bin: ',
                             style: const TextStyle(
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF1B365D),
                               fontSize: 11.5,
                               fontWeight: FontWeight.w500,
                             ),
@@ -919,7 +919,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           Text(
                             item.binLocation,
                             style: const TextStyle(
-                              color: Color(0xFF1D4ED8),
+                              color: Color(0xFF1B365D),
                               fontSize: 11.5,
                               fontWeight: FontWeight.bold,
                             ),
@@ -934,7 +934,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           Text(
                             '${CurrencyService.formatInr(item.cost)} cost • ',
                             style: const TextStyle(
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF1B365D),
                               fontSize: 11.5,
                               fontWeight: FontWeight.w500,
                             ),
@@ -943,7 +943,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                             '${CurrencyService.formatInr(item.retail)} ',
                             style: const TextStyle(
                               fontFamily: 'serif',
-                              color: Color(0xFF0F172A),
+                              color: Color(0xFF0D1B2A),
                               fontSize: 12.5,
                               fontWeight: FontWeight.w800,
                             ),
@@ -951,7 +951,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           const Text(
                             'retail',
                             style: TextStyle(
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF1B365D),
                               fontSize: 11.5,
                               fontWeight: FontWeight.w500,
                             ),
@@ -1020,7 +1020,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       Text(
                         'Min safety threshold: ${item.minSafety}',
                         style: const TextStyle(
-                          color: Color(0xFF64748B),
+                          color: Color(0xFF1B365D),
                           fontSize: 10.5,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1038,9 +1038,9 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFF5EBDD),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                        border: Border.all(color: const Color(0xFFE6C17A)),
                       ),
                       child: Row(
                         children: [
@@ -1089,8 +1089,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           stock: item.stock,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFBAE6FD),
-                          foregroundColor: const Color(0xFF0369A1),
+                          backgroundColor: const Color(0xFFE6C17A),
+                          foregroundColor: const Color(0xFFB8860B),
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                           minimumSize: const Size(80, 32),
@@ -1124,8 +1124,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF505C7D),
-                          foregroundColor: Colors.white,
+                          backgroundColor: const Color(0xFF1B365D),
+                          foregroundColor: const Color(0xFFF5EBDD),
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           minimumSize: const Size(100, 32),
@@ -1148,15 +1148,15 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       Row(
                         children: [
                           if (item.rightFooterIcon != null) ...[
-                            Icon(item.rightFooterIcon, size: 14, color: const Color(0xFF0284C7)),
+                            Icon(item.rightFooterIcon, size: 14, color: const Color(0xFFB8860B)),
                             const SizedBox(width: 4),
                           ],
                           Text(
                             item.rightFooterText!,
                             style: TextStyle(
                               color: item.rightFooterIcon != null
-                                  ? const Color(0xFF0F172A)
-                                  : const Color(0xFF94A3B8),
+                                  ? const Color(0xFF0D1B2A)
+                                  : const Color(0xFF1B365D),
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
                             ),
@@ -1197,7 +1197,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             width: 8,
             height: 8,
             decoration: const BoxDecoration(
-              color: Color(0xFF38BDF8),
+              color: Color(0xFF1B365D),
               shape: BoxShape.circle,
             ),
           ),
@@ -1211,7 +1211,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               const Text(
                 'Audit Mode Active',
                 style: TextStyle(
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF1B365D),
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
                 ),
@@ -1219,7 +1219,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               Text(
                 '$_verifiedCount / $_totalAuditCount Verified',
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFF5EBDD),
                   fontSize: 12.5,
                   fontWeight: FontWeight.bold,
                 ),
@@ -1234,8 +1234,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               _showAdjustModal(context);
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF0F172A),
+              backgroundColor: const Color(0xFFF5EBDD),
+              foregroundColor: const Color(0xFF0D1B2A),
               elevation: 0,
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               minimumSize: const Size(60, 36),
@@ -1245,14 +1245,14 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             ),
             child: Row(
               children: const [
-                Icon(Icons.tune, size: 15, color: Color(0xFF0F172A)),
+                Icon(Icons.tune, size: 15, color: Color(0xFF0D1B2A)),
                 SizedBox(width: 5),
                 Text(
                   'Adjust',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF0F172A),
+                    color: Color(0xFF0D1B2A),
                   ),
                 ),
               ],
@@ -1281,7 +1281,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               ),
               child: const Icon(
                 Icons.file_download_outlined,
-                color: Colors.white,
+                color: Color(0xFFF5EBDD),
                 size: 18,
               ),
             ),
@@ -1294,7 +1294,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   void _showItemActionsMenu(BuildContext context, _InventoryProductModel item) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5EBDD),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -1308,20 +1308,20 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               item.title,
               style: const TextStyle(fontFamily: 'serif', fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text('SKU: ${item.sku} • Bin: ${item.binLocation}', style: const TextStyle(color: Color(0xFF64748B))),
+            Text('SKU: ${item.sku} • Bin: ${item.binLocation}', style: const TextStyle(color: Color(0xFF1B365D))),
             const SizedBox(height: 12),
             ListTile(
-              leading: const Icon(Icons.qr_code, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.qr_code, color: Color(0xFFB8860B)),
               title: const Text('Print Bin Label / Barcode'),
               onTap: () => AppNavigator.pop(ctx),
             ),
             ListTile(
-              leading: const Icon(Icons.swap_horiz, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.swap_horiz, color: Color(0xFFB8860B)),
               title: const Text('Relocate Stock to Another Bin'),
               onTap: () => AppNavigator.pop(ctx),
             ),
             ListTile(
-              leading: const Icon(Icons.edit_note, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.edit_note, color: Color(0xFFB8860B)),
               title: const Text('Manual Inventory Adjustment / Write-Off'),
               onTap: () => AppNavigator.pop(ctx),
             ),
@@ -1334,7 +1334,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   void _showAdjustModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5EBDD),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -1351,11 +1351,11 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             const SizedBox(height: 8),
             const Text(
               'Select an action to verify or correct on-hand bin quantities across warehouses:',
-              style: TextStyle(color: Color(0xFF64748B), fontSize: 12.5),
+              style: TextStyle(color: Color(0xFF1B365D), fontSize: 12.5),
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: const Icon(Icons.checklist_rtl, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.checklist_rtl, color: Color(0xFFB8860B)),
               title: const Text('Mark Remaining 43 Items as Verified'),
               onTap: () {
                 setState(() => _verifiedCount = _totalAuditCount);
@@ -1379,7 +1379,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   void _showAuditChecklistSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5EBDD),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -1395,7 +1395,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             ),
             SizedBox(height: 12),
             Text('• Central Mumbai Hub: 1,240 units verified\n• Bandra Hub: 420 units verified\n• Andheri Hub: 182 units verified',
-                style: TextStyle(height: 1.6, color: Color(0xFF475569))),
+                style: TextStyle(height: 1.6, color: Color(0xFF1B365D))),
           ],
         ),
       ),

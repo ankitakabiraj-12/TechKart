@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
 import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
+import '../core/network/api_client.dart';
+import '../core/network/api_config.dart';
 
 /// TechKart Search Results Screen (Titanium watch)
 ///
@@ -55,10 +57,16 @@ import '../theme/profile_avatar.dart';
 /// - Floating Bottom Navigation Bar.
 class SearchResultScreen extends StatefulWidget {
   final String query;
+  final int? categoryId;
+  final int? subcategoryId;
+  final String? categoryName;
 
   const SearchResultScreen({
     super.key,
     this.query = 'Titanium watch',
+    this.categoryId,
+    this.subcategoryId,
+    this.categoryName,
   });
 
   @override
@@ -66,53 +74,57 @@ class SearchResultScreen extends StatefulWidget {
 }
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
+  final ApiClient _apiClient = ApiClient();
   late final TextEditingController _searchController;
   final Set<String> _wishlisted = {'chronos_ultra_2'};
 
-  final List<Map<String, dynamic>> _results = [
+  bool _isLoading = true;
+  List<Map<String, dynamic>> _results = [];
+
+  final List<Map<String, dynamic>> _fallbackResults = [
     {
-      'id': 'chronos_ultra_2',
-      'title': 'Chronos Ultra 2',
-      'specs': 'Titanium 49mm • Cellul...',
+      'id': '12',
+      'title': 'Apple Watch Ultra 2 (GPS + Cellular, 49mm)',
+      'specs': 'Grade 5 Titanium 49mm • 3000 nits Always-On',
       'rating': '4.9 (420)',
-      'price': '₹35,499',
+      'price': '₹84,900',
       'tag': 'BEST MATCH',
-      'tagBg': const Color(0xFF00344B),
-      'tagColor': Colors.white,
-      'image': 'asset/chronos_titanium_chrono.jpg',
+      'tagBg': const Color(0xFF0D1B2A),
+      'tagColor': const Color(0xFFF5EBDD),
+      'image': 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80',
     },
     {
-      'id': 'aura_watch_studio',
-      'title': 'Aura Watch Studio',
-      'specs': 'Ceramic Bezel • Sapphire',
-      'rating': '4.8 (312)',
-      'price': '₹32,199',
-      'tag': 'SAPPHIRE',
-      'tagBg': const Color(0xFF48587E),
-      'tagColor': Colors.white,
-      'image': 'asset/onboarding_hero_1.png',
+      'id': '102',
+      'title': 'Apple iPhone 16 Pro Max',
+      'specs': 'Titanium 6.9" Super Retina XDR • A18 Pro',
+      'rating': '4.9 (1.4k)',
+      'price': '₹1,39,900',
+      'tag': 'FLAGSHIP',
+      'tagBg': const Color(0xFF1B365D),
+      'tagColor': const Color(0xFFF5EBDD),
+      'image': 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&q=80',
     },
     {
-      'id': 'volta_dual_dock',
-      'title': 'Volta Dual GaN Do...',
-      'specs': '65W Fast Charge • Puck',
+      'id': '16',
+      'title': 'Anker 735 GaNPrime 65W Fast Charger',
+      'specs': '65W Multi-Port • 2x USB-C + 1x USB-A',
       'rating': '4.9 (890)',
-      'price': '₹7,399',
+      'price': '₹3,999',
       'tag': 'COMPANION',
-      'tagBg': const Color(0xFFF3EEE4),
-      'tagColor': const Color(0xFF8B6B2B),
-      'image': 'asset/carousel_fast_gan_charger.jpg',
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFFB8860B),
+      'image': 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80',
     },
     {
-      'id': 'apex_titanium_link',
-      'title': 'Apex Titanium Link',
-      'specs': 'Dual Biometrics • 7-day',
-      'rating': '4.9 (1.1k)',
-      'price': '₹45,499',
-      'tag': 'ECOSYSTEM',
-      'tagBg': const Color(0xFFD9ECFE),
-      'tagColor': const Color(0xFF00344B),
-      'image': 'asset/apex_titanium_link.jpg',
+      'id': '101',
+      'title': 'Sony WH-1000XM5 ANC Headphones',
+      'specs': 'Industry Leading Noise Cancelling • 30h Playtime',
+      'rating': '4.9 (2.1k)',
+      'price': '₹29,990',
+      'tag': 'HI-RES',
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFF0D1B2A),
+      'image': 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80',
     },
   ];
 
@@ -120,6 +132,75 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: widget.query);
+    _loadProducts();
+  }
+
+  Future<void> _loadProducts() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await _apiClient.getProducts(
+        categoryId: widget.categoryId,
+        subcategoryId: widget.subcategoryId,
+        search: widget.subcategoryId != null ? null : (widget.query.isNotEmpty ? widget.query : null),
+      );
+
+      if (response.isSuccess && response.data != null && response.data!.isNotEmpty) {
+        final products = response.data!;
+        setState(() {
+          _results = products.map((p) {
+            String imgPath = p.primaryImageUrl ?? (p.images.isNotEmpty ? p.images.first : "");
+            if (imgPath.isEmpty) {
+              imgPath = "asset/product_images/Wearables/Smartwatches_ChronosUltra2.jpg";
+            }
+
+            final specsText = (p.description != null && p.description!.isNotEmpty)
+                ? p.description!
+                : (p.sellerStoreName != null ? "${p.sellerStoreName} • Authentic" : "Authentic • TechKart");
+
+            return {
+              'id': p.id.toString(),
+              'title': p.title,
+              'specs': specsText,
+              'rating': "4.9 (${p.stockQuantity > 0 ? p.stockQuantity : 100})",
+              'price': "₹${p.price.toStringAsFixed(0)}",
+              'mrp': p.mrp != null ? "₹${p.mrp!.toStringAsFixed(0)}" : null,
+              'tag': (p.stockQuantity > 0 ? "IN STOCK" : "PRE-ORDER"),
+              'tagBg': const Color(0xFF0D1B2A),
+              'tagColor': const Color(0xFFF5EBDD),
+              'image': imgPath,
+              'stock': p.stockQuantity,
+            };
+          }).toList();
+          _isLoading = false;
+        });
+      } else {
+        if (widget.subcategoryId != null) {
+          setState(() {
+            _results = [];
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _results = List.from(_fallbackResults);
+            _isLoading = false;
+          });
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          if (widget.subcategoryId != null) {
+            _results = [];
+          } else {
+            _results = List.from(_fallbackResults);
+          }
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -141,7 +222,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           '${item['title']} added to your cart.',
           style: GoogleFonts.literata(fontSize: 13.5),
         ),
-        backgroundColor: const Color(0xFF00344B),
+        backgroundColor: const Color(0xFF0D1B2A),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
       ),
@@ -157,13 +238,13 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -178,14 +259,21 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Image.asset(
-                    'asset/app_logo.png',
+                  Container(
+                    width: 32,
                     height: 32,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'asset/app_launcher_icon.png',
-                      height: 32,
-                      fit: BoxFit.contain,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'asset/app_logo.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                          'asset/app_launcher_icon.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -197,7 +285,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       Row(
@@ -205,7 +293,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           const Icon(
                             Icons.location_on_outlined,
                             size: 11,
-                            color: Color(0xFF718096),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 2),
                           Text(
@@ -213,7 +301,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 10.5,
                               fontWeight: FontWeight.w400,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -233,7 +321,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         icon: const Icon(
                           Icons.notifications_none_rounded,
                           size: 23,
-                          color: Color(0xFF2D3748),
+                          color: Color(0xFF1B365D),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -285,7 +373,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     },
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -298,7 +386,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     child: Container(
                       height: 46,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEAF5FF),
+                        color: const Color(0xFFE6C17A),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -307,7 +395,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           const Icon(
                             Icons.search_rounded,
                             size: 19,
-                            color: Color(0xFF718096),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -315,10 +403,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               controller: _searchController,
                               style: GoogleFonts.literata(
                                 fontSize: 13.5,
-                                color: const Color(0xFF00344B),
+                                color: const Color(0xFF0D1B2A),
                                 fontWeight: FontWeight.w500,
                               ),
                               decoration: const InputDecoration(
+                                filled: false,
+                                fillColor: Colors.transparent,
                                 isDense: true,
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.zero,
@@ -330,14 +420,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             child: const Icon(
                               Icons.close_rounded,
                               size: 17,
-                              color: Color(0xFF718096),
+                              color: Color(0xFF1B365D),
                             ),
                           ),
                           const SizedBox(width: 10),
                           const Icon(
                             Icons.mic_none_rounded,
                             size: 19,
-                            color: Color(0xFF718096),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 10),
                           GestureDetector(
@@ -348,7 +438,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             child: const Icon(
                               Icons.camera_alt_outlined,
                               size: 19,
-                              color: Color(0xFF718096),
+                              color: Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -369,37 +459,45 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        widget.query,
-                        style: GoogleFonts.domine(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFD9ECFE),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '14 items',
-                          style: GoogleFonts.literata(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFF00344B),
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.categoryName ?? widget.query,
+                            style: GoogleFonts.domine(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFF0D1B2A),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE6C17A),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            '${_results.length} items',
+                            style: GoogleFonts.literata(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF0D1B2A),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
 
                   // Sort dropdown pill
                   Container(
@@ -408,7 +506,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEAF5FF),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -418,14 +516,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF00344B),
+                            color: const Color(0xFF0D1B2A),
                           ),
                         ),
                         const SizedBox(width: 4),
                         const Icon(
                           Icons.keyboard_arrow_down_rounded,
                           size: 16,
-                          color: Color(0xFF00344B),
+                          color: Color(0xFF0D1B2A),
                         ),
                       ],
                     ),
@@ -450,20 +548,20 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
                       children: [
                         const Icon(Icons.check_rounded,
-                            size: 14, color: Colors.white),
+                            size: 14, color: Color(0xFFF5EBDD)),
                         const SizedBox(width: 4),
                         Text(
                           'In Stock',
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: const Color(0xFFF5EBDD),
                           ),
                         ),
                       ],
@@ -476,7 +574,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEAF5FF),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -486,7 +584,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF00344B),
+                            color: const Color(0xFF0D1B2A),
                           ),
                         ),
                         const SizedBox(width: 4),
@@ -494,7 +592,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           width: 15,
                           height: 15,
                           decoration: const BoxDecoration(
-                            color: Color(0xFF48587E),
+                            color: Color(0xFF1B365D),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -503,7 +601,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                color: const Color(0xFFF5EBDD),
                               ),
                             ),
                           ),
@@ -518,7 +616,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEAF5FF),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -526,7 +624,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -537,7 +635,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEAF5FF),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -545,7 +643,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -565,18 +663,74 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 14,
-                          childAspectRatio: 0.68,
-                        ),
-                        itemCount: _results.length,
-                        itemBuilder: (context, index) {
+                      if (_isLoading)
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 48),
+                          child: Center(
+                            child: CircularProgressIndicator(color: Color(0xFF0D1B2A)),
+                          ),
+                        )
+                      else if (_results.isEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 48),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 72,
+                                  height: 72,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFE6C17A),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.inventory_2_outlined,
+                                    size: 36,
+                                    color: Color(0xFF0D1B2A),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  "No products in this subcategory",
+                                  style: GoogleFonts.domine(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0xFF0D1B2A),
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  "Verified catalog stock arriving soon.",
+                                  style: GoogleFonts.literata(
+                                    fontSize: 13,
+                                    color: const Color(0xFF1B365D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      else
+                      Builder(
+                        builder: (context) {
+                          final screenWidth = MediaQuery.of(context).size.width;
+                          final cardWidth = (screenWidth - 32 - 12) / 2;
+                          final double cardHeight = (cardWidth / 1.15) + 100.0;
+                          final double dynamicRatio = (cardWidth / cardHeight).clamp(0.55, 0.75);
+
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 14,
+                              childAspectRatio: dynamicRatio,
+                            ),
+                            itemCount: _results.length,
+                            itemBuilder: (context, index) {
                           final item = _results[index];
                           final id = item['id'] as String;
                           final isFavorite = _wishlisted.contains(id);
@@ -585,11 +739,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             onTap: () => _onProductTap(item),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: const Color(0xFFF5EBDD),
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF00344B)
+                                    color: const Color(0xFF0D1B2A)
                                         .withValues(alpha: 0.04),
                                     blurRadius: 10,
                                     offset: const Offset(0, 4),
@@ -608,15 +762,35 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                       child: Stack(
                                         fit: StackFit.expand,
                                         children: [
-                                          Image.asset(
-                                            item['image'] as String,
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) =>
-                                                    Container(
-                                              color: const Color(0xFFF1F5F9),
-                                            ),
-                                          ),
+                                          Builder(builder: (context) {
+                                            final imgStr = item['image'] as String;
+                                            if (imgStr.startsWith('asset/')) {
+                                              return Image.asset(
+                                                imgStr,
+                                                fit: BoxFit.cover,
+                                                cacheWidth: 500,
+                                                errorBuilder: (context, error, stackTrace) => Image.network(
+                                                  ApiConfig.resolveImageUrl(imgStr),
+                                                  fit: BoxFit.cover,
+                                                  cacheWidth: 500,
+                                                  errorBuilder: (context, error2, stackTrace2) => Container(
+                                                    color: const Color(0xFFE6C17A),
+                                                    child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final fullUrl = imgStr.startsWith('http') ? imgStr : ApiConfig.resolveImageUrl(imgStr);
+                                            return Image.network(
+                                              fullUrl,
+                                              fit: BoxFit.cover,
+                                              cacheWidth: 500,
+                                              errorBuilder: (context, error, stackTrace) => Container(
+                                                color: const Color(0xFFE6C17A),
+                                                child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
+                                              ),
+                                            );
+                                          }),
                                           Positioned(
                                             top: 8,
                                             left: 8,
@@ -661,7 +835,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: const BoxDecoration(
-                                                  color: Colors.white,
+                                                  color: Color(0xFFF5EBDD),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Center(
@@ -697,7 +871,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                             const Icon(
                                               Icons.star_border_rounded,
                                               size: 14,
-                                              color: Color(0xFF4A5568),
+                                              color: Color(0xFF1B365D),
                                             ),
                                             const SizedBox(width: 3),
                                             Text(
@@ -705,7 +879,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                               style: GoogleFonts.literata(
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF4A5568),
+                                                color: const Color(0xFF1B365D),
                                               ),
                                             ),
                                           ],
@@ -716,7 +890,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                           style: GoogleFonts.domine(
                                             fontSize: 13.5,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -727,7 +901,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                           style: GoogleFonts.literata(
                                             fontSize: 10.5,
                                             fontWeight: FontWeight.w400,
-                                            color: const Color(0xFF718096),
+                                            color: const Color(0xFF1B365D),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -737,13 +911,30 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              item['price'] as String,
-                                              style: GoogleFonts.domine(
-                                                fontSize: 14.5,
-                                                fontWeight: FontWeight.w700,
-                                                color: const Color(0xFF00344B),
-                                              ),
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                                              textBaseline: TextBaseline.alphabetic,
+                                              children: [
+                                                Text(
+                                                  item['price'] as String,
+                                                  style: GoogleFonts.domine(
+                                                    fontSize: 14.5,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: const Color(0xFF0D1B2A),
+                                                  ),
+                                                ),
+                                                if (item['mrp'] != null) ...[
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    item['mrp'] as String,
+                                                    style: GoogleFonts.literata(
+                                                      fontSize: 10.5,
+                                                      decoration: TextDecoration.lineThrough,
+                                                      color: const Color(0xFF1B365D),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ],
                                             ),
                                             GestureDetector(
                                               onTap: () => _onAddToCart(item),
@@ -751,14 +942,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: const BoxDecoration(
-                                                  color: Color(0xFF00344B),
+                                                  color: Color(0xFF0D1B2A),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: const Center(
                                                   child: Icon(
                                                     Icons.add_rounded,
                                                     size: 17,
-                                                    color: Colors.white,
+                                                    color: Color(0xFFF5EBDD),
                                                   ),
                                                 ),
                                               ),
@@ -773,7 +964,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             ),
                           );
                         },
-                      ),
+                      );
+                    },),
 
                       const SizedBox(height: 18),
 
@@ -785,7 +977,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Color(0xFFEAF5FF), Color(0xFFD9ECFE)],
+                            colors: [Color(0xFFE6C17A), Color(0xFFE6C17A)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -800,14 +992,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   width: 32,
                                   height: 32,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFF48587E),
+                                    color: Color(0xFF1B365D),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.auto_awesome_rounded,
                                       size: 16,
-                                      color: Colors.white,
+                                      color: Color(0xFFF5EBDD),
                                     ),
                                   ),
                                 ),
@@ -817,7 +1009,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   style: GoogleFonts.domine(
                                     fontSize: 14.5,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                               ],
@@ -828,7 +1020,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                                 height: 1.4,
                               ),
                             ),
@@ -843,7 +1035,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                 width: double.infinity,
                                 height: 42,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: const Color(0xFFF5EBDD),
                                   borderRadius: BorderRadius.circular(21),
                                 ),
                                 padding:
@@ -853,7 +1045,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                     const Icon(
                                       Icons.chat_bubble_outline_rounded,
                                       size: 15,
-                                      color: Color(0xFF4A5568),
+                                      color: Color(0xFF1B365D),
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -862,7 +1054,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         style: GoogleFonts.literata(
                                           fontSize: 11.5,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -871,7 +1063,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                     const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 15,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                   ],
                                 ),
@@ -899,7 +1091,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 } else if (index == 1) {
                   AppNavigator.toCategories(context);
                 } else if (index == 2) {
-                  AppNavigator.toAiVisualSearchCamera(context);
+                  AppNavigator.toConversationalShoppingAssistant(context);
                 } else if (index == 3) {
                   AppNavigator.toCart(context);
                 } else if (index == 4) {

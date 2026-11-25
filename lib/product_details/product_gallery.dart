@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -46,6 +46,7 @@ class ProductGalleryScreen extends StatefulWidget {
 
 class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
   int _selectedThumbIndex = 0;
+  double _zoomLevel = 1.0;
 
   final List<String> _galleryImages = [
     'asset/chronos_ultra_2.jpg',
@@ -71,13 +72,13 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: Color(0xFFF5EBDD),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -98,14 +99,14 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                       width: 40,
                       height: 40,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFEAF5FF),
+                        color: Color(0xFFE6C17A),
                         shape: BoxShape.circle,
                       ),
                       child: const Center(
                         child: Icon(
                           Icons.arrow_back_ios_new_rounded,
                           size: 16,
-                          color: Color(0xFF00344B),
+                          color: Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -121,7 +122,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                           style: GoogleFonts.domine(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF00344B),
+                            color: const Color(0xFF0D1B2A),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -131,7 +132,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFD9ECFE),
+                            color: const Color(0xFFE6C17A),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -139,7 +140,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -151,14 +152,14 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                     width: 38,
                     height: 38,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFEAF5FF),
+                      color: Color(0xFFE6C17A),
                       shape: BoxShape.circle,
                     ),
                     child: const Center(
                       child: Icon(
                         Icons.share_outlined,
                         size: 17,
-                        color: Color(0xFF00344B),
+                        color: Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -168,14 +169,14 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                     width: 38,
                     height: 38,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFEAF5FF),
+                      color: Color(0xFFE6C17A),
                       shape: BoxShape.circle,
                     ),
                     child: const Center(
                       child: Icon(
                         Icons.fullscreen_rounded,
                         size: 20,
-                        color: Color(0xFF00344B),
+                        color: Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -198,7 +199,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFD9ECFE),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -206,7 +207,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -218,7 +219,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF3EEE4),
+                      color: const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -226,7 +227,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF8B6B2B),
+                        color: const Color(0xFFB8860B),
                       ),
                     ),
                   ),
@@ -251,11 +252,11 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                         width: double.infinity,
                         height: 320,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF00344B).withValues(alpha: 0.05),
+                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.05),
                               blurRadius: 16,
                               offset: const Offset(0, 4),
                             ),
@@ -266,14 +267,17 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(24),
-                              child: Image.asset(
-                                _galleryImages[_selectedThumbIndex],
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Container(
-                                  color: const Color(0xFFF1F5F9),
-                                  child: const Center(
-                                    child: Icon(Icons.image_outlined, size: 40),
+                              child: Transform.scale(
+                                scale: _zoomLevel,
+                                child: Image.asset(
+                                  _galleryImages[_selectedThumbIndex],
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                    color: const Color(0xFFE6C17A),
+                                    child: const Center(
+                                      child: Icon(Icons.image_outlined, size: 40),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -285,7 +289,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                               right: 14,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withValues(alpha: 0.9),
+                                  color: const Color(0xFFF5EBDD).withValues(alpha: 0.9),
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
@@ -298,22 +302,30 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                 child: Column(
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          _zoomLevel = (_zoomLevel + 0.5).clamp(1.0, 3.0);
+                                        });
+                                      },
                                       icon: const Icon(Icons.add, size: 18),
                                       constraints: const BoxConstraints(
                                           minWidth: 36, minHeight: 36),
                                       padding: EdgeInsets.zero,
                                     ),
                                     Text(
-                                      '1x',
+                                      '${_zoomLevel.toStringAsFixed(_zoomLevel.truncateToDouble() == _zoomLevel ? 0 : 1)}x',
                                       style: GoogleFonts.literata(
                                         fontSize: 10.5,
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          _zoomLevel = (_zoomLevel - 0.5).clamp(1.0, 3.0);
+                                        });
+                                      },
                                       icon: const Icon(Icons.remove, size: 18),
                                       constraints: const BoxConstraints(
                                           minWidth: 36, minHeight: 36),
@@ -339,7 +351,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                       vertical: 5,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFEAF5FF)
+                                      color: const Color(0xFFE6C17A)
                                           .withValues(alpha: 0.95),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
@@ -348,7 +360,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                         const Icon(
                                           Icons.pinch_rounded,
                                           size: 14,
-                                          color: Color(0xFF00344B),
+                                          color: Color(0xFF0D1B2A),
                                         ),
                                         const SizedBox(width: 5),
                                         Text(
@@ -356,7 +368,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                           style: GoogleFonts.literata(
                                             fontSize: 10.5,
                                             fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                         ),
                                       ],
@@ -368,7 +380,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFD9ECFE)
+                                      color: const Color(0xFFE6C17A)
                                           .withValues(alpha: 0.95),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -377,7 +389,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 10.5,
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                   ),
@@ -400,7 +412,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontStyle: FontStyle.italic,
-                                color: const Color(0xFF4A5568),
+                                color: const Color(0xFF1B365D),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -411,7 +423,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                               const Icon(
                                 Icons.verified_outlined,
                                 size: 14,
-                                color: Color(0xFF48587E),
+                                color: Color(0xFF1B365D),
                               ),
                               const SizedBox(width: 4),
                               Text(
@@ -419,7 +431,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 8.5,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF48587E),
+                                  color: const Color(0xFF1B365D),
                                   height: 1.1,
                                 ),
                               ),
@@ -449,11 +461,11 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                 shape: BoxShape.circle,
                                 border: isSelected
                                     ? Border.all(
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                         width: 2,
                                       )
                                     : Border.all(
-                                        color: const Color(0xFFE2E8F0),
+                                        color: const Color(0xFFE6C17A),
                                         width: 1,
                                       ),
                               ),
@@ -465,7 +477,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Container(
-                                    color: const Color(0xFFF1F5F9),
+                                    color: const Color(0xFFE6C17A),
                                   ),
                                 ),
                               ),
@@ -484,7 +496,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                           vertical: 14,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -492,7 +504,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             const Icon(
                               Icons.search_rounded,
                               size: 18,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -504,14 +516,14 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   Text(
                                     'Edge-to-edge sapphire crystal shield',
                                     style: GoogleFonts.literata(
                                       fontSize: 11,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -522,7 +534,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFF48587E),
+                                color: const Color(0xFF1B365D),
                               ),
                             ),
                           ],
@@ -543,7 +555,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
               padding: EdgeInsets.fromLTRB(
                   20, 12, 20, bottomPadding > 0 ? bottomPadding + 8 : 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFF5EBDD),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.05),
@@ -565,7 +577,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             width: 6,
                             height: 6,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF8B6B2B),
+                              color: Color(0xFFB8860B),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -575,7 +587,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -588,7 +600,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 19,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           const SizedBox(width: 6),
@@ -597,7 +609,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 11.5,
                               decoration: TextDecoration.lineThrough,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -613,8 +625,8 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                         AppNavigator.toCart(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00344B),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF0D1B2A),
+                        foregroundColor: const Color(0xFFF5EBDD),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),

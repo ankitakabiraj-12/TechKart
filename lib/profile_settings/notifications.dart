@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
+import '../theme/profile_avatar.dart';
 
 /// TechKart Profile & Settings - Notifications Screen
 /// Recreated to match original reference UI with 100% visual fidelity.
@@ -35,7 +36,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -52,8 +53,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 8),
                   _buildNotificationCard(
                     icon: Icons.local_shipping_outlined,
-                    iconBg: const Color(0xFFDCEEFB),
-                    iconColor: const Color(0xFF00344B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFF0D1B2A),
                     title: 'Out for delivery today',
                     timeText: '12m ago',
                     isUnread: true,
@@ -66,8 +67,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.assignment_return_outlined,
-                    iconBg: const Color(0xFFDCEEFB),
-                    iconColor: const Color(0xFF00344B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFF0D1B2A),
                     title: 'Return pickup scheduled #RET-...',
                     timeText: '2h ago',
                     isUnread: true,
@@ -80,20 +81,26 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.local_offer_outlined,
-                    iconBg: const Color(0xFFF3EEE4),
-                    iconColor: const Color(0xFF8B6B2B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFFB8860B),
                     title: 'Flash Sale: GaN Chargers & Cables',
                     timeText: '5h ago',
                     description:
                         'Get 20% off high-speed dual GaN fast chargers with code TECHFAST20. Valid today only.',
+                    actionButtonText: 'Shop Chargers',
+                    isOutlinedAction: true,
+                    onAction: () => AppNavigator.toSubcategoryProducts(
+                      context,
+                      categoryName: 'Accessories',
+                    ),
                   ),
                   const SizedBox(height: 20),
                   _buildSectionHeader('Yesterday', badge: '1 New'),
                   const SizedBox(height: 8),
                   _buildNotificationCard(
                     icon: Icons.shield_outlined,
-                    iconBg: const Color(0xFFDCEEFB),
-                    iconColor: const Color(0xFF00344B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFF0D1B2A),
                     title: 'Two-Step Verification activated',
                     timeText: '4:15 PM',
                     isUnread: true,
@@ -106,20 +113,26 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.inventory_2_outlined,
-                    iconBg: const Color(0xFFEAF5FF),
-                    iconColor: const Color(0xFF00344B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFF0D1B2A),
                     title: 'Order #TK-89421 dispatched',
                     timeText: '10:30 AM',
                     description:
                         'Your Chronos Ultra 2 GPS Edition has departed Mumbai Central Logistics Facility.',
+                    actionButtonText: 'Track Order',
+                    isOutlinedAction: true,
+                    onAction: () => AppNavigator.toShipmentTracking(
+                      context,
+                      trackingId: 'TRK-98214-DEL',
+                    ),
                   ),
                   const SizedBox(height: 20),
                   _buildSectionHeader('Earlier this week', badge: 'All Read'),
                   const SizedBox(height: 8),
                   _buildNotificationCard(
                     icon: Icons.star_border,
-                    iconBg: const Color(0xFFF3EEE4),
-                    iconColor: const Color(0xFF8B6B2B),
+                    iconBg: const Color(0xFFE6C17A),
+                    iconColor: const Color(0xFFB8860B),
                     title: 'Welcome to TechKart VIP Plus',
                     timeText: 'Oct 22',
                     description:
@@ -142,10 +155,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -154,10 +164,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -167,7 +177,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -175,29 +185,21 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             onTap: _markAllAsRead,
             child: Row(
               children: [
-                const Icon(Icons.done_all, size: 14, color: Color(0xFF00344B)),
+                const Icon(Icons.done_all, size: 14, color: Color(0xFF0D1B2A)),
                 const SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 12),
-          Container(
-            width: 32,
-            height: 32,
-            decoration: const BoxDecoration(
-              color: Color(0xFF64748B),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(Icons.person, size: 18, color: Colors.white),
-          ),
+          const ProfileAvatar(size: 32),
         ],
       ),
     );
@@ -213,7 +215,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5),
           decoration: BoxDecoration(
-            color: const Color(0xFFEAF5FF),
+            color: const Color(0xFFE6C17A),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -222,7 +224,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF00344B),
+                  color: Color(0xFF0D1B2A),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -232,7 +234,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF00344B),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
@@ -242,13 +244,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           onTap: _markAllAsRead,
           child: Row(
             children: [
-              const Icon(Icons.done_all, size: 12, color: Color(0xFF64748B)),
+              const Icon(Icons.done_all, size: 12, color: Color(0xFF1B365D)),
               const SizedBox(width: 4),
               Text(
                 'Mark all read',
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -287,7 +289,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF00344B) : const Color(0xFFEAF5FF),
+          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -295,7 +297,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-            color: isSelected ? Colors.white : const Color(0xFF00344B),
+            color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
           ),
         ),
       ),
@@ -314,7 +316,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           style: GoogleFonts.domine(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
         if (badge != null)
@@ -323,7 +325,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             style: GoogleFonts.literata(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
       ],
@@ -349,9 +351,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -385,7 +387,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -395,7 +397,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           timeText,
                           style: GoogleFonts.literata(
                             fontSize: 10.5,
-                            color: const Color(0xFF94A3B8),
+                            color: const Color(0xFF1B365D),
                           ),
                         ),
                         if (isUnread) ...[
@@ -404,7 +406,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             width: 6,
                             height: 6,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF3B4875),
+                              color: Color(0xFF1B365D),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -419,7 +421,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     height: 1.35,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
                 if (actionButtonText != null) ...[
@@ -428,8 +430,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     ElevatedButton.icon(
                       onPressed: onAction ?? () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00344B),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF0D1B2A),
+                        foregroundColor: const Color(0xFFF5EBDD),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -452,8 +454,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     ElevatedButton(
                       onPressed: onAction ?? () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFEAF5FF),
-                        foregroundColor: const Color(0xFF00344B),
+                        backgroundColor: const Color(0xFFE6C17A),
+                        foregroundColor: const Color(0xFF0D1B2A),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),

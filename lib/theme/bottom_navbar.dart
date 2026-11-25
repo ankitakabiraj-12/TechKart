@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 
 /// TechKart Global Bottom Navigation Bar
 ///
 /// Implements the minimalist modern UI design from the HOMEBAR reference:
-/// - Floating stadium pill capsule track with perfectly rounded circular ends in sleek black (`Color(0xFF141414)`).
+/// - Floating stadium pill capsule track with perfectly rounded circular ends in sleek black (`Color(0xFF0D1B2A)`).
 /// - Multi-layer ambient diffused drop shadows for photorealistic depth.
 /// - Seamless full-width background gradient shield that removes unwanted edges.
 /// - Five connected circular item slots: 1. Home, 2. Categories, 3. AI Chatbot, 4. Cart, 5. Profile.
-/// - Active tab highlighted with a clean white circular background (`Colors.white`).
-/// - Active icon in contrasting dark color (`Color(0xFF141414)`).
+/// - Active tab highlighted with a clean white circular background (`const Color(0xFFF5EBDD)`).
+/// - Active icon in contrasting dark color (`Color(0xFF0D1B2A)`).
 /// - Inactive tabs with crisp white outline icons centered in each circular item slot.
 /// - Dynamic responsive width, item spacing, and positioning adapted to screen and device width.
 /// - Safe area compliance with clean floating margin above the device navigation handle.
@@ -31,7 +31,7 @@ class TechKartBottomNavBar extends StatelessWidget {
   /// Active indicator background color (defaults to white).
   final Color activeIndicatorColor;
 
-  /// Canvas background color of the screen (defaults to TechKart's light canvas `0xFFF8FAFC`).
+  /// Canvas background color of the screen (defaults to TechKart's light canvas `0xFFFDFBCF`).
   final Color? backgroundColor;
 
   const TechKartBottomNavBar({
@@ -39,8 +39,8 @@ class TechKartBottomNavBar extends StatelessWidget {
     required this.currentIndex,
     this.onTabSelected,
     this.cartBadgeCount = 0,
-    this.pillColor = const Color(0xFF141414),
-    this.activeIndicatorColor = Colors.white,
+    this.pillColor = const Color(0xFF0D1B2A),
+    this.activeIndicatorColor = const Color(0xFFF5EBDD),
     this.backgroundColor,
     Color? creamColor,
     Color? navyColor,
@@ -59,7 +59,7 @@ class TechKartBottomNavBar extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     final screenWidth = mediaQuery.size.width;
     final bottomPadding = mediaQuery.padding.bottom;
-    final Color effectiveBgColor = backgroundColor ?? const Color(0xFFF8FAFC);
+    final Color effectiveBgColor = backgroundColor ?? const Color(0xFFFDFBCF);
 
     // Responsive track width with comfortable, evenly distributed spacing
     final double trackWidth;
@@ -215,7 +215,7 @@ class TechKartBottomNavBar extends StatelessWidget {
             clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
-              _buildIconForTab(index, isSelected: false, color: Colors.white),
+              _buildIconForTab(index, isSelected: false, color: const Color(0xFFF5EBDD)),
               // Inactive text widget with full tap hit-testing bounds & semantic discoverability
               Opacity(
                 opacity: 0.0,
@@ -259,7 +259,7 @@ class TechKartBottomNavBar extends StatelessWidget {
               _buildIconForTab(
                 currentIndex,
                 isSelected: true,
-                color: const Color(0xFF141414),
+                color: const Color(0xFF0D1B2A),
               ),
               // Invisible text label for test discoverability & accessibility
               Opacity(

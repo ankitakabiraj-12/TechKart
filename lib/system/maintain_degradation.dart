@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../app_routes/app_navigator.dart';
 
 /// TechKart System - Scheduled Maintenance & System Degradation Screen
@@ -95,7 +95,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                   fontFamily: 'serif',
                   fontSize: 29,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0F172A),
+                  color: Color(0xFF0D1B2A),
                   letterSpacing: -0.4,
                 ),
                 textAlign: TextAlign.center,
@@ -111,7 +111,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                   style: TextStyle(
                     fontSize: 14,
                     height: 1.5,
-                    color: Color(0xFF475569),
+                    color: Color(0xFF1B365D),
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
@@ -161,17 +161,24 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
         // Brand Title with Bullet Dot
         Row(
           children: [
-            Image.asset(
-              'asset/app_logo.png',
+            Container(
               width: 24,
               height: 24,
-              fit: BoxFit.contain,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  'asset/app_logo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             const SizedBox(width: 8),
             const Text(
               'TechKart',
               style: TextStyle(
-                color: Color(0xFF0F172A),
+                color: Color(0xFF0D1B2A),
                 fontSize: 19,
                 fontWeight: FontWeight.w800,
                 letterSpacing: -0.4,
@@ -180,7 +187,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             const Text(
               '•',
               style: TextStyle(
-                color: Color(0xFF334155),
+                color: Color(0xFF1B365D),
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -210,7 +217,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
               const Text(
                 'OFFLINE MODE',
                 style: TextStyle(
-                  color: Color(0xFF475569),
+                  color: Color(0xFF1B365D),
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
@@ -247,7 +254,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
           width: 68,
           height: 68,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: const Color(0xFFF5EBDD),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
@@ -260,7 +267,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
           alignment: Alignment.center,
           child: const Icon(
             Icons.tune,
-            color: Color(0xFF0F172A),
+            color: Color(0xFF0D1B2A),
             size: 26,
           ),
         ),
@@ -276,7 +283,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: const Color(0xFFE8EEF5)),
         boxShadow: [
@@ -313,7 +320,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                     Text(
                       'Expected completion: 3:00 PM EST',
                       style: TextStyle(
-                        color: Color(0xFF0F172A),
+                        color: Color(0xFF0D1B2A),
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
@@ -322,7 +329,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                     Text(
                       'Estimated duration ~ 25 minutes remaining',
                       style: TextStyle(
-                        color: Color(0xFF64748B),
+                        color: Color(0xFF1B365D),
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
                       ),
@@ -351,7 +358,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                 child: Text(
                   'All pending carts, checkout data, and orders are safely stored.',
                   style: TextStyle(
-                    color: Color(0xFF475569),
+                    color: Color(0xFF1B365D),
                     fontSize: 11.5,
                     height: 1.4,
                     fontWeight: FontWeight.w400,
@@ -375,7 +382,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFEEF6FD),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFD6E8FA), width: 1),
+        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -384,14 +391,14 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             children: const [
               Icon(
                 Icons.sync_alt_rounded,
-                color: Color(0xFF334155),
+                color: Color(0xFF1B365D),
                 size: 16,
               ),
               SizedBox(width: 8),
               Text(
                 'Platform Sync in progress',
                 style: TextStyle(
-                  color: Color(0xFF334155),
+                  color: Color(0xFF1B365D),
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -401,7 +408,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
           const Text(
             'STAGE 3/4',
             style: TextStyle(
-              color: Color(0xFF0F172A),
+              color: Color(0xFF0D1B2A),
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 0.5,
@@ -422,13 +429,13 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
       child: ElevatedButton(
         onPressed: _isChecking ? null : _handleCheckConnection,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF061E33),
-          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF0D1B2A),
+          foregroundColor: const Color(0xFFF5EBDD),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(26),
           ),
-          disabledBackgroundColor: const Color(0xFF061E33).withValues(alpha: 0.7),
+          disabledBackgroundColor: const Color(0xFF0D1B2A).withValues(alpha: 0.7),
         ),
         child: _isChecking
             ? const SizedBox(
@@ -436,7 +443,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF5EBDD)),
                 ),
               )
             : Row(
@@ -477,7 +484,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             Text(
               'Need urgent order support? ',
               style: TextStyle(
-                color: Color(0xFF475569),
+                color: Color(0xFF1B365D),
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
               ),
@@ -485,7 +492,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             Text(
               'Contact Desk',
               style: TextStyle(
-                color: Color(0xFF1E293B),
+                color: Color(0xFF0D1B2A),
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 decoration: TextDecoration.underline,
@@ -494,7 +501,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             SizedBox(width: 2),
             Icon(
               Icons.north_east,
-              color: Color(0xFF1E293B),
+              color: Color(0xFF0D1B2A),
               size: 13,
             ),
           ],
@@ -516,7 +523,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
               width: 5,
               height: 5,
               decoration: const BoxDecoration(
-                color: Color(0xFF64748B),
+                color: Color(0xFF1B365D),
                 shape: BoxShape.circle,
               ),
             ),
@@ -524,7 +531,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             const Text(
               'Storefront Edge Gateway Offline',
               style: TextStyle(
-                color: Color(0xFF64748B),
+                color: Color(0xFF1B365D),
                 fontSize: 11,
                 fontWeight: FontWeight.w500,
               ),
@@ -535,7 +542,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
         const Text(
           'Incident ID: TK-M802 • Region: US-EAST-1',
           style: TextStyle(
-            color: Color(0xFF64748B),
+            color: Color(0xFF1B365D),
             fontSize: 11,
             fontWeight: FontWeight.w500,
           ),
@@ -547,7 +554,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
   void _showSupportSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5EBDD),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -564,11 +571,11 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
             const SizedBox(height: 8),
             const Text(
               'If you have an urgent order arriving today or need payment assistance, our priority concierge is on standby:',
-              style: TextStyle(color: Color(0xFF64748B), fontSize: 13, height: 1.4),
+              style: TextStyle(color: Color(0xFF1B365D), fontSize: 13, height: 1.4),
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: const Icon(Icons.support_agent_rounded, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.support_agent_rounded, color: Color(0xFFB8860B)),
               title: const Text('Connect with Live Concierge'),
               subtitle: const Text('Estimated wait time: < 1 min'),
               onTap: () {
@@ -577,7 +584,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.email_outlined, color: Color(0xFF0284C7)),
+              leading: const Icon(Icons.email_outlined, color: Color(0xFFB8860B)),
               title: const Text('Email priority@techkart.com'),
               onTap: () => AppNavigator.pop(ctx),
             ),

@@ -264,6 +264,8 @@ class AppNavigator {
         return _buildRoute(WriteReviewsScreen(productId: productId), settings);
 
       case AppRoutes.cart:
+        return _buildRoute(const ShoppingCartScreen(), settings);
+
       case AppRoutes.wishlist:
         return _buildRoute(const WishlistScreen(), settings);
 
@@ -571,7 +573,18 @@ class AppNavigator {
   static Future<void> toSearchResult(
     BuildContext context, {
     String query = 'Titanium watch',
-  }) => push(context, SearchResultScreen(query: query));
+    int? categoryId,
+    int? subcategoryId,
+    String? categoryName,
+  }) => push(
+        context,
+        SearchResultScreen(
+          query: query,
+          categoryId: categoryId,
+          subcategoryId: subcategoryId,
+          categoryName: categoryName,
+        ),
+      );
 
   static Future<void> toProductDetails(
     BuildContext context, {
@@ -599,7 +612,7 @@ class AppNavigator {
   }) => push(context, WriteReviewsScreen(productId: productId));
 
   static Future<void> toCart(BuildContext context) =>
-      push(context, const WishlistScreen());
+      push(context, const ShoppingCartScreen());
 
   static Future<void> toWishlist(BuildContext context) =>
       push(context, const WishlistScreen());

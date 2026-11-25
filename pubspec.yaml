@@ -69,8 +69,52 @@ flutter:
     - asset/categories/
     - asset/subcategories/
     - asset/campaigns/
+    - asset/product_images/3D-Printing/
+    - asset/product_images/Audio-Headphones/
+    - asset/product_images/Automotive-Electronics/
+    - asset/product_images/Cables-Connectors/
+    - asset/product_images/Cameras/
+    - asset/product_images/Chargers/
+    - asset/product_images/Communication-Equipment/
+    - asset/product_images/Computer-Accessories/
+    - asset/product_images/Computers/
+    - asset/product_images/Drones/
+    - asset/product_images/Electrical-Equipment/
+    - asset/product_images/Electronic-Accessories/
+    - asset/product_images/Electronic-Components/
+    - asset/product_images/Electronics-Tools/
+    - asset/product_images/GPS-Navigation/
+    - asset/product_images/Gaming/
+    - asset/product_images/Gaming-Accessories/
+    - asset/product_images/Home-Appliances/
+    - asset/product_images/Industrial-Electronics/
+    - asset/product_images/Kitchen-Appliances/
+    - asset/product_images/Laptops/
+    - asset/product_images/Lighting/
+    - asset/product_images/Medical-Electronics/
+    - asset/product_images/Mobiles/
+    - asset/product_images/Monitors/
+    - asset/product_images/Musical-Electronics/
+    - asset/product_images/Networking/
+    - asset/product_images/Office-Technology/
+    - asset/product_images/Other-Electronics/
+    - asset/product_images/Photo-Video-Accessories/
+    - asset/product_images/Power-Banks/
+    - asset/product_images/Printers-Office-Electronics/
+    - asset/product_images/Professional-Audio/
+    - asset/product_images/Refurbished-Electronics/
+    - asset/product_images/Robotics/
+    - asset/product_images/Scientific-Equipment/
+    - asset/product_images/Security-Surveillance/
+    - asset/product_images/Servers/
+    - asset/product_images/Smart-Devices-IoT/
+    - asset/product_images/Smart-Home/
+    - asset/product_images/Solar-Energy/
+    - asset/product_images/Storage-Memory/
+    - asset/product_images/TV-Home-Entertainment/
+    - asset/product_images/VR-AR/
+    - asset/product_images/Wearables/
     - assets/
-    - assets/campaigns/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -103,6 +147,6 @@ flutter_launcher_icons:
   ios: false
   image_path: "asset/app_launcher_icon.png"
   min_sdk_android: 21
-  adaptive_icon_background: "#FCF2DF"
+  adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "asset/app_launcher_icon.png"
 

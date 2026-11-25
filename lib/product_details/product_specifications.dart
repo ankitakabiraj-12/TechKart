@@ -97,13 +97,13 @@ class _ProductSpecificationsScreenState
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: Color(0xFFF5EBDD),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -122,7 +122,7 @@ class _ProductSpecificationsScreenState
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -130,14 +130,21 @@ class _ProductSpecificationsScreenState
                         const BoxConstraints(minWidth: 36, minHeight: 36),
                   ),
                   const SizedBox(width: 6),
-                  Image.asset(
-                    'asset/app_logo.png',
+                  Container(
+                    width: 28,
                     height: 28,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'asset/app_launcher_icon.png',
-                      height: 28,
-                      fit: BoxFit.contain,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'asset/app_logo.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                          'asset/app_launcher_icon.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -146,27 +153,38 @@ class _ProductSpecificationsScreenState
                     style: GoogleFonts.domine(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Clipboard.setData(ClipboardData(text: 'Full Specifications for ${widget.productId} on TechKart'));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Specifications copied to clipboard.',
+                            style: GoogleFonts.literata(),
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.share_outlined,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
                         const BoxConstraints(minWidth: 34, minHeight: 34),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => AppNavigator.toWishlist(context),
                     icon: const Icon(
                       Icons.favorite_border_rounded,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -186,7 +204,7 @@ class _ProductSpecificationsScreenState
               child: Container(
                 height: 44,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(22),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -195,7 +213,7 @@ class _ProductSpecificationsScreenState
                     const Icon(
                       Icons.search_rounded,
                       size: 18,
-                      color: Color(0xFF718096),
+                      color: Color(0xFF1B365D),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -203,14 +221,16 @@ class _ProductSpecificationsScreenState
                         controller: _searchFilter,
                         style: GoogleFonts.literata(
                           fontSize: 13,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                         decoration: InputDecoration(
+                          filled: false,
+                          fillColor: Colors.transparent,
                           hintText:
                               'Filter specs (e.g., nits, GPS, battery)...',
                           hintStyle: GoogleFonts.literata(
                             fontSize: 12.5,
-                            color: const Color(0xFFA0AEC0),
+                            color: const Color(0xFF1B365D),
                           ),
                           border: InputBorder.none,
                           isDense: true,
@@ -250,8 +270,8 @@ class _ProductSpecificationsScreenState
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF00344B)
-                              : const Color(0xFFEAF5FF),
+                              ? const Color(0xFF0D1B2A)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Center(
@@ -262,8 +282,8 @@ class _ProductSpecificationsScreenState
                               fontWeight:
                                   isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: isSelected
-                                  ? Colors.white
-                                  : const Color(0xFF00344B),
+                                  ? const Color(0xFFF5EBDD)
+                                  : const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -291,11 +311,11 @@ class _ProductSpecificationsScreenState
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                               blurRadius: 10,
                               offset: const Offset(0, 3),
                             ),
@@ -308,7 +328,7 @@ class _ProductSpecificationsScreenState
                               child: Container(
                                 width: 54,
                                 height: 54,
-                                color: const Color(0xFFF1F5F9),
+                                color: const Color(0xFFE6C17A),
                                 child: Image.asset(
                                   'asset/chronos_ultra_2.jpg',
                                   fit: BoxFit.cover,
@@ -327,7 +347,7 @@ class _ProductSpecificationsScreenState
                                         style: GoogleFonts.domine(
                                           fontSize: 14.5,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                       ),
                                       const Spacer(),
@@ -337,7 +357,7 @@ class _ProductSpecificationsScreenState
                                           vertical: 2,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFD9ECFE),
+                                          color: const Color(0xFFE6C17A),
                                           borderRadius:
                                               BorderRadius.circular(6),
                                         ),
@@ -346,7 +366,7 @@ class _ProductSpecificationsScreenState
                                           style: GoogleFonts.literata(
                                             fontSize: 9,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                         ),
                                       ),
@@ -357,7 +377,7 @@ class _ProductSpecificationsScreenState
                                     'Grade 5 Titanium • 49mm Cellular',
                                     style: GoogleFonts.literata(
                                       fontSize: 11,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -366,7 +386,7 @@ class _ProductSpecificationsScreenState
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ],
@@ -385,7 +405,7 @@ class _ProductSpecificationsScreenState
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFEAF5FF),
+                                color: const Color(0xFFE6C17A),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Column(
@@ -400,13 +420,13 @@ class _ProductSpecificationsScreenState
                                         style: GoogleFonts.literata(
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF718096),
+                                          color: const Color(0xFF1B365D),
                                         ),
                                       ),
                                       const Icon(
                                         Icons.wb_sunny_outlined,
                                         size: 13,
-                                        color: Color(0xFF00344B),
+                                        color: Color(0xFF0D1B2A),
                                       ),
                                     ],
                                   ),
@@ -416,7 +436,7 @@ class _ProductSpecificationsScreenState
                                     style: GoogleFonts.domine(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -424,7 +444,7 @@ class _ProductSpecificationsScreenState
                                     '1 nit minimum in dark mode',
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -436,7 +456,7 @@ class _ProductSpecificationsScreenState
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFEAF5FF),
+                                color: const Color(0xFFE6C17A),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Column(
@@ -451,13 +471,13 @@ class _ProductSpecificationsScreenState
                                         style: GoogleFonts.literata(
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF718096),
+                                          color: const Color(0xFF1B365D),
                                         ),
                                       ),
                                       const Icon(
                                         Icons.scuba_diving_rounded,
                                         size: 14,
-                                        color: Color(0xFF00344B),
+                                        color: Color(0xFF0D1B2A),
                                       ),
                                     ],
                                   ),
@@ -467,7 +487,7 @@ class _ProductSpecificationsScreenState
                                     style: GoogleFonts.domine(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -475,7 +495,7 @@ class _ProductSpecificationsScreenState
                                     '40m dive certified EN13319',
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -574,7 +594,7 @@ class _ProductSpecificationsScreenState
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3EEE4),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -589,7 +609,7 @@ class _ProductSpecificationsScreenState
                                     const Icon(
                                       Icons.inventory_2_outlined,
                                       size: 16,
-                                      color: Color(0xFF8B6B2B),
+                                      color: Color(0xFFB8860B),
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
@@ -597,7 +617,7 @@ class _ProductSpecificationsScreenState
                                       style: GoogleFonts.domine(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF8B6B2B),
+                                        color: const Color(0xFFB8860B),
                                       ),
                                     ),
                                   ],
@@ -608,7 +628,7 @@ class _ProductSpecificationsScreenState
                                     fontSize: 9.5,
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 0.8,
-                                    color: const Color(0xFF8B6B2B),
+                                    color: const Color(0xFFB8860B),
                                   ),
                                 ),
                               ],
@@ -632,7 +652,7 @@ class _ProductSpecificationsScreenState
                           const Icon(
                             Icons.help_outline_rounded,
                             size: 14,
-                            color: Color(0xFF718096),
+                            color: Color(0xFF1B365D),
                           ),
                           const SizedBox(width: 6),
                           Expanded(
@@ -640,7 +660,7 @@ class _ProductSpecificationsScreenState
                               'Chronos Ultra 2 is tested under controlled laboratory conditions with ratings compliant with ISO 22810:2010 and EN13319 standards for recreational diving up to 40 meters. Battery endurance derived from typical daily usage metrics.',
                               style: GoogleFonts.literata(
                                 fontSize: 10,
-                                color: const Color(0xFF718096),
+                                color: const Color(0xFF1B365D),
                                 height: 1.35,
                               ),
                             ),
@@ -662,7 +682,7 @@ class _ProductSpecificationsScreenState
               padding: EdgeInsets.fromLTRB(
                   20, 12, 20, bottomPadding > 0 ? bottomPadding + 8 : 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFF5EBDD),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.05),
@@ -683,7 +703,7 @@ class _ProductSpecificationsScreenState
                         style: GoogleFonts.literata(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF718096),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       Text(
@@ -691,7 +711,7 @@ class _ProductSpecificationsScreenState
                         style: GoogleFonts.domine(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
@@ -704,8 +724,8 @@ class _ProductSpecificationsScreenState
                         AppNavigator.toCart(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2D3748),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF1B365D),
+                        foregroundColor: const Color(0xFFF5EBDD),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
@@ -744,11 +764,11 @@ class _ProductSpecificationsScreenState
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00344B).withValues(alpha: 0.03),
+            color: const Color(0xFF0D1B2A).withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -763,11 +783,11 @@ class _ProductSpecificationsScreenState
                 width: 24,
                 height: 24,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEAF5FF),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: Icon(icon, size: 13, color: const Color(0xFF00344B)),
+                  child: Icon(icon, size: 13, color: const Color(0xFF0D1B2A)),
                 ),
               ),
               const SizedBox(width: 8),
@@ -777,7 +797,7 @@ class _ProductSpecificationsScreenState
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.8,
-                  color: const Color(0xFF718096),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -789,7 +809,7 @@ class _ProductSpecificationsScreenState
               margin: const EdgeInsets.only(bottom: 6),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
+                color: const Color(0xFFFDFBCF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -800,7 +820,7 @@ class _ProductSpecificationsScreenState
                     style: GoogleFonts.literata(
                       fontSize: 10.5,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFF718096),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -809,7 +829,7 @@ class _ProductSpecificationsScreenState
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                 ],
@@ -827,7 +847,7 @@ class _ProductSpecificationsScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFFF5EBDD),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -835,7 +855,7 @@ class _ProductSpecificationsScreenState
             const Icon(
               Icons.check_rounded,
               size: 15,
-              color: Color(0xFF8B6B2B),
+              color: Color(0xFFB8860B),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -844,7 +864,7 @@ class _ProductSpecificationsScreenState
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xFF00344B),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ),

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -148,13 +148,13 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -176,15 +176,22 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // TechKart Logo Icon
-                      Image.asset(
-                        'asset/app_logo.png',
+                      Container(
+                        width: 38,
                         height: 38,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Image.asset(
-                          'asset/app_launcher_icon.png',
-                          height: 38,
-                          fit: BoxFit.contain,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: ClipOval(
+                          child: Image.asset(
+                            'asset/app_logo.png',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                              'asset/app_launcher_icon.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
 
@@ -198,7 +205,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           style: GoogleFonts.literata(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF4A5568),
+                            color: const Color(0xFF1B365D),
                             letterSpacing: 0.1,
                           ),
                         ),
@@ -243,7 +250,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   borderRadius: BorderRadius.circular(28),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF00344B).withValues(alpha: 0.06),
+                                      color: const Color(0xFF0D1B2A).withValues(alpha: 0.06),
                                       blurRadius: 20,
                                       offset: const Offset(0, 10),
                                     ),
@@ -296,7 +303,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                             vertical: 7,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: const Color(0xFFF5EBDD),
                                             borderRadius:
                                                 BorderRadius.circular(24),
                                             boxShadow: [
@@ -314,7 +321,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                               const Icon(
                                                 Icons.explore_outlined,
                                                 size: 14,
-                                                color: Color(0xFF00344B),
+                                                color: Color(0xFF0D1B2A),
                                               ),
                                               const SizedBox(width: 6),
                                               Text(
@@ -324,7 +331,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                   fontWeight: FontWeight.w700,
                                                   letterSpacing: 0.9,
                                                   color:
-                                                      const Color(0xFF00344B),
+                                                      const Color(0xFF0D1B2A),
                                                 ),
                                               ),
                                             ],
@@ -347,7 +354,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 style: GoogleFonts.domine(
                                   fontSize: 27,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF00344B),
+                                  color: const Color(0xFF0D1B2A),
                                   height: 1.25,
                                   letterSpacing: -0.5,
                                 ),
@@ -367,7 +374,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   style: GoogleFonts.literata(
                                     fontSize: 14.5,
                                     fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF4A5568),
+                                    color: const Color(0xFF1B365D),
                                     height: 1.45,
                                   ),
                                 ),
@@ -398,8 +405,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         width: isActive ? 24 : 6,
                         decoration: BoxDecoration(
                           color: isActive
-                              ? const Color(0xFF00344B)
-                              : const Color(0xFFCCE4F5),
+                              ? const Color(0xFF0D1B2A)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(3),
                         ),
                       );
@@ -420,8 +427,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: ElevatedButton(
                       onPressed: _onNext,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00344B),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF0D1B2A),
+                        foregroundColor: const Color(0xFFF5EBDD),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28),
@@ -437,7 +444,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             style: GoogleFonts.literata(
                               fontSize: 15.5,
                               fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                              color: const Color(0xFFF5EBDD),
                               letterSpacing: 0.2,
                             ),
                           ),
@@ -445,7 +452,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           const Icon(
                             Icons.arrow_forward_rounded,
                             size: 18,
-                            color: Colors.white,
+                            color: Color(0xFFF5EBDD),
                           ),
                         ],
                       ),
@@ -466,7 +473,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       style: GoogleFonts.literata(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xFF4A5568),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                     GestureDetector(
@@ -477,7 +484,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         style: GoogleFonts.domine(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ),
@@ -493,7 +500,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   width: 134,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFCBD5E1),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),

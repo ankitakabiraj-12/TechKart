@@ -102,17 +102,27 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
+
     return ValueListenableBuilder<Map<String, dynamic>?>(
       valueListenable: SessionManager().currentUserNotifier,
-      builder: (context, _, __) {
+      builder: (context, user, child) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF6FAFC),
+          backgroundColor: const Color(0xFFFDFBCF),
           body: SafeArea(
             child: Column(
               children: [
                 _buildAppBar(),
                 Expanded(
-                  child: ListView(
+                      child: ListView(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 12,
@@ -133,8 +143,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('orders_in_progress') > 0
                               ? '${_statInt('orders_in_progress')} in progress'
                               : null,
-                          badgeBg: const Color(0xFFEAF5FF),
-                          badgeColor: const Color(0xFF00344B),
+                          badgeBg: const Color(0xFFE6C17A),
+                          badgeColor: const Color(0xFF0D1B2A),
                           onTap:
                               widget.onOrderHistory ??
                               () => AppNavigator.toOrderHistory(context),
@@ -145,8 +155,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('active_returns') > 0
                               ? '${_statInt('active_returns')} active'
                               : null,
-                          badgeBg: const Color(0xFFF3EEE4),
-                          badgeColor: const Color(0xFF8B6B2B),
+                          badgeBg: const Color(0xFFE6C17A),
+                          badgeColor: const Color(0xFFB8860B),
                           onTap:
                               widget.onReturnsRefunds ??
                               () => AppNavigator.toReturnStatus(
@@ -171,8 +181,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('pending_reviews') > 0
                               ? '${_statInt('pending_reviews')} pending'
                               : null,
-                          badgeBg: const Color(0xFFEAF5FF),
-                          badgeColor: const Color(0xFF00344B),
+                          badgeBg: const Color(0xFFE6C17A),
+                          badgeColor: const Color(0xFF0D1B2A),
                           onTap:
                               widget.onProductReviews ??
                               () => AppNavigator.toWriteReviews(context),
@@ -231,8 +241,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           icon: Icons.headset_mic_outlined,
                           title: '24/7 Concierge Support',
                           badge: 'Live Chat',
-                          badgeBg: const Color(0xFFDCEEFB),
-                          badgeColor: const Color(0xFF00344B),
+                          badgeBg: const Color(0xFFE6C17A),
+                          badgeColor: const Color(0xFF0D1B2A),
                           onTap: widget.onConciergeSupport ?? () {},
                         ),
                         _buildMenuItem(
@@ -246,7 +256,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                       _buildLogoutButton(),
                       const SizedBox(height: 14),
                       _buildAppVersionFooter(),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 70),
                     ],
                   ),
                 ),
@@ -270,14 +280,13 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
   }
 
   // ---------------------------------------------------------------------------
-  // APP BAR
+  // CLEAN MINIMAL APP BAR
   // ---------------------------------------------------------------------------
   Widget _buildAppBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1)),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -286,13 +295,13 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.arrow_back,
                 size: 20,
-                color: Color(0xFF00344B),
+                color: Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -303,22 +312,20 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
             icon: const Icon(
               Icons.notifications_none_outlined,
-              color: Color(0xFF0F172A),
+              color: Color(0xFF0D1B2A),
               size: 24,
             ),
             onPressed: widget.onNotificationsAlerts ?? () {},
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
-          const SizedBox(width: 12),
-          const ProfileAvatar(size: 32),
         ],
       ),
     );
@@ -331,97 +338,97 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFD3E7F8)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
-        children: [
-          const ProfileAvatar(size: 54),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            children: [
+              const ProfileAvatar(size: 54),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      children: [
+                        Text(
+                          SessionManager().userName ?? 'Customer',
+                          style: GoogleFonts.domine(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF0D1B2A),
+                          ),
+                        ),
+                        if (_statString('vip_tier', fallback: 'MEMBER') !=
+                            'MEMBER') ...[
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE6C17A),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  size: 10,
+                                  color: Color(0xFFB8860B),
+                                ),
+                                const SizedBox(width: 3),
+                                Text(
+                                  _statString('vip_tier'),
+                                  style: TextStyle(
+                                    fontFamily: 'Literata',
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0xFFB8860B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                        const Spacer(),
+                        GestureDetector(
+                          onTap:
+                              widget.onEditProfile ??
+                              () => AppNavigator.toEditProfile(context),
+                          child: const Icon(
+                            Icons.edit_outlined,
+                            size: 16,
+                            color: Color(0xFF0D1B2A),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
                     Text(
-                      SessionManager().userName ?? 'Customer',
-                      style: GoogleFonts.domine(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                      SessionManager().userEmail ?? 'No email on file',
+                      style: GoogleFonts.literata(
+                        fontSize: 11.5,
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
-                    if (_statString('vip_tier', fallback: 'MEMBER') !=
-                        'MEMBER') ...[
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF3EEE4),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.star,
-                              size: 10,
-                              color: Color(0xFF8B6B2B),
-                            ),
-                            const SizedBox(width: 3),
-                            Text(
-                              _statString('vip_tier'),
-                              style: TextStyle(
-                                fontFamily: 'Literata',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF8B6B2B),
-                              ),
-                            ),
-                          ],
+                    if ((SessionManager().userPhone ?? '').isNotEmpty)
+                      Text(
+                        SessionManager().userPhone!,
+                        style: GoogleFonts.literata(
+                          fontSize: 11.5,
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
-                    ],
-                    const Spacer(),
-                    GestureDetector(
-                      onTap:
-                          widget.onEditProfile ??
-                          () => AppNavigator.toEditProfile(context),
-                      child: const Icon(
-                        Icons.edit_outlined,
-                        size: 16,
-                        color: Color(0xFF00344B),
-                      ),
-                    ),
                   ],
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  SessionManager().userEmail ?? 'No email on file',
-                  style: GoogleFonts.literata(
-                    fontSize: 11.5,
-                    color: const Color(0xFF64748B),
-                  ),
-                ),
-                if ((SessionManager().userPhone ?? '').isNotEmpty)
-                  Text(
-                    SessionManager().userPhone!,
-                    style: GoogleFonts.literata(
-                      fontSize: 11.5,
-                      color: const Color(0xFF64748B),
-                    ),
-                  ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
   }
 
   // ---------------------------------------------------------------------------
@@ -436,6 +443,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           icon: Icons.inventory_2_outlined,
           value: '${_statInt('order_count')}',
           label: 'Orders',
+          onTap: widget.onOrderHistory ?? () => AppNavigator.toOrderHistory(context),
         ),
         const SizedBox(width: 10),
         _buildStatCard(
@@ -443,6 +451,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           value: '${_statInt('wishlist_count')}',
           label: 'Wishlist',
           isHeart: true,
+          onTap: widget.onWishlist ?? () => AppNavigator.toWishlist(context),
         ),
         const SizedBox(width: 10),
         _buildStatCard(
@@ -460,14 +469,17 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     required String value,
     required String label,
     bool isHeart = false,
+    VoidCallback? onTap,
   }) {
     return Expanded(
-      child: Container(
+      child: GestureDetector(
+        onTap: onTap != null ? () { HapticFeedback.lightImpact(); onTap(); } : null,
+        child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFFF5EBDD),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFE2EDF3)),
+          border: Border.all(color: const Color(0xFFE6C17A)),
         ),
         child: Column(
           children: [
@@ -479,7 +491,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   size: 14,
                   color: isHeart
                       ? const Color(0xFFEF4444)
-                      : const Color(0xFF64748B),
+                      : const Color(0xFF1B365D),
                 ),
                 const SizedBox(width: 5),
                 Text(
@@ -487,7 +499,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ],
@@ -497,10 +509,11 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
               label,
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF64748B),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
+        ),
         ),
       ),
     );
@@ -526,22 +539,22 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFEAF5FF),
+        color: const Color(0xFFE6C17A),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFD3E7F8)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color(0xFFF5EBDD),
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.local_shipping,
               size: 18,
-              color: Color(0xFF00344B),
+              color: Color(0xFF0D1B2A),
             ),
           ),
           const SizedBox(width: 12),
@@ -554,14 +567,14 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 Text(
                   subtitle.isNotEmpty ? subtitle : 'Arriving today by 5:30 PM • Bandra West',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ],
@@ -575,8 +588,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   trackingId: trackingRef,
                 ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00344B),
-              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF0D1B2A),
+              foregroundColor: const Color(0xFFF5EBDD),
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -607,7 +620,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
         fontSize: 10.5,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
-        color: const Color(0xFF64748B),
+        color: const Color(0xFF1B365D),
       ),
     );
   }
@@ -618,9 +631,9 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
   Widget _buildMenuCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(children: children),
     );
@@ -651,10 +664,10 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                 Container(
                   padding: const EdgeInsets.all(7),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFEAF5FF),
+                    color: Color(0xFFE6C17A),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, size: 16, color: const Color(0xFF00344B)),
+                  child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -666,7 +679,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0F172A),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                       if (subtitle != null) ...[
@@ -675,7 +688,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           subtitle,
                           style: GoogleFonts.literata(
                             fontSize: 11,
-                            color: const Color(0xFF64748B),
+                            color: const Color(0xFF1B365D),
                           ),
                         ),
                       ],
@@ -689,7 +702,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                       vertical: 3,
                     ),
                     decoration: BoxDecoration(
-                      color: badgeBg ?? const Color(0xFFF1F5F9),
+                      color: badgeBg ?? const Color(0xFFE6C17A),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
@@ -698,7 +711,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                         fontFamily: 'Literata',
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
-                        color: badgeColor ?? const Color(0xFF64748B),
+                        color: badgeColor ?? const Color(0xFF1B365D),
                       ),
                     ),
                   ),
@@ -709,7 +722,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                     trailingText,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -717,13 +730,13 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 12,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF1B365D),
                 ),
               ],
             ),
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE2EDF3), height: 1),
+        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
       ],
     );
   }
@@ -742,31 +755,35 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
   }
 
   Widget _buildLogoutButton() {
-    return Container(
-      width: double.infinity,
-      height: 48,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
-      ),
-      child: InkWell(
-        onTap: _handleLogout,
-        borderRadius: BorderRadius.circular(24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.logout, size: 16, color: Color(0xFFEF4444)),
-            const SizedBox(width: 8),
-            Text(
-              'Log Out of TechKart',
-              style: GoogleFonts.literata(
-                fontSize: 13.5,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFEF4444),
-              ),
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: _handleLogout,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF5EBDD),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0xFFE6C17A), width: 1),
             ),
-          ],
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.logout, size: 15, color: Color(0xFFEF4444)),
+                const SizedBox(width: 8),
+                Text(
+                  'Log Out of TechKart',
+                  style: GoogleFonts.literata(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFFEF4444),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -782,7 +799,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           'TechKart v1.0',
           style: GoogleFonts.literata(
             fontSize: 11,
-            color: const Color(0xFF94A3B8),
+            color: const Color(0xFF1B365D),
           ),
         ),
         const SizedBox(height: 2),
@@ -790,7 +807,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           'Secure account & profile management',
           style: GoogleFonts.literata(
             fontSize: 10.5,
-            color: const Color(0xFF94A3B8),
+            color: const Color(0xFF1B365D),
           ),
         ),
       ],

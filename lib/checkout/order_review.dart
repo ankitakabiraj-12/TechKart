@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:techkart/checkout/delivery_address.dart';
+import '../app_routes/app_navigator.dart';
 import '../core/network/network.dart';
 import '../theme/profile_avatar.dart';
 
@@ -91,24 +92,14 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     if (widget.onContinueToPayment != null) {
       widget.onContinueToPayment!();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Order placed successfully! Order #TK-89421 confirmed.',
-            style: GoogleFonts.literata(),
-          ),
-          backgroundColor: const Color(0xFF00344B),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      AppNavigator.toPaymentMethod(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -148,10 +139,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -160,10 +148,10 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -173,13 +161,24 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0F172A)),
-            onPressed: widget.onLockPressed ?? () {},
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            onPressed: widget.onLockPressed ??
+                () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Order review secured with encrypted SSL transport.',
+                        style: GoogleFonts.literata(),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
@@ -203,7 +202,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: const Color(0xFFF3EEE4),
+                color: const Color(0xFFE6C17A),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
@@ -211,7 +210,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF8B6B2B),
+                  color: const Color(0xFFB8860B),
                 ),
               ),
             ),
@@ -219,7 +218,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               'Order #TK-89421',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF64748B),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
@@ -268,14 +267,14 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           height: 32,
           decoration: BoxDecoration(
             color: isActive || isCompleted
-                ? const Color(0xFF00344B)
-                : const Color(0xFFDCEEFB),
+                ? const Color(0xFF0D1B2A)
+                : const Color(0xFFE6C17A),
             shape: BoxShape.circle,
           ),
           child: Icon(
             icon,
             size: 16,
-            color: isActive || isCompleted ? Colors.white : const Color(0xFF64748B),
+            color: isActive || isCompleted ? const Color(0xFFF5EBDD) : const Color(0xFF1B365D),
           ),
         ),
         const SizedBox(height: 4),
@@ -285,8 +284,8 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             fontSize: 10.5,
             fontWeight: FontWeight.w700,
             color: isActive || isCompleted
-                ? const Color(0xFF00344B)
-                : const Color(0xFF94A3B8),
+                ? const Color(0xFF0D1B2A)
+                : const Color(0xFF1B365D),
           ),
         ),
       ],
@@ -297,7 +296,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       width: 48,
       height: 2,
-      color: isDone ? const Color(0xFF00344B) : const Color(0xFFE2EDF3),
+      color: isDone ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
     );
   }
 
@@ -313,7 +312,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           style: GoogleFonts.domine(
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
         const SizedBox(height: 4),
@@ -322,7 +321,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             height: 1.35,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
       ],
@@ -336,9 +335,9 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -352,21 +351,21 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.location_on, size: 16, color: Color(0xFF00344B)),
+              const Icon(Icons.location_on, size: 16, color: Color(0xFF0D1B2A)),
               const SizedBox(width: 6),
               Text(
                 'Delivering to',
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3EEE4),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -375,7 +374,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                     fontFamily: 'Literata',
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B6B2B),
+                    color: const Color(0xFFB8860B),
                   ),
                 ),
               ),
@@ -387,7 +386,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ),
@@ -402,14 +401,14 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 style: GoogleFonts.domine(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
               Text(
                 _currentAddress.phone,
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],
@@ -420,27 +419,27 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             style: GoogleFonts.literata(
               fontSize: 12,
               height: 1.35,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFEAF5FF),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
                 const Icon(Icons.verified_user_outlined,
-                    size: 14, color: Color(0xFF00344B)),
+                    size: 14, color: Color(0xFF0D1B2A)),
                 const SizedBox(width: 8),
                 Expanded(
                   child: RichText(
                     text: TextSpan(
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                       children: const [
                         TextSpan(
@@ -449,7 +448,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                         ),
                         TextSpan(
                           text: 'Leave package at front door with building concierge if unavailable.',
-                          style: TextStyle(color: Color(0xFF64748B)),
+                          style: TextStyle(color: Color(0xFF1B365D)),
                         ),
                       ],
                     ),
@@ -470,9 +469,9 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -489,10 +488,10 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFDCEEFB),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.bolt, size: 16, color: Color(0xFF00344B)),
+                child: const Icon(Icons.bolt, size: 16, color: Color(0xFF0D1B2A)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -501,14 +500,14 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -517,7 +516,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                     fontFamily: 'Literata',
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ),
@@ -530,7 +529,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               'Dispatched from Mumbai Central Fulfillment Hub',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF64748B),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ),
@@ -538,19 +537,19 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFFEAF5FF),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
                 const Icon(Icons.access_time_rounded,
-                    size: 14, color: Color(0xFF00344B)),
+                    size: 14, color: Color(0xFF0D1B2A)),
                 const SizedBox(width: 6),
                 RichText(
                   text: TextSpan(
                     style: GoogleFonts.literata(
                       fontSize: 11.5,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                     children: const [
                       TextSpan(text: 'Estimated Delivery: '),
@@ -581,7 +580,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           style: GoogleFonts.domine(
             fontSize: 14.5,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
         GestureDetector(
@@ -591,7 +590,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             style: GoogleFonts.literata(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF00344B),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
         ),
@@ -607,9 +606,9 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -625,7 +624,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             child: Container(
               width: 58,
               height: 58,
-              color: const Color(0xFFF1F5F9),
+              color: const Color(0xFFE6C17A),
               child: Image.asset(
                 item.image,
                 fit: BoxFit.cover,
@@ -644,7 +643,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -654,7 +653,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       item.subtitle,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                     if (item.isBundle) ...[
@@ -663,7 +662,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 1.5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3EEE4),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -672,7 +671,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                             fontFamily: 'Literata',
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF8B6B2B),
+                            color: const Color(0xFFB8860B),
                           ),
                         ),
                       ),
@@ -687,7 +686,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       style: GoogleFonts.domine(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(width: 6),
@@ -695,7 +694,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       '₹${item.originalPrice.toStringAsFixed(2)}',
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF94A3B8),
+                        color: const Color(0xFF1B365D),
                         decoration: TextDecoration.lineThrough,
                       ),
                     ),
@@ -705,7 +704,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 1.5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -714,7 +713,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                             fontFamily: 'Literata',
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF00344B),
+                            color: const Color(0xFF0D1B2A),
                           ),
                         ),
                       ),
@@ -736,9 +735,9 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -749,7 +748,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               fontSize: 11,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.8,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
           const SizedBox(height: 12),
@@ -761,18 +760,18 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 'Bundle Promotion',
                 style: GoogleFonts.literata(
                   fontSize: 12,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const SizedBox(width: 6),
-              const Icon(Icons.local_offer_outlined, size: 13, color: Color(0xFF00344B)),
+              const Icon(Icons.local_offer_outlined, size: 13, color: Color(0xFF0D1B2A)),
               const Spacer(),
               Text(
                 '-₹${_bundleDiscount.toStringAsFixed(2)}',
                 style: GoogleFonts.literata(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
@@ -786,7 +785,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 'Express Priority Dispatch',
                 style: GoogleFonts.literata(
                   fontSize: 12,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
               const Spacer(),
@@ -795,19 +794,19 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
               ),
             ],
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
-            child: Divider(color: Color(0xFFE2EDF3), height: 1),
+            child: Divider(color: Color(0xFFE6C17A), height: 1),
           ),
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFEAF5FF),
+              color: const Color(0xFFE6C17A),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -821,7 +820,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       style: GoogleFonts.domine(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -829,7 +828,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       'Includes taxes and courier insurance',
                       style: GoogleFonts.literata(
                         fontSize: 10.5,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                   ],
@@ -839,7 +838,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 17,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ],
@@ -858,7 +857,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           label,
           style: GoogleFonts.literata(
             fontSize: 12,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
         Text(
@@ -866,7 +865,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
       ],
@@ -880,8 +879,8 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Color(0xFFE2EDF3), width: 1)),
+        color: Color(0xFFF5EBDD),
+        border: Border(top: BorderSide(color: Color(0xFFE6C17A), width: 1)),
         boxShadow: [
           BoxShadow(
             color: Color(0x0A000000),
@@ -904,7 +903,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.5,
-                      color: const Color(0xFF64748B),
+                      color: const Color(0xFF1B365D),
                     ),
                   ),
                   Text(
@@ -912,7 +911,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                     style: GoogleFonts.domine(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0F172A),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                 ],
@@ -924,8 +923,8 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   child: ElevatedButton(
                     onPressed: _handlePlaceOrder,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00344B),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF0D1B2A),
+                      foregroundColor: const Color(0xFFF5EBDD),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
@@ -942,7 +941,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
+                        const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
                       ],
                     ),
                   ),
@@ -954,13 +953,13 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.lock_outline, size: 12, color: Color(0xFF64748B)),
+              const Icon(Icons.lock_outline, size: 12, color: Color(0xFF1B365D)),
               const SizedBox(width: 4),
               Text(
                 '256-Bit SSL Encrypted Checkout • 100% Genuine Guarantee',
                 style: GoogleFonts.literata(
                   fontSize: 10.5,
-                  color: const Color(0xFF64748B),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ],

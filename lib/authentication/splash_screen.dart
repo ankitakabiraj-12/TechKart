@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,16 +55,20 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _progressController;
   bool _hasNavigated = false;
   bool _assetsPrecached = false;
+  bool _isNavigating = false;
 
   @override
   void initState() {
     super.initState();
 
+    // Warm up SessionManager asynchronously during splash
+    SessionManager().initialize();
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFF030D1A),
+        systemNavigationBarColor: Color(0xFF0D1B2A),
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -105,11 +109,6 @@ class _SplashScreenState extends State<SplashScreen>
       onError: (_, _) {},
     );
     precacheImage(
-      const AssetImage('asset/TechKart_Logo.png'),
-      context,
-      onError: (_, _) {},
-    );
-    precacheImage(
       const AssetImage('asset/app_logo.png'),
       context,
       onError: (_, _) {},
@@ -125,82 +124,60 @@ class _SplashScreenState extends State<SplashScreen>
   void _onAnimationCompleted() {
     if (_hasNavigated || !mounted) return;
     if (widget.autoNavigate) {
-      Future.delayed(const Duration(milliseconds: 150), () {
-        if (mounted && !_hasNavigated) {
-          _handleInitializationComplete();
-        }
-      });
-    }
-  }
-
-  void _handleInitializationComplete() async {
-    if (_hasNavigated || !mounted) return;
-    _hasNavigated = true;
-
-    widget.onInitializationComplete?.call();
-
-    if (widget.autoNavigate && mounted) {
-      if (widget.nextScreen != null) {
-        AppNavigator.replace(context, widget.nextScreen!);
-        return;
-      }
-
-      final sessionManager = SessionManager();
-      await sessionManager.initialize();
-      final hasValidSession = await sessionManager.validateSession();
-
-      if (!mounted) return;
-
-      if (hasValidSession) {
-        AppNavigator.replaceAll(context, AppRoutes.mainShell);
-      } else {
-        final onboardingDone = await sessionManager.isOnboardingCompleted();
-        if (!mounted) return;
-
-        if (onboardingDone) {
-          AppNavigator.replaceAll(context, AppRoutes.login);
-        } else {
-          AppNavigator.toOnboarding(context);
-        }
-      }
+      _executeNavigation();
     }
   }
 
   void _onGetStartedPressed() {
-    if (_hasNavigated) return;
+    if (_hasNavigated || _isNavigating) return;
     HapticFeedback.lightImpact();
-    _navigateToNext();
+    _executeNavigation();
   }
 
-  void _navigateToNext() async {
-    if (_hasNavigated || !mounted) return;
-    _hasNavigated = true;
+  void _executeNavigation() async {
+    if (_hasNavigated || _isNavigating || !mounted) return;
+    setState(() => _isNavigating = true);
 
     widget.onInitializationComplete?.call();
 
-    if (mounted) {
-      if (widget.nextScreen != null) {
-        AppNavigator.replace(context, widget.nextScreen!);
-        return;
-      }
+    if (widget.nextScreen != null) {
+      _hasNavigated = true;
+      AppNavigator.replace(context, widget.nextScreen!);
+      return;
+    }
 
-      final sessionManager = SessionManager();
-      await sessionManager.initialize();
-      final hasValidSession = await sessionManager.validateSession();
+    final sessionManager = SessionManager();
+    await sessionManager.initialize();
 
+    // 1. Fast path: check cached session immediately so UI switches instantly
+    final hasCache = await sessionManager.hasCachedSession();
+    if (!mounted) return;
+
+    if (hasCache) {
+      _hasNavigated = true;
+      AppNavigator.replaceAll(context, AppRoutes.mainShell);
+      // Validate session in background without blocking navigation
+      sessionManager.validateSession();
+      return;
+    }
+
+    // 2. Check token or onboarding status
+    final hasToken = await sessionManager.validateSession(
+      timeout: const Duration(seconds: 2),
+    );
+    if (!mounted) return;
+
+    _hasNavigated = true;
+    if (hasToken) {
+      AppNavigator.replaceAll(context, AppRoutes.mainShell);
+    } else {
+      final onboardingDone = await sessionManager.isOnboardingCompleted();
       if (!mounted) return;
 
-      if (hasValidSession) {
-        AppNavigator.replaceAll(context, AppRoutes.mainShell);
+      if (onboardingDone) {
+        AppNavigator.replaceAll(context, AppRoutes.login);
       } else {
-        final onboardingDone = await sessionManager.isOnboardingCompleted();
-        if (!mounted) return;
-
-        if (onboardingDone) {
-          AppNavigator.replaceAll(context, AppRoutes.login);
-        } else {
-          AppNavigator.toOnboarding(context);
-        }
+        AppNavigator.toOnboarding(context);
       }
     }
   }
@@ -211,7 +188,7 @@ class _SplashScreenState extends State<SplashScreen>
     final bottomPadding = mediaQuery.padding.bottom;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F7F2),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: AnimatedBuilder(
         animation: _progressController,
         builder: (context, _) {
@@ -290,16 +267,16 @@ class _SplashScreenState extends State<SplashScreen>
       width: double.infinity,
       height: 56,
       decoration: BoxDecoration(
-        color: const Color(0xFF030D1A), // Deep midnight navy pill
+        color: const Color(0xFF0D1B2A), // Deep midnight navy pill
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF030D1A).withValues(alpha: 0.35),
+            color: const Color(0xFF0D1B2A).withValues(alpha: 0.35),
             blurRadius: 18,
             offset: const Offset(0, 6),
           ),
           BoxShadow(
-            color: const Color(0xFF1E3A8A).withValues(alpha: 0.15),
+            color: const Color(0xFF0D1B2A).withValues(alpha: 0.15),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -308,43 +285,54 @@ class _SplashScreenState extends State<SplashScreen>
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: _onGetStartedPressed,
+          onTap: _isNavigating ? null : _onGetStartedPressed,
           borderRadius: BorderRadius.circular(28),
-          splashColor: Colors.white.withValues(alpha: 0.15),
-          highlightColor: Colors.white.withValues(alpha: 0.08),
+          splashColor: const Color(0xFFF5EBDD).withValues(alpha: 0.15),
+          highlightColor: const Color(0xFFF5EBDD).withValues(alpha: 0.08),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                const SizedBox(width: 36), // Balanced spacing for center alignment
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'Get Started',
-                      style: GoogleFonts.domine(
-                        fontSize: 16.5,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        letterSpacing: 0.3,
+            child: _isNavigating
+                ? const Center(
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.5,
+                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF5EBDD)),
                       ),
                     ),
+                  )
+                : Row(
+                    children: [
+                      const SizedBox(width: 36), // Balanced spacing for center alignment
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Get Started',
+                            style: GoogleFonts.domine(
+                              fontSize: 16.5,
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFFF5EBDD),
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF5EBDD).withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          size: 18,
+                          color: Color(0xFFF5EBDD),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    size: 18,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
@@ -353,17 +341,17 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildFallbackLayout(Size size, double topPadding) {
     return Container(
-      color: const Color(0xFFF9F7F2),
+      color: const Color(0xFFFDFBCF),
       padding: EdgeInsets.only(top: topPadding + 40, left: 24, right: 24),
       child: Column(
         children: [
           Image.asset(
-            'asset/TechKart_Logo.png',
+            'asset/app_logo.png',
             height: 90,
             errorBuilder: (_, _, _) => const Icon(
               Icons.shopping_cart_outlined,
               size: 64,
-              color: Color(0xFF0B192C),
+              color: Color(0xFF0D1B2A),
             ),
           ),
           const SizedBox(height: 12),
@@ -372,7 +360,7 @@ class _SplashScreenState extends State<SplashScreen>
             style: GoogleFonts.domine(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF071F36),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
           const SizedBox(height: 6),
@@ -403,7 +391,7 @@ class _AmbientGlowPainter extends CustomPainter {
     final glowPaint = Paint()
       ..shader = RadialGradient(
         colors: [
-          const Color(0xFF38BDF8).withValues(alpha: shimmerAlpha * 0.25),
+          const Color(0xFF1B365D).withValues(alpha: shimmerAlpha * 0.25),
           Colors.transparent,
         ],
         stops: const [0.0, 1.0],

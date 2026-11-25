@@ -82,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -103,19 +103,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.translate,
                       title: 'App Language',
                       subtitle: 'English (IN)',
-                      onTap: widget.onAppLanguage ?? () {},
+                      onTap: widget.onAppLanguage ??
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'App Language is set to English (IN). More languages coming soon.',
+                                  style: GoogleFonts.literata(),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                     ),
                     _buildNavRow(
                       icon: Icons.payments_outlined,
                       title: 'Currency Display',
                       subtitle: 'INR (₹) • Indian Rupee',
-                      onTap: widget.onCurrencyDisplay ?? () {},
+                      onTap: widget.onCurrencyDisplay ??
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Default store currency is Indian Rupee (₹ INR).',
+                                  style: GoogleFonts.literata(),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                     ),
                     _buildNavRow(
                       icon: Icons.palette_outlined,
                       title: 'Appearance',
                       subtitle: 'Light Mode (System Default)',
-                      onTap: widget.onAppearance ?? () {},
+                      onTap: widget.onAppearance ??
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Theme set to Light Mode (System Default).',
+                                  style: GoogleFonts.literata(),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                       isLast: true,
                     ),
                   ]),
@@ -163,14 +196,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.lock_reset,
                       title: 'Change Password',
                       subtitle: 'Last updated 3 months ago',
-                      onTap: widget.onChangePassword ?? () {},
+                      onTap: widget.onChangePassword ??
+                          () => AppNavigator.toForgotPassword(context),
                     ),
                     _buildNavRow(
                       icon: Icons.shield_outlined,
                       title: 'Two-Step Verification',
                       subtitle: 'Primary method: SMS • (+91) •••• 210',
                       badge: 'ACTIVE',
-                      onTap: widget.onTwoStepVerification ?? () {},
+                      onTap: widget.onTwoStepVerification ??
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Two-Step verification is active on your mobile number.',
+                                  style: GoogleFonts.literata(),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                     ),
                     _buildSwitchRow(
                       icon: Icons.fingerprint,
@@ -186,7 +231,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.verified_user_outlined,
                       title: 'Data Privacy & Diagnostics',
                       subtitle: 'Manage shared device analytics',
-                      onTap: widget.onDataPrivacy ?? () {},
+                      onTap: widget.onDataPrivacy ??
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Your device telemetry & analytics data are encrypted locally.',
+                                  style: GoogleFonts.literata(),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
                       isLast: true,
                     ),
                   ]),
@@ -198,13 +254,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.help_outline,
                       title: 'Help Center & FAQs',
                       subtitle: '24/7 dedicated customer care',
-                      onTap: widget.onHelpCenter ?? () {},
+                      onTap: widget.onHelpCenter ??
+                          () => AppNavigator.toConversationalShoppingAssistant(context),
                     ),
                     _buildNavRow(
                       icon: Icons.description_outlined,
                       title: 'Terms of Service & 7-Day Guarantee',
                       subtitle: 'Buyer protection policies',
-                      onTap: widget.onTermsOfService ?? () {},
+                      onTap: widget.onTermsOfService ??
+                          () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text(
+                                  'Terms & 7-Day Guarantee',
+                                  style: GoogleFonts.domine(fontWeight: FontWeight.w700),
+                                ),
+                                content: Text(
+                                  'Every purchase on TechKart is backed by our 7-Day Replacement Guarantee and 100% Genuine Tech Warranty.',
+                                  style: GoogleFonts.literata(fontSize: 13.5),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.of(ctx).pop(),
+                                    child: const Text('Understood'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                     ),
                     _buildActionRow(
                       icon: Icons.refresh,
@@ -236,8 +314,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1)),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -246,13 +323,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFEAF5FF),
+                color: Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.arrow_back,
                 size: 20,
-                color: Color(0xFF00344B),
+                color: Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -263,22 +340,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: GoogleFonts.domine(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
           GestureDetector(
-            onTap: widget.onMarkAllRead ?? () {},
+            onTap: widget.onMarkAllRead ??
+                () {
+                  HapticFeedback.lightImpact();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'All preference alerts marked as read.',
+                        style: GoogleFonts.literata(),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
             child: Row(
               children: [
-                const Icon(Icons.done_all, size: 14, color: Color(0xFF00344B)),
+                const Icon(Icons.done_all, size: 14, color: Color(0xFF0D1B2A)),
                 const SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ],
@@ -289,10 +378,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             width: 32,
             height: 32,
             decoration: const BoxDecoration(
-              color: Color(0xFF64748B),
+              color: Color(0xFF1B365D),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.person, size: 18, color: Colors.white),
+            child: const Icon(Icons.person, size: 18, color: Color(0xFFF5EBDD)),
           ),
         ],
       ),
@@ -306,13 +395,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.search, size: 20, color: Color(0xFF64748B)),
+          const Icon(Icons.search, size: 20, color: Color(0xFF1B365D)),
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
@@ -320,14 +409,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: widget.onSearchChanged,
               style: GoogleFonts.literata(
                 fontSize: 13,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
               decoration: InputDecoration(
+                filled: false,
+                fillColor: Colors.transparent,
                 border: InputBorder.none,
                 hintText: 'Search settings, security, alerts...',
                 hintStyle: GoogleFonts.literata(
                   fontSize: 13,
-                  color: const Color(0xFF94A3B8),
+                  color: const Color(0xFF1B365D),
                 ),
               ),
             ),
@@ -347,7 +438,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         fontSize: 10.5,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
-        color: const Color(0xFF64748B),
+        color: const Color(0xFF1B365D),
       ),
     );
   }
@@ -358,9 +449,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSettingsCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Column(children: children),
     );
@@ -388,10 +479,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Container(
                   padding: const EdgeInsets.all(7),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFEAF5FF),
+                    color: Color(0xFFE6C17A),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, size: 16, color: const Color(0xFF00344B)),
+                  child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -405,7 +496,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0F172A),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           if (badge != null) ...[
@@ -416,7 +507,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 vertical: 1.5,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFDCEEFB),
+                                color: const Color(0xFFE6C17A),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Text(
@@ -424,7 +515,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 style: const TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ),
                             ),
@@ -436,7 +527,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         subtitle,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF64748B),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                     ],
@@ -445,13 +536,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 12,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF1B365D),
                 ),
               ],
             ),
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE2EDF3), height: 1),
+        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
       ],
     );
   }
@@ -473,10 +564,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEAF5FF),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, size: 16, color: const Color(0xFF00344B)),
+                child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -488,7 +579,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(height: 1),
@@ -496,7 +587,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                   ],
@@ -505,12 +596,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Switch(
                 value: value,
                 onChanged: onChanged,
-                activeThumbColor: const Color(0xFF00344B),
+                activeThumbColor: const Color(0xFF0D1B2A),
               ),
             ],
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE2EDF3), height: 1),
+        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
       ],
     );
   }
@@ -532,10 +623,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFEAF5FF),
+                  color: Color(0xFFE6C17A),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, size: 16, color: const Color(0xFF00344B)),
+                child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -547,7 +638,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0F172A),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                     const SizedBox(height: 1),
@@ -555,7 +646,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF64748B),
+                        color: const Color(0xFF1B365D),
                       ),
                     ),
                   ],
@@ -564,8 +655,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFEAF5FF),
-                  foregroundColor: const Color(0xFF00344B),
+                  backgroundColor: const Color(0xFFE6C17A),
+                  foregroundColor: const Color(0xFF0D1B2A),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
@@ -587,7 +678,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE2EDF3), height: 1),
+        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
       ],
     );
   }
@@ -606,31 +697,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildLogoutButton() {
-    return Container(
-      width: double.infinity,
-      height: 48,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
-      ),
-      child: InkWell(
-        onTap: _handleLogout,
-        borderRadius: BorderRadius.circular(24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.logout, size: 16, color: Color(0xFFEF4444)),
-            const SizedBox(width: 8),
-            Text(
-              'Log Out of TechKart',
-              style: GoogleFonts.literata(
-                fontSize: 13.5,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFEF4444),
-              ),
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: _handleLogout,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF5EBDD),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0xFFE6C17A), width: 1),
             ),
-          ],
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.logout, size: 15, color: Color(0xFFEF4444)),
+                const SizedBox(width: 8),
+                Text(
+                  'Log Out of TechKart',
+                  style: GoogleFonts.literata(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFFEF4444),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -645,13 +740,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.lock_outline, size: 12, color: Color(0xFF64748B)),
+            const Icon(Icons.lock_outline, size: 12, color: Color(0xFF1B365D)),
             const SizedBox(width: 4),
             Text(
               'End-to-End Encrypted Session',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF64748B),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
@@ -661,7 +756,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           'TechKart Mobile v2.4.1 (Build 4920) • Verified Build',
           style: GoogleFonts.literata(
             fontSize: 10.5,
-            color: const Color(0xFF94A3B8),
+            color: const Color(0xFF1B365D),
           ),
         ),
       ],

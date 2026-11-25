@@ -1,7 +1,8 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../app_routes/app_navigator.dart';
 import '../core/network/network.dart';
 import '../theme/profile_avatar.dart';
 
@@ -168,7 +169,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
               'Review submitted successfully!',
               style: GoogleFonts.literata(),
             ),
-            backgroundColor: const Color(0xFF00344B),
+            backgroundColor: const Color(0xFF0D1B2A),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -212,7 +213,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 'Review submitted successfully! Thank you for your feedback.',
                 style: GoogleFonts.literata(),
               ),
-              backgroundColor: const Color(0xFF00344B),
+              backgroundColor: const Color(0xFF0D1B2A),
               behavior: SnackBarBehavior.floating,
             ),
           );
@@ -248,7 +249,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6FAFC),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         child: Column(
           children: [
@@ -291,10 +292,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF6FAFC),
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE2EDF3), width: 1),
-        ),
+        color: Color(0xFFFDFBCF),
       ),
       child: Row(
         children: [
@@ -303,10 +301,10 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFFEAF5FF),
+                color: const Color(0xFFE6C17A),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF00344B)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
             ),
           ),
           const SizedBox(width: 14),
@@ -316,7 +314,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
               style: GoogleFonts.domine(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
           ),
@@ -325,8 +323,8 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             children: [
               IconButton(
                 icon: const Icon(Icons.notifications_none_outlined,
-                    color: Color(0xFF0F172A), size: 24),
-                onPressed: () {},
+                    color: Color(0xFF0D1B2A), size: 24),
+                onPressed: () => AppNavigator.toNotifications(context),
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
               ),
@@ -358,9 +356,9 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x06000000),
@@ -381,8 +379,8 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
               errorBuilder: (context, error, stackTrace) => Container(
                 width: 58,
                 height: 58,
-                color: const Color(0xFFEAF5FF),
-                child: const Icon(Icons.watch, color: Color(0xFF00344B)),
+                color: const Color(0xFFE6C17A),
+                child: const Icon(Icons.watch, color: Color(0xFF0D1B2A)),
               ),
             ),
           ),
@@ -421,7 +419,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   style: GoogleFonts.domine(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -429,7 +427,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   'Grade 5 Titanium • 49mm Cellular • ₹35,499.00',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ],
@@ -447,9 +445,9 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x06000000),
@@ -465,7 +463,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             style: GoogleFonts.domine(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF0F172A),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
           const SizedBox(height: 4),
@@ -473,7 +471,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             'Tap a star to rate your experience',
             style: GoogleFonts.literata(
               fontSize: 12,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
           const SizedBox(height: 14),
@@ -492,7 +490,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   child: Icon(
                     isFilled ? Icons.star_rounded : Icons.star_outline_rounded,
                     size: 38,
-                    color: isFilled ? const Color(0xFFF59E0B) : const Color(0xFFCBD5E1),
+                    color: isFilled ? const Color(0xFFF59E0B) : const Color(0xFFE6C17A),
                   ),
                 ),
               );
@@ -553,7 +551,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             fontSize: 11,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.8,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
         const SizedBox(height: 10),
@@ -568,17 +566,17 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 duration: const Duration(milliseconds: 150),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF00344B) : const Color(0xFFEAF5FF),
+                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: isSelected ? const Color(0xFF00344B) : const Color(0xFFD3E7F8),
+                    color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
                   ),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (isSelected) ...[
-                      const Icon(Icons.check, size: 13, color: Colors.white),
+                      const Icon(Icons.check, size: 13, color: Color(0xFFF5EBDD)),
                       const SizedBox(width: 5),
                     ],
                     Text(
@@ -586,7 +584,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12,
                         fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                        color: isSelected ? Colors.white : const Color(0xFF00344B),
+                        color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                       ),
                     ),
                   ],
@@ -614,14 +612,14 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
             Text(
               'Required',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF94A3B8),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
@@ -630,23 +628,23 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: const Color(0xFFF5EBDD),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE2EDF3)),
+            border: Border.all(color: const Color(0xFFE6C17A)),
           ),
           child: TextField(
             controller: _titleController,
             style: GoogleFonts.literata(
               fontSize: 13.5,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF0F172A),
+              color: const Color(0xFF0D1B2A),
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Best titanium smartwatch I've owned",
               hintStyle: GoogleFonts.literata(
                 fontSize: 13,
-                color: const Color(0xFF94A3B8),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ),
@@ -670,14 +668,14 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF0D1B2A),
               ),
             ),
             Text(
               'Min. 20 characters',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF94A3B8),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ],
@@ -686,9 +684,9 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: const Color(0xFFF5EBDD),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE2EDF3)),
+            border: Border.all(color: const Color(0xFFE6C17A)),
           ),
           child: Column(
             children: [
@@ -699,14 +697,14 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 13,
                   height: 1.45,
-                  color: const Color(0xFF0F172A),
+                  color: const Color(0xFF0D1B2A),
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Share battery endurance, display clarity, wrist comfort, and daily wear experience...',
                   hintStyle: GoogleFonts.literata(
                     fontSize: 12.5,
-                    color: const Color(0xFF94A3B8),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ),
@@ -717,7 +715,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   '${_reviewController.text.length} / 500',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF94A3B8),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ),
@@ -740,7 +738,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
           style: GoogleFonts.literata(
             fontSize: 12.5,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0F172A),
+            color: const Color(0xFF0D1B2A),
           ),
         ),
         const SizedBox(height: 3),
@@ -748,7 +746,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
           'Share real shots of wrist fit, finishes, or unboxing (up to 4)',
           style: GoogleFonts.literata(
             fontSize: 11,
-            color: const Color(0xFF64748B),
+            color: const Color(0xFF1B365D),
           ),
         ),
         const SizedBox(height: 10),
@@ -771,7 +769,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 width: 72,
                 height: 72,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEAF5FF),
+                  color: const Color(0xFFE6C17A),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: const Color(0xFF70B2E2),
@@ -781,14 +779,14 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.add_a_photo_outlined, size: 20, color: Color(0xFF00344B)),
+                    const Icon(Icons.add_a_photo_outlined, size: 20, color: Color(0xFF0D1B2A)),
                     const SizedBox(height: 4),
                     Text(
                       'Add',
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ],
@@ -812,8 +810,8 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                         errorBuilder: (context, error, stackTrace) => Container(
                           width: 72,
                           height: 72,
-                          color: const Color(0xFFEAF5FF),
-                          child: const Icon(Icons.image, color: Color(0xFF00344B)),
+                          color: const Color(0xFFE6C17A),
+                          child: const Icon(Icons.image, color: Color(0xFF0D1B2A)),
                         ),
                       ),
                     ),
@@ -830,7 +828,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                             color: Color(0xCC000000),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.close, size: 12, color: Colors.white),
+                          child: const Icon(Icons.close, size: 12, color: Color(0xFFF5EBDD)),
                         ),
                       ),
                     ),
@@ -851,9 +849,9 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF5EBDD),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2EDF3)),
+        border: Border.all(color: const Color(0xFFE6C17A)),
       ),
       child: Row(
         children: [
@@ -866,7 +864,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0F172A),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -874,7 +872,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                   'Helps other verified buyers make choices',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF64748B),
+                    color: const Color(0xFF1B365D),
                   ),
                 ),
               ],
@@ -887,7 +885,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
-                    color: _wouldRecommend ? const Color(0xFF00344B) : const Color(0xFFEAF5FF),
+                    color: _wouldRecommend ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -895,7 +893,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: _wouldRecommend ? Colors.white : const Color(0xFF00344B),
+                      color: _wouldRecommend ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                     ),
                   ),
                 ),
@@ -906,7 +904,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
-                    color: !_wouldRecommend ? const Color(0xFF00344B) : const Color(0xFFEAF5FF),
+                    color: !_wouldRecommend ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -914,7 +912,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: !_wouldRecommend ? Colors.white : const Color(0xFF00344B),
+                      color: !_wouldRecommend ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
                     ),
                   ),
                 ),
@@ -933,14 +931,14 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF64748B)),
+        const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF1B365D)),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
             'Reviews are moderated under TechKart Community Guidelines',
             style: GoogleFonts.literata(
               fontSize: 11,
-              color: const Color(0xFF64748B),
+              color: const Color(0xFF1B365D),
             ),
           ),
         ),
@@ -958,8 +956,8 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
       child: ElevatedButton(
         onPressed: _isSubmitting ? null : _handleSubmit,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF00344B),
-          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF0D1B2A),
+          foregroundColor: const Color(0xFFF5EBDD),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -971,7 +969,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: Colors.white,
+                  color: Color(0xFFF5EBDD),
                 ),
               )
             : Row(
@@ -985,7 +983,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
+                  const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
                 ],
               ),
       ),

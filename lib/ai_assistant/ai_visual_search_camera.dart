@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
@@ -22,11 +22,13 @@ bool _isTestEnvironment() {
 class AiVisualSearchCameraScreen extends StatefulWidget {
   final bool showBottomNav;
   final ValueChanged<int>? onNavTabSelected;
+  final VoidCallback? onBack;
 
   const AiVisualSearchCameraScreen({
     super.key,
-    this.showBottomNav = true,
+    this.showBottomNav = false,
     this.onNavTabSelected,
+    this.onBack,
   });
 
   @override
@@ -38,7 +40,6 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
   // Modes & Controls
   String _activeMode = 'Object AI'; // 'Object AI' or 'Barcode'
   String _selectedAction = 'Identify Specs';
-  String _selectedBottomMode = 'Search'; // Search, Translate, Talk, Create
   int _opticalZoom = 1;
   bool _isFlashOn = false;
 
@@ -269,7 +270,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5EBDD),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -285,7 +286,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFCBD5E1),
+                    color: const Color(0xFFE6C17A),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -303,7 +304,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                     alignment: Alignment.center,
                     child: const Icon(
                       Icons.auto_awesome,
-                      color: Color(0xFF2563EB),
+                      color: Color(0xFF1B365D),
                       size: 22,
                     ),
                   ),
@@ -317,7 +318,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xFF0F172A),
+                            color: Color(0xFF0D1B2A),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -325,7 +326,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                           matchSubtitle,
                           style: const TextStyle(
                             fontSize: 12,
-                            color: Color(0xFF0284C7),
+                            color: Color(0xFFB8860B),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -337,7 +338,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF0F172A),
+                      color: Color(0xFF0D1B2A),
                     ),
                   ),
                 ],
@@ -348,7 +349,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF334155),
+                  color: Color(0xFF1B365D),
                 ),
               ),
               const SizedBox(height: 6),
@@ -356,7 +357,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                 '• Dual-frequency GNSS antenna layout detected\n• Sapphire crystal lens verified\n• Magnetic fast-charging connector matched',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF64748B),
+                  color: Color(0xFF1B365D),
                   height: 1.5,
                 ),
               ),
@@ -377,7 +378,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                   ),
                   child: const Text(
                     'Inspect Full Specifications Matrix',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                    style: TextStyle(color: Color(0xFFF5EBDD), fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -440,7 +441,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.92),
+                          color: const Color(0xFFF5EBDD).withValues(alpha: 0.92),
                           borderRadius: BorderRadius.circular(22),
                           boxShadow: [
                             BoxShadow(
@@ -489,10 +490,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               ),
             ),
 
-            // 3. Google Lens Style Bottom Mode Slider (Search, Translate, Talk, Create)
-            _buildBottomModeSlider(),
-
-            // 4. TechKart AI Sensor Banner
+            // TechKart AI Sensor Banner
             _buildAiSensorBanner(),
           ],
         ),
@@ -512,10 +510,16 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
         children: [
           // Back button
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white, size: 22),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFFF5EBDD), size: 22),
             onPressed: () {
               HapticFeedback.lightImpact();
-              AppNavigator.pop(context);
+              if (widget.onBack != null) {
+                widget.onBack!();
+              } else if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              } else {
+                AppNavigator.toConversationalShoppingAssistant(context);
+              }
             },
           ),
 
@@ -523,46 +527,17 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
           IconButton(
             icon: Icon(
               _isFlashOn ? Icons.flash_on_rounded : Icons.flash_off_rounded,
-              color: _isFlashOn ? const Color(0xFFFEF08A) : Colors.white,
+              color: _isFlashOn ? const Color(0xFFFEF08A) : const Color(0xFFF5EBDD),
               size: 22,
             ),
             onPressed: _toggleFlash,
           ),
 
-          const SizedBox(width: 4),
-
-          // Brand Title: TechKart Lens / TechKart AI
-          Expanded(
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image.asset(
-                    'asset/app_logo.png',
-                    width: 24,
-                    height: 24,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.auto_awesome, color: Color(0xFF38BDF8), size: 18),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  'TechKart AI',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    letterSpacing: -0.2,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const Spacer(),
 
           // History Button
           IconButton(
-            icon: const Icon(Icons.history_rounded, color: Colors.white, size: 22),
+            icon: const Icon(Icons.history_rounded, color: Color(0xFFF5EBDD), size: 22),
             onPressed: () {
               HapticFeedback.lightImpact();
               ScaffoldMessenger.of(context).showSnackBar(
@@ -577,8 +552,16 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
 
           // More Options
           IconButton(
-            icon: const Icon(Icons.more_vert_rounded, color: Colors.white, size: 22),
-            onPressed: () {},
+            icon: const Icon(Icons.more_vert_rounded, color: Color(0xFFF5EBDD), size: 22),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Visual lens resolution: Auto HDR • 4K Neural processing'),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Duration(seconds: 1),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -592,7 +575,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
     // 1. Permanently Denied Permission
     if (_isPermanentlyDenied) {
       return Container(
-        color: const Color(0xFF0F172A),
+        color: const Color(0xFF0D1B2A),
         padding: const EdgeInsets.all(28),
         alignment: Alignment.center,
         child: Column(
@@ -602,13 +585,13 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
             const SizedBox(height: 16),
             const Text(
               'Camera Access Permanently Denied',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFF5EBDD)),
             ),
             const SizedBox(height: 8),
             const Text(
               'To use TechKart AI visual gadget search, please enable camera access in your device system settings.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12.5, color: Color(0xFF94A3B8), height: 1.4),
+              style: TextStyle(fontSize: 12.5, color: Color(0xFF1B365D), height: 1.4),
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
@@ -616,8 +599,8 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               icon: const Icon(Icons.settings, size: 16),
               label: const Text('Open Settings'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2563EB),
-                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF1B365D),
+                foregroundColor: const Color(0xFFF5EBDD),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               ),
             ),
@@ -629,7 +612,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
     // 2. Denied Permission (request again)
     if (_isPermissionDenied) {
       return Container(
-        color: const Color(0xFF0F172A),
+        color: const Color(0xFF0D1B2A),
         padding: const EdgeInsets.all(28),
         alignment: Alignment.center,
         child: Column(
@@ -639,20 +622,20 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
             const SizedBox(height: 16),
             const Text(
               'Camera Permission Required',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFF5EBDD)),
             ),
             const SizedBox(height: 8),
             const Text(
               'TechKart AI needs your camera to scan gadgets, barcodes, and specs.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12.5, color: Color(0xFF94A3B8)),
+              style: TextStyle(fontSize: 12.5, color: Color(0xFF1B365D)),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _initializeCameraFlow,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2563EB),
-                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF1B365D),
+                foregroundColor: const Color(0xFFF5EBDD),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               ),
               child: const Text('Grant Camera Access'),
@@ -669,9 +652,9 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
 
     if (_isLoadingCamera) {
       return Container(
-        color: const Color(0xFF0F172A),
+        color: const Color(0xFF0D1B2A),
         alignment: Alignment.center,
-        child: const CircularProgressIndicator(color: Color(0xFF38BDF8)),
+        child: const CircularProgressIndicator(color: Color(0xFF1B365D)),
       );
     }
 
@@ -686,7 +669,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
             'asset/chronos_watch_x.jpg',
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) => Container(
-              color: const Color(0xFF1E293B),
+              color: const Color(0xFF0D1B2A),
             ),
           ),
         Container(
@@ -725,15 +708,15 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               gradient: LinearGradient(
                 colors: [
                   Colors.transparent,
-                  const Color(0xFF38BDF8).withValues(alpha: 0.85),
-                  const Color(0xFF00E5FF),
-                  const Color(0xFF38BDF8).withValues(alpha: 0.85),
+                  const Color(0xFF1B365D).withValues(alpha: 0.85),
+                  const Color(0xFF1B365D),
+                  const Color(0xFF1B365D).withValues(alpha: 0.85),
                   Colors.transparent,
                 ],
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF00E5FF).withValues(alpha: 0.65),
+                  color: const Color(0xFF1B365D).withValues(alpha: 0.65),
                   blurRadius: 10,
                   spreadRadius: 2,
                 ),
@@ -752,10 +735,10 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F172A).withValues(alpha: 0.70),
+        color: const Color(0xFF0D1B2A).withValues(alpha: 0.70),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.15),
+          color: const Color(0xFFF5EBDD).withValues(alpha: 0.15),
           width: 0.8,
         ),
       ),
@@ -763,7 +746,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Icon(Icons.center_focus_weak_rounded, size: 14, color: Color(0xFF38BDF8)),
+          Icon(Icons.center_focus_weak_rounded, size: 14, color: Color(0xFF1B365D)),
           SizedBox(width: 8),
           Flexible(
             child: Text(
@@ -772,7 +755,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               style: TextStyle(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w600,
-                color: Colors.white,
+                color: Color(0xFFF5EBDD),
               ),
             ),
           ),
@@ -803,7 +786,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                   decoration: BoxDecoration(
                     color: const Color(0xFF991B1B),
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
+                    border: Border.all(color: const Color(0xFFF5EBDD), width: 2),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.3),
@@ -818,7 +801,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
                       color: const Color(0xFFB91C1C),
-                      child: const Icon(Icons.photo_library_outlined, color: Colors.white, size: 24),
+                      child: const Icon(Icons.photo_library_outlined, color: Color(0xFFF5EBDD), size: 24),
                     ),
                   ),
                 ),
@@ -827,7 +810,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                   height: 50,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.8), width: 1.5),
+                    border: Border.all(color: const Color(0xFFF5EBDD).withValues(alpha: 0.8), width: 1.5),
                   ),
                 ),
               ],
@@ -841,11 +824,11 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               width: 76,
               height: 76,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFF5EBDD),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.white.withValues(alpha: 0.35),
+                    color: const Color(0xFFF5EBDD).withValues(alpha: 0.35),
                     blurRadius: 18,
                     spreadRadius: 2,
                   ),
@@ -866,7 +849,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                     child: Icon(
                       Icons.auto_awesome,
                       size: 14,
-                      color: Color(0xFF2563EB),
+                      color: Color(0xFF1B365D),
                     ),
                   ),
                 ],
@@ -888,7 +871,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               decoration: BoxDecoration(
                 color: Colors.black.withValues(alpha: 0.6),
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white.withValues(alpha: 0.8), width: 1.5),
+                border: Border.all(color: const Color(0xFFF5EBDD).withValues(alpha: 0.8), width: 1.5),
               ),
               alignment: Alignment.center,
               child: Text(
@@ -897,80 +880,12 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                 style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  color: Color(0xFFF5EBDD),
                 ),
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // GOOGLE LENS BOTTOM MODE SLIDER (Search, Translate, Talk, Create)
-  // ---------------------------------------------------------------------------
-  Widget _buildBottomModeSlider() {
-    final modes = [
-      {'name': 'Search', 'icon': Icons.search_rounded},
-      {'name': 'Translate', 'icon': Icons.translate_rounded},
-      {'name': 'Talk', 'icon': Icons.auto_awesome},
-      {'name': 'Create', 'icon': Icons.edit_note_rounded},
-    ];
-
-    return Container(
-      color: Colors.black.withValues(alpha: 0.95),
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: modes.map((m) {
-            final name = m['name'] as String;
-            final icon = m['icon'] as IconData;
-            final isSelected = _selectedBottomMode == name;
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: InkWell(
-                onTap: () {
-                  HapticFeedback.selectionClick();
-                  setState(() {
-                    _selectedBottomMode = name;
-                  });
-                },
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                  decoration: BoxDecoration(
-                    color: isSelected ? const Color(0xFF334155) : Colors.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        icon,
-                        size: 15,
-                        color: isSelected ? Colors.white : const Color(0xFF94A3B8),
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        name,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                          color: isSelected ? Colors.white : const Color(0xFF94A3B8),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
       ),
     );
   }
@@ -986,7 +901,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E293B),
+          color: const Color(0xFF0D1B2A),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -995,14 +910,14 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
               width: 28,
               height: 28,
               decoration: const BoxDecoration(
-                color: Color(0xFF0F172A),
+                color: Color(0xFF0D1B2A),
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
               child: const Icon(
                 Icons.smart_toy_outlined,
                 size: 16,
-                color: Color(0xFF38BDF8),
+                color: Color(0xFF1B365D),
               ),
             ),
             const SizedBox(width: 10),
@@ -1012,7 +927,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: Color(0xFFF5EBDD),
                   height: 1.25,
                 ),
               ),
@@ -1021,7 +936,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
             const Icon(
               Icons.chevron_right_rounded,
               size: 18,
-              color: Color(0xFF38BDF8),
+              color: Color(0xFF1B365D),
             ),
           ],
         ),
@@ -1097,7 +1012,7 @@ class _GoogleLensReticlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.85)
+      ..color = const Color(0xFFF5EBDD).withValues(alpha: 0.85)
       ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

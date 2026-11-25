@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -104,13 +104,13 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: Color(0xFFF5EBDD),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -129,7 +129,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -137,14 +137,21 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                         const BoxConstraints(minWidth: 36, minHeight: 36),
                   ),
                   const SizedBox(width: 6),
-                  Image.asset(
-                    'asset/app_logo.png',
+                  Container(
+                    width: 28,
                     height: 28,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'asset/app_launcher_icon.png',
-                      height: 28,
-                      fit: BoxFit.contain,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'asset/app_logo.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                          'asset/app_launcher_icon.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -153,38 +160,49 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                     style: GoogleFonts.domine(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF00344B),
+                      color: const Color(0xFF0D1B2A),
                     ),
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => AppNavigator.toSearchOverlay(context),
                     icon: const Icon(
                       Icons.search_rounded,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
                         const BoxConstraints(minWidth: 34, minHeight: 34),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Clipboard.setData(ClipboardData(text: 'Check out ${widget.productId} reviews on TechKart!'));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Review link copied to clipboard.',
+                            style: GoogleFonts.literata(),
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.share_outlined,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
                         const BoxConstraints(minWidth: 34, minHeight: 34),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => AppNavigator.toWishlist(context),
                     icon: const Icon(
                       Icons.favorite_border_rounded,
                       size: 20,
-                      color: Color(0xFF2D3748),
+                      color: Color(0xFF1B365D),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -213,11 +231,11 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                               blurRadius: 10,
                               offset: const Offset(0, 3),
                             ),
@@ -230,7 +248,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               child: Container(
                                 width: 54,
                                 height: 54,
-                                color: const Color(0xFFF1F5F9),
+                                color: const Color(0xFFE6C17A),
                                 child: Image.asset(
                                   'asset/chronos_ultra_2.jpg',
                                   fit: BoxFit.cover,
@@ -247,7 +265,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 14.5,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -255,7 +273,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     'Grade 5 Titanium • 49mm Cellular',
                                     style: GoogleFonts.literata(
                                       fontSize: 11,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -264,7 +282,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ],
@@ -281,7 +299,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFEAF5FF),
+                                  color: const Color(0xFFE6C17A),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
                                 child: Row(
@@ -289,7 +307,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     const Icon(
                                       Icons.edit_outlined,
                                       size: 13,
-                                      color: Color(0xFF00344B),
+                                      color: Color(0xFF0D1B2A),
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
@@ -297,7 +315,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFF00344B),
+                                        color: const Color(0xFF0D1B2A),
                                       ),
                                     ),
                                   ],
@@ -320,7 +338,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 38,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           const SizedBox(width: 6),
@@ -329,7 +347,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                         ],
@@ -342,7 +360,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                           (index) => const Icon(
                             Icons.star_rounded,
                             size: 19,
-                            color: Color(0xFF8B6B2B),
+                            color: Color(0xFFB8860B),
                           ),
                         ),
                       ),
@@ -352,7 +370,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                         'Based on 420 verified reviews',
                         style: GoogleFonts.literata(
                           fontSize: 12,
-                          color: const Color(0xFF718096),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -363,7 +381,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3EEE4),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -372,7 +390,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                             const Icon(
                               Icons.check_circle_outline_rounded,
                               size: 13,
-                              color: Color(0xFF8B6B2B),
+                              color: Color(0xFFB8860B),
                             ),
                             const SizedBox(width: 5),
                             Text(
@@ -380,7 +398,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF8B6B2B),
+                                color: const Color(0xFFB8860B),
                               ),
                             ),
                           ],
@@ -407,7 +425,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFEAF5FF),
+                              color: const Color(0xFFE6C17A),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Row(
@@ -417,14 +435,14 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                   style: GoogleFonts.literata(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                                 const SizedBox(width: 3),
                                 const Icon(
                                   Icons.keyboard_arrow_down_rounded,
                                   size: 15,
-                                  color: Color(0xFF00344B),
+                                  color: Color(0xFF0D1B2A),
                                 ),
                               ],
                             ),
@@ -437,20 +455,20 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Row(
                               children: [
                                 const Icon(Icons.check_rounded,
-                                    size: 13, color: Colors.white),
+                                    size: 13, color: Color(0xFFF5EBDD)),
                                 const SizedBox(width: 4),
                                 Text(
                                   'Verified Only',
                                   style: GoogleFonts.literata(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    color: const Color(0xFFF5EBDD),
                                   ),
                                 ),
                               ],
@@ -464,7 +482,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFEAF5FF),
+                              color: const Color(0xFFE6C17A),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Text(
@@ -472,7 +490,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xFF00344B),
+                                color: const Color(0xFF0D1B2A),
                               ),
                             ),
                           ),
@@ -491,11 +509,11 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: const Color(0xFFF5EBDD),
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color(0xFF00344B)
+                                  color: const Color(0xFF0D1B2A)
                                       .withValues(alpha: 0.04),
                                   blurRadius: 10,
                                   offset: const Offset(0, 3),
@@ -511,7 +529,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                       width: 34,
                                       height: 34,
                                       decoration: const BoxDecoration(
-                                        color: Color(0xFFD9ECFE),
+                                        color: Color(0xFFE6C17A),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Center(
@@ -520,7 +538,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                           style: GoogleFonts.literata(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                         ),
                                       ),
@@ -535,14 +553,14 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                           style: GoogleFonts.domine(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                         ),
                                         Text(
                                           r['time'] as String,
                                           style: GoogleFonts.literata(
                                             fontSize: 10,
-                                            color: const Color(0xFF718096),
+                                            color: const Color(0xFF1B365D),
                                           ),
                                         ),
                                       ],
@@ -554,7 +572,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                         vertical: 3,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFEAF5FF),
+                                        color: const Color(0xFFE6C17A),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Row(
@@ -562,7 +580,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                           const Icon(
                                             Icons.verified_user_outlined,
                                             size: 11,
-                                            color: Color(0xFF00344B),
+                                            color: Color(0xFF0D1B2A),
                                           ),
                                           const SizedBox(width: 4),
                                           Text(
@@ -570,7 +588,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                             style: GoogleFonts.literata(
                                               fontSize: 9.5,
                                               fontWeight: FontWeight.w600,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                         ],
@@ -590,7 +608,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                               ? Icons.star_rounded
                                               : Icons.star_border_rounded,
                                           size: 15,
-                                          color: const Color(0xFF8B6B2B),
+                                          color: const Color(0xFFB8860B),
                                         ),
                                       ),
                                     ),
@@ -599,7 +617,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                       '• ${r['specs']}',
                                       style: GoogleFonts.literata(
                                         fontSize: 10.5,
-                                        color: const Color(0xFF718096),
+                                        color: const Color(0xFF1B365D),
                                       ),
                                     ),
                                   ],
@@ -611,7 +629,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                   style: GoogleFonts.domine(
                                     fontSize: 13.5,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF00344B),
+                                    color: const Color(0xFF0D1B2A),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -619,7 +637,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                   r['body'] as String,
                                   style: GoogleFonts.literata(
                                     fontSize: 12,
-                                    color: const Color(0xFF4A5568),
+                                    color: const Color(0xFF1B365D),
                                     height: 1.4,
                                   ),
                                 ),
@@ -631,7 +649,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                       'Was this review helpful?',
                                       style: GoogleFonts.literata(
                                         fontSize: 10.5,
-                                        color: const Color(0xFF718096),
+                                        color: const Color(0xFF1B365D),
                                       ),
                                     ),
                                     const Spacer(),
@@ -652,7 +670,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                           vertical: 5,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFEAF5FF),
+                                          color: const Color(0xFFE6C17A),
                                           borderRadius:
                                               BorderRadius.circular(14),
                                         ),
@@ -661,7 +679,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                             const Icon(
                                               Icons.thumb_up_alt_outlined,
                                               size: 13,
-                                              color: Color(0xFF00344B),
+                                              color: Color(0xFF0D1B2A),
                                             ),
                                             const SizedBox(width: 4),
                                             Text(
@@ -669,7 +687,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                               style: GoogleFonts.literata(
                                                 fontSize: 10.5,
                                                 fontWeight: FontWeight.w600,
-                                                color: const Color(0xFF00344B),
+                                                color: const Color(0xFF0D1B2A),
                                               ),
                                             ),
                                           ],
@@ -680,7 +698,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     const Icon(
                                       Icons.flag_outlined,
                                       size: 14,
-                                      color: Color(0xFF718096),
+                                      color: Color(0xFF1B365D),
                                     ),
                                   ],
                                 ),
@@ -704,7 +722,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
               padding: EdgeInsets.fromLTRB(
                   20, 12, 20, bottomPadding > 0 ? bottomPadding + 8 : 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFF5EBDD),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.05),
@@ -724,7 +742,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                         'Have this product?',
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF718096),
+                          color: const Color(0xFF1B365D),
                         ),
                       ),
                       Text(
@@ -732,7 +750,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                         style: GoogleFonts.domine(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF00344B),
+                          color: const Color(0xFF0D1B2A),
                         ),
                       ),
                     ],
@@ -746,8 +764,8 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                         AppNavigator.toWriteReviews(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00344B),
-                        foregroundColor: Colors.white,
+                        backgroundColor: const Color(0xFF0D1B2A),
+                        foregroundColor: const Color(0xFFF5EBDD),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(22),
                         ),
@@ -793,12 +811,12 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
               style: GoogleFonts.literata(
                 fontSize: 10.5,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF4A5568),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ),
           const SizedBox(width: 4),
-          const Icon(Icons.star_rounded, size: 12, color: Color(0xFF718096)),
+          const Icon(Icons.star_rounded, size: 12, color: Color(0xFF1B365D)),
           const SizedBox(width: 8),
 
           Expanded(
@@ -806,12 +824,12 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
               borderRadius: BorderRadius.circular(4),
               child: Container(
                 height: 6,
-                color: const Color(0xFFEAF5FF),
+                color: const Color(0xFFE6C17A),
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
                   widthFactor: fillRatio,
                   child: Container(
-                    color: const Color(0xFF00344B),
+                    color: const Color(0xFF0D1B2A),
                   ),
                 ),
               ),
@@ -826,7 +844,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
               textAlign: TextAlign.end,
               style: GoogleFonts.literata(
                 fontSize: 10,
-                color: const Color(0xFF718096),
+                color: const Color(0xFF1B365D),
               ),
             ),
           ),

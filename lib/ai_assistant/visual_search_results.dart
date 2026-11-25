@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -59,8 +59,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': '45mm GPS • Aluminum',
       'price': '₹24,999.00',
       'tag': '94% Match',
-      'tagBg': const Color(0xFFD9ECFE),
-      'tagColor': const Color(0xFF00344B),
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFF0D1B2A),
       'image': 'asset/chronos_watch_x.jpg',
     },
     {
@@ -69,8 +69,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Titanium Slate • 256GB',
       'price': '₹74,999.00',
       'tag': 'Paired Device',
-      'tagBg': const Color(0xFFF3EEE4),
-      'tagColor': const Color(0xFF8B6B2B),
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFFB8860B),
       'image': 'asset/apex_fold_buds_pro.jpg',
     },
     {
@@ -79,8 +79,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Dual USB-C • Compact',
       'price': '₹3,999.00',
       'tag': 'OEM Accessory',
-      'tagBg': const Color(0xFFD9ECFE),
-      'tagColor': const Color(0xFF00344B),
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFF0D1B2A),
       'image': 'asset/carousel_fast_gan_charger.jpg',
     },
     {
@@ -89,8 +89,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Spatial Audio • 40h Battery',
       'price': '₹20,699.00',
       'tag': 'Eco Match',
-      'tagBg': const Color(0xFFD9ECFE),
-      'tagColor': const Color(0xFF00344B),
+      'tagBg': const Color(0xFFE6C17A),
+      'tagColor': const Color(0xFF0D1B2A),
       'image': 'asset/aura_anc_4_pro.jpg',
     },
   ];
@@ -104,13 +104,13 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5FAFF),
+        systemNavigationBarColor: Color(0xFFFDFBCF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5FAFF),
+      backgroundColor: const Color(0xFFFDFBCF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -129,7 +129,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF00344B),
+                      color: Color(0xFF0D1B2A),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -144,7 +144,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                       style: GoogleFonts.domine(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF00344B),
+                        color: const Color(0xFF0D1B2A),
                       ),
                     ),
                   ),
@@ -157,7 +157,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         icon: const Icon(
                           Icons.notifications_none_rounded,
                           size: 23,
-                          color: Color(0xFF2D3748),
+                          color: Color(0xFF1B365D),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -194,11 +194,11 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFF5EBDD),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                      color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                       blurRadius: 10,
                       offset: const Offset(0, 3),
                     ),
@@ -214,7 +214,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                           child: Container(
                             width: 62,
                             height: 62,
-                            color: const Color(0xFFF1F5F9),
+                            color: const Color(0xFFE6C17A),
                             child: Image.asset(
                               'asset/chronos_ultra_2.jpg',
                               fit: BoxFit.cover,
@@ -228,14 +228,14 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             width: 20,
                             height: 20,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                               shape: BoxShape.circle,
                             ),
                             child: const Center(
                               child: Icon(
                                 Icons.crop_free_rounded,
                                 size: 12,
-                                color: Colors.white,
+                                color: Color(0xFFF5EBDD),
                               ),
                             ),
                           ),
@@ -254,7 +254,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                               fontSize: 9.5,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.8,
-                              color: const Color(0xFF718096),
+                              color: const Color(0xFF1B365D),
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -263,7 +263,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             style: GoogleFonts.domine(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                              color: const Color(0xFF0D1B2A),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -275,7 +275,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   vertical: 3,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFF3EEE4),
+                                  color: const Color(0xFFE6C17A),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -283,7 +283,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   style: GoogleFonts.literata(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
-                                    color: const Color(0xFF8B6B2B),
+                                    color: const Color(0xFFB8860B),
                                   ),
                                 ),
                               ),
@@ -295,7 +295,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     const Icon(
                                       Icons.camera_alt_outlined,
                                       size: 13,
-                                      color: Color(0xFF718096),
+                                      color: Color(0xFF1B365D),
                                     ),
                                     const SizedBox(width: 3),
                                     Text(
@@ -303,7 +303,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w500,
-                                        color: const Color(0xFF718096),
+                                        color: const Color(0xFF1B365D),
                                       ),
                                     ),
                                   ],
@@ -348,8 +348,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF00344B)
-                              : const Color(0xFFEAF5FF),
+                              ? const Color(0xFF0D1B2A)
+                              : const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Center(
@@ -360,8 +360,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                               fontWeight:
                                   isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: isSelected
-                                  ? Colors.white
-                                  : const Color(0xFF00344B),
+                                  ? const Color(0xFFF5EBDD)
+                                  : const Color(0xFF0D1B2A),
                             ),
                           ),
                         ),
@@ -390,11 +390,11 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color(0xFFF5EBDD),
                           borderRadius: BorderRadius.circular(22),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF00344B).withValues(alpha: 0.04),
+                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -411,7 +411,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     vertical: 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFD9ECFE),
+                                    color: const Color(0xFFE6C17A),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
@@ -419,7 +419,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                 ),
@@ -427,7 +427,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                 const Icon(
                                   Icons.favorite_border_rounded,
                                   size: 18,
-                                  color: Color(0xFF718096),
+                                  color: Color(0xFF1B365D),
                                 ),
                               ],
                             ),
@@ -441,7 +441,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   child: Container(
                                     width: 100,
                                     height: 100,
-                                    color: const Color(0xFFF1F5F9),
+                                    color: const Color(0xFFE6C17A),
                                     child: Image.asset(
                                       'asset/chronos_ultra_2.jpg',
                                       fit: BoxFit.cover,
@@ -460,7 +460,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                         style: GoogleFonts.domine(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF00344B),
+                                          color: const Color(0xFF0D1B2A),
                                         ),
                                       ),
                                       const SizedBox(height: 3),
@@ -468,7 +468,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                         '49mm Cellular • Grade 5 Titanium',
                                         style: GoogleFonts.literata(
                                           fontSize: 11.5,
-                                          color: const Color(0xFF718096),
+                                          color: const Color(0xFF1B365D),
                                         ),
                                       ),
                                       const SizedBox(height: 8),
@@ -479,7 +479,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                             style: GoogleFonts.domine(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF00344B),
+                                              color: const Color(0xFF0D1B2A),
                                             ),
                                           ),
                                           const SizedBox(width: 6),
@@ -489,7 +489,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                               fontSize: 11.5,
                                               decoration:
                                                   TextDecoration.lineThrough,
-                                              color: const Color(0xFF718096),
+                                              color: const Color(0xFF1B365D),
                                             ),
                                           ),
                                         ],
@@ -512,8 +512,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                       productId: 'chronos_ultra_2');
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF00344B),
-                                  foregroundColor: Colors.white,
+                                  backgroundColor: const Color(0xFF0D1B2A),
+                                  foregroundColor: const Color(0xFFF5EBDD),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(22),
                                   ),
@@ -544,33 +544,47 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                       // Section Title
                       Row(
                         children: [
-                          Text(
-                            'MATCHED DEVICES & GEAR',
-                            style: GoogleFonts.domine(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w700,
-                              color: const Color(0xFF00344B),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    'MATCHED DEVICES & GEAR',
+                                    style: GoogleFonts.domine(
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFF0D1B2A),
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '(4 results)',
+                                  style: GoogleFonts.literata(
+                                    fontSize: 11,
+                                    color: const Color(0xFF1B365D),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(width: 6),
-                          Text(
-                            '(4 results)',
-                            style: GoogleFonts.literata(
-                              fontSize: 12,
-                              color: const Color(0xFF718096),
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(Icons.bolt_rounded,
-                              size: 14, color: Color(0xFF00344B)),
-                          const SizedBox(width: 2),
-                          Text(
-                            'Real-Time Catalog',
-                            style: GoogleFonts.literata(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF00344B),
-                            ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.bolt_rounded,
+                                  size: 14, color: Color(0xFF0D1B2A)),
+                              const SizedBox(width: 2),
+                              Text(
+                                'Real-Time Catalog',
+                                style: GoogleFonts.literata(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w500,
+                                  color: const Color(0xFF0D1B2A),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -582,11 +596,12 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                            SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 14,
-                          childAspectRatio: 0.68,
+                          childAspectRatio: ((mediaQuery.size.width - 32 - 12) / 2) /
+                              (((mediaQuery.size.width - 32 - 12) / 2 / 1.15) + 85.0),
                         ),
                         itemCount: _matchedProducts.length,
                         itemBuilder: (context, index) {
@@ -599,11 +614,11 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: const Color(0xFFF5EBDD),
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF00344B)
+                                    color: const Color(0xFF0D1B2A)
                                         .withValues(alpha: 0.04),
                                     blurRadius: 10,
                                     offset: const Offset(0, 3),
@@ -628,7 +643,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                             errorBuilder:
                                                 (context, error, stackTrace) =>
                                                     Container(
-                                              color: const Color(0xFFF1F5F9),
+                                              color: const Color(0xFFE6C17A),
                                             ),
                                           ),
                                           Positioned(
@@ -662,7 +677,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                             child: Icon(
                                               Icons.favorite_border_rounded,
                                               size: 16,
-                                              color: Color(0xFF718096),
+                                              color: Color(0xFF1B365D),
                                             ),
                                           ),
                                         ],
@@ -681,7 +696,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                           style: GoogleFonts.domine(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF00344B),
+                                            color: const Color(0xFF0D1B2A),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -691,7 +706,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                           p['specs'] as String,
                                           style: GoogleFonts.literata(
                                             fontSize: 10.5,
-                                            color: const Color(0xFF718096),
+                                            color: const Color(0xFF1B365D),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -706,21 +721,21 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                               style: GoogleFonts.domine(
                                                 fontSize: 13.5,
                                                 fontWeight: FontWeight.w700,
-                                                color: const Color(0xFF00344B),
+                                                color: const Color(0xFF0D1B2A),
                                               ),
                                             ),
                                             Container(
                                               width: 26,
                                               height: 26,
                                               decoration: const BoxDecoration(
-                                                color: Color(0xFFEAF5FF),
+                                                color: Color(0xFFE6C17A),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: const Center(
                                                 child: Icon(
                                                   Icons.add_rounded,
                                                   size: 16,
-                                                  color: Color(0xFF00344B),
+                                                  color: Color(0xFF0D1B2A),
                                                 ),
                                               ),
                                             ),
@@ -743,7 +758,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEAF5FF),
+                          color: const Color(0xFFE6C17A),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Row(
@@ -751,7 +766,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             const Icon(
                               Icons.manage_search_rounded,
                               size: 19,
-                              color: Color(0xFF00344B),
+                              color: Color(0xFF0D1B2A),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
@@ -763,14 +778,14 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     style: GoogleFonts.domine(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF00344B),
+                                      color: const Color(0xFF0D1B2A),
                                     ),
                                   ),
                                   Text(
                                     'Refine with text query or adjust crop box',
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
-                                      color: const Color(0xFF718096),
+                                      color: const Color(0xFF1B365D),
                                     ),
                                   ),
                                 ],
@@ -783,8 +798,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   AppNavigator.toSearchOverlay(context);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF00344B),
-                                  foregroundColor: Colors.white,
+                                  backgroundColor: const Color(0xFF0D1B2A),
+                                  foregroundColor: const Color(0xFFF5EBDD),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 14),
                                   shape: RoundedRectangleBorder(
