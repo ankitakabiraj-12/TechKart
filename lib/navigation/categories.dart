@@ -90,6 +90,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     'gaming-accessories': 'Desk pads, ultra-light mouse skates & headset stands',
     'photo-video-accessories': 'Carbon fiber tripods, studio backdrops & camera cages',
     'other-electronics': 'Specialized hardware devices & experimental electronics',
+    'tablets-ereaders': 'Flagship iPads, Android tablets & Kindle e-readers',
+    'wearable-fitness-electronics': 'Titanium GPS smartwatches, fitness bands & biometric rings',
+    'cooling-air-treatment': 'Inverter split ACs, air purifiers & BLDC fans',
+    'washing-cleaning-appliances': 'Front load washers, smart dishwashers & robot vacuums',
+    'refrigerators-freezers': 'Multi-door refrigerators, convertible freezers & mini bars',
+    'personal-care-electronics': 'Precision trimmers, sonic toothbrushes & ionic hair dryers',
+    'electronic-toys-gadgets': 'Programmable robotics, STEM kits & RC quadcopters',
+    'streaming-content-creation': 'Creator ring lights, capture cards & streaming decks',
+    'automotive-accessories': 'Dash cams, tire pressure monitors & wireless CarPlay kits',
   };
 
   static const Map<String, String> _tags = {
