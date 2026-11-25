@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import 'api_config.dart';
@@ -341,7 +342,7 @@ class ApiClient {
   }) async {
     final usesLoopback =
         _baseUrl.contains('127.0.0.1') || _baseUrl.contains('localhost');
-    if (!Platform.isAndroid || !usesLoopback) return null;
+    if (kIsWeb || !Platform.isAndroid || !usesLoopback) return null;
 
     try {
       final fallbackUri = Uri.parse(

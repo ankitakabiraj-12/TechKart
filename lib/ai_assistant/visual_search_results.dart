@@ -601,7 +601,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 14,
                           childAspectRatio: ((mediaQuery.size.width - 32 - 12) / 2) /
-                              (((mediaQuery.size.width - 32 - 12) / 2 / 1.15) + 85.0),
+                              (((mediaQuery.size.width - 32 - 12) / 2 / 1.15) + 98.0),
                         ),
                         itemCount: _matchedProducts.length,
                         itemBuilder: (context, index) {

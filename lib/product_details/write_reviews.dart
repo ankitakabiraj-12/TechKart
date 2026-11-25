@@ -1,4 +1,5 @@
 ﻿import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
   late final TextEditingController _reviewController;
 
   static bool get _isTestEnvironment =>
-      Platform.environment.containsKey('FLUTTER_TEST');
+      !kIsWeb && Platform.environment.containsKey('FLUTTER_TEST');
 
   final Set<String> _selectedTags = {
     'Build Quality',

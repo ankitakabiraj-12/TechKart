@@ -31,7 +31,7 @@ class ApiConfig {
     if (kIsWeb) {
       return 'http://127.0.0.1:$phpBuiltInPort/api/v1';
     }
-    if (Platform.isAndroid) {
+    if (!kIsWeb && Platform.isAndroid) {
       return 'http://127.0.0.1:$phpBuiltInPort/api/v1';
     }
     return 'http://127.0.0.1:$phpBuiltInPort/api/v1';
