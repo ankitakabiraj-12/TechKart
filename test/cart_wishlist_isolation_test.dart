@@ -90,7 +90,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ShoppingCartScreen(),
+            body: ShoppingCartScreen(initialItems: const []),
           ),
         ),
       );

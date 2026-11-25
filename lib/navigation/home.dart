@@ -576,13 +576,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
-                                          banner['buttonText']!,
-                                          style: GoogleFonts.literata(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w700,
-                                            color: const Color(0xFFF5EBDD),
-                                            letterSpacing: 0.2,
+                                        Flexible(
+                                          child: Text(
+                                            banner['buttonText']!,
+                                            style: GoogleFonts.literata(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w700,
+                                              color: const Color(0xFFF5EBDD),
+                                              letterSpacing: 0.2,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         const SizedBox(width: 8),
@@ -1323,7 +1326,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 3),
-                  Row(
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 6,
+                    runSpacing: 2,
                     children: [
                       Text(
                         price,
@@ -1333,7 +1339,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color(0xFF0D1B2A),
                         ),
                       ),
-                      const SizedBox(width: 6),
                       Text(
                         mrp,
                         style: GoogleFonts.literata(
@@ -1370,14 +1375,18 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Value 365',
-                style: GoogleFonts.domine(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+              Expanded(
+                child: Text(
+                  'Value 365',
+                  style: GoogleFonts.domine(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF0D1B2A),
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -1790,11 +1799,13 @@ class _HomeScreenState extends State<HomeScreen> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: feedProducts.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 14,
-            childAspectRatio: 0.60,
+            childAspectRatio: MediaQuery.of(context).size.width < 360
+                ? 0.52
+                : (MediaQuery.of(context).size.width < 400 ? 0.56 : 0.59),
           ),
           itemBuilder: (context, index) {
             final prod = feedProducts[index];
@@ -1923,19 +1934,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // Rating pill
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          rating,
-                          style: GoogleFonts.literata(
-                            fontSize: 9.5,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFF166534),
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE6C17A),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            rating,
+                            style: GoogleFonts.literata(
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF166534),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
@@ -1954,7 +1970,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
-                  Row(
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 5,
+                    runSpacing: 2,
                     children: [
                       Text(
                         price,
@@ -1964,7 +1983,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color(0xFF0D1B2A),
                         ),
                       ),
-                      const SizedBox(width: 5),
                       Text(
                         mrp,
                         style: GoogleFonts.literata(

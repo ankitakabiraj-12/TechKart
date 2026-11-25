@@ -252,6 +252,14 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                 child: Image.asset(
                                   'asset/chronos_ultra_2.jpg',
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => Container(
+                                    color: const Color(0xFFE6C17A),
+                                    child: const Icon(
+                                      Icons.watch_outlined,
+                                      color: Color(0xFF0D1B2A),
+                                      size: 24,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

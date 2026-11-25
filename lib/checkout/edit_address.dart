@@ -115,6 +115,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               child: Form(
                 key: _formKey,
                 child: ListView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   children: [
                     _buildStepPillHeader(),

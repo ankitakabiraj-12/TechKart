@@ -361,6 +361,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
               position: _slideAnimation,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(

@@ -81,31 +81,21 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           filled: false,
           fillColor: Colors.transparent,
           focusColor: Colors.transparent,
           hoverColor: Colors.transparent,
-          hintStyle: const TextStyle(color: Color(0xFF1B365D)),
-          labelStyle: const TextStyle(color: Color(0xFF1B365D)),
-          prefixIconColor: const Color(0xFF1B365D),
-          suffixIconColor: const Color(0xFF1B365D),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE6C17A)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE6C17A)),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE6C17A)),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE6C17A)),
-          ),
+          hintStyle: TextStyle(color: Color(0xFF1B365D)),
+          labelStyle: TextStyle(color: Color(0xFF1B365D)),
+          prefixIconColor: Color(0xFF1B365D),
+          suffixIconColor: Color(0xFF1B365D),
+          border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

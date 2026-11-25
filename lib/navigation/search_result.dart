@@ -147,6 +147,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         search: widget.subcategoryId != null ? null : (widget.query.isNotEmpty ? widget.query : null),
       );
 
+      if (!mounted) return;
+
       if (response.isSuccess && response.data != null && response.data!.isNotEmpty) {
         final products = response.data!;
         setState(() {

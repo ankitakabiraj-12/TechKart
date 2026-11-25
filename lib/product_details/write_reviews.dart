@@ -257,6 +257,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             _buildAppBar(),
             Expanded(
               child: ListView(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   _buildProductHeaderCard(),

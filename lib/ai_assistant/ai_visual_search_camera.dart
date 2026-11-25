@@ -180,10 +180,12 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
         await _cameraController!.setFlashMode(
           newFlashState ? FlashMode.torch : FlashMode.off,
         );
+        if (!mounted) return;
         setState(() {
           _isFlashOn = newFlashState;
         });
       } catch (e) {
+        if (!mounted) return;
         setState(() {
           _isFlashOn = !_isFlashOn;
         });
@@ -238,6 +240,7 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
     if (_cameraController != null && _cameraController!.value.isInitialized) {
       try {
         final XFile file = await _cameraController!.takePicture();
+        if (!mounted) return;
         setState(() {
           _capturedImagePath = file.path;
         });
@@ -245,6 +248,8 @@ class _AiVisualSearchCameraScreenState extends State<AiVisualSearchCameraScreen>
         debugPrint('Error taking picture: $e');
       }
     }
+
+    if (!mounted) return;
 
     _showVisualRecognitionResult(
       title: 'Chronos Titanium 46mm GPS',

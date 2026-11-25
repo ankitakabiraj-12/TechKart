@@ -200,6 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _buildAppBar(),
             Expanded(
               child: ListView(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 12,

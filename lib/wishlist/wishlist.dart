@@ -431,15 +431,17 @@ class _WishlistScreenState extends State<WishlistScreen> {
                   ),
                   const SizedBox(width: 8),
 
-                  Text(
-                    'Wishlist',
-                    style: GoogleFonts.domine(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                  Expanded(
+                    child: Text(
+                      'Wishlist',
+                      style: GoogleFonts.domine(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF0D1B2A),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const Spacer(),
 
                   IconButton(
                     onPressed: () => AppNavigator.toSearchOverlay(context),

@@ -59,11 +59,19 @@ void main() {
   group('WishlistScreen UI & Interaction Tests', () {
     for (final width in [320.0, 360.0, 390.0, 412.0, 480.0]) {
       testWidgets('Renders WishlistScreen without overflow on width $width', (WidgetTester tester) async {
+        FlutterErrorDetails? caughtDetails;
+        final originalOnError = FlutterError.onError;
+        FlutterError.onError = (details) {
+          caughtDetails = details;
+          originalOnError?.call(details);
+        };
+
         tester.view.physicalSize = Size(width * 2.0, 844 * 2.0);
         tester.view.devicePixelRatio = 2.0;
         addTearDown(() {
           tester.view.resetPhysicalSize();
           tester.view.resetDevicePixelRatio();
+          FlutterError.onError = originalOnError;
         });
 
         await tester.pumpWidget(

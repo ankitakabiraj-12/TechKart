@@ -15,6 +15,7 @@ class ShoppingCartScreen extends StatefulWidget {
 
   final bool showBottomNav;
   final ValueChanged<int>? onNavTabSelected;
+  final List<Map<String, dynamic>>? initialItems;
 
   const ShoppingCartScreen({
     super.key,
@@ -23,6 +24,7 @@ class ShoppingCartScreen extends StatefulWidget {
     this.initialTabIndex = 3,
     this.showBottomNav = true,
     this.onNavTabSelected,
+    this.initialItems,
   });
 
   @override
@@ -41,28 +43,32 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   void initState() {
     super.initState();
-    _items = [
-      {
-        'id': 'chronos_ultra_2',
-        'badge': 'SALE',
-        'title': 'Chronos Ultra 2 (49mm GPS)',
-        'subtitle': 'Grade 5 Titanium • Midnight Band',
-        'price': 35499.00,
-        'originalPrice': 41499.00,
-        'quantity': 1,
-        'image': 'asset/chronos_ultra_2.jpg',
-      },
-      {
-        'id': 'voltfast_65w_gan',
-        'badge': 'BUNDLE',
-        'title': 'VoltFast 65W GaN Charger',
-        'subtitle': 'Space Grey • Dual USB-C',
-        'price': 3999.00,
-        'originalPrice': 4999.00,
-        'quantity': 1,
-        'image': 'asset/carousel_fast_gan_charger.jpg',
-      },
-    ];
+    if (widget.initialItems != null) {
+      _items = List.from(widget.initialItems!);
+    } else {
+      _items = [
+        {
+          'id': 'chronos_ultra_2',
+          'badge': 'SALE',
+          'title': 'Chronos Ultra 2 (49mm GPS)',
+          'subtitle': 'Grade 5 Titanium • Midnight Band',
+          'price': 35499.00,
+          'originalPrice': 41499.00,
+          'quantity': 1,
+          'image': 'asset/chronos_ultra_2.jpg',
+        },
+        {
+          'id': 'voltfast_65w_gan',
+          'badge': 'BUNDLE',
+          'title': 'VoltFast 65W GaN Charger',
+          'subtitle': 'Space Grey • Dual USB-C',
+          'price': 3999.00,
+          'originalPrice': 4999.00,
+          'quantity': 1,
+          'image': 'asset/carousel_fast_gan_charger.jpg',
+        },
+      ];
+    }
   }
 
   @override
@@ -126,27 +132,29 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           children: [
             _buildAppBar(),
             Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                children: [
-                  _buildHeaderRow(),
-                  const SizedBox(height: 14),
-                  _buildFreeExpressBanner(),
-                  const SizedBox(height: 16),
-                  ..._items.asMap().entries.map((entry) {
-                    return _buildCartItemCard(entry.value, entry.key);
-                  }),
-                  const SizedBox(height: 14),
-                  _buildCouponSection(),
-                  const SizedBox(height: 16),
-                  _buildPriceBreakdownCard(),
-                  const SizedBox(height: 20),
-                  _buildCheckoutButton(),
-                  const SizedBox(height: 12),
-                  _buildTrustSafetyNote(),
-                  const SizedBox(height: 70),
-                ],
-              ),
+              child: _items.isEmpty
+                  ? _buildEmptyState()
+                  : ListView(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      children: [
+                        _buildHeaderRow(),
+                        const SizedBox(height: 14),
+                        _buildFreeExpressBanner(),
+                        const SizedBox(height: 16),
+                        ..._items.asMap().entries.map((entry) {
+                          return _buildCartItemCard(entry.value, entry.key);
+                        }),
+                        const SizedBox(height: 14),
+                        _buildCouponSection(),
+                        const SizedBox(height: 16),
+                        _buildPriceBreakdownCard(),
+                        const SizedBox(height: 20),
+                        _buildCheckoutButton(),
+                        const SizedBox(height: 12),
+                        _buildTrustSafetyNote(),
+                        const SizedBox(height: 70),
+                      ],
+                    ),
             ),
             if (widget.showBottomNav)
               TechKartBottomNavBar(
@@ -860,6 +868,81 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // EMPTY CART STATE
+  // ---------------------------------------------------------------------------
+  Widget _buildEmptyState() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: const BoxDecoration(
+                color: Color(0xFFE6C17A),
+                shape: BoxShape.circle,
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 38,
+                  color: Color(0xFF0D1B2A),
+                ),
+              ),
+            ),
+            const SizedBox(height: 18),
+            Text(
+              'Your shopping cart is empty',
+              style: GoogleFonts.domine(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF0D1B2A),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Explore our curated collection of tech and gadgets.',
+              style: GoogleFonts.literata(
+                fontSize: 13,
+                color: const Color(0xFF1B365D),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                AppNavigator.toHome(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0D1B2A),
+                foregroundColor: const Color(0xFFF5EBDD),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 14,
+                ),
+              ),
+              child: Text(
+                'Start Shopping',
+                style: GoogleFonts.literata(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

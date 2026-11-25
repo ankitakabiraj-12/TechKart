@@ -185,6 +185,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
               position: _slideAnimation,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Form(

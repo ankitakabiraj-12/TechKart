@@ -73,6 +73,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
             _buildAppBar(),
             Expanded(
               child: ListView(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   _buildOrderEligibilityPills(),

@@ -31,7 +31,7 @@ void main() {
       expect(sessionManager.userName, equals('Tanmoy Das'));
       expect(sessionManager.userEmail, equals('tanmoy.das@example.com'));
       expect(sessionManager.userGender, equals('male'));
-      expect(sessionManager.avatarAssetPath, equals('asset/male_avatar.jpg'));
+      expect(sessionManager.avatarAssetPath, equals('assets/male_avatar.png'));
 
       // Verify persistent secure storage has User 1 data
       final rawUser1 = await TokenStorage().getUserData();
@@ -45,7 +45,7 @@ void main() {
       final restartedSession1 = SessionManager();
       await restartedSession1.initialize();
       expect(restartedSession1.userName, equals('Tanmoy Das'));
-      expect(restartedSession1.avatarAssetPath, equals('asset/male_avatar.jpg'));
+      expect(restartedSession1.avatarAssetPath, equals('assets/male_avatar.png'));
 
       // --- USER 1 LOGOUT ---
       await restartedSession1.clearSession();
@@ -69,7 +69,7 @@ void main() {
       expect(sessionManager.userName, equals('Riya Sen'));
       expect(sessionManager.userEmail, equals('riya.sen@example.com'));
       expect(sessionManager.userGender, equals('female'));
-      expect(sessionManager.avatarAssetPath, equals('asset/female_avatar.jpg'));
+      expect(sessionManager.avatarAssetPath, equals('assets/female_avatar.png'));
 
       // Verify storage holds User 2 data
       final rawUser2 = await TokenStorage().getUserData();
@@ -82,7 +82,7 @@ void main() {
       final restartedSession2 = SessionManager();
       await restartedSession2.initialize();
       expect(restartedSession2.userName, equals('Riya Sen'));
-      expect(restartedSession2.avatarAssetPath, equals('asset/female_avatar.jpg'));
+      expect(restartedSession2.avatarAssetPath, equals('assets/female_avatar.png'));
 
       // --- USER 2 LOGOUT ---
       await restartedSession2.clearSession();
