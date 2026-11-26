@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techkart/theme/app_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -117,7 +118,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
+                color: Color(0xFFF7F7F7),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
@@ -190,9 +191,9 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF7F7F7),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +229,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     width: 7,
                     height: 7,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF142D4E),
+                      color: Color(0xFFF7F7F7),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -282,7 +283,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF142D4E),
+                    color: Color(0xFFF7F7F7),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.local_shipping,
@@ -360,7 +361,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +397,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF142D4E),
+                    color: const Color(0xFFF7F7F7),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -424,7 +425,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
+                  color: Color(0xFFF7F7F7),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.inventory_2_outlined,
@@ -458,7 +459,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF142D4E),
+                    color: Color(0xFFF7F7F7),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.phone_outlined,
@@ -561,7 +562,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -661,7 +662,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 decoration: BoxDecoration(
                   color: isActive
                       ? const Color(0xFF142D4E)
-                      : (isDone ? const Color(0xFF142D4E) : const Color(0xFF142D4E)),
+                      : (isDone ? const Color(0xFF000000) : const Color(0xFFF7F7F7)),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -674,7 +675,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: const Color(0xFF142D4E),
+                    color: const Color(0xFFF7F7F7),
                   ),
                 ),
             ],
@@ -703,7 +704,7 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 1.5),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF142D4E),
+                            color: const Color(0xFFF7F7F7),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -755,14 +756,14 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF7F7F7),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.notifications_active_outlined,
@@ -825,8 +826,8 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
                     );
                   },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF142D4E),
-                foregroundColor: const Color(0xFF142D4E),
+        backgroundColor: AppTheme.pureBlack,
+        foregroundColor: AppTheme.pureWhite,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22),
@@ -850,8 +851,8 @@ class _ShipmentTrackingScreenState extends State<ShipmentTrackingScreen> {
             child: ElevatedButton.icon(
               onPressed: () => AppNavigator.toConversationalShoppingAssistant(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF142D4E),
-                foregroundColor: const Color(0xFFF8FAFC),
+        backgroundColor: AppTheme.pureBlack,
+        foregroundColor: AppTheme.pureWhite,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(22),

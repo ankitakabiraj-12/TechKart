@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techkart/theme/app_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -216,7 +217,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
+                color: Color(0xFFF7F7F7),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
@@ -274,7 +275,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           ],
         ),
         const SizedBox(height: 12),
-        const Divider(color: Color(0xFF142D4E), height: 1),
+        const Divider(color: Color(0xFFE2E8F0), height: 1),
       ],
     );
   }
@@ -292,14 +293,14 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           height: 32,
           decoration: BoxDecoration(
             color: isActive
-                ? const Color(0xFF142D4E)
-                : const Color(0xFF142D4E),
+                ? const Color(0xFF000000)
+                : const Color(0xFFF7F7F7),
             shape: BoxShape.circle,
           ),
           child: Icon(
             icon,
             size: 16,
-            color: isActive ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
+            color: isActive ? const Color(0xFFFFFFFF) : const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 4),
@@ -309,7 +310,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             fontSize: 10.5,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.8,
-            color: isActive ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+            color: isActive ? const Color(0xFF000000) : const Color(0xFFF7F7F7),
           ),
         ),
       ],
@@ -320,7 +321,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       width: 44,
       height: 2,
-      color: const Color(0xFF142D4E),
+      color: const Color(0xFFF7F7F7),
     );
   }
 
@@ -334,7 +335,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
-            color: const Color(0xFF142D4E),
+            color: const Color(0xFFF7F7F7),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -394,7 +395,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+          color: isSelected ? const Color(0xFF000000) : const Color(0xFFF7F7F7),
           width: isSelected ? 1.5 : 1,
         ),
         boxShadow: const [
@@ -437,13 +438,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             height: 20,
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? const Color(0xFF142D4E)
-                                  : const Color(0xFFF8FAFC),
+                                  ? const Color(0xFF000000)
+                                  : const Color(0xFFFFFFFF),
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: isSelected
-                                    ? const Color(0xFF142D4E)
-                                    : const Color(0xFF142D4E),
+                                    ? const Color(0xFF000000)
+                                    : const Color(0xFFF7F7F7),
                                 width: 1.5,
                               ),
                             ),
@@ -459,7 +460,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF142D4E),
+                            color: const Color(0xFFF7F7F7),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
@@ -485,7 +486,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2.5),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF142D4E),
+                              color: const Color(0xFFF7F7F7),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -572,7 +573,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF142D4E),
+                          color: const Color(0xFFF7F7F7),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -618,16 +619,16 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFF142D4E),
+          color: const Color(0xFFF7F7F7),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFF142D4E)),
+          
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
+                color: Color(0xFFF7F7F7),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add_location_alt_outlined,
@@ -673,7 +674,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -681,7 +682,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF7F7F7),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(Icons.door_front_door_outlined,
@@ -718,12 +719,12 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: _leaveAtDoor ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
+                color: _leaveAtDoor ? const Color(0xFF000000) : const Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(
                   color: _leaveAtDoor
-                      ? const Color(0xFF142D4E)
-                      : const Color(0xFF142D4E),
+                      ? const Color(0xFF000000)
+                      : const Color(0xFFF7F7F7),
                 ),
               ),
               child: _leaveAtDoor
@@ -775,7 +776,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF142D4E),
+                  color: const Color(0xFFF7F7F7),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -797,8 +798,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             child: ElevatedButton(
               onPressed: _handleProceed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF142D4E),
-                foregroundColor: const Color(0xFFF8FAFC),
+                backgroundColor: AppTheme.pureBlack,
+                foregroundColor: AppTheme.pureWhite,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
