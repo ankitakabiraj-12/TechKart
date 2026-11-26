@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -101,7 +101,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -143,7 +143,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -152,25 +152,25 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Checkout',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
             onPressed: widget.onLockPressed ??
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -205,7 +205,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -215,7 +215,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     width: 6,
                     height: 6,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -226,7 +226,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.5,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -235,13 +235,13 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Row(
               children: [
                 const Icon(Icons.receipt_long_outlined,
-                    size: 13, color: Color(0xFF1B365D)),
+                    size: 13, color: Color(0xFF000000)),
                 const SizedBox(width: 4),
                 Text(
                   'Order #TK-89421',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -272,8 +272,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: isActive
-            ? const Color(0xFFE6C17A)
-            : const Color(0xFFE6C17A),
+            ? const Color(0xFF142D4E)
+            : const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -282,7 +282,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           Icon(
             icon,
             size: 13,
-            color: isActive ? const Color(0xFF0D1B2A) : const Color(0xFFB8860B),
+            color: isActive ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           ),
           const SizedBox(width: 5),
           Text(
@@ -290,7 +290,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             style: GoogleFonts.literata(
               fontSize: 11,
               fontWeight: FontWeight.w700,
-              color: isActive ? const Color(0xFF0D1B2A) : const Color(0xFFB8860B),
+              color: isActive ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
             ),
           ),
         ],
@@ -307,10 +307,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       children: [
         Text(
           'Choose Payment Method',
-          style: GoogleFonts.domine(
+          style: GoogleFonts.literata(
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 4),
@@ -319,7 +319,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             height: 1.35,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],
@@ -333,20 +333,20 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Color(0xFFE6C17A),
+              color: Color(0xFF142D4E),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.shopping_bag_outlined,
-                size: 18, color: Color(0xFF0D1B2A)),
+                size: 18, color: Color(0xFF000000)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -355,17 +355,17 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               children: [
                 Text(
                   '2 Selected Items',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 Text(
                   'Chronos Ultra 2 + VoltFast ...',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -376,10 +376,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             children: [
               Text(
                 '₹${_totalAmount.toStringAsFixed(2)}',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               Row(
@@ -389,11 +389,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     'Details',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const Icon(Icons.keyboard_arrow_down,
-                      size: 14, color: Color(0xFF1B365D)),
+                      size: 14, color: Color(0xFF000000)),
                 ],
               ),
             ],
@@ -412,10 +412,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           width: isSelected ? 1.5 : 1,
         ),
       ),
@@ -430,32 +430,32 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   width: 20,
                   height: 20,
                   decoration: BoxDecoration(
-                    color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                    color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                      color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                       width: 1.5,
                     ),
                   ),
                   child: isSelected
-                      ? const Icon(Icons.check, size: 13, color: Color(0xFFF5EBDD))
+                      ? const Icon(Icons.check, size: 13, color: Color(0xFFF8FAFC))
                       : null,
                 ),
               ),
               const SizedBox(width: 10),
               Text(
                 'Credit / Debit Card',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -463,7 +463,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -472,7 +472,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: const Text(
@@ -480,7 +480,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   style: TextStyle(
                     fontSize: 9.5,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF0D1B2A),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ),
@@ -488,7 +488,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: const Text(
@@ -496,7 +496,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   style: TextStyle(
                     fontSize: 9.5,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                   ),
                 ),
               ),
@@ -509,7 +509,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               'Visa, Mastercard, American Express, RuPay',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -519,7 +519,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -529,14 +529,14 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.credit_card, size: 16, color: Color(0xFF0D1B2A)),
+                          const Icon(Icons.credit_card, size: 16, color: Color(0xFF000000)),
                           const SizedBox(width: 8),
                           Text(
                             'TechKart Platinum',
-                            style: GoogleFonts.domine(
+                            style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -546,7 +546,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -563,7 +563,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 9,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           Text(
@@ -571,7 +571,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -584,7 +584,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 9,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           Text(
@@ -592,7 +592,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -609,7 +609,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               style: GoogleFonts.literata(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
             const SizedBox(height: 6),
@@ -620,9 +620,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   height: 38,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFFE6C17A)),
+                    border: Border.all(color: const Color(0xFF142D4E)),
                   ),
                   child: Row(
                     children: [
@@ -643,7 +643,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           ),
                         ),
                       ),
-                      const Icon(Icons.help_outline, size: 14, color: Color(0xFF1B365D)),
+                      const Icon(Icons.help_outline, size: 14, color: Color(0xFF000000)),
                     ],
                   ),
                 ),
@@ -653,7 +653,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     '3 or 4 digits located on signature strip',
                     style: GoogleFonts.literata(
                       fontSize: 10.5,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -668,14 +668,14 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     width: 18,
                     height: 18,
                     decoration: BoxDecoration(
-                      color: _saveCard ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                      color: _saveCard ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
-                        color: _saveCard ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                        color: _saveCard ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                       ),
                     ),
                     child: _saveCard
-                        ? const Icon(Icons.check, size: 12, color: Color(0xFFF5EBDD))
+                        ? const Icon(Icons.check, size: 12, color: Color(0xFFF8FAFC))
                         : null,
                   ),
                 ),
@@ -684,7 +684,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   'Save card securely for 1-click checkout',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -692,14 +692,14 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                const Icon(Icons.add_card, size: 14, color: Color(0xFF0D1B2A)),
+                const Icon(Icons.add_card, size: 14, color: Color(0xFF000000)),
                 const SizedBox(width: 6),
                 Text(
                   '+ Add New Card',
                   style: GoogleFonts.literata(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -721,10 +721,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+            color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -734,15 +734,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   width: 1.5,
                 ),
               ),
               child: isSelected
-                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF5EBDD))
+                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF8FAFC))
                   : null,
             ),
             const SizedBox(width: 10),
@@ -754,17 +754,17 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     children: [
                       Text(
                         'UPI & Mobile Wallet',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -773,7 +773,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             fontFamily: 'Literata',
                             fontSize: 9.5,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFFB8860B),
+                            color: const Color(0xFF142D4E),
                           ),
                         ),
                       ),
@@ -784,7 +784,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     'Google Pay, PhonePe, Paytm, BHIM UPI',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -793,10 +793,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Container(
               padding: const EdgeInsets.all(6),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.qr_code_scanner, size: 16, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.qr_code_scanner, size: 16, color: Color(0xFF000000)),
             ),
           ],
         ),
@@ -815,10 +815,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+            color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -828,15 +828,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   width: 1.5,
                 ),
               ),
               child: isSelected
-                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF5EBDD))
+                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF8FAFC))
                   : null,
             ),
             const SizedBox(width: 10),
@@ -846,10 +846,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 children: [
                   Text(
                     'Net Banking',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -857,7 +857,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     '50+ authorized commercial & private banks',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -866,10 +866,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Container(
               padding: const EdgeInsets.all(6),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.account_balance_outlined, size: 16, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.account_balance_outlined, size: 16, color: Color(0xFF000000)),
             ),
           ],
         ),
@@ -888,10 +888,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+            color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -901,15 +901,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   width: 1.5,
                 ),
               ),
               child: isSelected
-                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF5EBDD))
+                  ? const Icon(Icons.check, size: 13, color: Color(0xFFF8FAFC))
                   : null,
             ),
             const SizedBox(width: 10),
@@ -921,17 +921,17 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     children: [
                       Text(
                         'Cash on Delivery (COD)',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -940,7 +940,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             fontFamily: 'Literata',
                             fontSize: 9.5,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ),
@@ -951,7 +951,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     'Pay via cash or POS card machine at your doorstep',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -960,10 +960,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             Container(
               padding: const EdgeInsets.all(6),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.payments_outlined, size: 16, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.payments_outlined, size: 16, color: Color(0xFF000000)),
             ),
           ],
         ),
@@ -978,9 +978,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -988,10 +988,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           Container(
             padding: const EdgeInsets.all(6),
             decoration: const BoxDecoration(
-              color: Color(0xFFE6C17A),
+              color: Color(0xFF142D4E),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.verified_user, size: 16, color: Color(0xFF0D1B2A)),
+            child: const Icon(Icons.verified_user, size: 16, color: Color(0xFF000000)),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -1000,10 +1000,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               children: [
                 Text(
                   'Bank-Grade 256-Bit SSL Protection',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -1012,7 +1012,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11,
                     height: 1.35,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -1030,8 +1030,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF5EBDD),
-        border: Border(top: BorderSide(color: Color(0xFFE6C17A), width: 1)),
+        color: Color(0xFFF8FAFC),
+        border: Border(top: BorderSide(color: Color(0xFF142D4E), width: 1)),
         boxShadow: [
           BoxShadow(
             color: Color(0x0A000000),
@@ -1054,15 +1054,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.5,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   Text(
                     '₹${_totalAmount.toStringAsFixed(2)}',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -1074,8 +1074,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   child: ElevatedButton(
                     onPressed: _handlePay,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0D1B2A),
-                      foregroundColor: const Color(0xFFF5EBDD),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFFF8FAFC),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
@@ -1084,7 +1084,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.lock_outline, size: 16, color: Color(0xFFF5EBDD)),
+                        const Icon(Icons.lock_outline, size: 16, color: Color(0xFFF8FAFC)),
                         const SizedBox(width: 8),
                         Text(
                           'Pay ₹${_totalAmount.toStringAsFixed(2)}',
@@ -1094,7 +1094,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
+                        const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF8FAFC)),
                       ],
                     ),
                   ),
@@ -1106,13 +1106,13 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.check_circle_outline, size: 12, color: Color(0xFF1B365D)),
+              const Icon(Icons.check_circle_outline, size: 12, color: Color(0xFF000000)),
               const SizedBox(width: 4),
               Text(
                 'PCI-DSS Level 1 Compliant • Encrypted Checkout',
                 style: GoogleFonts.literata(
                   fontSize: 10.5,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],

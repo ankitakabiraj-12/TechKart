@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/network/api_client.dart';
@@ -162,7 +162,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             'Profile changes saved successfully!',
             style: GoogleFonts.literata(),
           ),
-          backgroundColor: const Color(0xFF0D1B2A),
+          backgroundColor: const Color(0xFF142D4E),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -184,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: GoogleFonts.literata()),
-        backgroundColor: const Color(0xFF0D1B2A),
+        backgroundColor: const Color(0xFF142D4E),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -193,7 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -236,7 +236,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -245,13 +245,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.arrow_back,
                 size: 20,
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
               ),
             ),
           ),
@@ -259,10 +259,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Expanded(
             child: Text(
               'Account',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -270,7 +270,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             icon: const Icon(
               Icons.lock_outline,
               size: 22,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
             onPressed: widget.onLockPressed ??
                 () {
@@ -303,7 +303,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFFE6C17A), width: 2),
+          border: Border.all(color: const Color(0xFF142D4E), width: 2),
         ),
         child: const ProfileAvatar(size: 80),
       ),
@@ -325,14 +325,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
             Text(
               'Legal Name',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -341,16 +341,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
               const Icon(
                 Icons.person_outline,
                 size: 18,
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -359,14 +359,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter your full name',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -390,23 +390,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
               const Icon(
                 Icons.mail_outline,
                 size: 18,
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -416,14 +416,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'name@example.com',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -431,7 +431,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const Icon(
                 Icons.lock_outline,
                 size: 14,
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
               ),
             ],
           ),
@@ -452,29 +452,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
               const Icon(
                 Icons.phone_outlined,
                 size: 18,
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
               ),
               const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -482,7 +482,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -494,14 +494,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: '98765-43210',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -525,7 +525,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 8),
@@ -560,19 +560,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+            color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: isSelected
-                  ? const Color(0xFF0D1B2A)
-                  : const Color(0xFFE6C17A),
+                  ? const Color(0xFF142D4E)
+                  : const Color(0xFF142D4E),
             ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (isSelected) ...[
-                const Icon(Icons.check, size: 14, color: Color(0xFFF5EBDD)),
+                const Icon(Icons.check, size: 14, color: Color(0xFFF8FAFC)),
                 const SizedBox(width: 4),
               ],
               Text(
@@ -580,7 +580,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                  color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF1B365D),
+                  color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
                 ),
               ),
             ],
@@ -600,8 +600,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: ElevatedButton(
         onPressed: _isSaving ? null : _handleSave,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF0D1B2A),
-          foregroundColor: const Color(0xFFF5EBDD),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFFF8FAFC),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -613,13 +613,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 width: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF5EBDD)),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF8FAFC)),
                 ),
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.check, size: 16, color: Color(0xFFF5EBDD)),
+                  const Icon(Icons.check, size: 16, color: Color(0xFFF8FAFC)),
                   const SizedBox(width: 8),
                   Text(
                     'Save Changes',
@@ -646,7 +646,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           style: GoogleFonts.literata(
             fontSize: 12.5,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ),

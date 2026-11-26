@@ -6,6 +6,7 @@ import '../core/network/api_client.dart';
 import '../core/network/catalog_models.dart';
 import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
+import '../theme/app_theme.dart';
 
 /// TechKart Subcategories Browsing Screen
 ///
@@ -182,7 +183,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                 child: Icon(
                   Icons.devices_other_rounded,
                   size: 28,
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                 ),
               ),
             );
@@ -219,7 +220,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
     final filteredList = _getFilteredSubcategories();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: AppTheme.pureWhite,
       body: SafeArea(
         top: false,
         bottom: false,
@@ -245,7 +246,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                     },
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF0D1B2A),
+                      color: AppTheme.primaryText,
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -257,10 +258,10 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                   Expanded(
                     child: Text(
                       _effectiveCategory.name,
-                      style: GoogleFonts.domine(
+                      style: GoogleFonts.literata(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: AppTheme.primaryText,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -278,7 +279,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                       children: [
                         const Icon(
                           Icons.notifications_outlined,
-                          color: Color(0xFF0D1B2A),
+                          color: Color(0xFF000000),
                           size: 24,
                         ),
                         Positioned(
@@ -288,7 +289,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                             width: 7,
                             height: 7,
                             decoration: const BoxDecoration(
-                              color: Color(0xFFE53E3E),
+                              color: Color(0xFFDC2626),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -330,8 +331,9 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE6C17A),
-                        borderRadius: BorderRadius.circular(16),
+                        color: AppTheme.winterMist,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppTheme.borders, width: 1),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -339,7 +341,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                           const Icon(
                             Icons.swap_vert_rounded,
                             size: 14,
-                            color: Color(0xFF1B365D),
+                            color: AppTheme.secondaryText,
                           ),
                           const SizedBox(width: 2),
                           Flexible(
@@ -348,7 +350,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xFF0D1B2A),
+                                color: AppTheme.primaryText,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -357,7 +359,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                           const Icon(
                             Icons.keyboard_arrow_down_rounded,
                             size: 14,
-                            color: Color(0xFF1B365D),
+                            color: AppTheme.secondaryText,
                           ),
                         ],
                       ),
@@ -372,8 +374,9 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
-                      borderRadius: BorderRadius.circular(16),
+                      color: AppTheme.winterMist,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppTheme.borders, width: 1),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -381,7 +384,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                         const Icon(
                           Icons.tune_rounded,
                           size: 13,
-                          color: Color(0xFF1B365D),
+                          color: AppTheme.secondaryText,
                         ),
                         const SizedBox(width: 2),
                         Text(
@@ -389,7 +392,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 10.5,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF0D1B2A),
+                            color: AppTheme.primaryText,
                           ),
                         ),
                         const SizedBox(width: 3),
@@ -399,7 +402,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                             vertical: 1,
                           ),
                           decoration: const BoxDecoration(
-                            color: Color(0xFF1B365D),
+                            color: AppTheme.evergreen,
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: Text(
@@ -407,7 +410,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 9,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFFF5EBDD),
+                              color: AppTheme.pureWhite,
                             ),
                           ),
                         ),
@@ -422,14 +425,14 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                     width: 28,
                     height: 28,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFE6C17A),
+                      color: Color(0xFF142D4E),
                       shape: BoxShape.circle,
                     ),
                     child: const Center(
                       child: Icon(
                         Icons.verified_outlined,
                         size: 14,
-                        color: Color(0xFF1B365D),
+                        color: Color(0xFF000000),
                       ),
                     ),
                   ),
@@ -447,11 +450,11 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
               child: Container(
                 height: 38,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
+                      color: const Color(0xFF000000).withValues(alpha: 0.04),
                       blurRadius: 6,
                       offset: const Offset(0, 2),
                     ),
@@ -466,7 +469,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                   },
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     filled: false,
@@ -474,19 +477,19 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                     hintText: 'Search within ${_effectiveCategory.name}...',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 12.5,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                     prefixIcon: const Icon(
                       Icons.search_rounded,
                       size: 18,
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                     ),
                     suffixIcon: _searchQuery.isNotEmpty
                         ? IconButton(
                             icon: const Icon(
                               Icons.clear_rounded,
                               size: 16,
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                             ),
                             onPressed: () {
                               _searchController.clear();
@@ -536,8 +539,8 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF0D1B2A)
-                              : const Color(0xFFE6C17A),
+                              ? const Color(0xFF142D4E)
+                              : const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
@@ -549,8 +552,8 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                   ? FontWeight.w600
                                   : FontWeight.w500,
                               color: isSelected
-                                  ? const Color(0xFFF5EBDD)
-                                  : const Color(0xFF0D1B2A),
+                                  ? const Color(0xFFF8FAFC)
+                                  : const Color(0xFF142D4E),
                             ),
                           ),
                         ),
@@ -567,14 +570,14 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    const Icon(Icons.corporate_fare_outlined, size: 14, color: Color(0xFF1B365D)),
+                    const Icon(Icons.corporate_fare_outlined, size: 14, color: Color(0xFF000000)),
                     const SizedBox(width: 4),
                     Text(
                       'Popular Brands:',
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -604,9 +607,9 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5EBDD),
+                            color: const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+                            border: Border.all(color: const Color(0xFF142D4E), width: 1),
                           ),
                           child: Center(
                             child: Text(
@@ -614,7 +617,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                           ),
@@ -636,7 +639,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                   ? const Center(
                       child: CircularProgressIndicator(
                         valueColor:
-                            AlwaysStoppedAnimation<Color>(Color(0xFF0D1B2A)),
+                            AlwaysStoppedAnimation<Color>(Color(0xFF142D4E)),
                       ),
                     )
                   : _errorMessage != null
@@ -647,22 +650,22 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                               const Icon(
                                 Icons.cloud_off_rounded,
                                 size: 48,
-                                color: Color(0xFF1B365D),
+                                color: Color(0xFF000000),
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 _errorMessage!,
                                 style: GoogleFonts.literata(
                                   fontSize: 13,
-                                  color: const Color(0xFF1B365D),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                               const SizedBox(height: 16),
                               ElevatedButton(
                                 onPressed: _loadSubcategories,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF0D1B2A),
-                                  foregroundColor: const Color(0xFFF5EBDD),
+                                  backgroundColor: const Color(0xFF142D4E),
+                                  foregroundColor: const Color(0xFFF8FAFC),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
@@ -678,13 +681,13 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                 'No subcategories match "$_searchQuery"',
                                 style: GoogleFonts.literata(
                                   fontSize: 13,
-                                  color: const Color(0xFF1B365D),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             )
                           : RefreshIndicator(
                               onRefresh: _loadSubcategories,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                               child: SingleChildScrollView(
                                 physics: const AlwaysScrollableScrollPhysics(
                                   parent: BouncingScrollPhysics(),
@@ -716,17 +719,19 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                             onTap: () => _onSubcategoryTap(sub),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                color: const Color(0xFFF5EBDD),
+                                                color: AppTheme.pureWhite,
                                                 borderRadius:
-                                                    BorderRadius.circular(20),
+                                                    BorderRadius.circular(12),
+                                                border: Border.all(
+                                                  color: AppTheme.borders,
+                                                  width: 1.0,
+                                                ),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color:
-                                                        const Color(0xFF0D1B2A)
-                                                            .withValues(
-                                                                alpha: 0.04),
-                                                    blurRadius: 10,
-                                                    offset: const Offset(0, 4),
+                                                    color: Colors.black
+                                                        .withValues(alpha: 0.03),
+                                                    blurRadius: 8,
+                                                    offset: const Offset(0, 2),
                                                   ),
                                                 ],
                                               ),
@@ -739,7 +744,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                     borderRadius:
                                                         const BorderRadius
                                                             .vertical(
-                                                      top: Radius.circular(20),
+                                                      top: Radius.circular(12),
                                                     ),
                                                     child: AspectRatio(
                                                       aspectRatio: 1.25,
@@ -783,7 +788,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                                           .w700,
                                                                   color:
                                                                       const Color(
-                                                                    0xFF0D1B2A,
+                                                                    0xFF142D4E,
                                                                   ),
                                                                   letterSpacing:
                                                                       0.4,
@@ -802,7 +807,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                               decoration:
                                                                   const BoxDecoration(
                                                                 color:
-                                                                    Color(0xFFF5EBDD),
+                                                                    Color(0xFFF8FAFC),
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -812,7 +817,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                                       .arrow_forward_ios_rounded,
                                                                   size: 11,
                                                                   color: Color(
-                                                                    0xFF0D1B2A,
+                                                                    0xFF142D4E,
                                                                   ),
                                                                 ),
                                                               ),
@@ -844,7 +849,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                             color: const Color(
-                                                              0xFF0D1B2A,
+                                                              0xFF142D4E,
                                                             ),
                                                           ),
                                                           maxLines: 2,
@@ -901,7 +906,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                               decoration:
                                                                   const BoxDecoration(
                                                                 color: Color(
-                                                                    0xFF0D1B2A),
+                                                                    0xFF142D4E),
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -935,7 +940,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                         width: double.infinity,
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFE6C17A),
+                                          color: const Color(0xFF142D4E),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
@@ -947,7 +952,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                               width: 40,
                                               height: 40,
                                               decoration: const BoxDecoration(
-                                                color: Color(0xFFE6C17A),
+                                                color: Color(0xFF142D4E),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: const Center(
@@ -955,7 +960,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                   Icons
                                                       .verified_user_outlined,
                                                   size: 20,
-                                                  color: Color(0xFF0D1B2A),
+                                                  color: Color(0xFF000000),
                                                 ),
                                               ),
                                             ),
@@ -972,7 +977,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       color: const Color(
-                                                          0xFF0D1B2A),
+                                                          0xFF142D4E),
                                                     ),
                                                   ),
                                                   const SizedBox(height: 3),
@@ -983,7 +988,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       color: const Color(
-                                                          0xFF1B365D),
+                                                          0xFF142D4E),
                                                       height: 1.35,
                                                     ),
                                                   ),
@@ -1004,7 +1009,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                           vertical: 10,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFE6C17A)
+                                          color: const Color(0xFF142D4E)
                                               .withValues(alpha: 0.5),
                                           borderRadius:
                                               BorderRadius.circular(16),
@@ -1022,7 +1027,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                     height: 6,
                                                     decoration:
                                                         const BoxDecoration(
-                                                      color: Color(0xFF0D1B2A),
+                                                      color: Color(0xFF000000),
                                                       shape: BoxShape.circle,
                                                     ),
                                                   ),
@@ -1036,7 +1041,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         color: const Color(
-                                                            0xFF1B365D),
+                                                            0xFF142D4E),
                                                       ),
                                                       maxLines: 1,
                                                       overflow:
@@ -1053,7 +1058,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                 const Icon(
                                                   Icons.bolt_rounded,
                                                   size: 15,
-                                                  color: Color(0xFF0D1B2A),
+                                                  color: Color(0xFF000000),
                                                 ),
                                                 const SizedBox(width: 4),
                                                 Text(
@@ -1062,7 +1067,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                                     fontSize: 11.5,
                                                     fontWeight: FontWeight.w600,
                                                     color:
-                                                        const Color(0xFF0D1B2A),
+                                                        const Color(0xFF142D4E),
                                                   ),
                                                 ),
                                               ],

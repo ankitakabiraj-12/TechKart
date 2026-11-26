@@ -22,18 +22,18 @@ import '../theme/profile_avatar.dart';
 ///   2. WATER RATING: "100m ISO 22810", "40m dive certified EN13319"
 /// - Detailed Section Blocks (Rounded cards with blue category icons):
 ///   1. CASE & DIMENSIONS:
-///      - Case Dimensions: 49mm × 44mm × 14.4mm
+///      - Case Dimensions: 49mm Ã— 44mm Ã— 14.4mm
 ///      - Case Weight: 61.4g (Titanium Chassis)
 ///      - Wrist Fit Range: Accommodates 130-210 mm wrists
 ///      - Bezel & Edge: Grade 5 aerospace titanium with raised protection lip
 ///   2. DISPLAY & OPTICS:
 ///      - Panel Technology: Always-On Retina LTPO OLED
 ///      - Luminance: 3,000 nits peak / 1 nit ultra-low
-///      - Resolution & Density: 410 × 502 pixels (338 ppi)
+///      - Resolution & Density: 410 Ã— 502 pixels (338 ppi)
 ///      - Lens Protection: Flat sapphire front crystal with AR coating
 ///   3. HEALTH & BIO-TELEMETRY:
 ///      - Cardiac Telemetry: Electrical heart sensor (ECG) & 3rd-Gen Optical PPG
-///      - Thermal Sensing: Dual-sensor wrist temp (0.01°C precision)
+///      - Thermal Sensing: Dual-sensor wrist temp (0.01Â°C precision)
 ///      - Blood Oxygenation: Optical SpO2 with ambient light filter
 ///      - Crash & Fall Kinematics: High-g dual accelerometer (up to 256 Gs)
 ///   4. POWER & ENDURANCE:
@@ -97,13 +97,13 @@ class _ProductSpecificationsScreenState
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF5EBDD),
+        systemNavigationBarColor: Color(0xFFF8FAFC),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -122,7 +122,7 @@ class _ProductSpecificationsScreenState
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -150,10 +150,10 @@ class _ProductSpecificationsScreenState
                   const SizedBox(width: 6),
                   Text(
                     'Product ...',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const Spacer(),
@@ -173,7 +173,7 @@ class _ProductSpecificationsScreenState
                     icon: const Icon(
                       Icons.share_outlined,
                       size: 20,
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -184,7 +184,7 @@ class _ProductSpecificationsScreenState
                     icon: const Icon(
                       Icons.favorite_border_rounded,
                       size: 20,
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                     ),
                     padding: EdgeInsets.zero,
                     constraints:
@@ -204,7 +204,7 @@ class _ProductSpecificationsScreenState
               child: Container(
                 height: 44,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(22),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -213,7 +213,7 @@ class _ProductSpecificationsScreenState
                     const Icon(
                       Icons.search_rounded,
                       size: 18,
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -221,7 +221,7 @@ class _ProductSpecificationsScreenState
                         controller: _searchFilter,
                         style: GoogleFonts.literata(
                           fontSize: 13,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                         decoration: InputDecoration(
                           filled: false,
@@ -230,7 +230,7 @@ class _ProductSpecificationsScreenState
                               'Filter specs (e.g., nits, GPS, battery)...',
                           hintStyle: GoogleFonts.literata(
                             fontSize: 12.5,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                           border: InputBorder.none,
                           isDense: true,
@@ -270,8 +270,8 @@ class _ProductSpecificationsScreenState
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF0D1B2A)
-                              : const Color(0xFFE6C17A),
+                              ? const Color(0xFF142D4E)
+                              : const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Center(
@@ -282,8 +282,8 @@ class _ProductSpecificationsScreenState
                               fontWeight:
                                   isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: isSelected
-                                  ? const Color(0xFFF5EBDD)
-                                  : const Color(0xFF0D1B2A),
+                                  ? const Color(0xFFF8FAFC)
+                                  : const Color(0xFF142D4E),
                             ),
                           ),
                         ),
@@ -311,11 +311,11 @@ class _ProductSpecificationsScreenState
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5EBDD),
+                          color: const Color(0xFFF8FAFC),
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
+                              color: const Color(0xFF000000).withValues(alpha: 0.04),
                               blurRadius: 10,
                               offset: const Offset(0, 3),
                             ),
@@ -328,15 +328,15 @@ class _ProductSpecificationsScreenState
                               child: Container(
                                 width: 54,
                                 height: 54,
-                                color: const Color(0xFFE6C17A),
+                                color: const Color(0xFF142D4E),
                                 child: Image.asset(
                                   'asset/chronos_ultra_2.jpg',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) => Container(
-                                    color: const Color(0xFFE6C17A),
+                                    color: const Color(0xFF142D4E),
                                     child: const Icon(
                                       Icons.watch_outlined,
-                                      color: Color(0xFF0D1B2A),
+                                      color: Color(0xFF000000),
                                       size: 24,
                                     ),
                                   ),
@@ -352,10 +352,10 @@ class _ProductSpecificationsScreenState
                                     children: [
                                       Text(
                                         'Chronos Ultra 2',
-                                        style: GoogleFonts.domine(
+                                        style: GoogleFonts.literata(
                                           fontSize: 14.5,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const Spacer(),
@@ -365,7 +365,7 @@ class _ProductSpecificationsScreenState
                                           vertical: 2,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFE6C17A),
+                                          color: const Color(0xFF142D4E),
                                           borderRadius:
                                               BorderRadius.circular(6),
                                         ),
@@ -374,7 +374,7 @@ class _ProductSpecificationsScreenState
                                           style: GoogleFonts.literata(
                                             fontSize: 9,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF0D1B2A),
+                                            color: const Color(0xFF000000),
                                           ),
                                         ),
                                       ),
@@ -385,7 +385,7 @@ class _ProductSpecificationsScreenState
                                     'Grade 5 Titanium • 49mm Cellular',
                                     style: GoogleFonts.literata(
                                       fontSize: 11,
-                                      color: const Color(0xFF1B365D),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -394,7 +394,7 @@ class _ProductSpecificationsScreenState
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                 ],
@@ -413,7 +413,7 @@ class _ProductSpecificationsScreenState
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFE6C17A),
+                                color: const Color(0xFF142D4E),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Column(
@@ -428,23 +428,23 @@ class _ProductSpecificationsScreenState
                                         style: GoogleFonts.literata(
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF1B365D),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const Icon(
                                         Icons.wb_sunny_outlined,
                                         size: 13,
-                                        color: Color(0xFF0D1B2A),
+                                        color: Color(0xFF000000),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     '3,000 nits',
-                                    style: GoogleFonts.domine(
+                                    style: GoogleFonts.literata(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -452,7 +452,7 @@ class _ProductSpecificationsScreenState
                                     '1 nit minimum in dark mode',
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
-                                      color: const Color(0xFF1B365D),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                 ],
@@ -464,7 +464,7 @@ class _ProductSpecificationsScreenState
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFE6C17A),
+                                color: const Color(0xFF142D4E),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Column(
@@ -479,23 +479,23 @@ class _ProductSpecificationsScreenState
                                         style: GoogleFonts.literata(
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF1B365D),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const Icon(
                                         Icons.scuba_diving_rounded,
                                         size: 14,
-                                        color: Color(0xFF0D1B2A),
+                                        color: Color(0xFF000000),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     '100m ISO 22810',
-                                    style: GoogleFonts.domine(
+                                    style: GoogleFonts.literata(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                   const SizedBox(height: 2),
@@ -503,7 +503,7 @@ class _ProductSpecificationsScreenState
                                     '40m dive certified EN13319',
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
-                                      color: const Color(0xFF1B365D),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                 ],
@@ -520,7 +520,7 @@ class _ProductSpecificationsScreenState
                         icon: Icons.calendar_view_week_rounded,
                         title: 'CASE & DIMENSIONS',
                         specs: [
-                          {'label': 'Case Dimensions', 'val': '49mm × 44mm × 14.4mm'},
+                          {'label': 'Case Dimensions', 'val': '49mm Ã— 44mm Ã— 14.4mm'},
                           {'label': 'Case Weight', 'val': '61.4g (Titanium Chassis)'},
                           {'label': 'Wrist Fit Range', 'val': 'Accommodates 130-210 mm wrists'},
                           {'label': 'Bezel & Edge', 'val': 'Grade 5 aerospace titanium with raised protection lip'},
@@ -536,7 +536,7 @@ class _ProductSpecificationsScreenState
                         specs: [
                           {'label': 'Panel Technology', 'val': 'Always-On Retina LTPO OLED'},
                           {'label': 'Luminance', 'val': '3,000 nits peak / 1 nit ultra-low'},
-                          {'label': 'Resolution & Density', 'val': '410 × 502 pixels (338 ppi)'},
+                          {'label': 'Resolution & Density', 'val': '410 Ã— 502 pixels (338 ppi)'},
                           {'label': 'Lens Protection', 'val': 'Flat sapphire front crystal with AR coating'},
                         ],
                       ),
@@ -549,7 +549,7 @@ class _ProductSpecificationsScreenState
                         title: 'HEALTH & BIO-TELEMETRY',
                         specs: [
                           {'label': 'Cardiac Telemetry', 'val': 'Electrical heart sensor (ECG) & 3rd-Gen Optical PPG'},
-                          {'label': 'Thermal Sensing', 'val': 'Dual-sensor wrist temp (0.01°C precision)'},
+                          {'label': 'Thermal Sensing', 'val': 'Dual-sensor wrist temp (0.01Â°C precision)'},
                           {'label': 'Blood Oxygenation', 'val': 'Optical SpO2 with ambient light filter'},
                           {'label': 'Crash & Fall Kinematics', 'val': 'High-g dual accelerometer (up to 256 Gs)'},
                         ],
@@ -602,7 +602,7 @@ class _ProductSpecificationsScreenState
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -617,15 +617,15 @@ class _ProductSpecificationsScreenState
                                     const Icon(
                                       Icons.inventory_2_outlined,
                                       size: 16,
-                                      color: Color(0xFFB8860B),
+                                      color: Color(0xFF142D4E),
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
                                       'What\'s in the Box',
-                                      style: GoogleFonts.domine(
+                                      style: GoogleFonts.literata(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
-                                        color: const Color(0xFFB8860B),
+                                        color: const Color(0xFF142D4E),
                                       ),
                                     ),
                                   ],
@@ -636,7 +636,7 @@ class _ProductSpecificationsScreenState
                                     fontSize: 9.5,
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 0.8,
-                                    color: const Color(0xFFB8860B),
+                                    color: const Color(0xFF142D4E),
                                   ),
                                 ),
                               ],
@@ -660,7 +660,7 @@ class _ProductSpecificationsScreenState
                           const Icon(
                             Icons.help_outline_rounded,
                             size: 14,
-                            color: Color(0xFF1B365D),
+                            color: Color(0xFF000000),
                           ),
                           const SizedBox(width: 6),
                           Expanded(
@@ -668,7 +668,7 @@ class _ProductSpecificationsScreenState
                               'Chronos Ultra 2 is tested under controlled laboratory conditions with ratings compliant with ISO 22810:2010 and EN13319 standards for recreational diving up to 40 meters. Battery endurance derived from typical daily usage metrics.',
                               style: GoogleFonts.literata(
                                 fontSize: 10,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                                 height: 1.35,
                               ),
                             ),
@@ -690,7 +690,7 @@ class _ProductSpecificationsScreenState
               padding: EdgeInsets.fromLTRB(
                   20, 12, 20, bottomPadding > 0 ? bottomPadding + 8 : 16),
               decoration: BoxDecoration(
-                color: const Color(0xFFF5EBDD),
+                color: const Color(0xFFF8FAFC),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.05),
@@ -711,15 +711,15 @@ class _ProductSpecificationsScreenState
                         style: GoogleFonts.literata(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       Text(
                         '₹35,499.00',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -732,8 +732,8 @@ class _ProductSpecificationsScreenState
                         AppNavigator.toCart(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1B365D),
-                        foregroundColor: const Color(0xFFF5EBDD),
+                        backgroundColor: const Color(0xFF142D4E),
+                        foregroundColor: const Color(0xFFF8FAFC),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
@@ -772,11 +772,11 @@ class _ProductSpecificationsScreenState
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0D1B2A).withValues(alpha: 0.03),
+            color: const Color(0xFF000000).withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -791,11 +791,11 @@ class _ProductSpecificationsScreenState
                 width: 24,
                 height: 24,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: Icon(icon, size: 13, color: const Color(0xFF0D1B2A)),
+                  child: Icon(icon, size: 13, color: const Color(0xFF000000)),
                 ),
               ),
               const SizedBox(width: 8),
@@ -805,7 +805,7 @@ class _ProductSpecificationsScreenState
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.8,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -817,7 +817,7 @@ class _ProductSpecificationsScreenState
               margin: const EdgeInsets.only(bottom: 6),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFFDFBCF),
+                color: const Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -828,7 +828,7 @@ class _ProductSpecificationsScreenState
                     style: GoogleFonts.literata(
                       fontSize: 10.5,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -837,7 +837,7 @@ class _ProductSpecificationsScreenState
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -855,7 +855,7 @@ class _ProductSpecificationsScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -863,7 +863,7 @@ class _ProductSpecificationsScreenState
             const Icon(
               Icons.check_rounded,
               size: 15,
-              color: Color(0xFFB8860B),
+              color: Color(0xFF142D4E),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -872,7 +872,7 @@ class _ProductSpecificationsScreenState
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ),

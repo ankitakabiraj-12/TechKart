@@ -266,14 +266,21 @@ class ApiClient {
       final httpResponse = http.Response(
         responseBody,
         streamedResponse.statusCode,
-        headers: streamedResponse.headers,
+        headers: {
+          ...streamedResponse.headers,
+          'content-type': 'application/json; charset=utf-8',
+        },
         request: streamedResponse.request,
         isRedirect: streamedResponse.isRedirect,
         persistentConnection: streamedResponse.persistentConnection,
         reasonPhrase: streamedResponse.reasonPhrase,
       );
 
-      return _handleResponse<T>(httpResponse, fromJsonData: fromJsonData);
+      return _handleResponse<T>(
+        httpResponse,
+        rawBody: responseBody,
+        fromJsonData: fromJsonData,
+      );
     } on ConnectionTimeoutException {
       final fallback = await _tryLanFallback<T>(
         method: method,
@@ -361,7 +368,10 @@ class ApiClient {
       final response = http.Response(
         responseBody,
         streamedResponse.statusCode,
-        headers: streamedResponse.headers,
+        headers: {
+          ...streamedResponse.headers,
+          'content-type': 'application/json; charset=utf-8',
+        },
         request: streamedResponse.request,
         isRedirect: streamedResponse.isRedirect,
         persistentConnection: streamedResponse.persistentConnection,
@@ -370,7 +380,11 @@ class ApiClient {
 
       ApiConfig.baseUrl = ApiConfig.fallbackBaseUrl;
       _baseUrl = ApiConfig.fallbackBaseUrl;
-      return _handleResponse<T>(response, fromJsonData: fromJsonData);
+      return _handleResponse<T>(
+        response,
+        rawBody: responseBody,
+        fromJsonData: fromJsonData,
+      );
     } on ApiException {
       rethrow;
     } catch (_) {
@@ -380,14 +394,19 @@ class ApiClient {
 
   ApiResponse<T> _handleResponse<T>(
     http.Response response, {
+    String? rawBody,
     T Function(dynamic data)? fromJsonData,
   }) {
     final statusCode = response.statusCode;
     Map<String, dynamic> jsonBody = {};
 
     try {
-      if (response.body.isNotEmpty) {
-        final decoded = jsonDecode(response.body);
+      final bodyText = rawBody ??
+          (response.bodyBytes.isNotEmpty
+              ? utf8.decode(response.bodyBytes, allowMalformed: true)
+              : response.body);
+      if (bodyText.isNotEmpty) {
+        final decoded = jsonDecode(bodyText);
         if (decoded is Map<String, dynamic>) {
           jsonBody = decoded;
         } else {

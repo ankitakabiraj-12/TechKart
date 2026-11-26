@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 import '../system/currency_service.dart';
@@ -29,7 +29,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: _buildTopAppBar(context),
       body: SafeArea(
         top: false,
@@ -85,7 +85,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   // ---------------------------------------------------------------------------
   PreferredSizeWidget _buildTopAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -94,7 +94,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       title: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFF0D1B2A), size: 22),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF000000), size: 22),
             onPressed: () => AppNavigator.pop(context),
             tooltip: 'Back',
           ),
@@ -105,7 +105,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -120,7 +120,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               'asset/app_logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFFB8860B), size: 18),
+                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFF142D4E), size: 18),
               ),
             ),
           ),
@@ -130,10 +130,10 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           const Text(
             'Notifica...',
             style: TextStyle(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               fontSize: 19,
               fontWeight: FontWeight.w700,
-              fontFamily: 'serif',
+              fontFamily: 'Literata',
             ),
           ),
         ],
@@ -156,14 +156,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check, size: 16, color: Color(0xFF1B365D)),
+                Icon(Icons.check, size: 16, color: Color(0xFF000000)),
                 SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ],
@@ -178,12 +178,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           height: 34,
           margin: const EdgeInsets.only(right: 14),
           decoration: const BoxDecoration(
-            color: Color(0xFF1B365D),
+            color: Color(0xFF000000),
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.person,
-            color: Color(0xFFF5EBDD),
+            color: Color(0xFFF8FAFC),
             size: 20,
           ),
         ),
@@ -199,9 +199,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +216,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     width: 7,
                     height: 7,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -224,7 +224,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   const Text(
                     'LIVE SYNC',
                     style: TextStyle(
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 0.4,
@@ -233,7 +233,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   const Text(
                     ' • TechKart Global',
                     style: TextStyle(
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
                     ),
@@ -242,12 +242,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               ),
               Row(
                 children: const [
-                  Icon(Icons.verified_outlined, size: 14, color: Color(0xFF1B365D)),
+                  Icon(Icons.verified_outlined, size: 14, color: Color(0xFF000000)),
                   SizedBox(width: 4),
                   Text(
                     '100% Operational',
                     style: TextStyle(
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
@@ -270,10 +270,10 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     Text(
                       'Admin Overview',
                       style: TextStyle(
-                        fontFamily: 'serif',
+                        fontFamily: 'Literata',
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF0D1B2A),
+                        color: Color(0xFF000000),
                         letterSpacing: -0.4,
                       ),
                     ),
@@ -281,7 +281,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     Text(
                       'Today, Oct 24 • Real-time stream',
                       style: TextStyle(
-                        color: Color(0xFF1B365D),
+                        color: Color(0xFF000000),
                         fontSize: 12.5,
                         fontWeight: FontWeight.w500,
                       ),
@@ -298,12 +298,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     width: 38,
                     height: 38,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFF5EBDD),
+                      color: Color(0xFFF8FAFC),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.notifications_none_rounded,
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       size: 20,
                     ),
                   ),
@@ -314,9 +314,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       width: 9,
                       height: 9,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEF4444),
+                        color: const Color(0xFFDC2626),
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFFF5EBDD), width: 1.5),
+                        border: Border.all(color: const Color(0xFFF8FAFC), width: 1.5),
                       ),
                     ),
                   ),
@@ -336,7 +336,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 child: const Text(
                   'AD',
                   style: TextStyle(
-                    color: Color(0xFF0D1B2A),
+                    color: Color(0xFF000000),
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
@@ -362,8 +362,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               child: _buildKpiCard(
                 icon: Icons.payments_outlined,
                 badgeText: '+14.2%',
-                badgeBgColor: const Color(0xFFE6C17A),
-                badgeTextColor: const Color(0xFFB8860B),
+                badgeBgColor: const Color(0xFF142D4E),
+                badgeTextColor: const Color(0xFF142D4E),
                 title: 'Gross Revenue',
                 value: CurrencyService.formatUsdToInr(28490.50),
                 subtext: 'vs ${CurrencyService.formatUsdToInr(24910.00, showDecimals: false)} yesterday',
@@ -392,8 +392,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               child: _buildKpiCard(
                 icon: Icons.visibility_outlined,
                 badgeText: '• Live',
-                badgeBgColor: const Color(0xFFE6C17A),
-                badgeTextColor: const Color(0xFFB8860B),
+                badgeBgColor: const Color(0xFF142D4E),
+                badgeTextColor: const Color(0xFF142D4E),
                 title: 'Active Shoppers',
                 value: '342 online',
                 subtext: 'Peak traffic right now',
@@ -437,10 +437,10 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: cardBgColor ?? const Color(0xFFF5EBDD),
+          color: cardBgColor ?? const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(22),
           border: Border.all(
-            color: cardBgColor != null ? const Color(0xFFEBE0D2) : const Color(0xFFE6C17A),
+            color: cardBgColor != null ? const Color(0xFFEBE0D2) : const Color(0xFF142D4E),
             width: 1,
           ),
           boxShadow: [
@@ -468,7 +468,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   child: Icon(
                     icon,
                     size: 18,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 Container(
@@ -494,7 +494,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             Text(
               title,
               style: const TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 11.5,
                 fontWeight: FontWeight.w500,
               ),
@@ -505,8 +505,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             Text(
               value,
               style: const TextStyle(
-                fontFamily: 'serif',
-                color: Color(0xFF0D1B2A),
+                fontFamily: 'Literata',
+                color: Color(0xFF000000),
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
                 letterSpacing: -0.3,
@@ -518,7 +518,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             Text(
               subtext,
               style: const TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
               ),
@@ -539,9 +539,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -564,17 +564,17 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     Text(
                       'Hourly Revenue Pulse',
                       style: TextStyle(
-                        fontFamily: 'serif',
+                        fontFamily: 'Literata',
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF0D1B2A),
+                        color: Color(0xFF000000),
                       ),
                     ),
                     SizedBox(height: 2),
                     Text(
                       "Today's trajectory across key peak cycles",
                       style: TextStyle(
-                        color: Color(0xFF1B365D),
+                        color: Color(0xFF000000),
                         fontSize: 11,
                         fontWeight: FontWeight.w500,
                       ),
@@ -585,13 +585,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
                   'Peak: ${CurrencyService.formatUsdToInr(5420.00, showDecimals: false)}',
                   style: const TextStyle(
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                   ),
@@ -644,15 +644,15 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: const [
-              Text('08:00', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10.5, fontWeight: FontWeight.w500)),
-              Text('10:00', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10.5, fontWeight: FontWeight.w500)),
-              Text('12:00', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10.5, fontWeight: FontWeight.w500)),
+              Text('08:00', style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w500)),
+              Text('10:00', style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w500)),
+              Text('12:00', style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w500)),
               Text(
                 '14:00 (Peak)',
-                style: TextStyle(color: Color(0xFF0D1B2A), fontSize: 10.5, fontWeight: FontWeight.w800),
+                style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w800),
               ),
-              Text('16:00', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10.5, fontWeight: FontWeight.w500)),
-              Text('Now', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10.5, fontWeight: FontWeight.w500)),
+              Text('16:00', style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w500)),
+              Text('Now', style: TextStyle(color: Color(0xFF000000), fontSize: 10.5, fontWeight: FontWeight.w500)),
             ],
           ),
         ],
@@ -674,7 +674,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               width: dashWidth,
               height: 1,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: Color(0xFFE6C17A)),
+                decoration: BoxDecoration(color: Color(0xFF142D4E)),
               ),
             );
           }),
@@ -713,7 +713,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             width: 26,
             height: darkHeight,
             decoration: const BoxDecoration(
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -777,12 +777,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             width: 36,
             height: 36,
             decoration: const BoxDecoration(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.warning_amber_rounded,
-              color: Color(0xFFF5EBDD),
+              color: Color(0xFFF8FAFC),
               size: 20,
             ),
           ),
@@ -813,8 +813,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 const Text(
                   'Chronos Ultra 2 Titanium',
                   style: TextStyle(
-                    fontFamily: 'serif',
-                    color: Color(0xFF0D1B2A),
+                    fontFamily: 'Literata',
+                    color: Color(0xFF000000),
                     fontSize: 14.5,
                     fontWeight: FontWeight.bold,
                   ),
@@ -823,7 +823,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 const Text(
                   'Only 3 units left in Dhaka Central Hub',
                   style: TextStyle(
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                   ),
@@ -836,8 +836,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ElevatedButton(
             onPressed: () => AppNavigator.toEditProduct(context),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0D1B2A),
-              foregroundColor: const Color(0xFFF5EBDD),
+              backgroundColor: const Color(0xFF142D4E),
+              foregroundColor: const Color(0xFFF8FAFC),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               minimumSize: const Size(60, 32),
               shape: RoundedRectangleBorder(
@@ -868,16 +868,16 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             Text(
               'Store Operations',
               style: TextStyle(
-                fontFamily: 'serif',
+                fontFamily: 'Literata',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
               ),
             ),
             Text(
               'Quick Launcher',
               style: TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 11.5,
                 fontWeight: FontWeight.w500,
               ),
@@ -951,9 +951,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             width: 68,
             height: 68,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+              border: Border.all(color: const Color(0xFF142D4E), width: 1),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.02),
@@ -970,13 +970,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   width: 44,
                   height: 44,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE6C17A),
+                    color: Color(0xFF142D4E),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     icon,
                     size: 22,
-                    color: const Color(0xFFB8860B),
+                    color: const Color(0xFF142D4E),
                   ),
                 ),
 
@@ -988,13 +988,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         '$badgeCount',
                         style: const TextStyle(
-                          color: Color(0xFFF5EBDD),
+                          color: Color(0xFFF8FAFC),
                           fontSize: 8.5,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1008,7 +1008,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           Text(
             label,
             style: const TextStyle(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               fontSize: 11.5,
               fontWeight: FontWeight.w600,
             ),
@@ -1033,17 +1033,17 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 Text(
                   'Recent Live Orders',
                   style: TextStyle(
-                    fontFamily: 'serif',
+                    fontFamily: 'Literata',
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF0D1B2A),
+                    color: Color(0xFF000000),
                   ),
                 ),
                 SizedBox(width: 4),
                 Text(
                   '•',
                   style: TextStyle(
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -1055,7 +1055,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               child: const Text(
                 'View All (148) →',
                 style: TextStyle(
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
@@ -1071,13 +1071,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           icon: Icons.watch_outlined,
           orderId: '#TK-98241',
           status: 'Packed',
-          statusBgColor: const Color(0xFFE6C17A),
-          statusTextColor: const Color(0xFF1B365D),
+          statusBgColor: const Color(0xFF142D4E),
+          statusTextColor: const Color(0xFF142D4E),
           productTitle: 'Chronos Ultra 2 • Titanium ...',
           locationTime: 'Banani, Dhaka • 2 mins ago',
           price: CurrencyService.formatUsdToInr(429.00),
           paymentStatus: 'Paid Online',
-          paymentColor: const Color(0xFF1B365D),
+          paymentColor: const Color(0xFF142D4E),
           onTap: () => AppNavigator.toEditProduct(context),
         ),
 
@@ -1095,7 +1095,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           locationTime: 'Bandra West, Mumbai • 14 mins ago',
           price: CurrencyService.formatUsdToInr(49.00),
           paymentStatus: 'COD Confirmed',
-          paymentColor: const Color(0xFF1B365D),
+          paymentColor: const Color(0xFF142D4E),
           onTap: () {
             _showOrderDetailsSheet(context, orderId: '#TK-98240');
           },
@@ -1109,13 +1109,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           icon: Icons.headphones_outlined,
           orderId: '#TK-98239',
           status: 'Processing',
-          statusBgColor: const Color(0xFFE6C17A),
-          statusTextColor: const Color(0xFFB8860B),
+          statusBgColor: const Color(0xFF142D4E),
+          statusTextColor: const Color(0xFF142D4E),
           productTitle: 'QuietComfort Max Wireless...',
           locationTime: 'Andheri West, Mumbai • 28 mins ago',
           price: CurrencyService.formatUsdToInr(289.00),
           paymentStatus: 'Paid Online',
-          paymentColor: const Color(0xFF1B365D),
+          paymentColor: const Color(0xFF142D4E),
           onTap: () {
             _showOrderDetailsSheet(context, orderId: '#TK-98239');
           },
@@ -1144,9 +1144,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+          border: Border.all(color: const Color(0xFF142D4E), width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.015),
@@ -1162,12 +1162,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               width: 44,
               height: 44,
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
-                color: const Color(0xFFB8860B),
+                color: const Color(0xFF142D4E),
                 size: 20,
               ),
             ),
@@ -1183,7 +1183,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       Text(
                         orderId,
                         style: const TextStyle(
-                          color: Color(0xFF0D1B2A),
+                          color: Color(0xFF000000),
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
@@ -1210,8 +1210,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   Text(
                     productTitle,
                     style: const TextStyle(
-                      fontFamily: 'serif',
-                      color: Color(0xFF0D1B2A),
+                      fontFamily: 'Literata',
+                      color: Color(0xFF000000),
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
@@ -1222,7 +1222,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   Text(
                     locationTime,
                     style: const TextStyle(
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                       fontSize: 10.5,
                       fontWeight: FontWeight.w500,
                     ),
@@ -1238,8 +1238,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 Text(
                   price,
                   style: const TextStyle(
-                    fontFamily: 'serif',
-                    color: Color(0xFF0D1B2A),
+                    fontFamily: 'Literata',
+                    color: Color(0xFF000000),
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
                   ),
@@ -1271,8 +1271,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       child: ElevatedButton(
         onPressed: () => AppNavigator.toAdminOrderManagement(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF1B365D),
-          foregroundColor: const Color(0xFFF5EBDD),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFFF8FAFC),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(26),
@@ -1300,7 +1300,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFFF5EBDD),
+      backgroundColor: const Color(0xFFF8FAFC),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -1316,7 +1316,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -1328,7 +1328,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   Text(
                     'Order $orderId',
                     style: const TextStyle(
-                      fontFamily: 'serif',
+                      fontFamily: 'Literata',
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -1336,12 +1336,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
                       'Live Tracking',
-                      style: TextStyle(color: Color(0xFFB8860B), fontWeight: FontWeight.bold, fontSize: 11),
+                      style: TextStyle(color: Color(0xFF142D4E), fontWeight: FontWeight.bold, fontSize: 11),
                     ),
                   ),
                 ],
@@ -1349,7 +1349,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               const SizedBox(height: 14),
               const Text(
                 'Customer: Mohammad Rahat • Banani, Dhaka\nItem: Chronos Ultra 2 Titanium (49mm GPS)\nFulfillment: Express Courier (Next-Day Delivery)',
-                style: TextStyle(color: Color(0xFF1B365D), height: 1.5, fontSize: 13),
+                style: TextStyle(color: Color(0xFF000000), height: 1.5, fontSize: 13),
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -1358,8 +1358,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 child: ElevatedButton(
                   onPressed: () => AppNavigator.pop(ctx),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0D1B2A),
-                    foregroundColor: const Color(0xFFF5EBDD),
+                    backgroundColor: const Color(0xFF142D4E),
+                    foregroundColor: const Color(0xFFF8FAFC),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
                   ),
                   child: const Text('Close'),

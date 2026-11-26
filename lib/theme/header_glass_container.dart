@@ -24,10 +24,10 @@ class HeaderGlassContainer extends StatelessWidget {
     this.height,
     this.padding,
     this.margin,
-    this.borderRadius = 16.0,
+    this.borderRadius = 12.0,
     this.customShape,
-    this.backgroundColor = const Color(0xB8F2EFE9), // ~72% translucent white
-    this.borderColor = const Color(0x66D6C2A5),     // ~40% translucent white border
+    this.backgroundColor = const Color(0xF2FFFFFF), // Clean white glass
+    this.borderColor = const Color(0xFF142D4E),     // Borders token #DCE4DF
     this.blurSigma = 10.0,
     this.shadows,
     this.onTap,
@@ -96,8 +96,8 @@ class HeaderGlassCircle extends StatelessWidget {
     this.size = 36.0,
     this.padding,
     this.margin,
-    this.backgroundColor = const Color(0xB8F2EFE9),
-    this.borderColor = const Color(0x66D6C2A5),
+    this.backgroundColor = const Color(0xF2FFFFFF),
+    this.borderColor = const Color(0xFF142D4E),
     this.blurSigma = 10.0,
     this.onTap,
   });

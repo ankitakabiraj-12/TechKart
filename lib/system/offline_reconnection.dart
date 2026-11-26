@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../app_routes/app_navigator.dart';
 
 /// TechKart System - Offline & Network Reconnection Screen
@@ -83,10 +83,10 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
               const Text(
                 'You’re Offline',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   letterSpacing: -0.5,
                 ),
                 textAlign: TextAlign.center,
@@ -102,7 +102,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
                   style: TextStyle(
                     fontSize: 14.5,
                     height: 1.5,
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
@@ -141,7 +141,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
                   child: Text(
                     'View Saved Items',
                     style: TextStyle(
-                      color: Color(0xFF1B365D),
+                      color: Color(0xFF000000),
                       fontSize: 13.5,
                       fontWeight: FontWeight.w600,
                     ),
@@ -177,7 +177,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
               height: 32,
               padding: const EdgeInsets.all(4),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: Image.asset(
@@ -189,7 +189,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
             const Text(
               'TechKart',
               style: TextStyle(
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
                 fontSize: 15.5,
                 fontWeight: FontWeight.w800,
                 letterSpacing: -0.2,
@@ -217,7 +217,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
             ),
             child: const Icon(
               Icons.close,
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               size: 20,
             ),
           ),
@@ -292,7 +292,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
             child: Text(
               'Last synced today at 10:42 AM • Cached browsing available',
               style: TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -315,13 +315,13 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
       child: ElevatedButton(
         onPressed: _isRetrying ? null : _handleRetry,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF0D1B2A),
-          foregroundColor: const Color(0xFFF5EBDD),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFFF8FAFC),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(26),
           ),
-          disabledBackgroundColor: const Color(0xFF0D1B2A).withValues(alpha: 0.7),
+          disabledBackgroundColor: const Color(0xFF142D4E).withValues(alpha: 0.7),
         ),
         child: _isRetrying
             ? const SizedBox(
@@ -329,7 +329,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF5EBDD)),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF8FAFC)),
                 ),
               )
             : Row(
@@ -358,7 +358,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
       width: 134,
       height: 4,
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(2),
       ),
     );

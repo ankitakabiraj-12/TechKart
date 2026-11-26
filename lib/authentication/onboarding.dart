@@ -1,4 +1,4 @@
-﻿import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -148,13 +148,13 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -205,7 +205,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           style: GoogleFonts.literata(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                             letterSpacing: 0.1,
                           ),
                         ),
@@ -250,7 +250,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   borderRadius: BorderRadius.circular(28),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF0D1B2A).withValues(alpha: 0.06),
+                                      color: const Color(0xFF000000).withValues(alpha: 0.06),
                                       blurRadius: 20,
                                       offset: const Offset(0, 10),
                                     ),
@@ -303,7 +303,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                             vertical: 7,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFF5EBDD),
+                                            color: const Color(0xFFF8FAFC),
                                             borderRadius:
                                                 BorderRadius.circular(24),
                                             boxShadow: [
@@ -321,7 +321,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                               const Icon(
                                                 Icons.explore_outlined,
                                                 size: 14,
-                                                color: Color(0xFF0D1B2A),
+                                                color: Color(0xFF000000),
                                               ),
                                               const SizedBox(width: 6),
                                               Text(
@@ -331,7 +331,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                   fontWeight: FontWeight.w700,
                                                   letterSpacing: 0.9,
                                                   color:
-                                                      const Color(0xFF0D1B2A),
+                                                      const Color(0xFF142D4E),
                                                 ),
                                               ),
                                             ],
@@ -351,10 +351,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               Text(
                                 slide['title']!,
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.domine(
+                                style: GoogleFonts.literata(
                                   fontSize: 27,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                   height: 1.25,
                                   letterSpacing: -0.5,
                                 ),
@@ -374,7 +374,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   style: GoogleFonts.literata(
                                     fontSize: 14.5,
                                     fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF1B365D),
+                                    color: const Color(0xFF000000),
                                     height: 1.45,
                                   ),
                                 ),
@@ -405,8 +405,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         width: isActive ? 24 : 6,
                         decoration: BoxDecoration(
                           color: isActive
-                              ? const Color(0xFF0D1B2A)
-                              : const Color(0xFFE6C17A),
+                              ? const Color(0xFF142D4E)
+                              : const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(3),
                         ),
                       );
@@ -427,8 +427,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: ElevatedButton(
                       onPressed: _onNext,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF0D1B2A),
-                        foregroundColor: const Color(0xFFF5EBDD),
+                        backgroundColor: const Color(0xFF142D4E),
+                        foregroundColor: const Color(0xFFF8FAFC),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28),
@@ -444,7 +444,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             style: GoogleFonts.literata(
                               fontSize: 15.5,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFFF5EBDD),
+                              color: const Color(0xFFF8FAFC),
                               letterSpacing: 0.2,
                             ),
                           ),
@@ -452,7 +452,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           const Icon(
                             Icons.arrow_forward_rounded,
                             size: 18,
-                            color: Color(0xFFF5EBDD),
+                            color: Color(0xFFF8FAFC),
                           ),
                         ],
                       ),
@@ -473,7 +473,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       style: GoogleFonts.literata(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     GestureDetector(
@@ -481,10 +481,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       behavior: HitTestBehavior.opaque,
                       child: Text(
                         'Sign In',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ),
@@ -500,7 +500,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   width: 134,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),

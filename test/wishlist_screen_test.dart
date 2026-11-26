@@ -88,6 +88,7 @@ void main() {
         expect(find.text('My Saved Items'), findsOneWidget);
         expect(find.text('Add All to Cart'), findsOneWidget);
         expect(find.text('Sort & Filter'), findsOneWidget);
+        expect(caughtDetails, isNull);
         expect(find.text('Looking for more?'), findsOneWidget);
 
         // Verify heart icon presence

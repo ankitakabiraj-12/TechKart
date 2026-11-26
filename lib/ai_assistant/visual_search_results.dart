@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -37,7 +37,20 @@ import '../theme/profile_avatar.dart';
 ///   - "Refine" button (Dark navy).
 /// - Bottom Navigation Bar (AI Search active).
 class VisualSearchResultsScreen extends StatefulWidget {
-  const VisualSearchResultsScreen({super.key});
+  final VoidCallback? onBack;
+  final VoidCallback? onRetake;
+  final ValueChanged<String>? onProductSelected;
+  final bool showBottomNav;
+  final ValueChanged<int>? onNavTabSelected;
+
+  const VisualSearchResultsScreen({
+    super.key,
+    this.onBack,
+    this.onRetake,
+    this.onProductSelected,
+    this.showBottomNav = true,
+    this.onNavTabSelected,
+  });
 
   @override
   State<VisualSearchResultsScreen> createState() =>
@@ -59,8 +72,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': '45mm GPS • Aluminum',
       'price': '₹24,999.00',
       'tag': '94% Match',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFF0D1B2A),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'asset/chronos_watch_x.jpg',
     },
     {
@@ -69,8 +82,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Titanium Slate • 256GB',
       'price': '₹74,999.00',
       'tag': 'Paired Device',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFFB8860B),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'asset/apex_fold_buds_pro.jpg',
     },
     {
@@ -79,8 +92,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Dual USB-C • Compact',
       'price': '₹3,999.00',
       'tag': 'OEM Accessory',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFF0D1B2A),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'asset/carousel_fast_gan_charger.jpg',
     },
     {
@@ -89,8 +102,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       'specs': 'Spatial Audio • 40h Battery',
       'price': '₹20,699.00',
       'tag': 'Eco Match',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFF0D1B2A),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'asset/aura_anc_4_pro.jpg',
     },
   ];
@@ -104,13 +117,13 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -126,10 +139,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
               child: Row(
                 children: [
                   IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: widget.onBack ?? () => Navigator.of(context).pop(),
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -141,10 +154,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                   Expanded(
                     child: Text(
                       'Visual Search Results',
-                      style: GoogleFonts.domine(
+                      style: GoogleFonts.literata(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ),
@@ -157,7 +170,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         icon: const Icon(
                           Icons.notifications_none_rounded,
                           size: 23,
-                          color: Color(0xFF1B365D),
+                          color: Color(0xFF000000),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -170,7 +183,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                           width: 7,
                           height: 7,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFE53E3E),
+                            color: Color(0xFFDC2626),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -194,11 +207,11 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
+                      color: const Color(0xFF000000).withValues(alpha: 0.04),
                       blurRadius: 10,
                       offset: const Offset(0, 3),
                     ),
@@ -214,15 +227,15 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                           child: Container(
                             width: 62,
                             height: 62,
-                            color: const Color(0xFFE6C17A),
+                            color: const Color(0xFF142D4E),
                             child: Image.asset(
                               'asset/chronos_ultra_2.jpg',
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) => Container(
-                                color: const Color(0xFFE6C17A),
+                                color: const Color(0xFF142D4E),
                                 child: const Icon(
                                   Icons.watch_outlined,
-                                  color: Color(0xFF0D1B2A),
+                                  color: Color(0xFF000000),
                                   size: 24,
                                 ),
                               ),
@@ -236,14 +249,14 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             width: 20,
                             height: 20,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF0D1B2A),
+                              color: Color(0xFF000000),
                               shape: BoxShape.circle,
                             ),
                             child: const Center(
                               child: Icon(
                                 Icons.crop_free_rounded,
                                 size: 12,
-                                color: Color(0xFFF5EBDD),
+                                color: Color(0xFFF8FAFC),
                               ),
                             ),
                           ),
@@ -262,16 +275,16 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                               fontSize: 9.5,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.8,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'Titanium Smartwatch',
-                            style: GoogleFonts.domine(
+                            style: GoogleFonts.literata(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -283,7 +296,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   vertical: 3,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFE6C17A),
+                                  color: const Color(0xFF142D4E),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -291,19 +304,19 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   style: GoogleFonts.literata(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
-                                    color: const Color(0xFFB8860B),
+                                    color: const Color(0xFF142D4E),
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 10),
                               GestureDetector(
-                                onTap: () => Navigator.of(context).pop(),
+                                onTap: widget.onRetake ?? () => Navigator.of(context).pop(),
                                 child: Row(
                                   children: [
                                     const Icon(
                                       Icons.camera_alt_outlined,
                                       size: 13,
-                                      color: Color(0xFF1B365D),
+                                      color: Color(0xFF000000),
                                     ),
                                     const SizedBox(width: 3),
                                     Text(
@@ -311,7 +324,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                       style: GoogleFonts.literata(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w500,
-                                        color: const Color(0xFF1B365D),
+                                        color: const Color(0xFF000000),
                                       ),
                                     ),
                                   ],
@@ -356,8 +369,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF0D1B2A)
-                              : const Color(0xFFE6C17A),
+                              ? const Color(0xFF142D4E)
+                              : const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Center(
@@ -368,8 +381,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                               fontWeight:
                                   isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: isSelected
-                                  ? const Color(0xFFF5EBDD)
-                                  : const Color(0xFF0D1B2A),
+                                  ? const Color(0xFFF8FAFC)
+                                  : const Color(0xFF142D4E),
                             ),
                           ),
                         ),
@@ -398,11 +411,11 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5EBDD),
+                          color: const Color(0xFFF8FAFC),
                           borderRadius: BorderRadius.circular(22),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.04),
+                              color: const Color(0xFF000000).withValues(alpha: 0.04),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -419,7 +432,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     vertical: 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFE6C17A),
+                                    color: const Color(0xFF142D4E),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
@@ -427,7 +440,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     style: GoogleFonts.literata(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                 ),
@@ -435,7 +448,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                 const Icon(
                                   Icons.favorite_border_rounded,
                                   size: 18,
-                                  color: Color(0xFF1B365D),
+                                  color: Color(0xFF000000),
                                 ),
                               ],
                             ),
@@ -449,15 +462,15 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   child: Container(
                                     width: 100,
                                     height: 100,
-                                    color: const Color(0xFFE6C17A),
+                                    color: const Color(0xFF142D4E),
                                     child: Image.asset(
                                       'asset/chronos_ultra_2.jpg',
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) => Container(
-                                        color: const Color(0xFFE6C17A),
+                                        color: const Color(0xFF142D4E),
                                         child: const Icon(
                                           Icons.watch_outlined,
-                                          color: Color(0xFF0D1B2A),
+                                          color: Color(0xFF000000),
                                           size: 36,
                                         ),
                                       ),
@@ -473,10 +486,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                     children: [
                                       Text(
                                         'Chronos Ultra 2',
-                                        style: GoogleFonts.domine(
+                                        style: GoogleFonts.literata(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const SizedBox(height: 3),
@@ -484,7 +497,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                         '49mm Cellular • Grade 5 Titanium',
                                         style: GoogleFonts.literata(
                                           fontSize: 11.5,
-                                          color: const Color(0xFF1B365D),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const SizedBox(height: 8),
@@ -492,10 +505,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                         children: [
                                           Text(
                                             '₹35,499.00',
-                                            style: GoogleFonts.domine(
+                                            style: GoogleFonts.literata(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: const Color(0xFF0D1B2A),
+                                              color: const Color(0xFF000000),
                                             ),
                                           ),
                                           const SizedBox(width: 6),
@@ -505,7 +518,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                               fontSize: 11.5,
                                               decoration:
                                                   TextDecoration.lineThrough,
-                                              color: const Color(0xFF1B365D),
+                                              color: const Color(0xFF000000),
                                             ),
                                           ),
                                         ],
@@ -524,12 +537,16 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   HapticFeedback.lightImpact();
-                                  AppNavigator.toProductDetails(context,
-                                      productId: 'chronos_ultra_2');
+                                  if (widget.onProductSelected != null) {
+                                    widget.onProductSelected!('chronos_ultra_2');
+                                  } else {
+                                    AppNavigator.toProductDetails(context,
+                                        productId: 'chronos_ultra_2');
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF0D1B2A),
-                                  foregroundColor: const Color(0xFFF5EBDD),
+                                  backgroundColor: const Color(0xFF142D4E),
+                                  foregroundColor: const Color(0xFFF8FAFC),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(22),
                                   ),
@@ -566,10 +583,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                 Flexible(
                                   child: Text(
                                     'MATCHED DEVICES & GEAR',
-                                    style: GoogleFonts.domine(
+                                    style: GoogleFonts.literata(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -579,7 +596,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   '(4 results)',
                                   style: GoogleFonts.literata(
                                     fontSize: 11,
-                                    color: const Color(0xFF1B365D),
+                                    color: const Color(0xFF000000),
                                   ),
                                 ),
                               ],
@@ -590,14 +607,14 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(Icons.bolt_rounded,
-                                  size: 14, color: Color(0xFF0D1B2A)),
+                                  size: 14, color: Color(0xFF000000)),
                               const SizedBox(width: 2),
                               Text(
                                 'Real-Time Catalog',
                                 style: GoogleFonts.literata(
                                   fontSize: 10.5,
                                   fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             ],
@@ -625,16 +642,20 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                           return GestureDetector(
                             onTap: () {
                               HapticFeedback.lightImpact();
-                              AppNavigator.toProductDetails(context,
-                                  productId: p['id'] as String);
+                              if (widget.onProductSelected != null) {
+                                widget.onProductSelected!(p['id'] as String);
+                              } else {
+                                AppNavigator.toProductDetails(context,
+                                    productId: p['id'] as String);
+                              }
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF5EBDD),
+                                color: const Color(0xFFF8FAFC),
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF0D1B2A)
+                                    color: const Color(0xFF000000)
                                         .withValues(alpha: 0.04),
                                     blurRadius: 10,
                                     offset: const Offset(0, 3),
@@ -659,7 +680,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                             errorBuilder:
                                                 (context, error, stackTrace) =>
                                                     Container(
-                                              color: const Color(0xFFE6C17A),
+                                              color: const Color(0xFF142D4E),
                                             ),
                                           ),
                                           Positioned(
@@ -693,7 +714,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                             child: Icon(
                                               Icons.favorite_border_rounded,
                                               size: 16,
-                                              color: Color(0xFF1B365D),
+                                              color: Color(0xFF000000),
                                             ),
                                           ),
                                         ],
@@ -709,10 +730,10 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                       children: [
                                         Text(
                                           p['title'] as String,
-                                          style: GoogleFonts.domine(
+                                          style: GoogleFonts.literata(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF0D1B2A),
+                                            color: const Color(0xFF000000),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -722,7 +743,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                           p['specs'] as String,
                                           style: GoogleFonts.literata(
                                             fontSize: 10.5,
-                                            color: const Color(0xFF1B365D),
+                                            color: const Color(0xFF000000),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -734,24 +755,24 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                           children: [
                                             Text(
                                               p['price'] as String,
-                                              style: GoogleFonts.domine(
+                                              style: GoogleFonts.literata(
                                                 fontSize: 13.5,
                                                 fontWeight: FontWeight.w700,
-                                                color: const Color(0xFF0D1B2A),
+                                                color: const Color(0xFF000000),
                                               ),
                                             ),
                                             Container(
                                               width: 26,
                                               height: 26,
                                               decoration: const BoxDecoration(
-                                                color: Color(0xFFE6C17A),
+                                                color: Color(0xFF142D4E),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: const Center(
                                                 child: Icon(
                                                   Icons.add_rounded,
                                                   size: 16,
-                                                  color: Color(0xFF0D1B2A),
+                                                  color: Color(0xFF000000),
                                                 ),
                                               ),
                                             ),
@@ -774,7 +795,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Row(
@@ -782,7 +803,7 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                             const Icon(
                               Icons.manage_search_rounded,
                               size: 19,
-                              color: Color(0xFF0D1B2A),
+                              color: Color(0xFF000000),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
@@ -791,17 +812,17 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                 children: [
                                   Text(
                                     'Not the right match?',
-                                    style: GoogleFonts.domine(
+                                    style: GoogleFonts.literata(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                   Text(
                                     'Refine with text query or adjust crop box',
                                     style: GoogleFonts.literata(
                                       fontSize: 10.5,
-                                      color: const Color(0xFF1B365D),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                 ],
@@ -814,8 +835,8 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
                                   AppNavigator.toSearchOverlay(context);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF0D1B2A),
-                                  foregroundColor: const Color(0xFFF5EBDD),
+                                  backgroundColor: const Color(0xFF142D4E),
+                                  foregroundColor: const Color(0xFFF8FAFC),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 14),
                                   shape: RoundedRectangleBorder(
@@ -845,20 +866,25 @@ class _VisualSearchResultsScreenState extends State<VisualSearchResultsScreen> {
             // ---------------------------------------------------------------
             // BOTTOM NAVIGATION BAR
             // ---------------------------------------------------------------
-            TechKartBottomNavBar(
-              currentIndex: 2, // AI Search active
-              onTabSelected: (index) {
-                if (index == 0) {
-                  AppNavigator.toHome(context);
-                } else if (index == 1) {
-                  AppNavigator.toCategories(context);
-                } else if (index == 3) {
-                  AppNavigator.toCart(context);
-                } else if (index == 4) {
-                  AppNavigator.toCustomerProfileHub(context);
-                }
-              },
-            ),
+            if (widget.showBottomNav)
+              TechKartBottomNavBar(
+                currentIndex: 2, // AI Search active
+                onTabSelected: (index) {
+                  if (widget.onNavTabSelected != null) {
+                    widget.onNavTabSelected!(index);
+                  } else {
+                    if (index == 0) {
+                      AppNavigator.toHome(context);
+                    } else if (index == 1) {
+                      AppNavigator.toCategories(context);
+                    } else if (index == 3) {
+                      AppNavigator.toCart(context);
+                    } else if (index == 4) {
+                      AppNavigator.toCustomerProfileHub(context);
+                    }
+                  }
+                },
+              ),
           ],
         ),
       ),

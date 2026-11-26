@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -19,6 +19,20 @@ class OrderDetailsScreen extends StatefulWidget {
   final String courierPartner;
   final String trackingId;
   final String cardLast4;
+  final String? authCode;
+  final double? subtotal;
+  final double? discount;
+  final double? tax;
+  final double? totalAmount;
+  final VoidCallback? onBack;
+  final VoidCallback? onLockPressed;
+  final VoidCallback? onProfilePressed;
+  final VoidCallback? onTrackShipment;
+  final ValueChanged<String>? onBuyAgain;
+  final ValueChanged<String>? onViewProduct;
+  final VoidCallback? onDownloadInvoice;
+  final VoidCallback? onCancelOrder;
+  final VoidCallback? onNeedHelp;
 
   const OrderDetailsScreen({
     super.key,
@@ -35,6 +49,20 @@ class OrderDetailsScreen extends StatefulWidget {
     this.courierPartner = 'Apex Courier Express',
     this.trackingId = 'APX-982140',
     this.cardLast4 = '4829',
+    this.authCode,
+    this.subtotal,
+    this.discount,
+    this.tax,
+    this.totalAmount,
+    this.onBack,
+    this.onLockPressed,
+    this.onProfilePressed,
+    this.onTrackShipment,
+    this.onBuyAgain,
+    this.onViewProduct,
+    this.onDownloadInvoice,
+    this.onCancelOrder,
+    this.onNeedHelp,
   });
 
   @override
@@ -84,7 +112,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -123,35 +151,36 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => Navigator.of(context).maybePop(),
+            onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Order Details',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
-            onPressed: () {
+            key: const Key('order_details_lock_button'),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
+            onPressed: widget.onLockPressed ?? () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
@@ -166,7 +195,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             constraints: const BoxConstraints(),
           ),
           const SizedBox(width: 14),
-          const ProfileAvatar(size: 32),
+          GestureDetector(
+            key: const Key('order_details_profile_button'),
+            onTap: widget.onProfilePressed,
+            child: const ProfileAvatar(size: 32),
+          ),
         ],
       ),
     );
@@ -179,9 +212,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -197,16 +230,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             children: [
               Text(
                 'Order #${widget.orderId}',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               const SizedBox(width: 6),
               GestureDetector(
+                key: const Key('copy_order_id_button'),
                 onTap: _copyOrderId,
-                child: const Icon(Icons.copy_rounded, size: 14, color: Color(0xFF1B365D)),
+                child: const Icon(Icons.copy_rounded, size: 14, color: Color(0xFF000000)),
               ),
             ],
           ),
@@ -215,14 +249,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             'Placed on ${widget.orderDate} • ${widget.orderTime}',
             style: GoogleFonts.literata(
               fontSize: 11,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -232,7 +266,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   width: 5,
                   height: 5,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -243,7 +277,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     fontFamily: 'Literata',
                     fontSize: 10.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFFB8860B),
+                    color: const Color(0xFF142D4E),
                   ),
                 ),
               ],
@@ -253,13 +287,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
                 const Icon(Icons.local_shipping_outlined,
-                    size: 16, color: Color(0xFF0D1B2A)),
+                    size: 16, color: Color(0xFF000000)),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Column(
@@ -269,7 +303,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         text: TextSpan(
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                           children: [
                             const TextSpan(text: 'Expected Delivery: '),
@@ -284,7 +318,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         widget.guaranteedTime,
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -298,13 +332,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             width: double.infinity,
             height: 42,
             child: ElevatedButton.icon(
-              onPressed: () => AppNavigator.toShipmentTracking(
+              onPressed: widget.onTrackShipment ?? () => AppNavigator.toShipmentTracking(
                 context,
                 trackingId: widget.trackingId,
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0D1B2A),
-                foregroundColor: const Color(0xFFF5EBDD),
+                backgroundColor: const Color(0xFF142D4E),
+                foregroundColor: const Color(0xFFF8FAFC),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -332,9 +366,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -344,17 +378,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             children: [
               Text(
                 'Items in this Order (${_items.length})',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               Text(
                 '2 packages',
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -371,7 +405,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     child: Container(
                       width: 52,
                       height: 52,
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       child: Image.asset(
                         item['image'] as String,
                         fit: BoxFit.cover,
@@ -387,17 +421,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       children: [
                         Text(
                           item['title'] as String,
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 12.5,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         Text(
                           item['subtitle'] as String,
                           style: GoogleFonts.literata(
                             fontSize: 10.5,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -405,10 +439,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           children: [
                             Text(
                               item['price'] as String,
-                              style: GoogleFonts.domine(
+                              style: GoogleFonts.literata(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                             const SizedBox(width: 6),
@@ -416,7 +450,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               item['originalPrice'] as String,
                               style: GoogleFonts.literata(
                                 fontSize: 10.5,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                                 decoration: TextDecoration.lineThrough,
                               ),
                             ),
@@ -425,20 +459,30 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         const SizedBox(height: 6),
                         Row(
                           children: [
-                            Text(
-                              'Buy Again ›',
-                              style: GoogleFonts.literata(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF0D1B2A),
+                            GestureDetector(
+                              onTap: () {
+                                widget.onBuyAgain?.call(item['title'] as String);
+                              },
+                              child: Text(
+                                'Buy Again ›',
+                                style: GoogleFonts.literata(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF000000),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 12),
-                            Text(
-                              'View Product',
-                              style: GoogleFonts.literata(
-                                fontSize: 11,
-                                color: const Color(0xFF1B365D),
+                            GestureDetector(
+                              onTap: () {
+                                widget.onViewProduct?.call(item['title'] as String);
+                              },
+                              child: Text(
+                                'View Product',
+                                style: GoogleFonts.literata(
+                                  fontSize: 11,
+                                  color: const Color(0xFF000000),
+                                ),
                               ),
                             ),
                           ],
@@ -462,9 +506,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,19 +518,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.local_shipping_outlined,
-                    size: 14, color: Color(0xFF0D1B2A)),
+                    size: 14, color: Color(0xFF000000)),
               ),
               const SizedBox(width: 8),
               Text(
                 'Shipping Details',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -495,13 +539,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.person_outline, size: 14, color: Color(0xFF0D1B2A)),
+                const Icon(Icons.person_outline, size: 14, color: Color(0xFF000000)),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Column(
@@ -512,7 +556,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -520,7 +564,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         widget.recipientAddress,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -541,7 +585,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 'Tracking ID',
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
               Row(
@@ -551,14 +595,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
                     onTap: _copyTrackingId,
                     child: const Icon(Icons.copy_rounded,
-                        size: 13, color: Color(0xFF0D1B2A)),
+                        size: 13, color: Color(0xFF000000)),
                   ),
                 ],
               ),
@@ -576,9 +620,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -588,18 +632,18 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.credit_card, size: 14, color: Color(0xFF0D1B2A)),
+                child: const Icon(Icons.credit_card, size: 14, color: Color(0xFF000000)),
               ),
               const SizedBox(width: 8),
               Text(
                 'Payment Information',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -608,7 +652,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -616,7 +660,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: const Text(
@@ -634,14 +678,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       Text(
-                        'Auth #920831',
+                        'Auth #${widget.authCode ?? '920831'}',
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -650,7 +694,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -659,7 +703,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       fontFamily: 'Literata',
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFFB8860B),
+                      color: const Color(0xFF142D4E),
                     ),
                   ),
                 ),
@@ -671,13 +715,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           const SizedBox(height: 6),
           Row(
             children: [
-              const Icon(Icons.local_offer_outlined, size: 12, color: Color(0xFF1B365D)),
+              const Icon(Icons.local_offer_outlined, size: 12, color: Color(0xFF000000)),
               const SizedBox(width: 4),
               Text(
                 'Bundle Promotion',
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
               const Spacer(),
@@ -686,7 +730,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11.5,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -697,25 +741,25 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           _buildDetailRow('Express Delivery', 'FREE', isBold: true),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: Color(0xFFE6C17A), height: 1),
+            child: Divider(color: Color(0xFF142D4E), height: 1),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Total Amount Paid',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               Text(
                 '₹40,273.95',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 15.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -733,7 +777,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           label,
           style: GoogleFonts.literata(
             fontSize: 11.5,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
         Text(
@@ -741,7 +785,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           style: GoogleFonts.literata(
             fontSize: 11.5,
             fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
       ],
@@ -756,7 +800,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       width: double.infinity,
       height: 44,
       child: ElevatedButton.icon(
-        onPressed: () {
+        onPressed: widget.onDownloadInvoice ?? () {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -768,8 +812,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFE6C17A),
-          foregroundColor: const Color(0xFF0D1B2A),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFF142D4E),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22),
@@ -791,26 +835,29 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   // CANCEL ORDER ROW
   // ---------------------------------------------------------------------------
   Widget _buildCancelOrderRow() {
-    return Row(
-      children: [
-        const Icon(Icons.cancel_outlined, size: 14, color: Color(0xFF1B365D)),
-        const SizedBox(width: 6),
-        Text(
-          'Cancel Order',
-          style: GoogleFonts.literata(
-            fontSize: 11.5,
-            color: const Color(0xFF0D1B2A),
+    return GestureDetector(
+      onTap: widget.onCancelOrder,
+      child: Row(
+        children: [
+          const Icon(Icons.cancel_outlined, size: 14, color: Color(0xFF000000)),
+          const SizedBox(width: 6),
+          Text(
+            'Cancel Order',
+            style: GoogleFonts.literata(
+              fontSize: 11.5,
+              color: const Color(0xFF000000),
+            ),
           ),
-        ),
-        const Spacer(),
-        Text(
-          'Eligible until 12:28 PM',
-          style: GoogleFonts.literata(
-            fontSize: 10.5,
-            color: const Color(0xFF1B365D),
+          const Spacer(),
+          Text(
+            'Eligible until 12:28 PM',
+            style: GoogleFonts.literata(
+              fontSize: 10.5,
+              color: const Color(0xFF000000),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -818,20 +865,23 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   // NEED HELP ROW
   // ---------------------------------------------------------------------------
   Widget _buildNeedHelpRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.headset_mic_outlined, size: 14, color: Color(0xFF0D1B2A)),
-        const SizedBox(width: 6),
-        Text(
-          'Need Help with this Order?',
-          style: GoogleFonts.literata(
-            fontSize: 11.5,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+    return GestureDetector(
+      onTap: widget.onNeedHelp,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.headset_mic_outlined, size: 14, color: Color(0xFF000000)),
+          const SizedBox(width: 6),
+          Text(
+            'Need Help with this Order?',
+            style: GoogleFonts.literata(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFF000000),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

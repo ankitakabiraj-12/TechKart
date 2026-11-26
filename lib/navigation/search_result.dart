@@ -6,6 +6,7 @@ import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
 import '../core/network/api_client.dart';
 import '../core/widgets/techkart_product_image.dart';
+import '../system/currency_service.dart';
 
 /// TechKart Search Results Screen (Titanium watch)
 ///
@@ -16,7 +17,7 @@ import '../core/widgets/techkart_product_image.dart';
 ///   - Indian postal code location: "• 400001 • Mumbai"
 ///   - Notification bell with red dot, user profile avatar.
 /// - Search Input Pill:
-///   - Back arrow, search icon, "Titanium watch" text, clear "×", mic, and camera lens visual search icons.
+///   - Back arrow, search icon, "Titanium watch" text, clear "Ã—", mic, and camera lens visual search icons.
 /// - Results Header:
 ///   - "Titanium watch" in bold Domine serif font, "14 items" soft sky blue pill tag (#D9ECFE).
 ///   - "Sort: Best Match v" soft pill dropdown.
@@ -28,25 +29,25 @@ import '../core/widgets/techkart_product_image.dart';
 /// - 2-Column Product Grid (Clean white cards, 20px radius, heart icon, photo, badges, title, specs, INR ₹ prices, plus button):
 ///   1. "Chronos Ultra 2"
 ///      - Badge: "BEST MATCH" (Dark navy)
-///      - Rating: "☆ 4.9 (420)"
+///      - Rating: "★ 4.9 (420)"
 ///      - Specs: "Titanium 49mm • Cellul..."
 ///      - Price: ₹35,499
 ///      - Image: `asset/chronos_titanium_chrono.jpg`
 ///   2. "Aura Watch Studio"
 ///      - Badge: "SAPPHIRE" (Purple/Navy)
-///      - Rating: "☆ 4.8 (312)"
+///      - Rating: "★ 4.8 (312)"
 ///      - Specs: "Ceramic Bezel • Sapphire"
 ///      - Price: ₹32,199
 ///      - Image: `asset/onboarding_hero_1.png`
 ///   3. "Volta Dual GaN Do..."
 ///      - Badge: "COMPANION" (Beige)
-///      - Rating: "☆ 4.9 (890)"
+///      - Rating: "★ 4.9 (890)"
 ///      - Specs: "65W Fast Charge • Puck"
 ///      - Price: ₹7,399
 ///      - Image: `asset/carousel_fast_gan_charger.jpg`
 ///   4. "Apex Titanium Link"
 ///      - Badge: "ECOSYSTEM" (Soft sky blue)
-///      - Rating: "☆ 4.9 (1.1k)"
+///      - Rating: "★ 4.9 (1.1k)"
 ///      - Specs: "Dual Biometrics • 7-day"
 ///      - Price: ₹45,499
 ///      - Image: `asset/apex_titanium_link.jpg`
@@ -89,8 +90,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       'rating': '4.9 (420)',
       'price': '₹84,900',
       'tag': 'BEST MATCH',
-      'tagBg': const Color(0xFF0D1B2A),
-      'tagColor': const Color(0xFFF5EBDD),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFFF8FAFC),
       'image': 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80',
     },
     {
@@ -100,8 +101,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       'rating': '4.9 (1.4k)',
       'price': '₹1,39,900',
       'tag': 'FLAGSHIP',
-      'tagBg': const Color(0xFF1B365D),
-      'tagColor': const Color(0xFFF5EBDD),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFFF8FAFC),
       'image': 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&q=80',
     },
     {
@@ -111,8 +112,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       'rating': '4.9 (890)',
       'price': '₹3,999',
       'tag': 'COMPANION',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFFB8860B),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80',
     },
     {
@@ -122,8 +123,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       'rating': '4.9 (2.1k)',
       'price': '₹29,990',
       'tag': 'HI-RES',
-      'tagBg': const Color(0xFFE6C17A),
-      'tagColor': const Color(0xFF0D1B2A),
+      'tagBg': const Color(0xFF142D4E),
+      'tagColor': const Color(0xFF142D4E),
       'image': 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80',
     },
   ];
@@ -164,11 +165,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               'title': p.title,
               'specs': specsText,
               'rating': "4.9 (${p.stockQuantity > 0 ? p.stockQuantity : 100})",
-              'price': "₹${p.price.toStringAsFixed(0)}",
-              'mrp': p.mrp != null ? "₹${p.mrp!.toStringAsFixed(0)}" : null,
+              'price': CurrencyService.formatInr(p.price, showDecimals: false),
+              'mrp': p.mrp != null ? CurrencyService.formatInr(p.mrp, showDecimals: false) : null,
               'tag': (p.stockQuantity > 0 ? "IN STOCK" : "PRE-ORDER"),
-              'tagBg': const Color(0xFF0D1B2A),
-              'tagColor': const Color(0xFFF5EBDD),
+              'tagBg': const Color(0xFF142D4E),
+              'tagColor': const Color(0xFFF8FAFC),
               'image': imgPath,
               'stock': p.stockQuantity,
             };
@@ -221,7 +222,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           '${item['title']} added to your cart.',
           style: GoogleFonts.literata(fontSize: 13.5),
         ),
-        backgroundColor: const Color(0xFF0D1B2A),
+        backgroundColor: const Color(0xFF142D4E),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
       ),
@@ -237,13 +238,13 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -265,7 +266,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     },
                     icon: const Icon(
                       Icons.arrow_back_rounded,
-                      color: Color(0xFF0D1B2A),
+                      color: Color(0xFF000000),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -278,7 +279,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     child: Container(
                       height: 44,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE6C17A),
+                        color: const Color(0xFF142D4E),
                         borderRadius: BorderRadius.circular(22),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -287,7 +288,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           const Icon(
                             Icons.search_rounded,
                             size: 18,
-                            color: Color(0xFF1B365D),
+                            color: Color(0xFF000000),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -295,7 +296,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               controller: _searchController,
                               style: GoogleFonts.literata(
                                 fontSize: 13,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                                 fontWeight: FontWeight.w500,
                               ),
                               decoration: const InputDecoration(
@@ -315,14 +316,20 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             child: const Icon(
                               Icons.close_rounded,
                               size: 16,
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Icon(
-                            Icons.mic_none_rounded,
-                            size: 18,
-                            color: Color(0xFF1B365D),
+                          GestureDetector(
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              AppNavigator.toConversationalShoppingAssistant(context);
+                            },
+                            child: const Icon(
+                              Icons.mic_none_rounded,
+                              size: 18,
+                              color: Color(0xFF000000),
+                            ),
                           ),
                           const SizedBox(width: 8),
                           GestureDetector(
@@ -333,7 +340,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             child: const Icon(
                               Icons.camera_alt_outlined,
                               size: 18,
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -353,7 +360,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         icon: const Icon(
                           Icons.notifications_none_rounded,
                           size: 23,
-                          color: Color(0xFF1B365D),
+                          color: Color(0xFF000000),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -366,7 +373,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           width: 7,
                           height: 7,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFE53E3E),
+                            color: Color(0xFFDC2626),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -406,10 +413,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         Flexible(
                           child: Text(
                             widget.categoryName ?? widget.query,
-                            style: GoogleFonts.domine(
+                            style: GoogleFonts.literata(
                               fontSize: 17,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -422,7 +429,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             vertical: 3,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE6C17A),
+                            color: const Color(0xFF142D4E),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
@@ -430,7 +437,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ),
@@ -446,7 +453,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -456,14 +463,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         const SizedBox(width: 4),
                         const Icon(
                           Icons.keyboard_arrow_down_rounded,
                           size: 16,
-                          color: Color(0xFF0D1B2A),
+                          color: Color(0xFF000000),
                         ),
                       ],
                     ),
@@ -488,20 +495,20 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
                       children: [
                         const Icon(Icons.check_rounded,
-                            size: 14, color: Color(0xFFF5EBDD)),
+                            size: 14, color: Color(0xFFF8FAFC)),
                         const SizedBox(width: 4),
                         Text(
                           'In Stock',
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w600,
-                            color: const Color(0xFFF5EBDD),
+                            color: const Color(0xFFF8FAFC),
                           ),
                         ),
                       ],
@@ -514,7 +521,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -524,7 +531,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         const SizedBox(width: 4),
@@ -532,7 +539,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           width: 15,
                           height: 15,
                           decoration: const BoxDecoration(
-                            color: Color(0xFF1B365D),
+                            color: Color(0xFF000000),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -541,7 +548,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFFF5EBDD),
+                                color: const Color(0xFFF8FAFC),
                               ),
                             ),
                           ),
@@ -556,7 +563,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -564,7 +571,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ),
@@ -575,7 +582,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -583,7 +590,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ),
@@ -607,7 +614,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 48),
                           child: Center(
-                            child: CircularProgressIndicator(color: Color(0xFF0D1B2A)),
+                            child: CircularProgressIndicator(color: Color(0xFF000000)),
                           ),
                         )
                       else if (_results.isEmpty)
@@ -621,22 +628,22 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   width: 72,
                                   height: 72,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFFE6C17A),
+                                    color: Color(0xFF142D4E),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(
                                     Icons.inventory_2_outlined,
                                     size: 36,
-                                    color: Color(0xFF0D1B2A),
+                                    color: Color(0xFF000000),
                                   ),
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
                                   "No products in this subcategory",
-                                  style: GoogleFonts.domine(
+                                  style: GoogleFonts.literata(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF0D1B2A),
+                                    color: const Color(0xFF000000),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
@@ -644,7 +651,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   "Verified catalog stock arriving soon.",
                                   style: GoogleFonts.literata(
                                     fontSize: 13,
-                                    color: const Color(0xFF1B365D),
+                                    color: const Color(0xFF000000),
                                   ),
                                 ),
                               ],
@@ -679,11 +686,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             onTap: () => _onProductTap(item),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF5EBDD),
+                                color: const Color(0xFFF8FAFC),
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF0D1B2A)
+                                    color: const Color(0xFF000000)
                                         .withValues(alpha: 0.04),
                                     blurRadius: 10,
                                     offset: const Offset(0, 4),
@@ -752,7 +759,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: const BoxDecoration(
-                                                  color: Color(0xFFF5EBDD),
+                                                  color: Color(0xFFF8FAFC),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Center(
@@ -764,7 +771,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                     size: 15,
                                                     color: isFavorite
                                                         ? const Color(
-                                                            0xFFE53E3E)
+                                                            0xFFDC2626)
                                                         : const Color(
                                                             0xFF718096),
                                                   ),
@@ -789,7 +796,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                             const Icon(
                                               Icons.star_border_rounded,
                                               size: 14,
-                                              color: Color(0xFF1B365D),
+                                              color: Color(0xFF000000),
                                             ),
                                             const SizedBox(width: 3),
                                             Text(
@@ -797,7 +804,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                               style: GoogleFonts.literata(
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF1B365D),
+                                                color: const Color(0xFF000000),
                                               ),
                                             ),
                                           ],
@@ -805,10 +812,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         const SizedBox(height: 4),
                                         Text(
                                           item['title'] as String,
-                                          style: GoogleFonts.domine(
+                                          style: GoogleFonts.literata(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color(0xFF0D1B2A),
+                                            color: const Color(0xFF000000),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -819,7 +826,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                           style: GoogleFonts.literata(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w400,
-                                            color: const Color(0xFF1B365D),
+                                            color: const Color(0xFF000000),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -836,10 +843,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                               children: [
                                                 Text(
                                                   item['price'] as String,
-                                                  style: GoogleFonts.domine(
+                                                  style: GoogleFonts.literata(
                                                     fontSize: 14.5,
                                                     fontWeight: FontWeight.w700,
-                                                    color: const Color(0xFF0D1B2A),
+                                                    color: const Color(0xFF000000),
                                                   ),
                                                 ),
                                                 if (item['mrp'] != null) ...[
@@ -849,7 +856,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                     style: GoogleFonts.literata(
                                                       fontSize: 10.5,
                                                       decoration: TextDecoration.lineThrough,
-                                                      color: const Color(0xFF1B365D),
+                                                      color: const Color(0xFF000000),
                                                     ),
                                                   ),
                                                 ],
@@ -861,14 +868,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                 width: 28,
                                                 height: 28,
                                                 decoration: const BoxDecoration(
-                                                  color: Color(0xFF0D1B2A),
+                                                  color: Color(0xFF000000),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: const Center(
                                                   child: Icon(
                                                     Icons.add_rounded,
                                                     size: 17,
-                                                    color: Color(0xFFF5EBDD),
+                                                    color: Color(0xFFF8FAFC),
                                                   ),
                                                 ),
                                               ),
@@ -896,7 +903,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Color(0xFFE6C17A), Color(0xFFE6C17A)],
+                            colors: [Color(0xFF142D4E), Color(0xFF142D4E)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -911,24 +918,24 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   width: 32,
                                   height: 32,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFF1B365D),
+                                    color: Color(0xFF000000),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.auto_awesome_rounded,
                                       size: 16,
-                                      color: Color(0xFFF5EBDD),
+                                      color: Color(0xFFF8FAFC),
                                     ),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
                                   'Didn\'t find the exact specs?',
-                                  style: GoogleFonts.domine(
+                                  style: GoogleFonts.literata(
                                     fontSize: 14.5,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF0D1B2A),
+                                    color: const Color(0xFF000000),
                                   ),
                                 ),
                               ],
@@ -939,7 +946,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                                 height: 1.4,
                               ),
                             ),
@@ -954,7 +961,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                 width: double.infinity,
                                 height: 42,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFF5EBDD),
+                                  color: const Color(0xFFF8FAFC),
                                   borderRadius: BorderRadius.circular(21),
                                 ),
                                 padding:
@@ -964,7 +971,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                     const Icon(
                                       Icons.chat_bubble_outline_rounded,
                                       size: 15,
-                                      color: Color(0xFF1B365D),
+                                      color: Color(0xFF000000),
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(
@@ -973,7 +980,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         style: GoogleFonts.literata(
                                           fontSize: 11.5,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -982,7 +989,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                     const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 15,
-                                      color: Color(0xFF0D1B2A),
+                                      color: Color(0xFF000000),
                                     ),
                                   ],
                                 ),

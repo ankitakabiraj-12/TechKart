@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -171,7 +171,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -207,7 +207,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -216,25 +216,25 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Checkout',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
             onPressed: widget.onLockPressed ??
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -274,7 +274,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           ],
         ),
         const SizedBox(height: 12),
-        const Divider(color: Color(0xFFE6C17A), height: 1),
+        const Divider(color: Color(0xFF142D4E), height: 1),
       ],
     );
   }
@@ -292,14 +292,14 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           height: 32,
           decoration: BoxDecoration(
             color: isActive
-                ? const Color(0xFF0D1B2A)
-                : const Color(0xFFE6C17A),
+                ? const Color(0xFF142D4E)
+                : const Color(0xFF142D4E),
             shape: BoxShape.circle,
           ),
           child: Icon(
             icon,
             size: 16,
-            color: isActive ? const Color(0xFFF5EBDD) : const Color(0xFF1B365D),
+            color: isActive ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
           ),
         ),
         const SizedBox(height: 4),
@@ -309,7 +309,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             fontSize: 10.5,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.8,
-            color: isActive ? const Color(0xFF0D1B2A) : const Color(0xFF1B365D),
+            color: isActive ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           ),
         ),
       ],
@@ -320,7 +320,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       width: 44,
       height: 2,
-      color: const Color(0xFFE6C17A),
+      color: const Color(0xFF142D4E),
     );
   }
 
@@ -334,7 +334,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
-            color: const Color(0xFFE6C17A),
+            color: const Color(0xFF142D4E),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -344,7 +344,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -355,7 +355,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -364,10 +364,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         const SizedBox(height: 8),
         Text(
           'Select Delivery Address',
-          style: GoogleFonts.domine(
+          style: GoogleFonts.literata(
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 4),
@@ -375,7 +375,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           'Choose where you would like your TechKart order delivered.',
           style: GoogleFonts.literata(
             fontSize: 12,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],
@@ -391,10 +391,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           width: isSelected ? 1.5 : 1,
         ),
         boxShadow: const [
@@ -414,7 +414,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               Container(
                 width: 4,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     bottomLeft: Radius.circular(16),
@@ -437,19 +437,19 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             height: 20,
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? const Color(0xFF0D1B2A)
-                                  : const Color(0xFFF5EBDD),
+                                  ? const Color(0xFF142D4E)
+                                  : const Color(0xFFF8FAFC),
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: isSelected
-                                    ? const Color(0xFF0D1B2A)
-                                    : const Color(0xFFE6C17A),
+                                    ? const Color(0xFF142D4E)
+                                    : const Color(0xFF142D4E),
                                 width: 1.5,
                               ),
                             ),
                             child: isSelected
                                 ? const Icon(Icons.check,
-                                    size: 13, color: Color(0xFFF5EBDD))
+                                    size: 13, color: Color(0xFFF8FAFC))
                                 : null,
                           ),
                         ),
@@ -459,21 +459,21 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE6C17A),
+                            color: const Color(0xFF142D4E),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(address.labelIcon,
-                                  size: 13, color: const Color(0xFF0D1B2A)),
+                                  size: 13, color: const Color(0xFF000000)),
                               const SizedBox(width: 4),
                               Text(
                                 address.label,
                                 style: GoogleFonts.literata(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             ],
@@ -485,7 +485,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2.5),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -494,7 +494,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                                 fontFamily: 'Literata',
                                 fontSize: 9.5,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFFB8860B),
+                                color: const Color(0xFF142D4E),
                               ),
                             ),
                           ),
@@ -509,7 +509,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             );
                           },
                           child: const Icon(Icons.edit_outlined,
-                              size: 16, color: Color(0xFF1B365D)),
+                              size: 16, color: Color(0xFF000000)),
                         ),
                         if (address.isDefault) ...[
                           const SizedBox(width: 10),
@@ -526,7 +526,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                               );
                             },
                             child: const Icon(Icons.delete_outline,
-                                size: 16, color: Color(0xFF1B365D)),
+                                size: 16, color: Color(0xFF000000)),
                           ),
                         ],
                       ],
@@ -541,17 +541,17 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                               (address.companyTag != null
                                   ? ' ${address.companyTag}'
                                   : ''),
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         Text(
                           address.phone,
                           style: GoogleFonts.literata(
                             fontSize: 11.5,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ],
@@ -563,7 +563,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12,
                         height: 1.35,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     if (address.deliveryEstimate != null) ...[
@@ -572,7 +572,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -582,7 +582,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                                   ? Icons.bolt
                                   : Icons.access_time_rounded,
                               size: 14,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                             const SizedBox(width: 6),
                             Expanded(
@@ -591,7 +591,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                                 style: GoogleFonts.literata(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             ),
@@ -618,20 +618,20 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFFE6C17A),
+          color: const Color(0xFF142D4E),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFE6C17A)),
+          border: Border.all(color: const Color(0xFF142D4E)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add_location_alt_outlined,
-                  size: 18, color: Color(0xFF0D1B2A)),
+                  size: 18, color: Color(0xFF000000)),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -643,7 +643,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -651,13 +651,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     'Add a home, office, or pickup location',
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFF0D1B2A)),
+            const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFF000000)),
           ],
         ),
       ),
@@ -671,9 +671,9 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -681,11 +681,11 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(Icons.door_front_door_outlined,
-                size: 18, color: Color(0xFF0D1B2A)),
+                size: 18, color: Color(0xFF000000)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -697,7 +697,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -706,7 +706,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11,
                     height: 1.3,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -718,16 +718,16 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: _leaveAtDoor ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+                color: _leaveAtDoor ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(
                   color: _leaveAtDoor
-                      ? const Color(0xFF0D1B2A)
-                      : const Color(0xFFE6C17A),
+                      ? const Color(0xFF142D4E)
+                      : const Color(0xFF142D4E),
                 ),
               ),
               child: _leaveAtDoor
-                  ? const Icon(Icons.check, size: 14, color: Color(0xFFF5EBDD))
+                  ? const Icon(Icons.check, size: 14, color: Color(0xFFF8FAFC))
                   : null,
             ),
           ),
@@ -743,8 +743,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFF5EBDD),
-        border: Border(top: BorderSide(color: Color(0xFFE6C17A), width: 1)),
+        color: Color(0xFFF8FAFC),
+        border: Border(top: BorderSide(color: Color(0xFF142D4E), width: 1)),
         boxShadow: [
           BoxShadow(
             color: Color(0x0A000000),
@@ -759,7 +759,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           Row(
             children: [
               const Icon(Icons.near_me_outlined,
-                  size: 14, color: Color(0xFF0D1B2A)),
+                  size: 14, color: Color(0xFF000000)),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -767,7 +767,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -775,7 +775,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -784,7 +784,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     fontFamily: 'Literata',
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -797,8 +797,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             child: ElevatedButton(
               onPressed: _handleProceed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0D1B2A),
-                foregroundColor: const Color(0xFFF5EBDD),
+                backgroundColor: const Color(0xFF142D4E),
+                foregroundColor: const Color(0xFFF8FAFC),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
@@ -815,7 +815,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
+                  const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF8FAFC)),
                 ],
               ),
             ),
@@ -824,13 +824,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.lock_outline, size: 12, color: Color(0xFF1B365D)),
+              const Icon(Icons.lock_outline, size: 12, color: Color(0xFF000000)),
               const SizedBox(width: 4),
               Text(
                 'Secure SSL 256-bit Encrypted Checkout',
                 style: GoogleFonts.literata(
                   fontSize: 10.5,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],

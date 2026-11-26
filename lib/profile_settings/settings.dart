@@ -82,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -268,7 +268,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               builder: (ctx) => AlertDialog(
                                 title: Text(
                                   'Terms & 7-Day Guarantee',
-                                  style: GoogleFonts.domine(fontWeight: FontWeight.w700),
+                                  style: GoogleFonts.literata(fontWeight: FontWeight.w700),
                                 ),
                                 content: Text(
                                   'Every purchase on TechKart is backed by our 7-Day Replacement Guarantee and 100% Genuine Tech Warranty.',
@@ -314,7 +314,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -323,13 +323,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.arrow_back,
                 size: 20,
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
               ),
             ),
           ),
@@ -337,10 +337,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Expanded(
             child: Text(
               'Settings',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -360,14 +360,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
             child: Row(
               children: [
-                const Icon(Icons.done_all, size: 14, color: Color(0xFF0D1B2A)),
+                const Icon(Icons.done_all, size: 14, color: Color(0xFF000000)),
                 const SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -378,10 +378,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             width: 32,
             height: 32,
             decoration: const BoxDecoration(
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.person, size: 18, color: Color(0xFFF5EBDD)),
+            child: const Icon(Icons.person, size: 18, color: Color(0xFFF8FAFC)),
           ),
         ],
       ),
@@ -395,13 +395,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.search, size: 20, color: Color(0xFF1B365D)),
+          const Icon(Icons.search, size: 20, color: Color(0xFF000000)),
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
@@ -409,7 +409,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: widget.onSearchChanged,
               style: GoogleFonts.literata(
                 fontSize: 13,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
               decoration: InputDecoration(
                 filled: false,
@@ -418,7 +418,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 hintText: 'Search settings, security, alerts...',
                 hintStyle: GoogleFonts.literata(
                   fontSize: 13,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ),
@@ -438,7 +438,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         fontSize: 10.5,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
-        color: const Color(0xFF1B365D),
+        color: const Color(0xFF000000),
       ),
     );
   }
@@ -449,9 +449,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSettingsCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(children: children),
     );
@@ -479,10 +479,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Container(
                   padding: const EdgeInsets.all(7),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE6C17A),
+                    color: Color(0xFF142D4E),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
+                  child: Icon(icon, size: 16, color: const Color(0xFF000000)),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -496,7 +496,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           if (badge != null) ...[
@@ -507,7 +507,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 vertical: 1.5,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFE6C17A),
+                                color: const Color(0xFF142D4E),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Text(
@@ -515,7 +515,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 style: const TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF0D1B2A),
+                                  color: Color(0xFF000000),
                                 ),
                               ),
                             ),
@@ -527,7 +527,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         subtitle,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -536,13 +536,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 12,
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                 ),
               ],
             ),
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
+        if (!isLast) const Divider(color: Color(0xFF142D4E), height: 1),
       ],
     );
   }
@@ -564,10 +564,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
+                child: Icon(icon, size: 16, color: const Color(0xFF000000)),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -579,7 +579,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     const SizedBox(height: 1),
@@ -587,7 +587,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -596,12 +596,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Switch(
                 value: value,
                 onChanged: onChanged,
-                activeThumbColor: const Color(0xFF0D1B2A),
+                activeThumbColor: const Color(0xFF142D4E),
               ),
             ],
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
+        if (!isLast) const Divider(color: Color(0xFF142D4E), height: 1),
       ],
     );
   }
@@ -623,10 +623,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
+                child: Icon(icon, size: 16, color: const Color(0xFF000000)),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -638,7 +638,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     const SizedBox(height: 1),
@@ -646,7 +646,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -655,8 +655,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE6C17A),
-                  foregroundColor: const Color(0xFF0D1B2A),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFF142D4E),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
@@ -678,7 +678,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
+        if (!isLast) const Divider(color: Color(0xFF142D4E), height: 1),
       ],
     );
   }
@@ -706,21 +706,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+              border: Border.all(color: const Color(0xFF142D4E), width: 1),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.logout, size: 15, color: Color(0xFFEF4444)),
+                const Icon(Icons.logout, size: 15, color: Color(0xFFDC2626)),
                 const SizedBox(width: 8),
                 Text(
                   'Log Out of TechKart',
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFFEF4444),
+                    color: const Color(0xFFDC2626),
                   ),
                 ),
               ],
@@ -740,13 +740,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.lock_outline, size: 12, color: Color(0xFF1B365D)),
+            const Icon(Icons.lock_outline, size: 12, color: Color(0xFF000000)),
             const SizedBox(width: 4),
             Text(
               'End-to-End Encrypted Session',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -756,7 +756,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           'TechKart Mobile v2.4.1 (Build 4920) • Verified Build',
           style: GoogleFonts.literata(
             fontSize: 10.5,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],

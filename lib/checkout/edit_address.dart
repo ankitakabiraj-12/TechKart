@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:techkart/checkout/delivery_address.dart';
@@ -106,7 +106,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -124,7 +124,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                       'Enter your delivery location details to ensure fast and accurate shipment of your order.',
                       style: GoogleFonts.literata(
                         fontSize: 12,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                         height: 1.35,
                       ),
                     ),
@@ -176,7 +176,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -185,25 +185,25 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               widget.initialAddress != null ? 'Edit Address' : 'Add New Address',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 19,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
             onPressed: widget.onLockPressed ??
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -235,7 +235,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5),
           decoration: BoxDecoration(
-            color: const Color(0xFFE6C17A),
+            color: const Color(0xFF142D4E),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -245,7 +245,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFB8860B),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -256,7 +256,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
-                  color: const Color(0xFFB8860B),
+                  color: const Color(0xFF142D4E),
                 ),
               ),
             ],
@@ -267,7 +267,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           'Delivery Details',
           style: GoogleFonts.literata(
             fontSize: 11.5,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],
@@ -281,19 +281,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Color(0xFFF5EBDD),
+              color: Color(0xFFF8FAFC),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.my_location, size: 16, color: Color(0xFF0D1B2A)),
+            child: const Icon(Icons.my_location, size: 16, color: Color(0xFF000000)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -305,14 +305,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 Text(
                   'Pinpoint your current location instantly',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -321,7 +321,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -332,11 +332,11 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 const SizedBox(width: 4),
-                const Icon(Icons.arrow_forward_ios, size: 10, color: Color(0xFF0D1B2A)),
+                const Icon(Icons.arrow_forward_ios, size: 10, color: Color(0xFF000000)),
               ],
             ),
           ),
@@ -355,7 +355,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         fontSize: 11,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
-        color: const Color(0xFF1B365D),
+        color: const Color(0xFF000000),
       ),
     );
   }
@@ -374,19 +374,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
-            const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+            const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
           ],
         ),
         const SizedBox(height: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
@@ -396,19 +396,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'e.g. Tanvir Ahmed',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
               ),
-              const Icon(Icons.check_circle, size: 18, color: Color(0xFF10B981)),
+              const Icon(Icons.check_circle, size: 18, color: Color(0xFF107C41)),
             ],
           ),
         ),
@@ -430,10 +430,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
-            const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+            const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
           ],
         ),
         const SizedBox(height: 6),
@@ -443,9 +443,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE6C17A)),
+                border: Border.all(color: const Color(0xFF142D4E)),
               ),
               child: Row(
                 children: [
@@ -454,12 +454,12 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(width: 4),
                   const Icon(Icons.arrow_drop_down,
-                      size: 16, color: Color(0xFF0D1B2A)),
+                      size: 16, color: Color(0xFF000000)),
                 ],
               ),
             ),
@@ -469,9 +469,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: Row(
                   children: [
@@ -482,20 +482,20 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: '98765-43210',
                           hintStyle: GoogleFonts.literata(
                             fontSize: 13,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ),
                     ),
                     const Icon(Icons.phone_outlined,
-                        size: 18, color: Color(0xFF1B365D)),
+                        size: 18, color: Color(0xFF000000)),
                   ],
                 ),
               ),
@@ -505,13 +505,13 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         const SizedBox(height: 4),
         Row(
           children: [
-            const Icon(Icons.info_outline, size: 12, color: Color(0xFF1B365D)),
+            const Icon(Icons.info_outline, size: 12, color: Color(0xFF000000)),
             const SizedBox(width: 4),
             Text(
               'Used for delivery updates & SMS courier tracking',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -534,19 +534,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
-            const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+            const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
           ],
         ),
         const SizedBox(height: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
@@ -555,20 +555,20 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   controller: _streetController,
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'House, road, flat, or building details',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
               ),
               const Icon(Icons.apartment_rounded,
-                  size: 18, color: Color(0xFF1B365D)),
+                  size: 18, color: Color(0xFF000000)),
             ],
           ),
         ),
@@ -591,14 +591,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
             Text(
               'Optional',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -607,9 +607,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
@@ -618,20 +618,20 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   controller: _landmarkController,
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Nearby prominent structure, road or park',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
               ),
               const Icon(Icons.place_outlined,
-                  size: 18, color: Color(0xFF1B365D)),
+                  size: 18, color: Color(0xFF000000)),
             ],
           ),
         ),
@@ -656,32 +656,32 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
-                  const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+                  const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
                 ],
               ),
               const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: TextFormField(
                   controller: _cityController,
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'City',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -701,32 +701,32 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
-                  const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+                  const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
                 ],
               ),
               const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: TextFormField(
                   controller: _divisionController,
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Division',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -755,33 +755,33 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
-                  const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+                  const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
                 ],
               ),
               const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: TextFormField(
                   controller: _pinController,
                   keyboardType: TextInputType.number,
                   style: GoogleFonts.literata(
                     fontSize: 13,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'PIN / ZIP',
                     hintStyle: GoogleFonts.literata(
                       fontSize: 13,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
@@ -801,19 +801,19 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
-                  const Text(' *', style: TextStyle(color: Color(0xFFEF4444))),
+                  const Text(' *', style: TextStyle(color: Color(0xFFDC2626))),
                 ],
               ),
               const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EBDD),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -823,11 +823,11 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     const Icon(Icons.keyboard_arrow_down,
-                        size: 16, color: Color(0xFF1B365D)),
+                        size: 16, color: Color(0xFF000000)),
                   ],
                 ),
               ),
@@ -865,12 +865,12 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFFE6C17A) : const Color(0xFFF5EBDD),
+            color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isSelected
-                  ? const Color(0xFFB8860B)
-                  : const Color(0xFFE6C17A),
+                  ? const Color(0xFF142D4E)
+                  : const Color(0xFF142D4E),
             ),
           ),
           child: Column(
@@ -879,8 +879,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 icon,
                 size: 20,
                 color: isSelected
-                    ? const Color(0xFFB8860B)
-                    : const Color(0xFF1B365D),
+                    ? const Color(0xFF142D4E)
+                    : const Color(0xFF142D4E),
               ),
               const SizedBox(height: 6),
               Text(
@@ -889,8 +889,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                   color: isSelected
-                      ? const Color(0xFF0D1B2A)
-                      : const Color(0xFF1B365D),
+                      ? const Color(0xFF142D4E)
+                      : const Color(0xFF142D4E),
                 ),
               ),
             ],
@@ -915,14 +915,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
             Text(
               'Optional',
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -931,9 +931,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: TextFormField(
             controller: _instructionsController,
@@ -941,14 +941,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             style: GoogleFonts.literata(
               fontSize: 12.5,
               height: 1.35,
-              color: const Color(0xFF0D1B2A),
+              color: const Color(0xFF000000),
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: 'Call before arrival, ring bell at Flat 4B directly.',
               hintStyle: GoogleFonts.literata(
                 fontSize: 12,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -964,9 +964,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
@@ -979,7 +979,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -988,7 +988,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11,
                     height: 1.3,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -997,7 +997,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           Switch(
             value: _isDefault,
             onChanged: (val) => setState(() => _isDefault = val),
-            activeThumbColor: const Color(0xFF0D1B2A),
+            activeThumbColor: const Color(0xFF142D4E),
           ),
         ],
       ),
@@ -1014,8 +1014,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
       child: ElevatedButton(
         onPressed: _handleSave,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF0D1B2A),
-          foregroundColor: const Color(0xFFF5EBDD),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFFF8FAFC),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -1032,7 +1032,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
+            const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF8FAFC)),
           ],
         ),
       ),
@@ -1046,14 +1046,14 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF1B365D)),
+        const Icon(Icons.shield_outlined, size: 14, color: Color(0xFF000000)),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
             'SSL Encrypted • 100% Secure Checkout & Data Privacy',
             style: GoogleFonts.literata(
               fontSize: 11,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
         ),

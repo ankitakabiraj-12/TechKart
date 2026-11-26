@@ -85,7 +85,7 @@ class TechKartProductImage extends StatelessWidget {
             Icon(
               icon,
               size: (width != null && width! < 60) ? 22 : 32,
-              color: const Color(0xFF1B365D).withValues(alpha: 0.65),
+              color: const Color(0xFF000000).withValues(alpha: 0.65),
             ),
             if (height != null && height! >= 90 && productTitle != null && productTitle!.isNotEmpty) ...[
               const SizedBox(height: 4),
@@ -158,7 +158,7 @@ class TechKartProductImage extends StatelessWidget {
                 height: 18,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1B365D)),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF142D4E)),
                 ),
               ),
             ),

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -171,7 +171,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
               'Password reset successfully. Please sign in.',
               style: GoogleFonts.literata(),
             ),
-            backgroundColor: const Color(0xFF0D1B2A),
+            backgroundColor: const Color(0xFF142D4E),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -202,7 +202,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
             fontWeight: FontWeight.w500,
           ),
         ),
-        backgroundColor: const Color(0xFF0D1B2A),
+        backgroundColor: const Color(0xFF142D4E),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -228,13 +228,13 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -278,14 +278,14 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               width: 44,
                               height: 44,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFE6C17A),
+                                color: Color(0xFF142D4E),
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
                                 child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
                                   size: 16,
-                                  color: Color(0xFF0D1B2A),
+                                  color: Color(0xFF000000),
                                 ),
                               ),
                             ),
@@ -323,7 +323,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -332,7 +332,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             const Icon(
                               Icons.verified_user_outlined,
                               size: 14,
-                              color: Color(0xFF0D1B2A),
+                              color: Color(0xFF000000),
                             ),
                             const SizedBox(width: 6),
                             Text(
@@ -341,7 +341,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.9,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                           ],
@@ -355,10 +355,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                       // -----------------------------------------------------
                       Text(
                         'Create new password.',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 34,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                           letterSpacing: -0.6,
                         ),
                       ),
@@ -373,7 +373,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                         style: GoogleFonts.literata(
                           fontSize: 14.5,
                           fontWeight: FontWeight.w400,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                           height: 1.45,
                         ),
                       ),
@@ -391,7 +391,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           Text(
@@ -399,7 +399,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -408,7 +408,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                       Container(
                         height: 56,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         alignment: Alignment.center,
@@ -418,7 +418,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                           obscureText: _obscurePassword,
                           style: GoogleFonts.literata(
                             fontSize: 14.5,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                             fontWeight: FontWeight.w500,
                           ),
                           decoration: InputDecoration(
@@ -429,7 +429,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               child: Icon(
                                 Icons.lock_outline_rounded,
                                 size: 19,
-                                color: Color(0xFF1B365D),
+                                color: Color(0xFF000000),
                               ),
                             ),
                             prefixIconConstraints: const BoxConstraints(
@@ -442,7 +442,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
                                 size: 20,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                               ),
                               onPressed: () {
                                 setState(() {
@@ -453,7 +453,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             hintText: '••••••••••••',
                             hintStyle: GoogleFonts.literata(
                               fontSize: 14.5,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -476,7 +476,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           Text(
@@ -484,7 +484,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFF0D1B2A),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -499,7 +499,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               margin: EdgeInsets.only(right: index < 3 ? 6 : 0),
                               decoration: BoxDecoration(
                                 color: index < _passwordScore
-                                    ? const Color(0xFF1B365D)
+                                    ? const Color(0xFF142D4E)
                                     : const Color(0xFFC4E3FA),
                                 borderRadius: BorderRadius.circular(2),
                               ),
@@ -518,7 +518,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                 ? Icons.check_circle_outline_rounded
                                 : Icons.radio_button_unchecked_rounded,
                             size: 15,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                           const SizedBox(width: 6),
                           Text(
@@ -526,7 +526,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           const SizedBox(width: 18),
@@ -535,7 +535,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                 ? Icons.check_circle_outline_rounded
                                 : Icons.radio_button_unchecked_rounded,
                             size: 15,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                           const SizedBox(width: 6),
                           Text(
@@ -543,7 +543,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -558,7 +558,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                 ? Icons.check_circle_outline_rounded
                                 : Icons.radio_button_unchecked_rounded,
                             size: 15,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                           const SizedBox(width: 7),
                           Text(
@@ -566,7 +566,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -585,7 +585,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             style: GoogleFonts.literata(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                           if (_confirmPasswordController.text.isNotEmpty)
@@ -597,8 +597,8 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                       : Icons.error_outline_rounded,
                                   size: 14,
                                   color: _passwordsMatch
-                                      ? const Color(0xFF1B365D)
-                                      : const Color(0xFFEF4444),
+                                      ? const Color(0xFF142D4E)
+                                      : const Color(0xFFDC2626),
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
@@ -609,8 +609,8 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                     color: _passwordsMatch
-                                        ? const Color(0xFF1B365D)
-                                        : const Color(0xFFEF4444),
+                                        ? const Color(0xFF142D4E)
+                                        : const Color(0xFFDC2626),
                                   ),
                                 ),
                               ],
@@ -621,7 +621,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                       Container(
                         height: 56,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         alignment: Alignment.center,
@@ -631,7 +631,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                           obscureText: _obscureConfirmPassword,
                           style: GoogleFonts.literata(
                             fontSize: 14.5,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                             fontWeight: FontWeight.w500,
                           ),
                           decoration: InputDecoration(
@@ -642,7 +642,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               child: Icon(
                                 Icons.shield_outlined,
                                 size: 19,
-                                color: Color(0xFF1B365D),
+                                color: Color(0xFF000000),
                               ),
                             ),
                             prefixIconConstraints: const BoxConstraints(
@@ -655,7 +655,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
                                 size: 20,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                               ),
                               onPressed: () {
                                 setState(() {
@@ -667,7 +667,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                             hintText: '••••••••••••',
                             hintStyle: GoogleFonts.literata(
                               fontSize: 14.5,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -686,7 +686,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -696,14 +696,14 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               width: 44,
                               height: 44,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF5EBDD),
+                                color: Color(0xFFF8FAFC),
                                 shape: BoxShape.circle,
                               ),
                               child: const Center(
                                 child: Icon(
                                   Icons.lock_reset_rounded,
                                   size: 22,
-                                  color: Color(0xFF0D1B2A),
+                                  color: Color(0xFF000000),
                                 ),
                               ),
                             ),
@@ -717,7 +717,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     style: GoogleFonts.literata(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF0D1B2A),
+                                      color: const Color(0xFF000000),
                                     ),
                                   ),
                                   const SizedBox(height: 3),
@@ -726,7 +726,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     style: GoogleFonts.literata(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w400,
-                                      color: const Color(0xFF1B365D),
+                                      color: const Color(0xFF000000),
                                       height: 1.35,
                                     ),
                                   ),
@@ -748,10 +748,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _handleUpdatePassword,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF0D1B2A),
-                            foregroundColor: const Color(0xFFF5EBDD),
+                            backgroundColor: const Color(0xFF142D4E),
+                            foregroundColor: const Color(0xFFF8FAFC),
                             disabledBackgroundColor: const Color(
-                              0xFF0D1B2A,
+                              0xFF142D4E,
                             ).withValues(alpha: 0.6),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -765,7 +765,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      Color(0xFFF5EBDD),
+                                      Color(0xFFF8FAFC),
                                     ),
                                   ),
                                 )
@@ -777,7 +777,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 15.5,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFFF5EBDD),
+                                        color: const Color(0xFFF8FAFC),
                                         letterSpacing: 0.2,
                                       ),
                                     ),
@@ -785,7 +785,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                                     const Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 18,
-                                      color: Color(0xFFF5EBDD),
+                                      color: Color(0xFFF8FAFC),
                                     ),
                                   ],
                                 ),
@@ -806,7 +806,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                             GestureDetector(
@@ -814,12 +814,12 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                               behavior: HitTestBehavior.opaque,
                               child: Text(
                                 'Sign In',
-                                style: GoogleFonts.domine(
+                                style: GoogleFonts.literata(
                                   fontSize: 13.5,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                   decoration: TextDecoration.underline,
-                                  decorationColor: const Color(0xFF0D1B2A),
+                                  decorationColor: const Color(0xFF142D4E),
                                   decorationThickness: 1.5,
                                 ),
                               ),
@@ -838,7 +838,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen>
                           width: 134,
                           height: 4,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE6C17A),
+                            color: const Color(0xFF142D4E),
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

@@ -14,6 +14,8 @@ class ConversationalShoppingAssistantScreen extends StatefulWidget {
   final VoidCallback? onCameraPressed;
   final VoidCallback? onNotificationPressed;
   final VoidCallback? onProfilePressed;
+  final VoidCallback? onBundleAdded;
+  final ValueChanged<String>? onProductSelected;
   final bool showBottomNav;
   final ValueChanged<int>? onNavTabSelected;
 
@@ -23,6 +25,8 @@ class ConversationalShoppingAssistantScreen extends StatefulWidget {
     this.onCameraPressed,
     this.onNotificationPressed,
     this.onProfilePressed,
+    this.onBundleAdded,
+    this.onProductSelected,
     this.showBottomNav = true,
     this.onNavTabSelected,
   });
@@ -277,7 +281,7 @@ class _ConversationalShoppingAssistantScreenState
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -346,20 +350,20 @@ class _ConversationalShoppingAssistantScreenState
                           width: 28,
                           height: 28,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFE6C17A),
+                            color: Color(0xFF142D4E),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(Icons.auto_awesome,
-                              size: 14, color: Color(0xFF0D1B2A)),
+                              size: 14, color: Color(0xFFFFFFFF)),
                         ),
                         const SizedBox(width: 10),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 10),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5EBDD),
+                            color: const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xFFE6C17A)),
+                            border: Border.all(color: const Color(0xFFE2E8F0)),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -369,7 +373,7 @@ class _ConversationalShoppingAssistantScreenState
                                 height: 12,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  color: Color(0xFF0D1B2A),
+                                  color: Color(0xFF142D4E),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -377,7 +381,7 @@ class _ConversationalShoppingAssistantScreenState
                                 'TechKart AI is thinking...',
                                 style: GoogleFonts.literata(
                                   fontSize: 11,
-                                  color: const Color(0xFF1B365D),
+                                  color: const Color(0xFF142D4E),
                                 ),
                               ),
                             ],
@@ -404,7 +408,7 @@ class _ConversationalShoppingAssistantScreenState
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -413,10 +417,10 @@ class _ConversationalShoppingAssistantScreenState
             child: Container(
               padding: const EdgeInsets.all(7),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFFF1F5F9),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 19, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back_rounded, size: 19, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 10),
@@ -430,10 +434,10 @@ class _ConversationalShoppingAssistantScreenState
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'TechKart AI',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                     maxLines: 1,
                   ),
@@ -443,7 +447,7 @@ class _ConversationalShoppingAssistantScreenState
                   'Smart Electronics Assistant',
                   style: GoogleFonts.literata(
                     fontSize: 10,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF142D4E),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -452,7 +456,7 @@ class _ConversationalShoppingAssistantScreenState
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.refresh_rounded, size: 21, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.refresh_rounded, size: 21, color: Color(0xFF000000)),
             tooltip: 'New Chat Session',
             onPressed: _startNewChat,
             padding: EdgeInsets.zero,
@@ -460,7 +464,7 @@ class _ConversationalShoppingAssistantScreenState
           ),
           const SizedBox(width: 4),
           IconButton(
-            icon: const Icon(Icons.camera_alt_outlined, size: 21, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.camera_alt_outlined, size: 21, color: Color(0xFF000000)),
             tooltip: 'Visual Search',
             onPressed: widget.onCameraPressed ??
                 () => AppNavigator.toAiVisualSearchCamera(context),
@@ -469,7 +473,7 @@ class _ConversationalShoppingAssistantScreenState
           ),
           const SizedBox(width: 4),
           IconButton(
-            icon: const Icon(Icons.notifications_none_outlined, size: 21, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.notifications_none_outlined, size: 21, color: Color(0xFF000000)),
             onPressed: widget.onNotificationPressed ??
                 () => AppNavigator.toNotifications(context),
             padding: EdgeInsets.zero,
@@ -494,7 +498,7 @@ class _ConversationalShoppingAssistantScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          color: const Color(0xFFE6C17A),
+          color: const Color(0xFFF1F5F9),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
@@ -502,7 +506,7 @@ class _ConversationalShoppingAssistantScreenState
           style: GoogleFonts.literata(
             fontSize: 10.5,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF64748B),
           ),
         ),
       ),
@@ -520,30 +524,30 @@ class _ConversationalShoppingAssistantScreenState
           width: 28,
           height: 28,
           decoration: const BoxDecoration(
-            color: Color(0xFFE6C17A),
+            color: Color(0xFF142D4E),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF0D1B2A)),
+          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFFFFFFFF)),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              border: Border.all(color: const Color(0xFFE6C17A)),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Text(
               message,
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 height: 1.45,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -562,7 +566,7 @@ class _ConversationalShoppingAssistantScreenState
         constraints: const BoxConstraints(maxWidth: 300),
         padding: const EdgeInsets.all(14),
         decoration: const BoxDecoration(
-          color: Color(0xFF0D1B2A),
+          color: Color(0xFF142D4E),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(4),
@@ -576,7 +580,7 @@ class _ConversationalShoppingAssistantScreenState
             fontSize: 12.5,
             height: 1.4,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFFFFFFF),
           ),
         ),
       ),
@@ -594,30 +598,30 @@ class _ConversationalShoppingAssistantScreenState
           width: 28,
           height: 28,
           decoration: const BoxDecoration(
-            color: Color(0xFFE6C17A),
+            color: Color(0xFF142D4E),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF0D1B2A)),
+          child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFFFFFFFF)),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              border: Border.all(color: const Color(0xFFE6C17A)),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Text(
               message,
               style: GoogleFonts.literata(
                 fontSize: 12.5,
                 height: 1.45,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -638,13 +642,13 @@ class _ConversationalShoppingAssistantScreenState
       margin: const EdgeInsets.only(left: 38, bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x04000000),
-            blurRadius: 6,
+            color: Color(0x06000000),
+            blurRadius: 8,
             offset: Offset(0, 2),
           ),
         ],
@@ -672,9 +676,9 @@ class _ConversationalShoppingAssistantScreenState
                       top: 2,
                       left: 2,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -683,7 +687,7 @@ class _ConversationalShoppingAssistantScreenState
                             fontFamily: 'Literata',
                             fontSize: 8.5,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xFF0D1B2A),
+                            color: Color(0xFFFFFFFF),
                           ),
                         ),
                       ),
@@ -697,10 +701,10 @@ class _ConversationalShoppingAssistantScreenState
                   children: [
                     Text(
                       productTitle,
-                      style: GoogleFonts.domine(
+                      style: GoogleFonts.literata(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -710,40 +714,41 @@ class _ConversationalShoppingAssistantScreenState
                         product['subtitle'] as String,
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF64748B),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     const SizedBox(height: 4),
-                    Row(
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(
                           product['price'] as String? ?? '₹0',
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
-                        if (product['cutPrice'] != null) ...[
-                          const SizedBox(width: 6),
+                        if (product['cutPrice'] != null)
                           Text(
                             product['cutPrice'] as String,
                             style: GoogleFonts.literata(
                               fontSize: 10.5,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF64748B),
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
-                        ],
-                        const Spacer(),
                         if (product['status'] != null)
                           Text(
                             product['status'] as String,
                             style: GoogleFonts.literata(
                               fontSize: 10,
-                              color: const Color(0xFF1B365D),
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF107C41),
                             ),
                           ),
                       ],
@@ -765,8 +770,8 @@ class _ConversationalShoppingAssistantScreenState
                       productId: productId,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0D1B2A),
-                      foregroundColor: const Color(0xFFF5EBDD),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFFFFFFFF),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
@@ -783,7 +788,7 @@ class _ConversationalShoppingAssistantScreenState
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Icon(Icons.arrow_forward, size: 13),
+                        const Icon(Icons.arrow_forward_rounded, size: 13),
                       ],
                     ),
                   ),
@@ -804,16 +809,16 @@ class _ConversationalShoppingAssistantScreenState
       margin: const EdgeInsets.only(left: 38),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Text(
         message,
         style: GoogleFonts.literata(
           fontSize: 12.5,
           height: 1.4,
-          color: const Color(0xFF0D1B2A),
+          color: const Color(0xFF000000),
         ),
       ),
     );
@@ -837,7 +842,7 @@ class _ConversationalShoppingAssistantScreenState
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.8,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF64748B),
                 ),
               ),
               GestureDetector(
@@ -854,14 +859,14 @@ class _ConversationalShoppingAssistantScreenState
                 },
                 child: Row(
                   children: [
-                    const Icon(Icons.tune, size: 12, color: Color(0xFF1B365D)),
+                    const Icon(Icons.tune, size: 12, color: Color(0xFF142D4E)),
                     const SizedBox(width: 4),
                     Text(
                       'Refine',
                       style: GoogleFonts.literata(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF142D4E),
                       ),
                     ),
                   ],
@@ -902,21 +907,21 @@ class _ConversationalShoppingAssistantScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE6C17A)),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 13, color: const Color(0xFF0D1B2A)),
+            Icon(icon, size: 13, color: const Color(0xFF142D4E)),
             const SizedBox(width: 6),
             Text(
               label,
               style: GoogleFonts.literata(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -941,8 +946,16 @@ class _ConversationalShoppingAssistantScreenState
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: const Color(0xFFE6C17A),
+          color: const Color(0xFFFFFFFF),
           borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0xFFE2E8F0), width: 1.2),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x06000000),
+              blurRadius: 8,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           children: [
@@ -954,11 +967,11 @@ class _ConversationalShoppingAssistantScreenState
               child: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFFF1F5F9),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.image_outlined,
-                    size: 18, color: Color(0xFF0D1B2A)),
+                    size: 18, color: Color(0xFF142D4E)),
               ),
             ),
             const SizedBox(width: 8),
@@ -969,16 +982,19 @@ class _ConversationalShoppingAssistantScreenState
                 onSubmitted: (value) => _handleSendMessage(value),
                 style: GoogleFonts.literata(
                   fontSize: 12.5,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
                 decoration: InputDecoration(
                   filled: false,
                   fillColor: Colors.transparent,
                   border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8),
                   hintText: 'Ask about specs, compatibility, deals...',
                   hintStyle: GoogleFonts.literata(
                     fontSize: 12,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF94A3B8),
                   ),
                 ),
               ),
@@ -992,11 +1008,11 @@ class _ConversationalShoppingAssistantScreenState
                 width: 32,
                 height: 32,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.arrow_upward,
-                    size: 16, color: Color(0xFFF5EBDD)),
+                child: const Icon(Icons.arrow_upward_rounded,
+                    size: 16, color: Color(0xFFFFFFFF)),
               ),
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_routes/app_navigator.dart';
 import 'authentication/splash_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,106 +40,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: AppNavigator.navigatorKey,
       home: const SplashScreen(),
       onGenerateRoute: AppNavigator.onGenerateRoute,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1B365D),
-          primary: const Color(0xFF0D1B2A),
-          secondary: const Color(0xFF1B365D),
-          tertiary: const Color(0xFFB8860B),
-          surface: const Color(0xFFF5EBDD),
-          
-          brightness: Brightness.light,
-        ),
-        scaffoldBackgroundColor: const Color(0xFFFDFBCF),
-        cardColor: const Color(0xFFF5EBDD),
-        dividerColor: const Color(0xFFE6C17A),
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Color(0xFF0D1B2A),
-          selectionColor: Color(0x33E6C17A),
-          selectionHandleColor: Color(0xFF0D1B2A),
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFFDFBCF),
-          foregroundColor: Color(0xFF0D1B2A),
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          iconTheme: IconThemeData(color: Color(0xFF0D1B2A)),
-          titleTextStyle: TextStyle(
-            color: Color(0xFF0D1B2A),
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        cardTheme: CardThemeData(
-          color: const Color(0xFFF5EBDD),
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(color: Color(0xFFE6C17A)),
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: false,
-          fillColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          hintStyle: TextStyle(color: Color(0xFF1B365D)),
-          labelStyle: TextStyle(color: Color(0xFF1B365D)),
-          prefixIconColor: Color(0xFF1B365D),
-          suffixIconColor: Color(0xFF1B365D),
-          border: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          focusedErrorBorder: InputBorder.none,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF0D1B2A),
-            foregroundColor: const Color(0xFFF5EBDD),
-            elevation: 0,
-            side: const BorderSide(color: Color(0xFF0D1B2A)),
-          ),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: const Color(0xFFF5EBDD),
-            foregroundColor: const Color(0xFF1B365D),
-            side: const BorderSide(color: Color(0xFF1B365D)),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: const Color(0xFF1B365D),
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: Color(0xFF0D1B2A),
-        ),
-        dividerTheme: const DividerThemeData(
-          color: Color(0xFFE6C17A),
-          thickness: 1,
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFF0D1B2A),
-          selectedItemColor: Color(0xFFF5EBDD),
-          unselectedItemColor: Color(0xFFE6C17A),
-        ),
-        dialogTheme: const DialogThemeData(
-          backgroundColor: Color(0xFFF5EBDD),
-          surfaceTintColor: Colors.transparent,
-        ),
-        bottomSheetTheme: const BottomSheetThemeData(
-          backgroundColor: Color(0xFFF5EBDD),
-          surfaceTintColor: Colors.transparent,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
     );
   }
 }

@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,10 +27,14 @@ import '../app_routes/app_navigator.dart';
 /// - Home indicator bar.
 class AiImageProcessingScreen extends StatefulWidget {
   final String? imagePath;
+  final VoidCallback? onClose;
+  final VoidCallback? onRetakePhoto;
 
   const AiImageProcessingScreen({
     super.key,
     this.imagePath,
+    this.onClose,
+    this.onRetakePhoto,
   });
 
   @override
@@ -75,13 +79,13 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -97,19 +101,19 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: widget.onClose ?? () => Navigator.of(context).pop(),
                     child: Container(
                       width: 42,
                       height: 42,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFE6C17A),
+                        color: Color(0xFF142D4E),
                         shape: BoxShape.circle,
                       ),
                       child: const Center(
                         child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          size: 16,
-                          color: Color(0xFF0D1B2A),
+                          Icons.close_rounded,
+                          size: 20,
+                          color: Color(0xFF000000),
                         ),
                       ),
                     ),
@@ -121,7 +125,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.9,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -146,11 +150,11 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                         width: double.infinity,
                         height: 320,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5EBDD),
+                          color: const Color(0xFFF8FAFC),
                           borderRadius: BorderRadius.circular(28),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF0D1B2A).withValues(alpha: 0.06),
+                              color: const Color(0xFF000000).withValues(alpha: 0.06),
                               blurRadius: 18,
                               offset: const Offset(0, 6),
                             ),
@@ -166,7 +170,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Container(
-                                  color: const Color(0xFFE6C17A),
+                                  color: const Color(0xFF142D4E),
                                 ),
                               ),
 
@@ -180,9 +184,9 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                   decoration: const BoxDecoration(
                                     border: Border(
                                       top: BorderSide(
-                                          color: Color(0xFF0D1B2A), width: 2),
+                                          color: Color(0xFF000000), width: 2),
                                       right: BorderSide(
-                                          color: Color(0xFF0D1B2A), width: 2),
+                                          color: Color(0xFF000000), width: 2),
                                     ),
                                   ),
                                 ),
@@ -196,9 +200,9 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                   decoration: const BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(
-                                          color: Color(0xFF0D1B2A), width: 2),
+                                          color: Color(0xFF000000), width: 2),
                                       left: BorderSide(
-                                          color: Color(0xFF0D1B2A), width: 2),
+                                          color: Color(0xFF000000), width: 2),
                                     ),
                                   ),
                                 ),
@@ -214,7 +218,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                     vertical: 6,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFF5EBDD).withValues(alpha: 0.95),
+                                    color: const Color(0xFFF8FAFC).withValues(alpha: 0.95),
                                     borderRadius: BorderRadius.circular(20),
                                     boxShadow: [
                                       BoxShadow(
@@ -230,7 +234,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                       const Icon(
                                         Icons.sync_rounded,
                                         size: 15,
-                                        color: Color(0xFF0D1B2A),
+                                        color: Color(0xFF000000),
                                       ),
                                       const SizedBox(width: 6),
                                       Text(
@@ -238,7 +242,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                         style: GoogleFonts.literata(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                     ],
@@ -256,7 +260,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                     vertical: 6,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFF5EBDD).withValues(alpha: 0.95),
+                                    color: const Color(0xFFF8FAFC).withValues(alpha: 0.95),
                                     borderRadius: BorderRadius.circular(20),
                                     boxShadow: [
                                       BoxShadow(
@@ -273,7 +277,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                         width: 6,
                                         height: 6,
                                         decoration: const BoxDecoration(
-                                          color: Color(0xFF1B365D),
+                                          color: Color(0xFF000000),
                                           shape: BoxShape.circle,
                                         ),
                                       ),
@@ -284,7 +288,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                           fontSize: 10,
                                           fontWeight: FontWeight.w700,
                                           letterSpacing: 0.6,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                     ],
@@ -302,10 +306,10 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                       Text(
                         'Identifying Hardware',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 27,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                           letterSpacing: -0.5,
                         ),
                       ),
@@ -319,7 +323,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                         style: GoogleFonts.literata(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                           height: 1.45,
                         ),
                       ),
@@ -334,7 +338,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             width: 26,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -343,7 +347,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             width: 6,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -352,7 +356,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             width: 6,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -368,7 +372,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -378,7 +382,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               width: 6,
                               height: 6,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFB8860B),
+                                color: Color(0xFF142D4E),
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -388,7 +392,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFFB8860B),
+                                color: const Color(0xFF142D4E),
                               ),
                             ),
                           ],
@@ -404,7 +408,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -414,7 +418,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               width: 6,
                               height: 6,
                               decoration: const BoxDecoration(
-                                color: Color(0xFF0D1B2A),
+                                color: Color(0xFF000000),
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -424,7 +428,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                           ],
@@ -440,7 +444,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE6C17A),
+                          color: const Color(0xFF142D4E),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -449,7 +453,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             const Icon(
                               Icons.check_circle_outline_rounded,
                               size: 14,
-                              color: Color(0xFF0D1B2A),
+                              color: Color(0xFF000000),
                             ),
                             const SizedBox(width: 6),
                             Text(
@@ -457,7 +461,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                           ],
@@ -473,11 +477,15 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                         child: ElevatedButton(
                           onPressed: () {
                             HapticFeedback.selectionClick();
-                            Navigator.of(context).pop();
+                            if (widget.onRetakePhoto != null) {
+                              widget.onRetakePhoto!();
+                            } else {
+                              Navigator.of(context).pop();
+                            }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFE6C17A),
-                            foregroundColor: const Color(0xFF0D1B2A),
+                            backgroundColor: const Color(0xFF142D4E),
+                            foregroundColor: const Color(0xFF142D4E),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
@@ -489,7 +497,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               const Icon(
                                 Icons.refresh_rounded,
                                 size: 18,
-                                color: Color(0xFF0D1B2A),
+                                color: Color(0xFF000000),
                               ),
                               const SizedBox(width: 8),
                               Text(
@@ -497,7 +505,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                                 style: GoogleFonts.literata(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             ],
@@ -514,7 +522,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           const Icon(
                             Icons.lightbulb_outline_rounded,
                             size: 14,
-                            color: Color(0xFF1B365D),
+                            color: Color(0xFF000000),
                           ),
                           const SizedBox(width: 6),
                           Flexible(
@@ -523,7 +531,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               textAlign: TextAlign.center,
                               style: GoogleFonts.literata(
                                 fontSize: 11,
-                                color: const Color(0xFF1B365D),
+                                color: const Color(0xFF000000),
                               ),
                             ),
                           ),
@@ -543,7 +551,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                 width: 134,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),

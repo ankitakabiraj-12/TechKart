@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 
@@ -115,7 +115,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   ];
 
   final List<Map<String, dynamic>> _finishes = [
-    {'name': 'Titanium Black (Default)', 'color': const Color(0xFF0D1B2A), 'isSelected': true},
+    {'name': 'Titanium Black (Default)', 'color': const Color(0xFF142D4E), 'isSelected': true},
     {'name': 'Titanium Starlight', 'color': const Color(0xFFFACC15), 'isSelected': false},
   ];
 
@@ -148,7 +148,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: _buildTopAppBar(context),
       body: SafeArea(
         top: false,
@@ -203,7 +203,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   // ---------------------------------------------------------------------------
   PreferredSizeWidget _buildTopAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -212,7 +212,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       title: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFF0D1B2A), size: 22),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF000000), size: 22),
             onPressed: () => AppNavigator.pop(context),
             tooltip: 'Back',
           ),
@@ -223,7 +223,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -238,7 +238,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               'asset/app_logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFFB8860B), size: 18),
+                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFF142D4E), size: 18),
               ),
             ),
           ),
@@ -248,10 +248,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
           const Text(
             'Notifica...',
             style: TextStyle(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               fontSize: 19,
               fontWeight: FontWeight.w700,
-              fontFamily: 'serif',
+              fontFamily: 'Literata',
             ),
           ),
         ],
@@ -274,14 +274,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check, size: 16, color: Color(0xFF1B365D)),
+                Icon(Icons.check, size: 16, color: Color(0xFF000000)),
                 SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ],
@@ -296,12 +296,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
           height: 34,
           margin: const EdgeInsets.only(right: 14),
           decoration: const BoxDecoration(
-            color: Color(0xFF1B365D),
+            color: Color(0xFF000000),
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.person,
-            color: Color(0xFFF5EBDD),
+            color: Color(0xFFF8FAFC),
             size: 20,
           ),
         ),
@@ -316,9 +316,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -329,7 +329,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 width: 7,
                 height: 7,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF10B981),
+                  color: Color(0xFF107C41),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -337,22 +337,22 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const Text(
                 'Live & Active',
                 style: TextStyle(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   fontSize: 11.5,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ],
           ),
-          const Icon(Icons.sync_alt_rounded, size: 16, color: Color(0xFFB8860B)),
+          const Icon(Icons.sync_alt_rounded, size: 16, color: Color(0xFF142D4E)),
           Row(
             children: const [
-              Icon(Icons.access_time, size: 13, color: Color(0xFF1B365D)),
+              Icon(Icons.access_time, size: 13, color: Color(0xFF000000)),
               SizedBox(width: 4),
               Text(
                 'Oct 24, 2:15 PM',
                 style: TextStyle(
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
                 ),
@@ -371,9 +371,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,22 +385,22 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const Text(
                 'Product Media',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Text(
                   '1 / 5 uploaded',
                   style: TextStyle(
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     fontSize: 10.5,
                     fontWeight: FontWeight.w700,
                   ),
@@ -412,7 +412,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           const Text(
             '1 primary photo • up to 5 gallery shots',
             style: TextStyle(
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
@@ -428,7 +428,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 height: 86,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Stack(
@@ -438,8 +438,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       'asset/chronos_ultra_2.jpg',
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: const Color(0xFFE6C17A),
-                        child: const Icon(Icons.image, color: Color(0xFF1B365D)),
+                        color: const Color(0xFF142D4E),
+                        child: const Icon(Icons.image, color: Color(0xFF000000)),
                       ),
                     ),
                     // PRIMARY pill badge
@@ -449,7 +449,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5EBDD).withValues(alpha: 0.9),
+                          color: const Color(0xFFF8FAFC).withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
@@ -457,7 +457,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           style: TextStyle(
                             fontSize: 7.5,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF0D1B2A),
+                            color: Color(0xFF000000),
                           ),
                         ),
                       ),
@@ -472,10 +472,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             width: 22,
                             height: 22,
                             decoration: const BoxDecoration(
-                              color: Color(0xFFF5EBDD),
+                              color: Color(0xFFF8FAFC),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.sync, size: 13, color: Color(0xFF0D1B2A)),
+                            child: const Icon(Icons.sync, size: 13, color: Color(0xFF000000)),
                           ),
                           const SizedBox(width: 4),
                           Container(
@@ -485,7 +485,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               color: Color(0xFFDC2626),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.delete_outline, size: 13, color: Color(0xFFF5EBDD)),
+                            child: const Icon(Icons.delete_outline, size: 13, color: Color(0xFFF8FAFC)),
                           ),
                         ],
                       ),
@@ -511,19 +511,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   width: 86,
                   height: 86,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFE6C17A)),
+                    border: Border.all(color: const Color(0xFF142D4E)),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Icon(Icons.add_photo_alternate_outlined, color: Color(0xFFB8860B), size: 22),
+                      Icon(Icons.add_photo_alternate_outlined, color: Color(0xFF142D4E), size: 22),
                       SizedBox(height: 4),
                       Text(
                         '+ Add Photo',
                         style: TextStyle(
-                          color: Color(0xFFB8860B),
+                          color: Color(0xFF142D4E),
                           fontSize: 10.5,
                           fontWeight: FontWeight.bold,
                         ),
@@ -539,19 +539,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 width: 86,
                 height: 86,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFDFBCF),
+                  color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Icon(Icons.image_outlined, color: Color(0xFF1B365D), size: 20),
+                    Icon(Icons.image_outlined, color: Color(0xFF000000), size: 20),
                     SizedBox(height: 4),
                     Text(
                       'Slot 3',
                       style: TextStyle(
-                        color: Color(0xFF1B365D),
+                        color: Color(0xFF000000),
                         fontSize: 9.5,
                         fontWeight: FontWeight.w500,
                       ),
@@ -568,13 +568,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              Icon(Icons.check_circle_outline, size: 13, color: Color(0xFFB8860B)),
+              Icon(Icons.check_circle_outline, size: 13, color: Color(0xFF142D4E)),
               SizedBox(width: 5),
               Expanded(
                 child: Text(
                   'JPG, PNG or WebP • Max 5MB • 1:1 square ratio recommended',
                   style: TextStyle(
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                   ),
@@ -594,9 +594,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -608,16 +608,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
               Text(
                 'Basic Information',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               Text(
                 '* Mandatory fields',
                 style: TextStyle(
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                   fontSize: 10.5,
                   fontWeight: FontWeight.w500,
                 ),
@@ -635,14 +635,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               Text(
                 'Shown on storefront',
                 style: TextStyle(
                   fontSize: 10.5,
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -652,7 +652,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           _buildInputBox(
             controller: _nameController,
             suffixIcon: IconButton(
-              icon: const Icon(Icons.cancel_outlined, size: 18, color: Color(0xFF1B365D)),
+              icon: const Icon(Icons.cancel_outlined, size: 18, color: Color(0xFF000000)),
               onPressed: () => _nameController.clear(),
             ),
           ),
@@ -665,23 +665,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 6),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(12),
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: _selectedCategory,
                 isExpanded: true,
-                icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF0D1B2A)),
+                icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF000000)),
                 style: const TextStyle(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -705,13 +705,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 6),
           _buildInputBox(
             controller: _brandController,
-            prefixIcon: const Icon(Icons.store_mall_directory_outlined, size: 18, color: Color(0xFFB8860B)),
+            prefixIcon: const Icon(Icons.store_mall_directory_outlined, size: 18, color: Color(0xFF142D4E)),
           ),
 
           const SizedBox(height: 14),
@@ -725,14 +725,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               Text(
                 '240 / 500',
                 style: TextStyle(
                   fontSize: 10.5,
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -755,9 +755,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -769,13 +769,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
               Text(
                 'Pricing & Inventory',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
-              Icon(Icons.monetization_on_outlined, size: 20, color: Color(0xFFB8860B)),
+              Icon(Icons.monetization_on_outlined, size: 20, color: Color(0xFF142D4E)),
             ],
           ),
           const SizedBox(height: 14),
@@ -789,7 +789,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: [
                     const Text(
                       'Regular Price (₹) *',
-                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF0D1B2A)),
+                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF000000)),
                     ),
                     const SizedBox(height: 6),
                     _buildInputBox(
@@ -807,7 +807,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: [
                     const Text(
                       'Compare-at (₹)',
-                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF0D1B2A)),
+                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF000000)),
                     ),
                     const SizedBox(height: 6),
                     _buildInputBox(
@@ -834,7 +834,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       children: [
                         const Text(
                           'Stock *',
-                          style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF0D1B2A)),
+                          style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF000000)),
                         ),
                         const SizedBox(width: 6),
                         Container(
@@ -855,7 +855,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       height: 44,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE6C17A),
+                        color: const Color(0xFF142D4E),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -871,7 +871,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               width: 28,
                               height: 28,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF5EBDD),
+                                color: Color(0xFFF8FAFC),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
@@ -880,7 +880,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           ),
                           Text(
                             '$_stockCount',
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF0D1B2A)),
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF000000)),
                           ),
                           InkWell(
                             onTap: () {
@@ -890,7 +890,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               width: 28,
                               height: 28,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF5EBDD),
+                                color: Color(0xFFF8FAFC),
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
@@ -910,7 +910,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: [
                     const Text(
                       'SKU Identifier *',
-                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF0D1B2A)),
+                      style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF000000)),
                     ),
                     const SizedBox(height: 6),
                     _buildInputBox(
@@ -928,12 +928,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
               children: [
-                const Icon(Icons.notifications_active_outlined, color: Color(0xFFB8860B), size: 20),
+                const Icon(Icons.notifications_active_outlined, color: Color(0xFF142D4E), size: 20),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -941,12 +941,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     children: const [
                       Text(
                         'Restock Alert Threshold',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF0D1B2A)),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF000000)),
                       ),
                       SizedBox(height: 1),
                       Text(
                         'Notify team when below: 5 units',
-                        style: TextStyle(fontSize: 10.5, color: Color(0xFF1B365D), fontWeight: FontWeight.w500),
+                        style: TextStyle(fontSize: 10.5, color: Color(0xFF000000), fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -958,10 +958,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     onChanged: (val) {
                       setState(() => _restockAlertEnabled = val);
                     },
-                    activeTrackColor: const Color(0xFF1B365D),
-                    activeThumbColor: const Color(0xFFF5EBDD),
-                    inactiveThumbColor: const Color(0xFFF5EBDD),
-                    inactiveTrackColor: const Color(0xFFE6C17A),
+                    activeTrackColor: const Color(0xFF142D4E),
+                    activeThumbColor: const Color(0xFFF8FAFC),
+                    inactiveThumbColor: const Color(0xFFF8FAFC),
+                    inactiveTrackColor: const Color(0xFF142D4E),
                   ),
                 ),
               ],
@@ -979,9 +979,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -993,10 +993,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const Text(
                 'Variants & Logistics',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               InkWell(
@@ -1012,7 +1012,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: const Text(
                   '+ Add',
                   style: TextStyle(
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
@@ -1024,7 +1024,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           const Text(
             'Options, SKUs, and packaging specs',
             style: TextStyle(
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
@@ -1035,7 +1035,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           const Text(
             'Configured Finishes:',
             style: TextStyle(
-              color: Color(0xFF1B365D),
+              color: Color(0xFF000000),
               fontSize: 11.5,
               fontWeight: FontWeight.w600,
             ),
@@ -1051,9 +1051,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isDefault ? const Color(0xFFE6C17A) : const Color(0xFFE6C17A),
+                  color: isDefault ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1072,14 +1072,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF0D1B2A),
+                        color: Color(0xFF000000),
                       ),
                     ),
                     const SizedBox(width: 6),
                     if (isDefault)
-                      const Icon(Icons.check_circle, size: 14, color: Color(0xFFB8860B))
+                      const Icon(Icons.check_circle, size: 14, color: Color(0xFF142D4E))
                     else
-                      const Icon(Icons.close, size: 14, color: Color(0xFF1B365D)),
+                      const Icon(Icons.close, size: 14, color: Color(0xFF000000)),
                   ],
                 ),
               );
@@ -1092,7 +1092,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -1102,12 +1102,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   width: 34,
                   height: 34,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFF5EBDD),
+                    color: Color(0xFFF8FAFC),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.local_shipping_outlined,
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     size: 18,
                   ),
                 ),
@@ -1121,7 +1121,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF0D1B2A),
+                          color: Color(0xFF000000),
                         ),
                       ),
                       SizedBox(height: 1),
@@ -1129,14 +1129,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         'Eligible for Next-Day Dispatch',
                         style: TextStyle(
                           fontSize: 10.5,
-                          color: Color(0xFF1B365D),
+                          color: Color(0xFF000000),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Icon(Icons.tune, color: Color(0xFFB8860B), size: 18),
+                const Icon(Icons.tune, color: Color(0xFF142D4E), size: 18),
               ],
             ),
           ),
@@ -1152,8 +1152,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
-        border: const Border(top: BorderSide(color: Color(0xFFE6C17A))),
+        color: const Color(0xFFF8FAFC),
+        border: const Border(top: BorderSide(color: Color(0xFF142D4E))),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -1180,8 +1180,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE6C17A),
-                  foregroundColor: const Color(0xFFB8860B),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFF142D4E),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -1223,8 +1223,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   AppNavigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0D1B2A),
-                  foregroundColor: const Color(0xFFF5EBDD),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFFF8FAFC),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -1262,7 +1262,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
@@ -1270,7 +1270,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         maxLines: maxLines,
         keyboardType: keyboardType,
         style: const TextStyle(
-          color: Color(0xFF0D1B2A),
+          color: Color(0xFF000000),
           fontSize: 13,
           fontWeight: FontWeight.w600,
         ),
@@ -1281,7 +1281,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           prefixIcon: prefixIcon,
           prefixText: prefixText,
           prefixStyle: const TextStyle(
-            color: Color(0xFF0D1B2A),
+            color: Color(0xFF000000),
             fontSize: 13,
             fontWeight: FontWeight.w600,
           ),

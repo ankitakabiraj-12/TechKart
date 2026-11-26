@@ -5,6 +5,7 @@ import '../app_routes/app_navigator.dart';
 import '../core/session_manager.dart';
 import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
+import '../theme/app_theme.dart';
 
 /// TechKart Profile & Settings - Customer Profile Hub Screen (SCR-35)
 /// Recreated to match original reference UI with 100% visual fidelity.
@@ -21,6 +22,9 @@ class CustomerProfileHubScreen extends StatefulWidget {
   final VoidCallback? onPaymentMethods;
   final VoidCallback? onAiPreferences;
   final VoidCallback? onNotificationsAlerts;
+  final VoidCallback? onNotificationPressed;
+  final VoidCallback? onProfileAvatarPressed;
+  final VoidCallback? onAppSettings;
   final VoidCallback? onLanguageRegion;
   final VoidCallback? onConciergeSupport;
   final VoidCallback? onAppSettingsPrivacy;
@@ -42,6 +46,9 @@ class CustomerProfileHubScreen extends StatefulWidget {
     this.onPaymentMethods,
     this.onAiPreferences,
     this.onNotificationsAlerts,
+    this.onNotificationPressed,
+    this.onProfileAvatarPressed,
+    this.onAppSettings,
     this.onLanguageRegion,
     this.onConciergeSupport,
     this.onAppSettingsPrivacy,
@@ -116,7 +123,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
       valueListenable: SessionManager().currentUserNotifier,
       builder: (context, user, child) {
         return Scaffold(
-          backgroundColor: const Color(0xFFFDFBCF),
+          backgroundColor: AppTheme.pureWhite,
           body: SafeArea(
             child: Column(
               children: [
@@ -143,8 +150,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('orders_in_progress') > 0
                               ? '${_statInt('orders_in_progress')} in progress'
                               : null,
-                          badgeBg: const Color(0xFFE6C17A),
-                          badgeColor: const Color(0xFF0D1B2A),
+                          badgeBg: const Color(0xFF142D4E),
+                          badgeColor: const Color(0xFF142D4E),
                           onTap:
                               widget.onOrderHistory ??
                               () => AppNavigator.toOrderHistory(context),
@@ -155,8 +162,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('active_returns') > 0
                               ? '${_statInt('active_returns')} active'
                               : null,
-                          badgeBg: const Color(0xFFE6C17A),
-                          badgeColor: const Color(0xFFB8860B),
+                          badgeBg: const Color(0xFF142D4E),
+                          badgeColor: const Color(0xFF142D4E),
                           onTap:
                               widget.onReturnsRefunds ??
                               () => AppNavigator.toReturnStatus(
@@ -181,8 +188,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           badge: _statInt('pending_reviews') > 0
                               ? '${_statInt('pending_reviews')} pending'
                               : null,
-                          badgeBg: const Color(0xFFE6C17A),
-                          badgeColor: const Color(0xFF0D1B2A),
+                          badgeBg: const Color(0xFF142D4E),
+                          badgeColor: const Color(0xFF142D4E),
                           onTap:
                               widget.onProductReviews ??
                               () => AppNavigator.toWriteReviews(context),
@@ -241,14 +248,14 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           icon: Icons.headset_mic_outlined,
                           title: '24/7 Concierge Support',
                           badge: 'Live Chat',
-                          badgeBg: const Color(0xFFE6C17A),
-                          badgeColor: const Color(0xFF0D1B2A),
+                          badgeBg: const Color(0xFF142D4E),
+                          badgeColor: const Color(0xFF142D4E),
                           onTap: widget.onConciergeSupport ?? () {},
                         ),
                         _buildMenuItem(
                           icon: Icons.lock_outline,
                           title: 'App Settings & Privacy',
-                          onTap: widget.onAppSettingsPrivacy ?? () {},
+                          onTap: widget.onAppSettings ?? widget.onAppSettingsPrivacy ?? () {},
                           isLast: true,
                         ),
                       ]),
@@ -286,7 +293,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: AppTheme.pureWhite,
       ),
       child: Row(
         children: [
@@ -295,13 +302,13 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.arrow_back,
                 size: 20,
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
               ),
             ),
           ),
@@ -309,20 +316,20 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           Expanded(
             child: Text(
               'Account',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
             icon: const Icon(
               Icons.notifications_none_outlined,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               size: 24,
             ),
-            onPressed: widget.onNotificationsAlerts ?? () {},
+            onPressed: widget.onNotificationPressed ?? widget.onNotificationsAlerts ?? () {},
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
@@ -338,13 +345,16 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
             children: [
-              const ProfileAvatar(size: 54),
+              GestureDetector(
+                onTap: widget.onProfileAvatarPressed,
+                child: const ProfileAvatar(size: 54),
+              ),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -354,10 +364,10 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                       children: [
                         Text(
                           SessionManager().userName ?? 'Customer',
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         if (_statString('vip_tier', fallback: 'MEMBER') !=
@@ -369,7 +379,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Row(
@@ -378,7 +388,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                                 const Icon(
                                   Icons.star,
                                   size: 10,
-                                  color: Color(0xFFB8860B),
+                                  color: Color(0xFF142D4E),
                                 ),
                                 const SizedBox(width: 3),
                                 Text(
@@ -387,7 +397,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                                     fontFamily: 'Literata',
                                     fontSize: 9,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFB8860B),
+                                    color: const Color(0xFF142D4E),
                                   ),
                                 ),
                               ],
@@ -402,7 +412,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           child: const Icon(
                             Icons.edit_outlined,
                             size: 16,
-                            color: Color(0xFF0D1B2A),
+                            color: Color(0xFF000000),
                           ),
                         ),
                       ],
@@ -412,7 +422,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                       SessionManager().userEmail ?? 'No email on file',
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     if ((SessionManager().userPhone ?? '').isNotEmpty)
@@ -420,7 +430,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                         SessionManager().userPhone!,
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                   ],
@@ -477,9 +487,9 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
         child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFE6C17A)),
+          border: Border.all(color: const Color(0xFF142D4E)),
         ),
         child: Column(
           children: [
@@ -490,16 +500,16 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   icon,
                   size: 14,
                   color: isHeart
-                      ? const Color(0xFFEF4444)
-                      : const Color(0xFF1B365D),
+                      ? const Color(0xFFDC2626)
+                      : const Color(0xFF142D4E),
                 ),
                 const SizedBox(width: 5),
                 Text(
                   value,
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -509,7 +519,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
               label,
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -539,22 +549,22 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Color(0xFFF5EBDD),
+              color: Color(0xFFF8FAFC),
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.local_shipping,
               size: 18,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
           ),
           const SizedBox(width: 12),
@@ -567,14 +577,14 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 Text(
                   subtitle.isNotEmpty ? subtitle : 'Arriving today by 5:30 PM • Bandra West',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -588,8 +598,8 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                   trackingId: trackingRef,
                 ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0D1B2A),
-              foregroundColor: const Color(0xFFF5EBDD),
+              backgroundColor: const Color(0xFF142D4E),
+              foregroundColor: const Color(0xFFF8FAFC),
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -620,7 +630,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
         fontSize: 10.5,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8,
-        color: const Color(0xFF1B365D),
+        color: const Color(0xFF000000),
       ),
     );
   }
@@ -631,9 +641,9 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
   Widget _buildMenuCard(List<Widget> children) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(children: children),
     );
@@ -664,10 +674,10 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                 Container(
                   padding: const EdgeInsets.all(7),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE6C17A),
+                    color: Color(0xFF142D4E),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
+                  child: Icon(icon, size: 16, color: const Color(0xFF000000)),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -679,7 +689,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       if (subtitle != null) ...[
@@ -688,7 +698,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                           subtitle,
                           style: GoogleFonts.literata(
                             fontSize: 11,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ],
@@ -702,7 +712,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                       vertical: 3,
                     ),
                     decoration: BoxDecoration(
-                      color: badgeBg ?? const Color(0xFFE6C17A),
+                      color: badgeBg ?? const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
@@ -711,7 +721,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                         fontFamily: 'Literata',
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
-                        color: badgeColor ?? const Color(0xFF1B365D),
+                        color: badgeColor ?? const Color(0xFF142D4E),
                       ),
                     ),
                   ),
@@ -722,7 +732,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                     trailingText,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -730,13 +740,13 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 12,
-                  color: Color(0xFF1B365D),
+                  color: Color(0xFF000000),
                 ),
               ],
             ),
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFFE6C17A), height: 1),
+        if (!isLast) const Divider(color: Color(0xFF142D4E), height: 1),
       ],
     );
   }
@@ -764,21 +774,21 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+              border: Border.all(color: const Color(0xFF142D4E), width: 1),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.logout, size: 15, color: Color(0xFFEF4444)),
+                const Icon(Icons.logout, size: 15, color: Color(0xFFDC2626)),
                 const SizedBox(width: 8),
                 Text(
                   'Log Out of TechKart',
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFFEF4444),
+                    color: const Color(0xFFDC2626),
                   ),
                 ),
               ],
@@ -799,7 +809,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           'TechKart v1.0',
           style: GoogleFonts.literata(
             fontSize: 11,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
         const SizedBox(height: 2),
@@ -807,7 +817,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
           'Secure account & profile management',
           style: GoogleFonts.literata(
             fontSize: 10.5,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],

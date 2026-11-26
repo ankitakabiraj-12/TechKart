@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 import '../system/currency_service.dart';
@@ -96,7 +96,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         stock: 3,
         badgeText: 'Low Stock: 3 units left',
         badgeBg: const Color(0xFFFEF2F2),
-        badgeTextColor: const Color(0xFFB91C1C),
+        badgeTextColor: const Color(0xFFDC2626),
         hasRedDot: true,
         subtext: 'Active • 24 sold this week',
         imagePath: 'asset/chronos_ultra_2.jpg',
@@ -111,8 +111,8 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         price: CurrencyService.convertUsdToInr(49.00),
         stock: 142,
         badgeText: 'In Stock (142 units)',
-        badgeBg: const Color(0xFFE6C17A),
-        badgeTextColor: const Color(0xFFB8860B),
+        badgeBg: const Color(0xFF142D4E),
+        badgeTextColor: const Color(0xFF142D4E),
         hasRedDot: false,
         subtext: 'Active • Top Seller',
         imagePath: 'asset/category_chargers.jpg',
@@ -127,8 +127,8 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         originalPrice: CurrencyService.convertUsdToInr(349.00),
         stock: 38,
         badgeText: 'In Stock (38 units)',
-        badgeBg: const Color(0xFFE6C17A),
-        badgeTextColor: const Color(0xFFB8860B),
+        badgeBg: const Color(0xFF142D4E),
+        badgeTextColor: const Color(0xFF142D4E),
         hasRedDot: false,
         subtext: 'Active • 18 sold this week',
         imagePath: 'asset/aura_pro_headphones.jpg',
@@ -143,10 +143,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         stock: 0,
         badgeText: 'Out of Stock (0 units)',
         badgeBg: const Color(0xFFFEE2E2),
-        badgeTextColor: const Color(0xFFB91C1C),
+        badgeTextColor: const Color(0xFFDC2626),
         hasRedDot: false,
         subtext: 'Restock PO #883 In Transit',
-        subtextColor: const Color(0xFF1B365D),
+        subtextColor: const Color(0xFF142D4E),
         imagePath: 'asset/apex_titanium_link.jpg',
         isEnabled: false,
         hasRestockButton: true,
@@ -160,7 +160,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         stock: 4,
         badgeText: 'Low Stock: 4 units left',
         badgeBg: const Color(0xFFFEF2F2),
-        badgeTextColor: const Color(0xFFB91C1C),
+        badgeTextColor: const Color(0xFFDC2626),
         hasRedDot: true,
         subtext: 'Active • Flagship',
         imagePath: 'asset/apex_fold_buds_pro.jpg',
@@ -198,7 +198,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
     final displayedProducts = _filteredProducts;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: _buildTopAppBar(context),
       body: SafeArea(
         top: false,
@@ -266,7 +266,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
   // ---------------------------------------------------------------------------
   PreferredSizeWidget _buildTopAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -275,7 +275,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       title: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFF0D1B2A), size: 22),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF000000), size: 22),
             onPressed: () => AppNavigator.pop(context),
             tooltip: 'Back',
           ),
@@ -286,7 +286,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -301,7 +301,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               'asset/app_logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFFB8860B), size: 18),
+                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFF142D4E), size: 18),
               ),
             ),
           ),
@@ -311,10 +311,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
           const Text(
             'Notifica...',
             style: TextStyle(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               fontSize: 19,
               fontWeight: FontWeight.w700,
-              fontFamily: 'serif',
+              fontFamily: 'Literata',
             ),
           ),
         ],
@@ -337,14 +337,14 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check, size: 16, color: Color(0xFF1B365D)),
+                Icon(Icons.check, size: 16, color: Color(0xFF000000)),
                 SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ],
@@ -359,12 +359,12 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
           height: 34,
           margin: const EdgeInsets.only(right: 14),
           decoration: const BoxDecoration(
-            color: Color(0xFF1B365D),
+            color: Color(0xFF000000),
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.person,
-            color: Color(0xFFF5EBDD),
+            color: Color(0xFFF8FAFC),
             size: 20,
           ),
         ),
@@ -388,10 +388,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 Text(
                   'Product Catalog',
                   style: TextStyle(
-                    fontFamily: 'serif',
+                    fontFamily: 'Literata',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF0D1B2A),
+                    color: Color(0xFF000000),
                     letterSpacing: -0.3,
                   ),
                 ),
@@ -399,7 +399,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 Text(
                   '•',
                   style: TextStyle(
-                    color: Color(0xFFB8860B),
+                    color: Color(0xFF142D4E),
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -410,7 +410,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             const Text(
               '48 Products Active',
               style: TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 12.5,
                 fontWeight: FontWeight.w500,
               ),
@@ -437,12 +437,12 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 width: 38,
                 height: 38,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.qr_code_scanner,
-                  color: Color(0xFFB8860B),
+                  color: Color(0xFF142D4E),
                   size: 20,
                 ),
               ),
@@ -454,14 +454,14 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               width: 38,
               height: 38,
               decoration: const BoxDecoration(
-                color: Color(0xFF0D1B2A),
+                color: Color(0xFF000000),
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
               child: const Text(
                 'AD',
                 style: TextStyle(
-                  color: Color(0xFFF5EBDD),
+                  color: Color(0xFFF8FAFC),
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                 ),
@@ -480,23 +480,23 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
     return Container(
       height: 44,
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: TextField(
         controller: _searchController,
         onChanged: (_) => setState(() {}),
-        style: const TextStyle(fontSize: 13, color: Color(0xFF0D1B2A)),
+        style: const TextStyle(fontSize: 13, color: Color(0xFF000000)),
         decoration: InputDecoration(
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 12),
           hintText: 'Search name, SKU, barcode...',
-          hintStyle: const TextStyle(color: Color(0xFF1B365D), fontSize: 13),
-          prefixIcon: const Icon(Icons.search, color: Color(0xFF1B365D), size: 20),
+          hintStyle: const TextStyle(color: Color(0xFF000000), fontSize: 13),
+          prefixIcon: const Icon(Icons.search, color: Color(0xFF000000), size: 20),
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
-                  icon: const Icon(Icons.close, color: Color(0xFF1B365D), size: 18),
+                  icon: const Icon(Icons.close, color: Color(0xFF000000), size: 18),
                   onPressed: () {
                     _searchController.clear();
                     setState(() {});
@@ -541,7 +541,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -561,7 +561,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                     Text(
                       label,
                       style: TextStyle(
-                        color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+                        color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
                         fontSize: 12,
                         fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                       ),
@@ -583,24 +583,24 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: const [
-              Icon(Icons.inventory_2_outlined, size: 16, color: Color(0xFFB8860B)),
+              Icon(Icons.inventory_2_outlined, size: 16, color: Color(0xFF142D4E)),
               SizedBox(width: 8),
               Text(
                 'Health: ',
-                style: TextStyle(color: Color(0xFF0D1B2A), fontSize: 11.5, fontWeight: FontWeight.bold),
+                style: TextStyle(color: Color(0xFF000000), fontSize: 11.5, fontWeight: FontWeight.bold),
               ),
               Text(
                 '94% In-Stock • 6 Require Restock',
-                style: TextStyle(color: Color(0xFF1B365D), fontSize: 11.5, fontWeight: FontWeight.w500),
+                style: TextStyle(color: Color(0xFF000000), fontSize: 11.5, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -617,7 +617,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             child: const Text(
               'Q2 Audited',
               style: TextStyle(
-                color: Color(0xFF1B365D),
+                color: Color(0xFF000000),
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
               ),
@@ -638,8 +638,8 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       child: ElevatedButton(
         onPressed: () => AppNavigator.toEditProduct(context),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF0D1B2A),
-          foregroundColor: const Color(0xFFF5EBDD),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFFF8FAFC),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -671,9 +671,9 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -692,16 +692,16 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 width: 72,
                 height: 72,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(
                   product.imagePath,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => const Center(
-                    child: Icon(Icons.image_outlined, color: Color(0xFF1B365D), size: 30),
+                    child: Icon(Icons.image_outlined, color: Color(0xFF000000), size: 30),
                   ),
                 ),
               ),
@@ -720,10 +720,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                           child: Text(
                             product.title,
                             style: const TextStyle(
-                              fontFamily: 'serif',
+                              fontFamily: 'Literata',
                               fontSize: 14.5,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF0D1B2A),
+                              color: Color(0xFF000000),
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -738,10 +738,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                                 product.isEnabled = val;
                               });
                             },
-                            activeTrackColor: const Color(0xFF0D1B2A),
-                            activeThumbColor: const Color(0xFFF5EBDD),
-                            inactiveThumbColor: const Color(0xFFF5EBDD),
-                            inactiveTrackColor: const Color(0xFFE6C17A),
+                            activeTrackColor: const Color(0xFF142D4E),
+                            activeThumbColor: const Color(0xFFF8FAFC),
+                            inactiveThumbColor: const Color(0xFFF8FAFC),
+                            inactiveTrackColor: const Color(0xFF142D4E),
                           ),
                         ),
                       ],
@@ -751,7 +751,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                     Text(
                       '${product.sku} • ${product.category}',
                       style: const TextStyle(
-                        color: Color(0xFF1B365D),
+                        color: Color(0xFF000000),
                         fontSize: 11,
                         fontWeight: FontWeight.w500,
                       ),
@@ -764,10 +764,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                         Text(
                           CurrencyService.formatInr(product.price),
                           style: const TextStyle(
-                            fontFamily: 'serif',
+                            fontFamily: 'Literata',
                             fontSize: 15.5,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF0D1B2A),
+                            color: Color(0xFF000000),
                           ),
                         ),
                         if (product.originalPrice != null) ...[
@@ -776,7 +776,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                             CurrencyService.formatInr(product.originalPrice!),
                             style: const TextStyle(
                               fontSize: 11.5,
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
@@ -823,7 +823,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                         Text(
                           product.subtext,
                           style: TextStyle(
-                            color: product.subtextColor ?? const Color(0xFF1B365D),
+                            color: product.subtextColor ?? const Color(0xFF142D4E),
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
                           ),
@@ -846,7 +846,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -898,17 +898,17 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
                       children: const [
-                        Icon(Icons.local_shipping_outlined, size: 14, color: Color(0xFFB8860B)),
+                        Icon(Icons.local_shipping_outlined, size: 14, color: Color(0xFF142D4E)),
                         SizedBox(width: 4),
                         Text(
                           'Restock Now',
                           style: TextStyle(
-                            color: Color(0xFFB8860B),
+                            color: Color(0xFF142D4E),
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                           ),
@@ -937,13 +937,13 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                   width: 34,
                   height: 34,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
                     Icons.edit_outlined,
                     size: 16,
-                    color: Color(0xFF0D1B2A),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ),
@@ -959,13 +959,13 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                   width: 34,
                   height: 34,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
                     Icons.delete_outline_rounded,
                     size: 16,
-                    color: Color(0xFF1B365D),
+                    color: Color(0xFF000000),
                   ),
                 ),
               ),
@@ -985,7 +985,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         const Text(
           'Showing 5 of 48 products',
           style: TextStyle(
-            color: Color(0xFF1B365D),
+            color: Color(0xFF000000),
             fontSize: 11.5,
             fontWeight: FontWeight.w500,
           ),
@@ -1020,7 +1020,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             // Dots ...
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Text('•••', style: TextStyle(color: Color(0xFF1B365D), fontSize: 10)),
+              child: Text('•••', style: TextStyle(color: Color(0xFF000000), fontSize: 10)),
             ),
             const SizedBox(width: 6),
 
@@ -1051,10 +1051,10 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         width: 32,
         height: 32,
         decoration: const BoxDecoration(
-          color: Color(0xFFE6C17A),
+          color: Color(0xFF142D4E),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, size: 16, color: const Color(0xFF0D1B2A)),
+        child: Icon(icon, size: 16, color: const Color(0xFF000000)),
       ),
     );
   }
@@ -1070,15 +1070,15 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         width: 32,
         height: 32,
         decoration: BoxDecoration(
-          color: isActive ? const Color(0xFF0D1B2A) : const Color(0xFFF5EBDD),
+          color: isActive ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
           shape: BoxShape.circle,
-          border: isActive ? null : Border.all(color: const Color(0xFFE6C17A)),
+          border: isActive ? null : Border.all(color: const Color(0xFF142D4E)),
         ),
         alignment: Alignment.center,
         child: Text(
           '$page',
           style: TextStyle(
-            color: isActive ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+            color: isActive ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
             fontSize: 12,
             fontWeight: isActive ? FontWeight.bold : FontWeight.w600,
           ),
@@ -1094,8 +1094,8 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
-        border: const Border(top: BorderSide(color: Color(0xFFE6C17A))),
+        color: const Color(0xFFF8FAFC),
+        border: const Border(top: BorderSide(color: Color(0xFF142D4E))),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -1110,7 +1110,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             width: 7,
             height: 7,
             decoration: const BoxDecoration(
-              color: Color(0xFFB8860B),
+              color: Color(0xFF142D4E),
               shape: BoxShape.circle,
             ),
           ),
@@ -1120,7 +1120,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
           ),
           const Spacer(),
@@ -1143,13 +1143,13 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
                 _isAllSelected ? 'Deselect All' : 'Select All',
                 style: const TextStyle(
-                  color: Color(0xFFB8860B),
+                  color: Color(0xFF142D4E),
                   fontSize: 11.5,
                   fontWeight: FontWeight.w700,
                 ),
@@ -1164,8 +1164,8 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               _showBulkActionsMenu(context);
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0D1B2A),
-              foregroundColor: const Color(0xFFF5EBDD),
+              backgroundColor: const Color(0xFF142D4E),
+              foregroundColor: const Color(0xFFF8FAFC),
               elevation: 0,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               minimumSize: const Size(90, 36),
@@ -1222,7 +1222,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
   void _showBulkActionsMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFFF5EBDD),
+      backgroundColor: const Color(0xFFF8FAFC),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -1234,21 +1234,21 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
           children: [
             const Text(
               'Bulk Operations',
-              style: TextStyle(fontFamily: 'serif', fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontFamily: 'Literata', fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             ListTile(
-              leading: const Icon(Icons.archive_outlined, color: Color(0xFFB8860B)),
+              leading: const Icon(Icons.archive_outlined, color: Color(0xFF142D4E)),
               title: const Text('Export Selected as CSV / Excel'),
               onTap: () => AppNavigator.pop(ctx),
             ),
             ListTile(
-              leading: const Icon(Icons.price_change_outlined, color: Color(0xFFB8860B)),
+              leading: const Icon(Icons.price_change_outlined, color: Color(0xFF142D4E)),
               title: const Text('Apply Percentage Discount (% Off)'),
               onTap: () => AppNavigator.pop(ctx),
             ),
             ListTile(
-              leading: const Icon(Icons.update_outlined, color: Color(0xFFB8860B)),
+              leading: const Icon(Icons.update_outlined, color: Color(0xFF142D4E)),
               title: const Text('Update Restock Alert Threshold'),
               onTap: () => AppNavigator.pop(ctx),
             ),

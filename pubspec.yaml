@@ -69,6 +69,7 @@ flutter:
     - asset/categories/
     - asset/subcategories/
     - asset/campaigns/
+    - asset/brands/
     - asset/product_images/3D-Printing/
     - asset/product_images/Audio-Headphones/
     - asset/product_images/Automotive-Electronics/

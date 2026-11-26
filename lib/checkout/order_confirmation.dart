@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -82,7 +82,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -93,10 +93,10 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 width: 64,
                 height: 64,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check, size: 34, color: Color(0xFFF5EBDD)),
+                child: const Icon(Icons.check, size: 34, color: Color(0xFFF8FAFC)),
               ),
             ),
             const SizedBox(height: 14),
@@ -105,7 +105,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -115,7 +115,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       width: 6,
                       height: 6,
                       decoration: const BoxDecoration(
-                        color: Color(0xFF0D1B2A),
+                        color: Color(0xFF000000),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -125,7 +125,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -137,10 +137,10 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             Center(
               child: Text(
                 'Order Confirmed!',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ),
@@ -154,7 +154,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 12.5,
                     height: 1.4,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -180,8 +180,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 onPressed: widget.onTrackOrder ??
                     () => AppNavigator.toOrderDetails(context, orderId: widget.orderId),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0D1B2A),
-                  foregroundColor: const Color(0xFFF5EBDD),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFFF8FAFC),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -198,7 +198,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF5EBDD)),
+                    const Icon(Icons.arrow_forward, size: 16, color: Color(0xFFF8FAFC)),
                   ],
                 ),
               ),
@@ -212,8 +212,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 onPressed: widget.onContinueShopping ??
                     () => AppNavigator.toHome(context),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE6C17A),
-                  foregroundColor: const Color(0xFF0D1B2A),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFF142D4E),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -242,9 +242,9 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         children: [
@@ -259,7 +259,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -267,17 +267,17 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     children: [
                       Text(
                         '#${widget.orderId}',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: _copyOrderId,
                         child: const Icon(Icons.copy_rounded,
-                            size: 13, color: Color(0xFF1B365D)),
+                            size: 13, color: Color(0xFF000000)),
                       ),
                     ],
                   ),
@@ -291,7 +291,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -300,7 +300,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     style: GoogleFonts.literata(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -309,17 +309,17 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: Color(0xFFE6C17A), height: 1),
+            child: Divider(color: Color(0xFF142D4E), height: 1),
           ),
           Row(
             children: [
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.credit_card, size: 16, color: Color(0xFF0D1B2A)),
+                child: const Icon(Icons.credit_card, size: 16, color: Color(0xFF000000)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -331,14 +331,14 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     Text(
                       'Auth Code • ${widget.authCode}',
                       style: GoogleFonts.literata(
                         fontSize: 10.5,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -349,16 +349,16 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 children: [
                   Text(
                     '₹${widget.totalAmount.toStringAsFixed(2)}',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 14.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -367,7 +367,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                         fontFamily: 'Literata',
                         fontSize: 9.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ),
@@ -387,9 +387,9 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,10 +399,10 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE6C17A),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.local_shipping, size: 16, color: Color(0xFF0D1B2A)),
+                child: const Icon(Icons.local_shipping, size: 16, color: Color(0xFF000000)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -414,15 +414,15 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 9.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     Text(
                       widget.estimatedDelivery,
-                      style: GoogleFonts.domine(
+                      style: GoogleFonts.literata(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -431,7 +431,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -441,7 +441,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 0.5,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -454,7 +454,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               widget.guaranteedTime,
               style: GoogleFonts.literata(
                 fontSize: 11,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
@@ -462,13 +462,13 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
                 const Icon(Icons.location_on_outlined,
-                    size: 14, color: Color(0xFF0D1B2A)),
+                    size: 14, color: Color(0xFF000000)),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Column(
@@ -479,14 +479,14 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       Text(
                         widget.deliveryAddress,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -512,17 +512,17 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           children: [
             Text(
               'Items in this Package',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
             Text(
               '${_items.length} items',
               style: GoogleFonts.literata(
                 fontSize: 11.5,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
           ],
@@ -533,9 +533,9 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             margin: const EdgeInsets.only(bottom: 10),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFFE6C17A)),
+              border: Border.all(color: const Color(0xFF142D4E)),
             ),
             child: Row(
               children: [
@@ -544,7 +544,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                   child: Container(
                     width: 50,
                     height: 50,
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     child: Image.asset(
                       item['image'] as String,
                       fit: BoxFit.cover,
@@ -560,17 +560,17 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     children: [
                       Text(
                         item['title'] as String,
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       Text(
                         item['subtitle'] as String,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -578,10 +578,10 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 ),
                 Text(
                   item['price'] as String,
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -599,19 +599,19 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
-          const Icon(Icons.mail_outline, size: 16, color: Color(0xFF0D1B2A)),
+          const Icon(Icons.mail_outline, size: 16, color: Color(0xFF000000)),
           const SizedBox(width: 10),
           Expanded(
             child: RichText(
               text: TextSpan(
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
                 children: [
                   const TextSpan(text: 'Receipt & live courier tracking link sent to '),

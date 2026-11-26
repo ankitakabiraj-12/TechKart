@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../app_routes/app_navigator.dart';
 import '../system/currency_service.dart';
@@ -70,8 +70,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
         paymentMethod: 'Paid Online (Mastercard)',
         isPaid: true,
         status: 'Packed',
-        statusBg: const Color(0xFFE6C17A),
-        statusTextColor: const Color(0xFF1B365D),
+        statusBg: const Color(0xFF142D4E),
+        statusTextColor: const Color(0xFF142D4E),
         timestamp: '2 mins ago',
         imagePath: 'asset/chronos_ultra_2.jpg',
       ),
@@ -100,8 +100,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
         paymentMethod: 'Paid Online (Visa)',
         isPaid: true,
         status: 'Processing',
-        statusBg: const Color(0xFFE6C17A),
-        statusTextColor: const Color(0xFFB8860B),
+        statusBg: const Color(0xFF142D4E),
+        statusTextColor: const Color(0xFF142D4E),
         timestamp: '28 mins ago',
         imagePath: 'asset/aura_pro_headphones.jpg',
       ),
@@ -156,7 +156,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
     final displayedOrders = _filteredOrders;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: _buildTopAppBar(context),
       body: SafeArea(
         top: false,
@@ -209,7 +209,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
   // ---------------------------------------------------------------------------
   PreferredSizeWidget _buildTopAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
       scrolledUnderElevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -218,7 +218,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       title: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFF0D1B2A), size: 22),
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF000000), size: 22),
             onPressed: () => AppNavigator.pop(context),
             tooltip: 'Back',
           ),
@@ -229,7 +229,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -244,7 +244,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               'asset/app_logo.png',
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFFB8860B), size: 18),
+                child: Icon(Icons.shopping_cart_rounded, color: Color(0xFF142D4E), size: 18),
               ),
             ),
           ),
@@ -254,10 +254,10 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
           const Text(
             'Order Dispatch',
             style: TextStyle(
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
               fontSize: 19,
               fontWeight: FontWeight.w700,
-              fontFamily: 'serif',
+              fontFamily: 'Literata',
             ),
           ),
         ],
@@ -265,7 +265,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       actions: [
         // Filter Icon
         IconButton(
-          icon: const Icon(Icons.tune, color: Color(0xFF1B365D), size: 20),
+          icon: const Icon(Icons.tune, color: Color(0xFF000000), size: 20),
           onPressed: () {},
         ),
         // User Avatar Circle
@@ -274,12 +274,12 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
           height: 34,
           margin: const EdgeInsets.only(right: 14),
           decoration: const BoxDecoration(
-            color: Color(0xFF1B365D),
+            color: Color(0xFF000000),
             shape: BoxShape.circle,
           ),
           child: const Icon(
             Icons.person,
-            color: Color(0xFFF5EBDD),
+            color: Color(0xFFF8FAFC),
             size: 20,
           ),
         ),
@@ -295,9 +295,9 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE6C17A), width: 1),
+        border: Border.all(color: const Color(0xFF142D4E), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,16 +308,16 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               Text(
                 'Live Dispatch Pipeline',
                 style: TextStyle(
-                  fontFamily: 'serif',
+                  fontFamily: 'Literata',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                 ),
               ),
               Text(
                 '148 Orders Today',
                 style: TextStyle(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
@@ -327,7 +327,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
           const SizedBox(height: 10),
           Row(
             children: [
-              _buildMiniStatusPill('12 Packed', const Color(0xFFE6C17A), const Color(0xFF1B365D)),
+              _buildMiniStatusPill('12 Packed', const Color(0xFF142D4E), const Color(0xFF142D4E)),
               const SizedBox(width: 8),
               _buildMiniStatusPill('8 In Transit', const Color(0xFFFEF3C7), const Color(0xFFB45309)),
               const SizedBox(width: 8),
@@ -360,23 +360,23 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
     return Container(
       height: 44,
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: TextField(
         controller: _searchController,
         onChanged: (_) => setState(() {}),
-        style: const TextStyle(fontSize: 13, color: Color(0xFF0D1B2A)),
+        style: const TextStyle(fontSize: 13, color: Color(0xFF000000)),
         decoration: InputDecoration(
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 12),
           hintText: 'Search Order #, customer name...',
-          hintStyle: const TextStyle(color: Color(0xFF1B365D), fontSize: 13),
-          prefixIcon: const Icon(Icons.search, color: Color(0xFF1B365D), size: 20),
+          hintStyle: const TextStyle(color: Color(0xFF000000), fontSize: 13),
+          prefixIcon: const Icon(Icons.search, color: Color(0xFF000000), size: 20),
           suffixIcon: _searchController.text.isNotEmpty
               ? IconButton(
-                  icon: const Icon(Icons.close, color: Color(0xFF1B365D), size: 18),
+                  icon: const Icon(Icons.close, color: Color(0xFF000000), size: 18),
                   onPressed: () {
                     _searchController.clear();
                     setState(() {});
@@ -411,13 +411,13 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   f,
                   style: TextStyle(
-                    color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+                    color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                   ),
@@ -437,9 +437,9 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -459,7 +459,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
                 children: [
                   Text(
                     order.orderId,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF0D1B2A)),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF000000)),
                   ),
                   const SizedBox(width: 8),
                   Container(
@@ -477,12 +477,12 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               ),
               Text(
                 order.timestamp,
-                style: const TextStyle(color: Color(0xFF1B365D), fontSize: 11),
+                style: const TextStyle(color: Color(0xFF000000), fontSize: 11),
               ),
             ],
           ),
 
-          const Divider(height: 16, color: Color(0xFFE6C17A)),
+          const Divider(height: 16, color: Color(0xFF142D4E)),
 
           // Product item + Image
           Row(
@@ -492,7 +492,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
                 height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFFE6C17A)),
+                  border: Border.all(color: const Color(0xFF142D4E)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(
@@ -508,14 +508,14 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
                   children: [
                     Text(
                       order.itemTitle,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF0D1B2A)),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF000000)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '${order.customerName} • ${order.customerLocation}',
-                      style: const TextStyle(color: Color(0xFF1B365D), fontSize: 11),
+                      style: const TextStyle(color: Color(0xFF000000), fontSize: 11),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -524,7 +524,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               ),
               Text(
                 CurrencyService.formatInr(order.amount),
-                style: const TextStyle(fontFamily: 'serif', fontSize: 15, fontWeight: FontWeight.w800),
+                style: const TextStyle(fontFamily: 'Literata', fontSize: 15, fontWeight: FontWeight.w800),
               ),
             ],
           ),
@@ -538,7 +538,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               Text(
                 order.paymentMethod,
                 style: TextStyle(
-                  color: order.isPaid ? const Color(0xFF1B365D) : const Color(0xFFD97706),
+                  color: order.isPaid ? const Color(0xFF142D4E) : const Color(0xFFD97706),
                   fontSize: 10.5,
                   fontWeight: FontWeight.w600,
                 ),
@@ -558,8 +558,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0D1B2A),
-                  foregroundColor: const Color(0xFFF5EBDD),
+                  backgroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFFF8FAFC),
                   elevation: 0,
                   minimumSize: const Size(80, 30),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -584,8 +584,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
-        border: const Border(top: BorderSide(color: Color(0xFFE6C17A))),
+        color: const Color(0xFFF8FAFC),
+        border: const Border(top: BorderSide(color: Color(0xFF142D4E))),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -610,8 +610,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               icon: const Icon(Icons.print_outlined, size: 16),
               label: const Text('Print Slips', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF0D1B2A),
-                side: const BorderSide(color: Color(0xFFE6C17A)),
+                foregroundColor: const Color(0xFF142D4E),
+                side: const BorderSide(color: Color(0xFF142D4E)),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
@@ -631,8 +631,8 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               icon: const Icon(Icons.local_shipping_outlined, size: 16),
               label: const Text('Dispatch All (12)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0D1B2A),
-                foregroundColor: const Color(0xFFF5EBDD),
+                backgroundColor: const Color(0xFF142D4E),
+                foregroundColor: const Color(0xFFF8FAFC),
                 elevation: 0,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),

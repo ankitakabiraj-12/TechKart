@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -6,14 +6,34 @@ import '../theme/profile_avatar.dart';
 
 /// TechKart Profile & Settings - Notifications Screen
 /// Recreated to match original reference UI with 100% visual fidelity.
+class TechKartNotification {
+  final String id;
+  final String title;
+  final String? time;
+  final String? description;
+
+  const TechKartNotification({
+    required this.id,
+    required this.title,
+    this.time,
+    this.description,
+  });
+}
+
 class NotificationsScreen extends StatefulWidget {
   final VoidCallback? onBack;
   final VoidCallback? onMarkAllRead;
+  final VoidCallback? onProfilePressed;
+  final ValueChanged<TechKartNotification>? onNotificationAction;
+  final ValueChanged<String>? onCategorySelected;
 
   const NotificationsScreen({
     super.key,
     this.onBack,
     this.onMarkAllRead,
+    this.onProfilePressed,
+    this.onNotificationAction,
+    this.onCategorySelected,
   });
 
   @override
@@ -36,7 +56,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -52,9 +72,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   _buildSectionHeader('Today', badge: '2 New'),
                   const SizedBox(height: 8),
                   _buildNotificationCard(
+                    id: 'notif_1',
+                    actionKey: const Key('notif_action_notif_1'),
                     icon: Icons.local_shipping_outlined,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFF0D1B2A),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Out for delivery today',
                     timeText: '12m ago',
                     isUnread: true,
@@ -67,8 +89,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.assignment_return_outlined,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFF0D1B2A),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Return pickup scheduled #RET-...',
                     timeText: '2h ago',
                     isUnread: true,
@@ -81,8 +103,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.local_offer_outlined,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFFB8860B),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Flash Sale: GaN Chargers & Cables',
                     timeText: '5h ago',
                     description:
@@ -99,8 +121,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 8),
                   _buildNotificationCard(
                     icon: Icons.shield_outlined,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFF0D1B2A),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Two-Step Verification activated',
                     timeText: '4:15 PM',
                     isUnread: true,
@@ -113,8 +135,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 10),
                   _buildNotificationCard(
                     icon: Icons.inventory_2_outlined,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFF0D1B2A),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Order #TK-89421 dispatched',
                     timeText: '10:30 AM',
                     description:
@@ -131,8 +153,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: 8),
                   _buildNotificationCard(
                     icon: Icons.star_border,
-                    iconBg: const Color(0xFFE6C17A),
-                    iconColor: const Color(0xFFB8860B),
+                    iconBg: const Color(0xFF142D4E),
+                    iconColor: const Color(0xFF142D4E),
                     title: 'Welcome to TechKart VIP Plus',
                     timeText: 'Oct 22',
                     description:
@@ -155,7 +177,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -164,42 +186,50 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Notifications',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           GestureDetector(
-            onTap: _markAllAsRead,
+            key: const Key('top_bar_mark_read_button'),
+            onTap: () {
+              widget.onMarkAllRead?.call();
+              _markAllAsRead();
+            },
             child: Row(
               children: [
-                const Icon(Icons.done_all, size: 14, color: Color(0xFF0D1B2A)),
+                const Icon(Icons.done_all, size: 14, color: Color(0xFF000000)),
                 const SizedBox(width: 4),
                 Text(
                   'Mark all read',
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 12),
-          const ProfileAvatar(size: 32),
+          GestureDetector(
+            key: const Key('notifications_profile_button'),
+            onTap: widget.onProfilePressed,
+            child: const ProfileAvatar(size: 32),
+          ),
         ],
       ),
     );
@@ -215,7 +245,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5),
           decoration: BoxDecoration(
-            color: const Color(0xFFE6C17A),
+            color: const Color(0xFF142D4E),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -224,7 +254,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF000000),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -234,23 +264,27 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
           ),
         ),
         GestureDetector(
-          onTap: _markAllAsRead,
+          key: const Key('sub_header_mark_read_button'),
+          onTap: () {
+            widget.onMarkAllRead?.call();
+            _markAllAsRead();
+          },
           child: Row(
             children: [
-              const Icon(Icons.done_all, size: 12, color: Color(0xFF1B365D)),
+              const Icon(Icons.done_all, size: 12, color: Color(0xFF000000)),
               const SizedBox(width: 4),
               Text(
                 'Mark all read',
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -268,28 +302,32 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          _buildFilterChip('all', 'All (5)'),
+          _buildFilterChip('all', 'All (5)', key: const Key('filter_all'), categoryName: 'All'),
           const SizedBox(width: 8),
-          _buildFilterChip('orders', 'Orders (2)'),
+          _buildFilterChip('orders', 'Orders (2)', key: const Key('filter_orders'), categoryName: 'Orders'),
           const SizedBox(width: 8),
-          _buildFilterChip('deliveries', 'Deliveries (1)'),
+          _buildFilterChip('deliveries', 'Deliveries (1)', key: const Key('filter_deliveries'), categoryName: 'Deliveries'),
+          const SizedBox(width: 8),
+          _buildFilterChip('offers', 'Offers', key: const Key('filter_offers'), categoryName: 'Offers'),
         ],
       ),
     );
   }
 
-  Widget _buildFilterChip(String id, String label) {
+  Widget _buildFilterChip(String id, String label, {Key? key, String? categoryName}) {
     final isSelected = _selectedTab == id;
 
     return GestureDetector(
+      key: key,
       onTap: () {
         HapticFeedback.selectionClick();
         setState(() => _selectedTab = id);
+        widget.onCategorySelected?.call(categoryName ?? id);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -297,7 +335,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           style: GoogleFonts.literata(
             fontSize: 12,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-            color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+            color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
           ),
         ),
       ),
@@ -313,10 +351,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       children: [
         Text(
           title,
-          style: GoogleFonts.domine(
+          style: GoogleFonts.literata(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+            color: const Color(0xFF000000),
           ),
         ),
         if (badge != null)
@@ -325,7 +363,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             style: GoogleFonts.literata(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
       ],
@@ -336,6 +374,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   // NOTIFICATION CARD
   // ---------------------------------------------------------------------------
   Widget _buildNotificationCard({
+    String? id,
+    Key? actionKey,
     required IconData icon,
     required Color iconBg,
     required Color iconColor,
@@ -351,9 +391,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -384,10 +424,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     Expanded(
                       child: Text(
                         title,
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ),
@@ -397,7 +437,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           timeText,
                           style: GoogleFonts.literata(
                             fontSize: 10.5,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                         if (isUnread) ...[
@@ -406,7 +446,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             width: 6,
                             height: 6,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -421,17 +461,30 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   style: GoogleFonts.literata(
                     fontSize: 11.5,
                     height: 1.35,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 if (actionButtonText != null) ...[
                   const SizedBox(height: 10),
                   if (!isOutlinedAction)
                     ElevatedButton.icon(
-                      onPressed: onAction ?? () {},
+                      key: actionKey,
+                      onPressed: () {
+                        if (id != null) {
+                          widget.onNotificationAction?.call(
+                            TechKartNotification(
+                              id: id,
+                              title: title,
+                              time: timeText,
+                              description: description,
+                            ),
+                          );
+                        }
+                        onAction?.call();
+                      },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF0D1B2A),
-                        foregroundColor: const Color(0xFFF5EBDD),
+                        backgroundColor: const Color(0xFF142D4E),
+                        foregroundColor: const Color(0xFFF8FAFC),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -452,10 +505,23 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     )
                   else
                     ElevatedButton(
-                      onPressed: onAction ?? () {},
+                      key: actionKey,
+                      onPressed: () {
+                        if (id != null) {
+                          widget.onNotificationAction?.call(
+                            TechKartNotification(
+                              id: id,
+                              title: title,
+                              time: timeText,
+                              description: description,
+                            ),
+                          );
+                        }
+                        onAction?.call();
+                      },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE6C17A),
-                        foregroundColor: const Color(0xFF0D1B2A),
+                        backgroundColor: const Color(0xFF142D4E),
+                        foregroundColor: const Color(0xFF142D4E),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),

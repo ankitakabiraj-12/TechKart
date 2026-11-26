@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFF0D1B2A),
+        systemNavigationBarColor: Color(0xFF142D4E),
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -188,7 +188,7 @@ class _SplashScreenState extends State<SplashScreen>
     final bottomPadding = mediaQuery.padding.bottom;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: AnimatedBuilder(
         animation: _progressController,
         builder: (context, _) {
@@ -267,16 +267,16 @@ class _SplashScreenState extends State<SplashScreen>
       width: double.infinity,
       height: 56,
       decoration: BoxDecoration(
-        color: const Color(0xFF0D1B2A), // Deep midnight navy pill
+        color: const Color(0xFF000000), // Deep midnight navy pill
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0D1B2A).withValues(alpha: 0.35),
+            color: const Color(0xFF000000).withValues(alpha: 0.35),
             blurRadius: 18,
             offset: const Offset(0, 6),
           ),
           BoxShadow(
-            color: const Color(0xFF0D1B2A).withValues(alpha: 0.15),
+            color: const Color(0xFF000000).withValues(alpha: 0.15),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -287,8 +287,8 @@ class _SplashScreenState extends State<SplashScreen>
         child: InkWell(
           onTap: _isNavigating ? null : _onGetStartedPressed,
           borderRadius: BorderRadius.circular(28),
-          splashColor: const Color(0xFFF5EBDD).withValues(alpha: 0.15),
-          highlightColor: const Color(0xFFF5EBDD).withValues(alpha: 0.08),
+          splashColor: const Color(0xFFF8FAFC).withValues(alpha: 0.15),
+          highlightColor: const Color(0xFFF8FAFC).withValues(alpha: 0.08),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: _isNavigating
@@ -298,7 +298,7 @@ class _SplashScreenState extends State<SplashScreen>
                       height: 24,
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
-                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF5EBDD)),
+                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF8FAFC)),
                       ),
                     ),
                   )
@@ -309,10 +309,10 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Center(
                           child: Text(
                             'Get Started',
-                            style: GoogleFonts.domine(
+                            style: GoogleFonts.literata(
                               fontSize: 16.5,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFFF5EBDD),
+                              color: const Color(0xFFF8FAFC),
                               letterSpacing: 0.3,
                             ),
                           ),
@@ -322,13 +322,13 @@ class _SplashScreenState extends State<SplashScreen>
                         width: 36,
                         height: 36,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5EBDD).withValues(alpha: 0.12),
+                          color: const Color(0xFFF8FAFC).withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
                           Icons.arrow_forward,
                           size: 18,
-                          color: Color(0xFFF5EBDD),
+                          color: Color(0xFFF8FAFC),
                         ),
                       ),
                     ],
@@ -341,7 +341,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildFallbackLayout(Size size, double topPadding) {
     return Container(
-      color: const Color(0xFFFDFBCF),
+      color: const Color(0xFFFFFFFF),
       padding: EdgeInsets.only(top: topPadding + 40, left: 24, right: 24),
       child: Column(
         children: [
@@ -351,16 +351,16 @@ class _SplashScreenState extends State<SplashScreen>
             errorBuilder: (_, _, _) => const Icon(
               Icons.shopping_cart_outlined,
               size: 64,
-              color: Color(0xFF0D1B2A),
+              color: Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 12),
           Text(
             'TechKart',
-            style: GoogleFonts.domine(
+            style: GoogleFonts.literata(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF0D1B2A),
+              color: const Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 6),
@@ -391,7 +391,7 @@ class _AmbientGlowPainter extends CustomPainter {
     final glowPaint = Paint()
       ..shader = RadialGradient(
         colors: [
-          const Color(0xFF1B365D).withValues(alpha: shimmerAlpha * 0.25),
+          const Color(0xFF142D4E).withValues(alpha: shimmerAlpha * 0.25),
           Colors.transparent,
         ],
         stops: const [0.0, 1.0],

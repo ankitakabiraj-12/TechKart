@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
@@ -29,7 +29,22 @@ import '../theme/bottom_navbar.dart';
 /// - Floating Action Button: "+ New Chat" (Midnight navy capsule).
 /// - Bottom Navigation Bar (AI Search active).
 class AiChatSessionsScreen extends StatefulWidget {
-  const AiChatSessionsScreen({super.key});
+  final VoidCallback? onBack;
+  final VoidCallback? onNewChat;
+  final VoidCallback? onManageMemory;
+  final ValueChanged<String>? onSessionSelected;
+  final bool showBottomNav;
+  final ValueChanged<int>? onNavTabSelected;
+
+  const AiChatSessionsScreen({
+    super.key,
+    this.onBack,
+    this.onNewChat,
+    this.onManageMemory,
+    this.onSessionSelected,
+    this.showBottomNav = true,
+    this.onNavTabSelected,
+  });
 
   @override
   State<AiChatSessionsScreen> createState() => _AiChatSessionsScreenState();
@@ -54,13 +69,13 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFDFBCF),
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -78,10 +93,10 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                   child: Row(
                     children: [
                       IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: widget.onBack ?? () => Navigator.of(context).pop(),
                         icon: const Icon(
                           Icons.arrow_back_rounded,
-                          color: Color(0xFF0D1B2A),
+                          color: Color(0xFF000000),
                           size: 22,
                         ),
                         padding: EdgeInsets.zero,
@@ -93,10 +108,10 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                       Expanded(
                         child: Text(
                           'Chat Sessions',
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ),
@@ -116,7 +131,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                         icon: const Icon(
                           Icons.tune_rounded,
                           size: 20,
-                          color: Color(0xFF1B365D),
+                          color: Color(0xFF000000),
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
@@ -132,7 +147,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             icon: const Icon(
                               Icons.shopping_bag_outlined,
                               size: 22,
-                              color: Color(0xFF1B365D),
+                              color: Color(0xFF000000),
                             ),
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(
@@ -145,7 +160,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                               width: 15,
                               height: 15,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFE53E3E),
+                                color: Color(0xFFDC2626),
                                 shape: BoxShape.circle,
                               ),
                               child: Center(
@@ -154,7 +169,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                                   style: GoogleFonts.literata(
                                     fontSize: 9,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFF5EBDD),
+                                    color: const Color(0xFFF8FAFC),
                                   ),
                                 ),
                               ),
@@ -174,7 +189,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                   child: Container(
                     height: 44,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE6C17A),
+                      color: const Color(0xFF142D4E),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -183,7 +198,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                         const Icon(
                           Icons.search_rounded,
                           size: 18,
-                          color: Color(0xFF1B365D),
+                          color: Color(0xFF000000),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -191,7 +206,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             'Search conversations...',
                             style: GoogleFonts.literata(
                               fontSize: 13,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ),
@@ -227,15 +242,15 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             ),
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? const Color(0xFF0D1B2A)
-                                  : const Color(0xFFE6C17A),
+                                  ? const Color(0xFF142D4E)
+                                  : const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(18),
                             ),
                             child: Row(
                               children: [
                                 if (index == 0) ...[
                                   const Icon(Icons.all_inclusive_rounded,
-                                      size: 14, color: Color(0xFFF5EBDD)),
+                                      size: 14, color: Color(0xFFF8FAFC)),
                                   const SizedBox(width: 5),
                                 ],
                                 Text(
@@ -246,8 +261,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                                         ? FontWeight.w600
                                         : FontWeight.w500,
                                     color: isSelected
-                                        ? const Color(0xFFF5EBDD)
-                                        : const Color(0xFF0D1B2A),
+                                        ? const Color(0xFFF8FAFC)
+                                        : const Color(0xFF142D4E),
                                   ),
                                 ),
                               ],
@@ -276,8 +291,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           _buildGroupHeader('RECENT', '2 sessions'),
                           _buildSessionCard(
                             icon: Icons.watch_outlined,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFFB8860B),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'Titanium Smartwatch...',
                             time: 'Today, 10:24 AM',
                             subtitle:
@@ -288,8 +303,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           const SizedBox(height: 10),
                           _buildSessionCard(
                             icon: Icons.smartphone_outlined,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFF0D1B2A),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'Foldable Phone vs Compa...',
                             time: 'Yesterday',
                             subtitle: 'Spec comparison • Aura Fold Pro',
@@ -303,8 +318,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           _buildGroupHeader('LAST 7 DAYS', '2 sessions'),
                           _buildSessionCard(
                             icon: Icons.keyboard_outlined,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFF0D1B2A),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'Mechanical Wireless Keyboa...',
                             time: 'Oct 24',
                             subtitle:
@@ -315,8 +330,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           const SizedBox(height: 10),
                           _buildSessionCard(
                             icon: Icons.headphones_outlined,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFF0D1B2A),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'ANC Noise Cancelling Studio...',
                             time: 'Oct 18',
                             subtitle:
@@ -331,8 +346,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           _buildGroupHeader('PREVIOUS MONTH', '2 sessions'),
                           _buildSessionCard(
                             icon: Icons.bolt_rounded,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFFB8860B),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'MagSafe 3-in-1 Charging Sta...',
                             time: 'Oct 12',
                             subtitle: 'Qi2 standard verification',
@@ -342,8 +357,8 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           const SizedBox(height: 10),
                           _buildSessionCard(
                             icon: Icons.translate_rounded,
-                            iconBg: const Color(0xFFE6C17A),
-                            iconColor: const Color(0xFF0D1B2A),
+                            iconBg: const Color(0xFF142D4E),
+                            iconColor: const Color(0xFF142D4E),
                             title: 'বাংলা পরামর্শ — বাজেট গে...',
                             time: 'Sep 28',
                             subtitle: 'GPU specs & thermal benchmark',
@@ -358,7 +373,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
@@ -367,14 +382,14 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                                   width: 36,
                                   height: 36,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFFF5EBDD),
+                                    color: Color(0xFFF8FAFC),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
                                     child: Icon(
                                       Icons.memory_rounded,
                                       size: 18,
-                                      color: Color(0xFF0D1B2A),
+                                      color: Color(0xFF000000),
                                     ),
                                   ),
                                 ),
@@ -386,10 +401,10 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                                     children: [
                                       Text(
                                         'Personalized Hardware Memory',
-                                        style: GoogleFonts.domine(
+                                        style: GoogleFonts.literata(
                                           fontSize: 12.5,
                                           fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF0D1B2A),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                       const SizedBox(height: 2),
@@ -397,27 +412,39 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                                         'Preferences saved across your sessions',
                                         style: GoogleFonts.literata(
                                           fontSize: 11,
-                                          color: const Color(0xFF1B365D),
+                                          color: const Color(0xFF000000),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFE6C17A),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    'Manage',
-                                    style: GoogleFonts.literata(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: const Color(0xFF0D1B2A),
+                                GestureDetector(
+                                  onTap: widget.onManageMemory ?? () {
+                                    HapticFeedback.selectionClick();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Personalized Hardware Memory: 8 preferences synced'),
+                                        behavior: SnackBarBehavior.floating,
+                                        duration: Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF142D4E),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      'Manage',
+                                      style: GoogleFonts.literata(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color(0xFF000000),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -435,20 +462,25 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                 // -----------------------------------------------------------
                 // BOTTOM NAVIGATION BAR
                 // -----------------------------------------------------------
-                TechKartBottomNavBar(
-                  currentIndex: 2, // AI Search active
-                  onTabSelected: (index) {
-                    if (index == 0) {
-                      AppNavigator.toHome(context);
-                    } else if (index == 1) {
-                      AppNavigator.toCategories(context);
-                    } else if (index == 3) {
-                      AppNavigator.toCart(context);
-                    } else if (index == 4) {
-                      AppNavigator.toCustomerProfileHub(context);
-                    }
-                  },
-                ),
+                if (widget.showBottomNav)
+                  TechKartBottomNavBar(
+                    currentIndex: 2, // AI Search active
+                    onTabSelected: (index) {
+                      if (widget.onNavTabSelected != null) {
+                        widget.onNavTabSelected!(index);
+                      } else {
+                        if (index == 0) {
+                          AppNavigator.toHome(context);
+                        } else if (index == 1) {
+                          AppNavigator.toCategories(context);
+                        } else if (index == 3) {
+                          AppNavigator.toCart(context);
+                        } else if (index == 4) {
+                          AppNavigator.toCustomerProfileHub(context);
+                        }
+                      }
+                    },
+                  ),
               ],
             ),
 
@@ -459,17 +491,21 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
               child: GestureDetector(
                 onTap: () {
                   HapticFeedback.lightImpact();
-                  AppNavigator.toConversationalShoppingAssistant(context);
+                  if (widget.onNewChat != null) {
+                    widget.onNewChat!();
+                  } else {
+                    AppNavigator.toConversationalShoppingAssistant(context);
+                  }
                 },
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF0D1B2A).withValues(alpha: 0.25),
+                        color: const Color(0xFF000000).withValues(alpha: 0.25),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -479,14 +515,14 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(Icons.add_comment_rounded,
-                          size: 16, color: Color(0xFFF5EBDD)),
+                          size: 16, color: Color(0xFFF8FAFC)),
                       const SizedBox(width: 8),
                       Text(
                         'New Chat',
                         style: GoogleFonts.literata(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFFF5EBDD),
+                          color: const Color(0xFFF8FAFC),
                         ),
                       ),
                     ],
@@ -512,14 +548,14 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
               fontSize: 11,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.8,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
           Text(
             count,
             style: GoogleFonts.literata(
               fontSize: 11,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
         ],
@@ -540,17 +576,21 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
-        AppNavigator.toConversationalShoppingAssistant(context);
+        if (widget.onSessionSelected != null) {
+          widget.onSessionSelected!(title);
+        } else {
+          AppNavigator.toConversationalShoppingAssistant(context);
+        }
       },
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF0D1B2A).withValues(alpha: 0.03),
+              color: const Color(0xFF000000).withValues(alpha: 0.03),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -583,10 +623,10 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                           Flexible(
                             child: Text(
                               title,
-                              style: GoogleFonts.domine(
+                              style: GoogleFonts.literata(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFF0D1B2A),
+                                color: const Color(0xFF000000),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -596,7 +636,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             time,
                             style: GoogleFonts.literata(
                               fontSize: 10.5,
-                              color: const Color(0xFF1B365D),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ],
@@ -606,7 +646,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                         subtitle,
                         style: GoogleFonts.literata(
                           fontSize: 11,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -616,25 +656,25 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                 ),
                 const SizedBox(width: 4),
                 const Icon(Icons.more_vert_rounded,
-                    size: 16, color: Color(0xFF1B365D)),
+                    size: 16, color: Color(0xFF000000)),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                Icon(footerIcon, size: 13, color: const Color(0xFF1B365D)),
+                Icon(footerIcon, size: 13, color: const Color(0xFF000000)),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     footerText,
                     style: GoogleFonts.literata(
                       fontSize: 10.5,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ),
                 const Icon(Icons.chevron_right_rounded,
-                    size: 15, color: Color(0xFF1B365D)),
+                    size: 15, color: Color(0xFF000000)),
               ],
             ),
           ],

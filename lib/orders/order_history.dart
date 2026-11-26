@@ -48,8 +48,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': 'Today, Oct 26, 2024',
       'status': 'Preparing Dispatch',
       'statusType': 'in_progress',
-      'statusBg': const Color(0xFFE6C17A),
-      'statusColor': const Color(0xFFB8860B),
+      'statusBg': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF142D4E),
       'hasDot': true,
       'title': 'Chronos Ultra 2 (49...',
       'subtitle': '+ 1 other item (VoltFast 6...)',
@@ -68,8 +68,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': 'Oct 14, 2024',
       'status': 'Delivered',
       'statusType': 'delivered',
-      'statusBg': const Color(0xFFE6C17A),
-      'statusColor': const Color(0xFF0D1B2A),
+      'statusBg': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF142D4E),
       'hasCheck': true,
       'title': 'KeyPro Wireless Mechani...',
       'subtitle': 'Tactile Brown Switch • Midnight Slate',
@@ -87,8 +87,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': 'Sep 28, 2024',
       'status': 'Delivered',
       'statusType': 'delivered',
-      'statusBg': const Color(0xFFE6C17A),
-      'statusColor': const Color(0xFF0D1B2A),
+      'statusBg': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF142D4E),
       'hasCheck': true,
       'title': 'Aura Pro ANC Headphones',
       'subtitle': 'Ivory White • Spatial Audio',
@@ -131,11 +131,11 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
 
           final statusType = isDelivered ? 'delivered' : (isCancelled ? 'cancelled' : 'in_progress');
           final statusBg = isDelivered
-              ? const Color(0xFFE6C17A)
-              : (isCancelled ? const Color(0xFFFDE8E5) : const Color(0xFFE6C17A));
+              ? const Color(0xFF142D4E)
+              : (isCancelled ? const Color(0xFFFDE8E5) : const Color(0xFF142D4E));
           final statusColor = isDelivered
-              ? const Color(0xFF0D1B2A)
-              : (isCancelled ? const Color(0xFFB52E1D) : const Color(0xFFB8860B));
+              ? const Color(0xFF142D4E)
+              : (isCancelled ? const Color(0xFFDC2626) : const Color(0xFF142D4E));
 
           final previewItems = (m['preview_items'] as List?) ?? [];
           final firstTitle = previewItems.isNotEmpty ? previewItems.first['title']?.toString() ?? 'Tech Hardware' : 'Tech Hardware';
@@ -224,7 +224,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -232,7 +232,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: _fetchLiveOrders,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(
                     parent: BouncingScrollPhysics(),
@@ -248,7 +248,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         padding: EdgeInsets.symmetric(vertical: 24),
                         child: Center(
                           child: CircularProgressIndicator(
-                            color: Color(0xFF0D1B2A),
+                            color: Color(0xFF000000),
                           ),
                         ),
                       )
@@ -258,14 +258,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         child: Center(
                           child: Column(
                             children: [
-                              const Icon(Icons.shopping_bag_outlined, size: 48, color: Color(0xFF1B365D)),
+                              const Icon(Icons.shopping_bag_outlined, size: 48, color: Color(0xFF000000)),
                               const SizedBox(height: 12),
                               Text(
                                 'No orders found',
-                                style: GoogleFonts.domine(
+                                style: GoogleFonts.literata(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF0D1B2A),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                               const SizedBox(height: 4),
@@ -273,7 +273,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                 'Items you purchase will appear here in real time.',
                                 style: GoogleFonts.literata(
                                   fontSize: 12,
-                                  color: const Color(0xFF1B365D),
+                                  color: const Color(0xFF000000),
                                 ),
                               ),
                             ],
@@ -302,7 +302,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -311,25 +311,25 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Order History',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
             onPressed: widget.onLockPressed ??
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -359,20 +359,20 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.search, size: 20, color: Color(0xFF1B365D)),
+          const Icon(Icons.search, size: 20, color: Color(0xFF000000)),
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
               controller: _searchController,
               style: GoogleFonts.literata(
                 fontSize: 13,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
               decoration: InputDecoration(
                 filled: false,
@@ -381,12 +381,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 hintText: 'Search orders, items or serials...',
                 hintStyle: GoogleFonts.literata(
                   fontSize: 13,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ),
           ),
-          const Icon(Icons.tune, size: 18, color: Color(0xFF0D1B2A)),
+          const Icon(Icons.tune, size: 18, color: Color(0xFF000000)),
         ],
       ),
     );
@@ -426,14 +426,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A),
+          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 14, color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A)),
+              Icon(icon, size: 14, color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E)),
               const SizedBox(width: 6),
             ],
             if (hasDot) ...[
@@ -441,7 +441,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 width: 6,
                 height: 6,
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+                  color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -452,7 +452,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               style: GoogleFonts.literata(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: isSelected ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+                color: isSelected ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
               ),
             ),
           ],
@@ -472,9 +472,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -495,17 +495,17 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 children: [
                   Text(
                     'Order #$orderId',
-                    style: GoogleFonts.domine(
+                    style: GoogleFonts.literata(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                   Text(
                     order['date'] as String,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -553,7 +553,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFFDFBCF),
+              color: const Color(0xFFFFFFFF),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -566,7 +566,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       height: 48,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: const Color(0xFFE6C17A)),
+                        border: Border.all(color: const Color(0xFF142D4E)),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
@@ -587,26 +587,26 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                     children: [
                       Text(
                         order['title'] as String,
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       Text(
                         order['subtitle'] as String,
                         style: GoogleFonts.literata(
                           fontSize: 10.5,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         '${order['price']} (${order['itemsCount']})',
-                        style: GoogleFonts.domine(
+                        style: GoogleFonts.literata(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -620,19 +620,19 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
                   const Icon(Icons.access_time_rounded,
-                      size: 13, color: Color(0xFF0D1B2A)),
+                      size: 13, color: Color(0xFF000000)),
                   const SizedBox(width: 6),
                   RichText(
                     text: TextSpan(
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                       children: [
                         const TextSpan(text: 'Expected Delivery: '),
@@ -656,8 +656,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () => AppNavigator.toOrderDetails(context, orderId: orderId),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0D1B2A),
-                      foregroundColor: const Color(0xFFF5EBDD),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFFF8FAFC),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -686,8 +686,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6C17A),
-                      foregroundColor: const Color(0xFF0D1B2A),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFF142D4E),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -710,8 +710,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () => AppNavigator.toWriteReviews(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6C17A),
-                      foregroundColor: const Color(0xFF0D1B2A),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFF142D4E),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -733,8 +733,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   child: ElevatedButton(
                     onPressed: () => AppNavigator.toOrderDetails(context, orderId: orderId),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6C17A),
-                      foregroundColor: const Color(0xFF0D1B2A),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFF142D4E),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -762,11 +762,11 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Icon(Icons.receipt_outlined,
-                      size: 16, color: Color(0xFF0D1B2A)),
+                      size: 16, color: Color(0xFF000000)),
                 ),
               ],
             ],
@@ -783,20 +783,20 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Color(0xFFF5EBDD),
+              color: Color(0xFFF8FAFC),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.headset_mic_outlined,
-                size: 18, color: Color(0xFF0D1B2A)),
+                size: 18, color: Color(0xFF000000)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -805,17 +805,17 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               children: [
                 Text(
                   'Need assistance?',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
                 Text(
                   'TechKart 24/7 concierge is here',
                   style: GoogleFonts.literata(
                     fontSize: 11,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ],
@@ -824,16 +824,16 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFE6C17A)),
+              border: Border.all(color: const Color(0xFF142D4E)),
             ),
             child: Text(
               'Contact',
               style: GoogleFonts.literata(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),

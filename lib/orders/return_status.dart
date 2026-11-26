@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/profile_avatar.dart';
@@ -23,6 +23,11 @@ class ReturnStatusScreen extends StatefulWidget {
   final VoidCallback? onReschedule;
   final VoidCallback? onCallCourier;
   final VoidCallback? onDownloadSlip;
+  final VoidCallback? onLockPressed;
+  final VoidCallback? onProfilePressed;
+  final VoidCallback? onCopyCaseId;
+  final VoidCallback? onTrackAgent;
+  final VoidCallback? onConciergeHelp;
 
   const ReturnStatusScreen({
     super.key,
@@ -44,6 +49,11 @@ class ReturnStatusScreen extends StatefulWidget {
     this.onReschedule,
     this.onCallCourier,
     this.onDownloadSlip,
+    this.onLockPressed,
+    this.onProfilePressed,
+    this.onCopyCaseId,
+    this.onTrackAgent,
+    this.onConciergeHelp,
   });
 
   @override
@@ -52,6 +62,10 @@ class ReturnStatusScreen extends StatefulWidget {
 
 class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
   void _copyCaseId() {
+    if (widget.onCopyCaseId != null) {
+      widget.onCopyCaseId!();
+      return;
+    }
     Clipboard.setData(ClipboardData(text: '#${widget.caseId}'));
     HapticFeedback.selectionClick();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +79,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
@@ -104,7 +118,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFDFBCF),
+        color: Color(0xFFFFFFFF),
       ),
       child: Row(
         children: [
@@ -113,26 +127,27 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Color(0xFFE6C17A),
+                color: Color(0xFF142D4E),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF0D1B2A)),
+              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Text(
               'Return Status',
-              style: GoogleFonts.domine(
+              style: GoogleFonts.literata(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF0D1B2A),
+                color: const Color(0xFF000000),
               ),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF0D1B2A)),
-            onPressed: () {
+            key: const Key('return_status_lock_button'),
+            icon: const Icon(Icons.lock_outline, size: 22, color: Color(0xFF000000)),
+            onPressed: widget.onLockPressed ?? () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
@@ -147,7 +162,11 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
             constraints: const BoxConstraints(),
           ),
           const SizedBox(width: 12),
-          const ProfileAvatar(size: 32),
+          GestureDetector(
+            key: const Key('return_status_profile_button'),
+            onTap: widget.onProfilePressed,
+            child: const ProfileAvatar(size: 32),
+          ),
         ],
       ),
     );
@@ -168,7 +187,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFB8860B),
+                  color: Color(0xFF142D4E),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -176,10 +195,10 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               Flexible(
                 child: Text(
                   'Case ID: #${widget.caseId}',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -189,7 +208,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               GestureDetector(
                 onTap: _copyCaseId,
                 child: const Icon(Icons.copy_rounded,
-                    size: 12, color: Color(0xFF1B365D)),
+                    size: 12, color: Color(0xFF000000)),
               ),
             ],
           ),
@@ -199,7 +218,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
           'Order #${widget.orderId}',
           style: GoogleFonts.literata(
             fontSize: 11,
-            color: const Color(0xFF1B365D),
+            color: const Color(0xFF000000),
           ),
         ),
       ],
@@ -213,9 +232,9 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFE6C17A),
+        color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,14 +247,14 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 3.5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(Icons.local_shipping_outlined,
-                          size: 13, color: Color(0xFFB8860B)),
+                          size: 13, color: Color(0xFF142D4E)),
                       const SizedBox(width: 4),
                       Flexible(
                         child: Text(
@@ -244,7 +263,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                             fontFamily: 'Literata',
                             fontSize: 10.5,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFFB8860B),
+                            color: const Color(0xFF142D4E),
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -259,14 +278,14 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.credit_card,
-                      size: 13, color: Color(0xFF1B365D)),
+                      size: 13, color: Color(0xFF000000)),
                   const SizedBox(width: 4),
                   Text(
                     'Visa •••• ${widget.cardLast4}',
                     style: GoogleFonts.literata(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                     ),
                   ),
                 ],
@@ -278,7 +297,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
             'Estimated Refund',
             style: GoogleFonts.literata(
               fontSize: 11,
-              color: const Color(0xFF1B365D),
+              color: const Color(0xFF000000),
             ),
           ),
           const SizedBox(height: 2),
@@ -290,10 +309,10 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               Flexible(
                 child: Text(
                   '₹${widget.estimatedRefund.toStringAsFixed(2)}',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 26,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -305,7 +324,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                   'Original payment method',
                   style: GoogleFonts.literata(
                     fontSize: 10.5,
-                    color: const Color(0xFF1B365D),
+                    color: const Color(0xFF000000),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -317,7 +336,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFF5EBDD),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -326,11 +345,11 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE6C17A),
+                    color: Color(0xFF142D4E),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.inventory_2_outlined,
-                      size: 16, color: Color(0xFF0D1B2A)),
+                      size: 16, color: Color(0xFF000000)),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -342,7 +361,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -351,7 +370,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                         style: GoogleFonts.literata(
                           fontSize: 11,
                           height: 1.35,
-                          color: const Color(0xFF1B365D),
+                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],
@@ -381,13 +400,13 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.8,
-                color: const Color(0xFF1B365D),
+                color: const Color(0xFF000000),
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -396,7 +415,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                   fontFamily: 'Literata',
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ),
@@ -406,9 +425,9 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5EBDD),
+            color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFE6C17A)),
+            border: Border.all(color: const Color(0xFF142D4E)),
           ),
           child: Row(
             children: [
@@ -430,17 +449,17 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                   children: [
                     Text(
                       widget.productName,
-                      style: GoogleFonts.domine(
+                      style: GoogleFonts.literata(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     Text(
                       widget.productSpecs,
                       style: GoogleFonts.literata(
                         fontSize: 10.5,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -451,7 +470,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFE6C17A),
+                              color: const Color(0xFF142D4E),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
@@ -459,7 +478,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                               style: const TextStyle(
                                 fontFamily: 'Literata',
                                 fontSize: 9.5,
-                                color: Color(0xFF0D1B2A),
+                                color: Color(0xFF000000),
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -469,10 +488,10 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                         const SizedBox(width: 8),
                         Text(
                           '₹${widget.estimatedRefund.toStringAsFixed(2)}',
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                       ],
@@ -494,9 +513,9 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -507,10 +526,10 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               Expanded(
                 child: Text(
                   'Lifecycle Progress',
-                  style: GoogleFonts.domine(
+                  style: GoogleFonts.literata(
                     fontSize: 14.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -521,7 +540,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 'Updated 14m ago',
                 style: GoogleFonts.literata(
                   fontSize: 11,
-                  color: const Color(0xFF1B365D),
+                  color: const Color(0xFF000000),
                 ),
               ),
             ],
@@ -551,14 +570,14 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               margin: const EdgeInsets.only(top: 8),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6C17A),
+                color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.access_time_rounded,
-                      size: 13, color: Color(0xFF0D1B2A)),
+                      size: 13, color: Color(0xFF000000)),
                   const SizedBox(width: 6),
                   Flexible(
                     child: Text(
@@ -566,7 +585,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -626,21 +645,21 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                 height: 24,
                 decoration: BoxDecoration(
                   color: isDone
-                      ? const Color(0xFF1B365D)
-                      : (isActive ? const Color(0xFF0D1B2A) : const Color(0xFFE6C17A)),
+                      ? const Color(0xFF142D4E)
+                      : (isActive ? const Color(0xFF142D4E) : const Color(0xFF142D4E)),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   icon,
                   size: 13,
-                  color: (isDone || isActive) ? const Color(0xFFF5EBDD) : const Color(0xFF0D1B2A),
+                  color: (isDone || isActive) ? const Color(0xFFF8FAFC) : const Color(0xFF142D4E),
                 ),
               ),
               if (!isLast)
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: const Color(0xFFE6C17A),
+                    color: const Color(0xFF142D4E),
                   ),
                 ),
             ],
@@ -658,10 +677,10 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                       Expanded(
                         child: Text(
                           title,
-                          style: GoogleFonts.domine(
+                          style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -674,7 +693,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                           style: GoogleFonts.literata(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0D1B2A),
+                            color: const Color(0xFF000000),
                           ),
                         )
                       else if (timestamp != null)
@@ -682,7 +701,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                           timestamp,
                           style: GoogleFonts.literata(
                             fontSize: 10.5,
-                            color: const Color(0xFF1B365D),
+                            color: const Color(0xFF000000),
                           ),
                         ),
                     ],
@@ -692,7 +711,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                     description,
                     style: GoogleFonts.literata(
                       fontSize: 11,
-                      color: const Color(0xFF1B365D),
+                      color: const Color(0xFF000000),
                       height: 1.35,
                     ),
                   ),
@@ -715,30 +734,30 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5EBDD),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE6C17A)),
+        border: Border.all(color: const Color(0xFF142D4E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.sync_alt, size: 16, color: Color(0xFF0D1B2A)),
+              const Icon(Icons.sync_alt, size: 16, color: Color(0xFF000000)),
               const SizedBox(width: 8),
               Text(
                 'Logistics & Collection',
-                style: GoogleFonts.domine(
+                style: GoogleFonts.literata(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D1B2A),
+                  color: const Color(0xFF000000),
                 ),
               ),
               const Spacer(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6C17A),
+                  color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -747,7 +766,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                     fontFamily: 'Literata',
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0D1B2A),
+                    color: const Color(0xFF000000),
                   ),
                 ),
               ),
@@ -757,7 +776,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFF142D4E),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -771,31 +790,34 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     Text(
                       'APX-RET-4910',
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF5EBDD),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFE6C17A)),
-                  ),
-                  child: Text(
-                    'Track Agent',
-                    style: GoogleFonts.literata(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1B2A),
+                GestureDetector(
+                  onTap: widget.onTrackAgent,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF8FAFC),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: const Color(0xFF142D4E)),
+                    ),
+                    child: Text(
+                      'Track Agent',
+                      style: GoogleFonts.literata(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF000000),
+                      ),
                     ),
                   ),
                 ),
@@ -807,7 +829,7 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(Icons.location_on_outlined,
-                  size: 14, color: Color(0xFF0D1B2A)),
+                  size: 14, color: Color(0xFF000000)),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
@@ -818,14 +840,14 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                       style: GoogleFonts.literata(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF0D1B2A),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                     Text(
                       widget.recipientAddress,
                       style: GoogleFonts.literata(
                         fontSize: 11,
-                        color: const Color(0xFF1B365D),
+                        color: const Color(0xFF000000),
                       ),
                     ),
                   ],
@@ -854,8 +876,8 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                           );
                         },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6C17A),
-                      foregroundColor: const Color(0xFF0D1B2A),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFF142D4E),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(19),
@@ -891,8 +913,8 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
                           );
                         },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6C17A),
-                      foregroundColor: const Color(0xFF0D1B2A),
+                      backgroundColor: const Color(0xFF142D4E),
+                      foregroundColor: const Color(0xFF142D4E),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(19),
@@ -938,8 +960,8 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
               );
             },
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFE6C17A),
-          foregroundColor: const Color(0xFF0D1B2A),
+          backgroundColor: const Color(0xFF142D4E),
+          foregroundColor: const Color(0xFF142D4E),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22),
@@ -961,20 +983,23 @@ class _ReturnStatusScreenState extends State<ReturnStatusScreen> {
   // NEED CONCIERGE HELP
   // ---------------------------------------------------------------------------
   Widget _buildNeedConciergeHelpRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.headset_mic_outlined, size: 14, color: Color(0xFF0D1B2A)),
-        const SizedBox(width: 6),
-        Text(
-          'Need Concierge Help with this Return?',
-          style: GoogleFonts.literata(
-            fontSize: 11.5,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFF0D1B2A),
+    return GestureDetector(
+      onTap: widget.onConciergeHelp,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.headset_mic_outlined, size: 14, color: Color(0xFF000000)),
+          const SizedBox(width: 6),
+          Text(
+            'Need Concierge Help with this Return?',
+            style: GoogleFonts.literata(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFF000000),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

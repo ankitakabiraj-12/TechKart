@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../theme/app_theme.dart';
 import '../theme/bottom_navbar.dart';
 import 'home.dart';
 import 'categories.dart';
@@ -29,7 +30,12 @@ class MainNavigationShell extends StatefulWidget {
 
   /// Allows child screens or global navigators to cleanly switch tabs in the root shell
   static bool switchToTab(BuildContext context, int index) {
-    final state = context.findAncestorStateOfType<_MainNavigationShellState>();
+    _MainNavigationShellState? state;
+    if (context is StatefulElement && context.state is _MainNavigationShellState) {
+      state = context.state as _MainNavigationShellState;
+    } else {
+      state = context.findAncestorStateOfType<_MainNavigationShellState>();
+    }
     if (state != null) {
       state.switchToTab(index);
       return true;
@@ -43,6 +49,7 @@ class MainNavigationShell extends StatefulWidget {
 
 class _MainNavigationShellState extends State<MainNavigationShell> {
   late int _currentIndex;
+  int _previousIndex = 0;
   final int _cartItemCount = 2;
   bool _isCategoriesSearching = false;
   late final Set<int> _activatedTabs;
@@ -51,6 +58,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
+    _previousIndex = widget.initialIndex == 2 ? 0 : widget.initialIndex;
     _activatedTabs = {widget.initialIndex};
   }
 
@@ -58,6 +66,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
   void didUpdateWidget(covariant MainNavigationShell oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.initialIndex != widget.initialIndex) {
+      _previousIndex = _currentIndex;
       _currentIndex = widget.initialIndex;
       _activatedTabs.add(widget.initialIndex);
     }
@@ -71,6 +80,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     if (_currentIndex == index) return;
     HapticFeedback.selectionClick();
     setState(() {
+      _previousIndex = _currentIndex;
       _currentIndex = index;
       _activatedTabs.add(index);
       _isCategoriesSearching = false;
@@ -87,59 +97,72 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFDFBCF),
-      extendBody: true,
-      body: SafeArea(
-        bottom: false,
-        child: IndexedStack(
-          index: _currentIndex,
-          children: [
-            _activatedTabs.contains(0)
-                ? HomeScreen(
-                    showBottomNav: false,
-                    onNavTabSelected: _onTabSelected,
-                  )
-                : const SizedBox.shrink(),
-            _activatedTabs.contains(1)
-                ? CategoriesScreen(
-                    showBottomNav: false,
-                    onNavTabSelected: _onTabSelected,
-                    onSearchStateChanged: _onCategoriesSearchChanged,
-                  )
-                : const SizedBox.shrink(),
-            _activatedTabs.contains(2)
-                ? ConversationalShoppingAssistantScreen(
-                    showBottomNav: false,
-                    onNavTabSelected: _onTabSelected,
-                    onBack: () => _onTabSelected(0),
-                  )
-                : const SizedBox.shrink(),
-            _activatedTabs.contains(3)
-                ? ShoppingCartScreen(
-                    showBottomNav: false,
-                    onNavTabSelected: _onTabSelected,
-                    onBack: () => _onTabSelected(0),
-                  )
-                : const SizedBox.shrink(),
-            _activatedTabs.contains(4)
-                ? CustomerProfileHubScreen(
-                    showBottomNav: false,
-                    onNavTabSelected: _onTabSelected,
-                  )
-                : const SizedBox.shrink(),
-          ],
+    // Completely hide the bottom navigation bar when TechKart AI (tab 2) is active,
+    // when searching in categories, or when the system keyboard is visible.
+    final bool hideBottomNav = _currentIndex == 2 ||
+        _isCategoriesSearching ||
+        MediaQuery.of(context).viewInsets.bottom > 0;
+
+    return PopScope(
+      canPop: _currentIndex == 0,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop && _currentIndex != 0) {
+          _onTabSelected(_previousIndex == _currentIndex ? 0 : _previousIndex);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppTheme.pureWhite,
+        extendBody: !hideBottomNav,
+        body: SafeArea(
+          top: false,
+          bottom: false,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: [
+              _activatedTabs.contains(0)
+                  ? HomeScreen(
+                      showBottomNav: false,
+                      onNavTabSelected: _onTabSelected,
+                    )
+                  : const SizedBox.shrink(),
+              _activatedTabs.contains(1)
+                  ? CategoriesScreen(
+                      showBottomNav: false,
+                      onNavTabSelected: _onTabSelected,
+                      onSearchStateChanged: _onCategoriesSearchChanged,
+                    )
+                  : const SizedBox.shrink(),
+              _activatedTabs.contains(2)
+                  ? ConversationalShoppingAssistantScreen(
+                      showBottomNav: false,
+                      onNavTabSelected: _onTabSelected,
+                      onBack: () => _onTabSelected(_previousIndex == 2 ? 0 : _previousIndex),
+                    )
+                  : const SizedBox.shrink(),
+              _activatedTabs.contains(3)
+                  ? ShoppingCartScreen(
+                      showBottomNav: false,
+                      onNavTabSelected: _onTabSelected,
+                      onBack: () => _onTabSelected(0),
+                    )
+                  : const SizedBox.shrink(),
+              _activatedTabs.contains(4)
+                  ? CustomerProfileHubScreen(
+                      showBottomNav: false,
+                      onNavTabSelected: _onTabSelected,
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
         ),
+        bottomNavigationBar: hideBottomNav
+            ? null
+            : TechKartBottomNavBar(
+                currentIndex: _currentIndex,
+                onTabSelected: _onTabSelected,
+                cartBadgeCount: _cartItemCount,
+              ),
       ),
-      bottomNavigationBar: (_currentIndex == 2 ||
-              _isCategoriesSearching ||
-              MediaQuery.of(context).viewInsets.bottom > 0)
-          ? null
-          : TechKartBottomNavBar(
-              currentIndex: _currentIndex,
-              onTabSelected: _onTabSelected,
-              cartBadgeCount: _cartItemCount,
-            ),
     );
   }
 }

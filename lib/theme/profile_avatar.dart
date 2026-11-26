@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../app_routes/app_navigator.dart';
 import '../core/session_manager.dart';
 
@@ -72,7 +72,7 @@ class ProfileAvatar extends StatelessWidget {
             border: borderWidth > 0 && borderColor != null
                 ? Border.all(color: borderColor!, width: borderWidth)
                 : null,
-            color: fallbackBgColor ?? const Color(0xFF0D1B2A),
+            color: fallbackBgColor ?? const Color(0xFF142D4E),
           ),
           clipBehavior: Clip.antiAlias,
           child: imageWidget,
@@ -103,12 +103,12 @@ class ProfileAvatar extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      color: fallbackBgColor ?? const Color(0xFF0D1B2A),
+      color: fallbackBgColor ?? const Color(0xFF142D4E),
       child: Center(
         child: Icon(
           Icons.person,
           size: size * 0.55,
-          color: const Color(0xFFF5EBDD),
+          color: const Color(0xFFF8FAFC),
         ),
       ),
     );
