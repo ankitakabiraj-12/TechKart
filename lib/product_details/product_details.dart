@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app_routes/app_navigator.dart';
 import '../core/network/api_client.dart';
-import '../core/network/api_config.dart';
 import '../core/network/catalog_models.dart';
 import '../core/network/product_resolver.dart';
 import '../core/session_manager.dart';
+import '../core/widgets/techkart_product_image.dart';
 import '../theme/profile_avatar.dart';
 
 /// TechKart Product Details Screen (Chronos Ultra 2)
@@ -408,35 +408,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
-                                  Builder(builder: (context) {
-                                    final img = _product?.primaryImageUrl ?? 'asset/chronos_ultra_2.jpg';
-                                    if (img.startsWith('asset/')) {
-                                      return Image.asset(
-                                        img,
-                                        fit: BoxFit.cover,
-                                        cacheWidth: 800,
-                                        errorBuilder: (context, error, stackTrace) => Image.network(
-                                          ApiConfig.resolveImageUrl(img),
-                                          fit: BoxFit.cover,
-                                          cacheWidth: 800,
-                                          errorBuilder: (context, error2, stackTrace2) => Container(
-                                            color: const Color(0xFFE6C17A),
-                                            child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    final url = img.startsWith('http') ? img : ApiConfig.resolveImageUrl(img);
-                                    return Image.network(
-                                      url,
-                                      fit: BoxFit.cover,
-                                      cacheWidth: 800,
-                                      errorBuilder: (context, error, stackTrace) => Container(
-                                        color: const Color(0xFFE6C17A),
-                                        child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
-                                      ),
-                                    );
-                                  }),
+                                  TechKartProductImage(
+                                    imageUrl: _product?.primaryImageUrl,
+                                    fit: BoxFit.cover,
+                                    productTitle: _product?.title,
+                                    categoryName: _product?.categoryName,
+                                  ),
                                   Positioned(
                                     top: 12,
                                     left: 12,

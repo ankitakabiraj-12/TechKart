@@ -177,12 +177,12 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
           fit: BoxFit.cover,
           errorBuilder: (context, error2, stackTrace2) {
             return Container(
-              color: const Color(0xFFE6C17A),
+              color: const Color(0xFFF1F5F9),
               child: const Center(
                 child: Icon(
                   Icons.devices_other_rounded,
                   size: 28,
-                  color: Color(0xFF0D1B2A),
+                  color: Color(0xFF1B365D),
                 ),
               ),
             );

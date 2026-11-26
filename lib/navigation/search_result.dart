@@ -5,7 +5,7 @@ import '../app_routes/app_navigator.dart';
 import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
 import '../core/network/api_client.dart';
-import '../core/network/api_config.dart';
+import '../core/widgets/techkart_product_image.dart';
 
 /// TechKart Search Results Screen (Titanium watch)
 ///
@@ -153,10 +153,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         final products = response.data!;
         setState(() {
           _results = products.map((p) {
-            String imgPath = p.primaryImageUrl ?? (p.images.isNotEmpty ? p.images.first : "");
-            if (imgPath.isEmpty) {
-              imgPath = "asset/product_images/Wearables/Smartwatches_ChronosUltra2.jpg";
-            }
+            final String imgPath = p.primaryImageUrl ?? (p.images.isNotEmpty ? p.images.first : "");
 
             final specsText = (p.description != null && p.description!.isNotEmpty)
                 ? p.description!
@@ -252,65 +249,98 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         bottom: false,
         child: Column(
           children: [
-            SizedBox(height: topPadding > 0 ? topPadding + 6 : 24),
+            SizedBox(height: topPadding > 0 ? topPadding + 4 : 16),
 
             // ---------------------------------------------------------------
-            // TOP BAR: Brand Logo + Location + Bell + Avatar
+            // UNIFIED TOP BAR: Back + Search Pill + Bell + Avatar
             // ---------------------------------------------------------------
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Row(
                 children: [
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
+                  IconButton(
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_rounded,
+                      color: Color(0xFF0D1B2A),
+                      size: 22,
                     ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'asset/app_logo.png',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Image.asset(
-                          'asset/app_launcher_icon.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    padding: EdgeInsets.zero,
+                    constraints:
+                        const BoxConstraints(minWidth: 34, minHeight: 36),
                   ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'TechKart',
-                        style: GoogleFonts.domine(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
-                        ),
+                  const SizedBox(width: 4),
+
+                  Expanded(
+                    child: Container(
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE6C17A),
+                        borderRadius: BorderRadius.circular(22),
                       ),
-                      Row(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
                         children: [
                           const Icon(
-                            Icons.location_on_outlined,
-                            size: 11,
+                            Icons.search_rounded,
+                            size: 18,
                             color: Color(0xFF1B365D),
                           ),
-                          const SizedBox(width: 2),
-                          Text(
-                            '400001 • Mumbai',
-                            style: GoogleFonts.literata(
-                              fontSize: 10.5,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF1B365D),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              controller: _searchController,
+                              style: GoogleFonts.literata(
+                                fontSize: 13,
+                                color: const Color(0xFF0D1B2A),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              decoration: const InputDecoration(
+                                filled: false,
+                                fillColor: Colors.transparent,
+                                isDense: true,
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _searchController.clear();
+                              setState(() {});
+                            },
+                            child: const Icon(
+                              Icons.close_rounded,
+                              size: 16,
+                              color: Color(0xFF1B365D),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.mic_none_rounded,
+                            size: 18,
+                            color: Color(0xFF1B365D),
+                          ),
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              AppNavigator.toAiVisualSearchCamera(context);
+                            },
+                            child: const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 18,
+                              color: Color(0xFF1B365D),
                             ),
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 8),
 
                   // Bell
                   Stack(
@@ -327,11 +357,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         ),
                         padding: EdgeInsets.zero,
                         constraints:
-                            const BoxConstraints(minWidth: 34, minHeight: 34),
+                            const BoxConstraints(minWidth: 32, minHeight: 34),
                       ),
                       Positioned(
-                        top: 6,
-                        right: 8,
+                        top: 5,
+                        right: 6,
                         child: Container(
                           width: 7,
                           height: 7,
@@ -359,99 +389,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               ),
             ),
 
-            const SizedBox(height: 10),
-
-            // ---------------------------------------------------------------
-            // SEARCH INPUT PILL
-            // ---------------------------------------------------------------
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      HapticFeedback.selectionClick();
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_rounded,
-                      color: Color(0xFF0D1B2A),
-                      size: 22,
-                    ),
-                    padding: EdgeInsets.zero,
-                    constraints:
-                        const BoxConstraints(minWidth: 36, minHeight: 36),
-                  ),
-                  const SizedBox(width: 6),
-
-                  Expanded(
-                    child: Container(
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFE6C17A),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.search_rounded,
-                            size: 19,
-                            color: Color(0xFF1B365D),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: TextField(
-                              controller: _searchController,
-                              style: GoogleFonts.literata(
-                                fontSize: 13.5,
-                                color: const Color(0xFF0D1B2A),
-                                fontWeight: FontWeight.w500,
-                              ),
-                              decoration: const InputDecoration(
-                                filled: false,
-                                fillColor: Colors.transparent,
-                                isDense: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => _searchController.clear(),
-                            child: const Icon(
-                              Icons.close_rounded,
-                              size: 17,
-                              color: Color(0xFF1B365D),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Icon(
-                            Icons.mic_none_rounded,
-                            size: 19,
-                            color: Color(0xFF1B365D),
-                          ),
-                          const SizedBox(width: 10),
-                          GestureDetector(
-                            onTap: () {
-                              HapticFeedback.selectionClick();
-                              AppNavigator.toAiVisualSearchCamera(context);
-                            },
-                            child: const Icon(
-                              Icons.camera_alt_outlined,
-                              size: 19,
-                              color: Color(0xFF1B365D),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
 
             // ---------------------------------------------------------------
             // RESULTS COUNT & SORT DROPDOWN
@@ -718,8 +656,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         builder: (context) {
                           final screenWidth = MediaQuery.of(context).size.width;
                           final cardWidth = (screenWidth - 32 - 12) / 2;
-                          final double cardHeight = (cardWidth / 1.15) + 100.0;
-                          final double dynamicRatio = (cardWidth / cardHeight).clamp(0.55, 0.75);
+                          final double cardHeight = (cardWidth / 1.15) + 130.0;
+                          final double dynamicRatio = (cardWidth / cardHeight).clamp(0.48, 0.72);
 
                           return GridView.builder(
                             shrinkWrap: true,
@@ -764,35 +702,12 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                       child: Stack(
                                         fit: StackFit.expand,
                                         children: [
-                                          Builder(builder: (context) {
-                                            final imgStr = item['image'] as String;
-                                            if (imgStr.startsWith('asset/')) {
-                                              return Image.asset(
-                                                imgStr,
-                                                fit: BoxFit.cover,
-                                                cacheWidth: 500,
-                                                errorBuilder: (context, error, stackTrace) => Image.network(
-                                                  ApiConfig.resolveImageUrl(imgStr),
-                                                  fit: BoxFit.cover,
-                                                  cacheWidth: 500,
-                                                  errorBuilder: (context, error2, stackTrace2) => Container(
-                                                    color: const Color(0xFFE6C17A),
-                                                    child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            final fullUrl = imgStr.startsWith('http') ? imgStr : ApiConfig.resolveImageUrl(imgStr);
-                                            return Image.network(
-                                              fullUrl,
-                                              fit: BoxFit.cover,
-                                              cacheWidth: 500,
-                                              errorBuilder: (context, error, stackTrace) => Container(
-                                                color: const Color(0xFFE6C17A),
-                                                child: const Icon(Icons.devices_rounded, color: Color(0xFF0D1B2A)),
-                                              ),
-                                            );
-                                          }),
+                                          TechKartProductImage(
+                                            imageUrl: item['image'] as String?,
+                                            fit: BoxFit.cover,
+                                            productTitle: item['title'] as String?,
+                                            categoryName: widget.categoryName,
+                                          ),
                                           Positioned(
                                             top: 8,
                                             left: 8,
@@ -863,10 +778,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                   ),
 
                                   Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Row(
                                           children: [
@@ -890,7 +806,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         Text(
                                           item['title'] as String,
                                           style: GoogleFonts.domine(
-                                            fontSize: 13.5,
+                                            fontSize: 13,
                                             fontWeight: FontWeight.w700,
                                             color: const Color(0xFF0D1B2A),
                                           ),
@@ -901,17 +817,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                         Text(
                                           item['specs'] as String,
                                           style: GoogleFonts.literata(
-                                            fontSize: 10.5,
+                                            fontSize: 10,
                                             fontWeight: FontWeight.w400,
                                             color: const Color(0xFF1B365D),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        const SizedBox(height: 8),
+                                        const SizedBox(height: 6),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Row(
                                               crossAxisAlignment: CrossAxisAlignment.baseline,

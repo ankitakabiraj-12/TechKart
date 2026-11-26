@@ -8,6 +8,7 @@ import '../core/network/api_config.dart';
 import '../core/network/catalog_models.dart';
 import '../core/network/product_resolver.dart';
 import '../core/session_manager.dart';
+import '../core/widgets/techkart_product_image.dart';
 import '../theme/bottom_navbar.dart';
 import '../theme/profile_avatar.dart';
 
@@ -91,6 +92,34 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Set<String> _wishlisted = {'apex_fold_hero'};
   final ApiClient _apiClient = ApiClient();
+
+  /// Dynamic browsing & search history tracker for "Still Looking for These?"
+  static final List<Map<String, dynamic>> _browsingHistory = [];
+
+  void _recordProductView({
+    required String id,
+    required String title,
+    required String price,
+    required String image,
+    String? category,
+    String? specs,
+  }) {
+    if (!mounted) return;
+    setState(() {
+      _browsingHistory.removeWhere((item) => item['id'] == id);
+      _browsingHistory.insert(0, {
+        'id': id,
+        'title': title,
+        'price': price,
+        'image': image,
+        'category': category ?? 'Electronics',
+        'specs': specs ?? 'Verified Hardware',
+      });
+      if (_browsingHistory.length > 10) {
+        _browsingHistory.removeLast();
+      }
+    });
+  }
 
   late final ScrollController _scrollController;
   final ValueNotifier<double> _scrollOffsetNotifier = ValueNotifier<double>(0.0);
@@ -706,6 +735,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
+        _recordProductView(
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+          category: tag,
+          specs: specs,
+        );
         AppNavigator.toProductDetails(context, productId: id);
       },
       child: Container(
@@ -965,107 +1002,179 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
-  /// 1. "ANKITA, still looking for these?" Top personalized recommendation banner
-  Widget _buildPersonalizedRecommendationBanner() {
+  /// 1. Flipkart-inspired dynamic "Still Looking for These?" section
+  Widget _buildStillLookingForTheseSection() {
     return ValueListenableBuilder<Map<String, dynamic>?>(
       valueListenable: SessionManager().currentUserNotifier,
       builder: (context, user, _) {
         final fullName = (user?['full_name'] as String?)?.trim();
         final rawFirstName = (fullName != null && fullName.isNotEmpty)
             ? fullName.split(' ').first.toUpperCase()
-            : 'ANKITA';
+            : null;
+        final headerTitle = rawFirstName != null
+            ? '$rawFirstName, still looking for these?'
+            : 'Still looking for these?';
+
+        // Sourcing products dynamically:
+        // 1. Prioritize user's actual browsing / search history
+        // 2. Fallback to catalog new arrivals if history has fewer than 3 items
+        // 3. Fallback to curated genuine flagship electronics
+        final List<Map<String, dynamic>> displayItems = [];
+
+        if (_browsingHistory.isNotEmpty) {
+          displayItems.addAll(_browsingHistory.take(3));
+        }
+
+        if (displayItems.length < 3 && _newArrivals.isNotEmpty) {
+          for (final prod in _newArrivals) {
+            if (displayItems.length >= 3) break;
+            final prodIdStr = '${prod.id}';
+            if (!displayItems.any((i) => i['id'] == prodIdStr)) {
+              displayItems.add({
+                'id': prodIdStr,
+                'title': prod.title,
+                'price': '₹${prod.price.toStringAsFixed(0)}',
+                'image': prod.primaryImageUrl ?? 'asset/chronos_ultra_2.jpg',
+                'category': prod.categoryName ?? 'Electronics',
+                'tag': prod.isNewArrival ? 'NEW' : 'FEATURED',
+              });
+            }
+          }
+        }
+
+        final fallbackDefaults = [
+          {
+            'id': 'sony-wh1000xm5-wireless-headphones',
+            'title': 'Sony WH-1000XM5',
+            'price': '₹29,990',
+            'image': 'asset/product_images/Audio-Headphones/sony-wh1000xm5-wireless-headphones.jpg',
+            'category': 'Audio',
+            'tag': 'HOT',
+          },
+          {
+            'id': 'samsung-galaxy-s25-ultra',
+            'title': 'Galaxy S25 Ultra',
+            'price': '₹1,29,999',
+            'image': 'asset/product_images/Mobiles/samsung-galaxy-s25-ultra.jpg',
+            'category': 'Flagship',
+            'tag': 'TOP',
+          },
+          {
+            'id': 'playstation-5-pro-console',
+            'title': 'Sony PS5 Pro 2TB',
+            'price': '₹69,990',
+            'image': 'asset/product_images/Gaming/playstation-5-pro-console.jpg',
+            'category': 'Gaming',
+            'tag': 'NEW',
+          },
+        ];
+
+        while (displayItems.length < 3) {
+          final nextFallback = fallbackDefaults[displayItems.length];
+          displayItems.add(nextFallback);
+        }
 
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               colors: [
-                Color(0xFFE53935),
-                Color(0xFFD81B60),
-                Color(0xFF8E24AA),
+                Color(0xFF0F172A), // Dark slate navy
+                Color(0xFF16222F),
               ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: const Color(0xFF1E293B),
+              width: 1,
+            ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFD81B60).withValues(alpha: 0.25),
+                color: Colors.black.withValues(alpha: 0.16),
                 blurRadius: 10,
-                offset: const Offset(0, 4),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header title with right-side badge
+              // Header title with right-side action link
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Text(
-                      '$rawFirstName, still looking for these?',
+                      headerTitle,
                       style: GoogleFonts.domine(
-                        fontSize: 14.5,
+                        fontSize: 13.5,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFFF5EBDD),
+                        color: const Color(0xFFF8FAFC),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFB300),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      'DEALS',
-                      style: GoogleFonts.literata(
-                        fontSize: 10.5,
-                        fontWeight: FontWeight.w800,
-                        color: const Color(0xFF0D1B2A),
-                        letterSpacing: 0.5,
+                  GestureDetector(
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      AppNavigator.toSearchOverlay(context);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E293B),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: const Color(0xFF334155),
+                          width: 0.8,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'View All',
+                            style: GoogleFonts.literata(
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF94A3B8),
+                            ),
+                          ),
+                          const SizedBox(width: 2),
+                          const Icon(
+                            Icons.chevron_right_rounded,
+                            size: 12,
+                            color: Color(0xFF94A3B8),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
 
-              // 3 horizontal mini cards
+              // 3 horizontal compact mini cards
               Row(
                 children: [
-                  Expanded(
-                    child: _buildPersonalizedMiniCard(
-                      id: 'apex_buds_pro',
-                      title: 'AURA PRO',
-                      price: '₹14,999',
-                      image: 'asset/apex_buds_pro.jpg',
+                  for (int i = 0; i < displayItems.length; i++) ...[
+                    if (i > 0) const SizedBox(width: 8),
+                    Expanded(
+                      child: _buildStillLookingMiniCard(
+                        id: displayItems[i]['id'] as String,
+                        title: displayItems[i]['title'] as String,
+                        price: displayItems[i]['price'] as String,
+                        image: displayItems[i]['image'] as String,
+                        tag: displayItems[i]['tag'] as String?,
+                        category: displayItems[i]['category'] as String?,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: _buildPersonalizedMiniCard(
-                      id: 'titan_pixel_9_pro',
-                      title: 'TITAN 9 PRO',
-                      price: '₹1,09,999',
-                      image: 'asset/titan_pixel_9_pro.jpg',
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: _buildPersonalizedMiniCard(
-                      id: 'carousel_wireless_speaker',
-                      title: 'SONIC 360',
-                      price: '₹12,499',
-                      image: 'asset/carousel_wireless_speaker.jpg',
-                    ),
-                  ),
+                  ],
                 ],
               ),
             ],
@@ -1075,26 +1184,35 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPersonalizedMiniCard({
+  Widget _buildStillLookingMiniCard({
     required String id,
     required String title,
     required String price,
     required String image,
+    String? tag,
+    String? category,
   }) {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
+        _recordProductView(
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+          category: category,
+        );
         AppNavigator.toProductDetails(context, productId: id);
       },
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: const Color(0xFFF5EBDD),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 4,
+              blurRadius: 5,
               offset: const Offset(0, 2),
             ),
           ],
@@ -1103,25 +1221,52 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: const Color(0xFFE6C17A),
-                    child: const Icon(Icons.devices_rounded, size: 20, color: Color(0xFF0D1B2A)),
+            // Stage image with tag
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    height: 72,
+                    width: double.infinity,
+                    color: const Color(0xFFF8FAFC),
+                    child: TechKartProductImage(
+                      imageUrl: image,
+                      height: 72,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      productTitle: title,
+                      categoryName: category,
+                    ),
                   ),
                 ),
-              ),
+                if (tag != null)
+                  Positioned(
+                    top: 4,
+                    left: 4,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0284C7),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        tag,
+                        style: GoogleFonts.literata(
+                          fontSize: 7.5,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 5),
             Text(
               title,
               style: GoogleFonts.literata(
-                fontSize: 10.5,
+                fontSize: 10,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF0D1B2A),
               ),
@@ -1240,6 +1385,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
+        _recordProductView(
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+          category: 'Deals',
+        );
         AppNavigator.toProductDetails(context, productId: id);
       },
       child: Container(
@@ -1564,6 +1716,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
+        _recordProductView(
+          id: id,
+          title: offerText,
+          price: offerText.contains('₹') ? offerText.substring(offerText.indexOf('₹')) : '₹1,74,990',
+          image: image,
+          category: badgeText,
+        );
         AppNavigator.toProductDetails(context, productId: id);
       },
       child: Container(
@@ -1842,6 +2001,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
+        _recordProductView(
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+          category: badge,
+          specs: offerTag,
+        );
         AppNavigator.toProductDetails(context, productId: id);
       },
       child: Container(
@@ -2108,221 +2275,284 @@ class _HomeScreenState extends State<HomeScreen> {
         bottom: false,
         child: Column(
           children: [
-            SizedBox(height: topPadding > 0 ? topPadding + 6 : 24),
-
             // ---------------------------------------------------------------
-            // TOP BAR: Brand Mark, Bell, Avatar
+            // WINTER TOP ZONE: Frost Gradient Header through Search Bar
             // ---------------------------------------------------------------
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'asset/app_logo.png',
-                        height: 36,
-                        width: 36,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Image.asset(
-                          'asset/app_launcher_icon.png',
-                          height: 36,
-                          width: 36,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'TechKart',
-                        style: GoogleFonts.domine(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xFF0D1B2A),
-                        ),
-                      ),
-                    ],
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFFE8F2F8), // Subtle winter frost morning tint
+                    Color(0xFFEEF5FA),
+                    Color(0xFFF4F8FB),
+                  ],
+                ),
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(0xFFDCEAF5),
+                    width: 0.8,
                   ),
-                  Row(
-                    children: [
-                      Stack(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              HapticFeedback.selectionClick();
-                              AppNavigator.toOrderHistory(context);
-                            },
-                            icon: const Icon(
-                              Icons.notifications_none_rounded,
-                              size: 23,
-                              color: Color(0xFF1B365D),
-                            ),
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(
-                                minWidth: 34, minHeight: 34),
-                          ),
-                          Positioned(
-                            top: 6,
-                            right: 8,
-                            child: Container(
-                              width: 7,
-                              height: 7,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFE53E3E),
-                                shape: BoxShape.circle,
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: topPadding > 0 ? topPadding + 4 : 20),
+
+                  // TOP BAR: Brand Mark, Bell, Avatar
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset(
+                              'asset/app_logo.png',
+                              height: 36,
+                              width: 36,
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                'asset/app_launcher_icon.png',
+                                height: 36,
+                                width: 36,
+                                fit: BoxFit.contain,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 6),
-                      GestureDetector(
-                        onTap: () {
-                          HapticFeedback.selectionClick();
-                          AppNavigator.toCustomerProfileHub(context);
-                        },
-                        child: const ProfileAvatar(
-                          size: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            // ---------------------------------------------------------------
-            // LOCATION & STATUS STRIP
-            // ---------------------------------------------------------------
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.location_on_outlined,
-                          size: 14,
-                          color: Color(0xFF1B365D),
-                        ),
-                        const SizedBox(width: 4),
-                        Flexible(
-                          child: ValueListenableBuilder<Map<String, dynamic>?>(
-                            valueListenable: SessionManager().currentUserNotifier,
-                            builder: (context, user, _) {
-                              final rawCity = (user?['city'] ?? '').toString().trim();
-                              final rawPincode = (user?['pincode'] ?? '').toString().trim();
-                              final locationLabel = (rawCity.isNotEmpty || rawPincode.isNotEmpty)
-                                  ? 'Delivering to ${[rawCity, rawPincode].where((s) => s.isNotEmpty).join(' ')}'
-                                  : 'Delivering to Behala, Kolkata 700063';
-
-                              return Text(
-                                locationLabel,
-                                style: GoogleFonts.literata(
-                                  fontSize: 11.5,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xFF1B365D),
+                            const SizedBox(width: 8),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'TechKart',
+                                style: GoogleFonts.domine(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF0D1B2A),
                                 ),
                                 maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              );
-                            },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Stack(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    HapticFeedback.selectionClick();
+                                    AppNavigator.toOrderHistory(context);
+                                  },
+                                  icon: const Icon(
+                                    Icons.notifications_none_rounded,
+                                    size: 23,
+                                    color: Color(0xFF1B365D),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(
+                                      minWidth: 34, minHeight: 34),
+                                ),
+                                Positioned(
+                                  top: 6,
+                                  right: 8,
+                                  child: Container(
+                                    width: 7,
+                                    height: 7,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFE53E3E),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 6),
+                            GestureDetector(
+                              onTap: () {
+                                HapticFeedback.selectionClick();
+                                AppNavigator.toCustomerProfileHub(context);
+                              },
+                              child: const ProfileAvatar(
+                                size: 30,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  // LOCATION & STATUS STRIP (With subtle Winter badge!)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.location_on_outlined,
+                                size: 14,
+                                color: Color(0xFF1B365D),
+                              ),
+                              const SizedBox(width: 4),
+                              Flexible(
+                                child: ValueListenableBuilder<Map<String, dynamic>?>(
+                                  valueListenable: SessionManager().currentUserNotifier,
+                                  builder: (context, user, _) {
+                                    final rawCity = (user?['city'] ?? '').toString().trim();
+                                    final rawPincode = (user?['pincode'] ?? '').toString().trim();
+                                    final locationLabel = (rawCity.isNotEmpty || rawPincode.isNotEmpty)
+                                        ? 'Delivering to ${[rawCity, rawPincode].where((s) => s.isNotEmpty).join(' ')}'
+                                        : 'Delivering to Behala, Kolkata 700063';
+
+                                    return Text(
+                                      locationLabel,
+                                      style: GoogleFonts.literata(
+                                        fontSize: 11.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xFF1B365D),
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDCEEFB),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color(0xFFB8DAF2),
+                              width: 0.8,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.ac_unit_rounded,
+                                size: 12,
+                                color: Color(0xFF0284C7),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                'Winter Tech',
+                                style: GoogleFonts.literata(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF0369A1),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              const Text('•', style: TextStyle(color: Color(0xFF7DD3FC), fontSize: 9)),
+                              const SizedBox(width: 5),
+                              const Icon(
+                                Icons.bolt_rounded,
+                                size: 13,
+                                color: Color(0xFF0D1B2A),
+                              ),
+                              Text(
+                                '24-h Fast',
+                                style: GoogleFonts.literata(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF0D1B2A),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.bolt_rounded,
-                        size: 15,
-                        color: Color(0xFF0D1B2A),
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        '24-h Fast',
-                        style: GoogleFonts.literata(
-                          fontSize: 11.5,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF0D1B2A),
+
+                  const SizedBox(height: 8),
+
+                  // FROSTED WINTER SEARCH BAR
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: GestureDetector(
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        AppNavigator.toSearchOverlay(context);
+                      },
+                      child: Container(
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22),
+                          border: Border.all(
+                            color: const Color(0xFFB4D7ED),
+                            width: 1.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF0284C7).withValues(alpha: 0.07),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.search_rounded,
+                              size: 19,
+                              color: Color(0xFF0284C7),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                'Search hardware, ecosystems, gear...',
+                                style: GoogleFonts.literata(
+                                  fontSize: 12.5,
+                                  color: const Color(0xFF475569),
+                                ),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.mic_none_rounded,
+                              size: 19,
+                              color: Color(0xFF1B365D),
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                HapticFeedback.selectionClick();
+                                AppNavigator.toAiVisualSearchCamera(context);
+                              },
+                              child: const Icon(
+                                Icons.camera_alt_outlined,
+                                size: 19,
+                                color: Color(0xFF1B365D),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
+
+                  const SizedBox(height: 8),
                 ],
               ),
             ),
-
-            const SizedBox(height: 10),
-
-            // ---------------------------------------------------------------
-            // SEARCH BAR
-            // ---------------------------------------------------------------
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GestureDetector(
-                onTap: () {
-                  HapticFeedback.selectionClick();
-                  AppNavigator.toSearchOverlay(context);
-                },
-                child: Container(
-                  height: 46,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF5EBDD),
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: const Color(0xFFE6C17A)),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.search_rounded,
-                        size: 19,
-                        color: Color(0xFF1B365D),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Search hardware, ecosystems, gear...',
-                          style: GoogleFonts.literata(
-                            fontSize: 13,
-                            color: const Color(0xFF1B365D),
-                          ),
-                        ),
-                      ),
-                      const Icon(
-                        Icons.mic_none_rounded,
-                        size: 19,
-                        color: Color(0xFF1B365D),
-                      ),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () {
-                          HapticFeedback.selectionClick();
-                          AppNavigator.toAiVisualSearchCamera(context);
-                        },
-                        child: const Icon(
-                          Icons.camera_alt_outlined,
-                          size: 19,
-                          color: Color(0xFF1B365D),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 10),
 
             // ---------------------------------------------------------------
             // SCROLLABLE BODY
@@ -2337,11 +2567,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // -----------------------------------------------------
-                      // PROMOTIONAL CAMPAIGN CAROUSEL (Reference 2 Layout + Reference 3 Gadget Photography)
+                      // PROMOTIONAL CAMPAIGN CAROUSEL (Winter-to-Warm Fade Transition)
                       // -----------------------------------------------------
-                      _buildPromotionalCarousel(),
+                      Container(
+                        padding: const EdgeInsets.only(top: 8, bottom: 4),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFF4F8FB),
+                              Color(0xFFFDFBCF), // Smoothly blends into warm cream
+                            ],
+                            stops: [0.0, 1.0],
+                          ),
+                        ),
+                        child: _buildPromotionalCarousel(),
+                      ),
 
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 8),
 
                       // -----------------------------------------------------
                       // CATEGORIES CIRCLE RAIL
@@ -2375,7 +2619,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 8),
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2415,7 +2659,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 14),
 
                       // -----------------------------------------------------
                       // SECTION: RECENT ARRIVALS & NEW LAUNCHES
@@ -2425,7 +2669,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'New Arrivals & Launches',
                         'Freshly added certified hardware • Auto-updated',
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 8),
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -2475,13 +2719,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         },
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 10),
 
                       // -----------------------------------------------------
-                      // SECTION 1: USER PERSONALIZED RECOMMENDATION BANNER
-                      // ("ANKITA, still looking for these?")
+                      // SECTION 1: FLIPKART-INSPIRED DYNAMIC "STILL LOOKING FOR THESE?"
                       // -----------------------------------------------------
-                      _buildPersonalizedRecommendationBanner(),
+                      _buildStillLookingForTheseSection(),
 
                       const SizedBox(height: 14),
 
@@ -2504,14 +2747,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       // -----------------------------------------------------
                       _buildBrandsInSpotlightSection(),
 
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 14),
 
                       // -----------------------------------------------------
                       // SECTION 5: FINANCIAL & VALUE SERVICES SHORTCUTS ROW
                       // -----------------------------------------------------
                       _buildFinancialServicesRow(),
 
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 14),
 
                       // -----------------------------------------------------
                       // SECTION 6: MORE PRODUCTS FOR YOU
@@ -2525,10 +2768,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       // -----------------------------------------------------
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE6C17A),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
