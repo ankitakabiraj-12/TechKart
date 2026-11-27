@@ -165,7 +165,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                       decoration: BoxDecoration(
                         color: const Color(0xFFF8FAFC),
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: const Color(0xFF142D4E)),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Row(
@@ -203,10 +203,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                             child: Container(
                               width: 18,
                               height: 18,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF142D4E),
-                                shape: BoxShape.circle,
-                              ),
+                              decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                               child: const Center(
                                 child: Icon(
                                   Icons.close_rounded,
@@ -278,7 +275,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? const Color(0xFF142D4E)
-                              : const Color(0xFF142D4E),
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
@@ -348,10 +345,7 @@ class _SearchOverlayScreenState extends State<SearchOverlayScreen> {
                               Container(
                                 width: 44,
                                 height: 44,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF142D4E),
-                                  shape: BoxShape.circle,
-                                ),
+                                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
                                     Icons.watch_outlined,

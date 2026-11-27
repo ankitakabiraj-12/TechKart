@@ -81,7 +81,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                 decoration: BoxDecoration(
                   color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -109,8 +109,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                   height: 140,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: const Color(0xFF142D4E),
+                    border: Border.all(color: const Color(0xFFE2E8F0),
                       width: 4,
                     ),
                   ),
@@ -118,10 +117,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                     child: Container(
                       width: 100,
                       height: 100,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF142D4E),
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                       child: const Center(
                         child: Icon(
                           Icons.security,
@@ -207,7 +203,7 @@ class _SecurePaymentScreenState extends State<SecurePaymentScreen>
                 decoration: BoxDecoration(
                   color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

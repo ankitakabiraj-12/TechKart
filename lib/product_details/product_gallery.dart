@@ -98,10 +98,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                     child: Container(
                       width: 40,
                       height: 40,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF142D4E),
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                       child: const Center(
                         child: Icon(
                           Icons.arrow_back_ios_new_rounded,
@@ -151,10 +148,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                   Container(
                     width: 38,
                     height: 38,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF142D4E),
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                     child: const Center(
                       child: Icon(
                         Icons.share_outlined,
@@ -168,10 +162,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                   Container(
                     width: 38,
                     height: 38,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF142D4E),
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                     child: const Center(
                       child: Icon(
                         Icons.fullscreen_rounded,
@@ -464,8 +455,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                                         color: const Color(0xFF000000),
                                         width: 2,
                                       )
-                                    : Border.all(
-                                        color: const Color(0xFF142D4E),
+                                    : Border.all(color: const Color(0xFFE2E8F0),
                                         width: 1,
                                       ),
                               ),
@@ -576,10 +566,7 @@ class _ProductGalleryScreenState extends State<ProductGalleryScreen> {
                           Container(
                             width: 6,
                             height: 6,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF142D4E),
-                              shape: BoxShape.circle,
-                            ),
+                            decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                           ),
                           const SizedBox(width: 5),
                           Text(

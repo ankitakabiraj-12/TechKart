@@ -424,10 +424,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                   Container(
                     width: 28,
                     height: 28,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF142D4E),
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                     child: const Center(
                       child: Icon(
                         Icons.verified_outlined,
@@ -540,7 +537,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? const Color(0xFF142D4E)
-                              : const Color(0xFF142D4E),
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
@@ -609,7 +606,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                           decoration: BoxDecoration(
                             color: const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: const Color(0xFF142D4E), width: 1),
+                            border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
                           ),
                           child: Center(
                             child: Text(
@@ -951,10 +948,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                                             Container(
                                               width: 40,
                                               height: 40,
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xFF142D4E),
-                                                shape: BoxShape.circle,
-                                              ),
+                                              decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                               child: const Center(
                                                 child: Icon(
                                                   Icons

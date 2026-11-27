@@ -318,7 +318,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -373,7 +373,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -428,7 +428,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 height: 86,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Stack(
@@ -513,7 +513,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF142D4E)),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -541,7 +541,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -596,7 +596,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -757,7 +757,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -981,7 +981,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1051,9 +1051,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isDefault ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isDefault ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1181,7 +1181,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF142D4E),
-                  foregroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFFFFFFFF),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),

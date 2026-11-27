@@ -349,10 +349,7 @@ class _ConversationalShoppingAssistantScreenState
                         Container(
                           width: 28,
                           height: 28,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF142D4E),
-                            shape: BoxShape.circle,
-                          ),
+                          decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                           child: const Icon(Icons.auto_awesome,
                               size: 14, color: Color(0xFFFFFFFF)),
                         ),
@@ -523,10 +520,7 @@ class _ConversationalShoppingAssistantScreenState
         Container(
           width: 28,
           height: 28,
-          decoration: const BoxDecoration(
-            color: Color(0xFF142D4E),
-            shape: BoxShape.circle,
-          ),
+          decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
           child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFFFFFFFF)),
         ),
         const SizedBox(width: 10),
@@ -597,10 +591,7 @@ class _ConversationalShoppingAssistantScreenState
         Container(
           width: 28,
           height: 28,
-          decoration: const BoxDecoration(
-            color: Color(0xFF142D4E),
-            shape: BoxShape.circle,
-          ),
+          decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
           child: const Icon(Icons.auto_awesome, size: 14, color: Color(0xFFFFFFFF)),
         ),
         const SizedBox(width: 10),
@@ -1007,10 +998,7 @@ class _ConversationalShoppingAssistantScreenState
               child: Container(
                 width: 32,
                 height: 32,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                 child: const Icon(Icons.arrow_upward_rounded,
                     size: 16, color: Color(0xFFFFFFFF)),
               ),

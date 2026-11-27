@@ -294,10 +294,7 @@ class _LoginScreenState extends State<LoginScreen>
                               child: Container(
                                 width: 44,
                                 height: 44,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF142D4E),
-                                  shape: BoxShape.circle,
-                                ),
+                                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
                                     Icons.arrow_back_ios_new_rounded,
@@ -624,10 +621,7 @@ class _LoginScreenState extends State<LoginScreen>
                               Container(
                                 width: 44,
                                 height: 44,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF142D4E),
-                                  shape: BoxShape.circle,
-                                ),
+                                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
                                     Icons.shield_outlined,

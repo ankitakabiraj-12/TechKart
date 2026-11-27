@@ -215,10 +215,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               child: Container(
                                 width: 44,
                                 height: 44,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF142D4E),
-                                  shape: BoxShape.circle,
-                                ),
+                                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
                                     Icons.arrow_back_ios_new_rounded,
@@ -261,7 +258,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             vertical: 7,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF142D4E),
+                            color: const Color(0xFFE8F2FD),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -270,7 +267,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               const Icon(
                                 Icons.lock_outline_rounded,
                                 size: 14,
-                                color: Color(0xFF000000),
+                                color: const Color(0xFF142D4E),
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -279,7 +276,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                   fontSize: 10.5,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: 0.9,
-                                  color: const Color(0xFF000000),
+                                  color: const Color(0xFF142D4E),
                                 ),
                               ),
                             ],
@@ -296,7 +293,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                           style: GoogleFonts.literata(
                             fontSize: 34,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF000000),
+                            color: const Color(0xFF142D4E),
                             letterSpacing: -0.6,
                           ),
                         ),
@@ -311,7 +308,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                           style: GoogleFonts.literata(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF000000),
+                            color: const Color(0xFF142D4E),
                             height: 1.45,
                           ),
                         ),
@@ -326,7 +323,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                           style: GoogleFonts.literata(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF000000),
+                            color: const Color(0xFF142D4E),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -342,7 +339,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             keyboardType: TextInputType.emailAddress,
                             style: GoogleFonts.literata(
                               fontSize: 14.5,
-                              color: const Color(0xFF000000),
+                              color: const Color(0xFF142D4E),
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
@@ -353,7 +350,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                 child: Icon(
                                   Icons.mail_outline_rounded,
                                   size: 21,
-                                  color: Color(0xFF000000),
+                                  color: const Color(0xFF142D4E),
                                 ),
                               ),
                               prefixIconConstraints: const BoxConstraints(
@@ -363,7 +360,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               hintText: 'name@example.com',
                               hintStyle: GoogleFonts.literata(
                                 fontSize: 14.5,
-                                color: const Color(0xFF000000),
+                                color: const Color(0xFF142D4E),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -383,7 +380,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                           style: GoogleFonts.literata(
                             fontSize: 12.5,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF000000),
+                            color: const Color(0xFF142D4E),
                           ),
                         ),
 
@@ -460,15 +457,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               Container(
                                 width: 44,
                                 height: 44,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF142D4E),
-                                  shape: BoxShape.circle,
-                                ),
+                                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
                                     Icons.verified_user_outlined,
                                     size: 20,
-                                    color: Color(0xFF000000),
+                                    color: const Color(0xFF142D4E),
                                   ),
                                 ),
                               ),
@@ -482,7 +476,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFF000000),
+                                        color: const Color(0xFF142D4E),
                                       ),
                                     ),
                                     const SizedBox(height: 3),
@@ -491,7 +485,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                       style: GoogleFonts.literata(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w400,
-                                        color: const Color(0xFF000000),
+                                        color: const Color(0xFF142D4E),
                                         height: 1.35,
                                       ),
                                     ),
@@ -516,7 +510,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                 style: GoogleFonts.literata(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF000000),
+                                  color: const Color(0xFF142D4E),
                                 ),
                               ),
                               GestureDetector(
@@ -527,7 +521,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                   style: GoogleFonts.literata(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF000000),
+                                    color: const Color(0xFF142D4E),
                                     decoration: TextDecoration.underline,
                                     decorationColor: const Color(0xFF142D4E),
                                     decorationThickness: 1.5,

@@ -297,7 +297,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       decoration: BoxDecoration(
         color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -362,7 +362,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: TextField(
         controller: _searchController,
@@ -411,7 +411,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -439,7 +439,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -482,7 +482,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
             ],
           ),
 
-          const Divider(height: 16, color: Color(0xFF142D4E)),
+          Divider(height: 16, color: const Color(0xFFE2E8F0)),
 
           // Product item + Image
           Row(
@@ -492,7 +492,7 @@ class _AdminOrderManagementScreenState extends State<AdminOrderManagementScreen>
                 height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(

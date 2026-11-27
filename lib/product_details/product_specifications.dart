@@ -271,7 +271,7 @@ class _ProductSpecificationsScreenState
                         decoration: BoxDecoration(
                           color: isSelected
                               ? const Color(0xFF142D4E)
-                              : const Color(0xFF142D4E),
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(18),
                         ),
                         child: Center(
@@ -790,10 +790,7 @@ class _ProductSpecificationsScreenState
               Container(
                 width: 24,
                 height: 24,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                 child: Center(
                   child: Icon(icon, size: 13, color: const Color(0xFF000000)),
                 ),

@@ -627,10 +627,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                 Container(
                                   width: 72,
                                   height: 72,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF142D4E),
-                                    shape: BoxShape.circle,
-                                  ),
+                                  decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                   child: const Icon(
                                     Icons.inventory_2_outlined,
                                     size: 36,

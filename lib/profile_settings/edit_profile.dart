@@ -242,18 +242,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                size: 20,
-                color: Color(0xFF000000),
-              ),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -303,7 +292,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFF142D4E), width: 2),
+          border: Border.all(color: const Color(0xFFE2E8F0), width: 2),
         ),
         child: const ProfileAvatar(size: 80),
       ),
@@ -343,7 +332,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -399,7 +388,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -461,7 +450,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -565,7 +554,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             border: Border.all(
               color: isSelected
                   ? const Color(0xFF142D4E)
-                  : const Color(0xFF142D4E),
+                  : const Color(0xFFE2E8F0),
             ),
           ),
           child: Row(

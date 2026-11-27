@@ -200,14 +200,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -305,7 +298,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF1F5F9),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -338,7 +331,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -355,7 +348,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF142D4E),
+                  color: const Color(0xFFE8F2FD),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.local_shipping_outlined,
@@ -389,7 +382,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             child: const LinearProgressIndicator(
               value: 1.0,
               minHeight: 5,
-              backgroundColor: Color(0xFF142D4E),
+              backgroundColor: Color(0xFFE2E8F0),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF142D4E)),
             ),
           ),
@@ -416,7 +409,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -436,7 +429,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 child: Container(
                   width: 84,
                   height: 84,
-                  color: const Color(0xFF142D4E),
+                  color: const Color(0xFFF1F5F9),
                   child: Image.asset(
                     item['image'] as String,
                     cacheWidth: 350,
@@ -454,7 +447,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   decoration: BoxDecoration(
                     color: item['badge'] == 'SALE'
                         ? const Color(0xFF142D4E)
-                        : const Color(0xFF142D4E),
+                        : const Color(0xFFE2E8F0),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -465,7 +458,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       fontWeight: FontWeight.w700,
                       color: item['badge'] == 'SALE'
                           ? const Color(0xFF142D4E)
-                          : const Color(0xFF142D4E),
+                          : const Color(0xFFE2E8F0),
                     ),
                   ),
                 ),
@@ -544,7 +537,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF142D4E),
+                        color: const Color(0xFFF1F5F9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -608,7 +601,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [
@@ -637,7 +630,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               decoration: BoxDecoration(
                 color: _couponApplied
                     ? const Color(0xFF142D4E)
-                    : const Color(0xFF142D4E),
+                    : const Color(0xFFE2E8F0),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
@@ -645,9 +638,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: _couponApplied
-                      ? const Color(0xFF142D4E)
-                      : const Color(0xFFF8FAFC),
+                  color: const Color(0xFFFFFFFF),
                 ),
               ),
             ),
@@ -666,7 +657,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         children: [
@@ -751,7 +742,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
-            child: Divider(color: Color(0xFF142D4E), height: 1),
+            child: Divider(color: const Color(0xFFE2E8F0), height: 1),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -837,7 +828,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         onPressed: widget.onCheckout ?? () => AppNavigator.toDeliveryAddress(context),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF142D4E),
-          foregroundColor: const Color(0xFFF8FAFC),
+          foregroundColor: const Color(0xFFFFFFFF),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -943,7 +934,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF142D4E),
-                foregroundColor: const Color(0xFFF8FAFC),
+                foregroundColor: const Color(0xFFFFFFFF),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),

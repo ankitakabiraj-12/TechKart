@@ -182,14 +182,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -244,10 +237,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               Container(
                 width: 6,
                 height: 6,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
               ),
               const SizedBox(width: 6),
               Text(
@@ -281,9 +271,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [
@@ -386,7 +376,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -445,7 +435,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFF142D4E)),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
               ),
               child: Row(
                 children: [
@@ -471,7 +461,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Row(
                   children: [
@@ -546,7 +536,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -609,7 +599,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -668,7 +658,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: TextFormField(
                   controller: _cityController,
@@ -713,7 +703,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: TextFormField(
                   controller: _divisionController,
@@ -767,7 +757,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: TextFormField(
                   controller: _pinController,
@@ -813,7 +803,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -870,7 +860,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
             border: Border.all(
               color: isSelected
                   ? const Color(0xFF142D4E)
-                  : const Color(0xFF142D4E),
+                  : const Color(0xFFE2E8F0),
             ),
           ),
           child: Column(
@@ -880,7 +870,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 size: 20,
                 color: isSelected
                     ? const Color(0xFF142D4E)
-                    : const Color(0xFF142D4E),
+                    : const Color(0xFFE2E8F0),
               ),
               const SizedBox(height: 6),
               Text(
@@ -890,7 +880,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                   color: isSelected
                       ? const Color(0xFF142D4E)
-                      : const Color(0xFF142D4E),
+                      : const Color(0xFFE2E8F0),
                 ),
               ),
             ],
@@ -933,7 +923,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: TextFormField(
             controller: _instructionsController,
@@ -964,9 +954,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [

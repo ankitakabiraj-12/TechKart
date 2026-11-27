@@ -105,10 +105,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                     child: Container(
                       width: 42,
                       height: 42,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF142D4E),
-                        shape: BoxShape.circle,
-                      ),
+                      decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                       child: const Center(
                         child: Icon(
                           Icons.close_rounded,
@@ -381,10 +378,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             Container(
                               width: 6,
                               height: 6,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF142D4E),
-                                shape: BoxShape.circle,
-                              ),
+                              decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                             ),
                             const SizedBox(width: 8),
                             Text(
@@ -408,7 +402,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           vertical: 7,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF142D4E),
+                          color: const Color(0xFFE8F2FD),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -418,7 +412,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               width: 6,
                               height: 6,
                               decoration: const BoxDecoration(
-                                color: Color(0xFF000000),
+                                color: const Color(0xFF142D4E),
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -428,7 +422,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF000000),
+                                color: const Color(0xFF142D4E),
                               ),
                             ),
                           ],
@@ -453,7 +447,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                             const Icon(
                               Icons.check_circle_outline_rounded,
                               size: 14,
-                              color: Color(0xFF000000),
+                              color: const Color(0xFF142D4E),
                             ),
                             const SizedBox(width: 6),
                             Text(
@@ -461,7 +455,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                               style: GoogleFonts.literata(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF000000),
+                                color: const Color(0xFF142D4E),
                               ),
                             ),
                           ],
@@ -485,7 +479,7 @@ class _AiImageProcessingScreenState extends State<AiImageProcessingScreen>
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF142D4E),
-                            foregroundColor: const Color(0xFF142D4E),
+                            foregroundColor: const Color(0xFFFFFFFF),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),

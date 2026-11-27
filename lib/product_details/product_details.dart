@@ -727,7 +727,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       border: Border.all(
                                         color: isSelected
                                             ? const Color(0xFF142D4E)
-                                            : const Color(0xFF142D4E),
+                                            : const Color(0xFFE2E8F0),
                                         width: 1,
                                       ),
                                     ),
@@ -804,7 +804,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     border: Border.all(
                                       color: isSelected
                                           ? const Color(0xFF142D4E)
-                                          : const Color(0xFF142D4E),
+                                          : const Color(0xFFE2E8F0),
                                       width: 1,
                                     ),
                                   ),
@@ -887,7 +887,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   border: Border.all(
                                     color: isSelected
                                         ? const Color(0xFF142D4E)
-                                        : const Color(0xFF142D4E),
+                                        : const Color(0xFFE2E8F0),
                                     width: 1,
                                   ),
                                 ),
@@ -899,7 +899,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       decoration: BoxDecoration(
                                         color: isSelected
                                             ? const Color(0xFF142D4E)
-                                            : const Color(0xFF142D4E),
+                                            : const Color(0xFFE2E8F0),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Center(
@@ -944,7 +944,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       size: 18,
                                       color: isSelected
                                           ? const Color(0xFF142D4E)
-                                          : const Color(0xFF142D4E),
+                                          : const Color(0xFFE2E8F0),
                                     ),
                                   ],
                                 ),

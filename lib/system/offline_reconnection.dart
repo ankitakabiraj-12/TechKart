@@ -176,10 +176,7 @@ class _OfflineReconnectionScreenState extends State<OfflineReconnectionScreen> {
               width: 32,
               height: 32,
               padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
               child: Image.asset(
                 'asset/app_logo.png',
                 fit: BoxFit.contain,

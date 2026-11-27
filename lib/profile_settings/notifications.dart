@@ -183,14 +183,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -327,7 +320,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+          color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -393,7 +386,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -521,7 +514,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF142D4E),
-                        foregroundColor: const Color(0xFF142D4E),
+                        foregroundColor: const Color(0xFFFFFFFF),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),

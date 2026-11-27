@@ -201,7 +201,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -541,7 +541,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -953,7 +953,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             decoration: BoxDecoration(
               color: const Color(0xFFF8FAFC),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF142D4E), width: 1),
+              border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.02),
@@ -969,10 +969,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 Container(
                   width: 44,
                   height: 44,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF142D4E),
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                   child: Icon(
                     icon,
                     size: 22,
@@ -1146,7 +1143,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0xFF142D4E), width: 1),
+          border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.015),
@@ -1161,10 +1158,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             Container(
               width: 44,
               height: 44,
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
               child: Icon(
                 icon,
                 color: const Color(0xFF142D4E),

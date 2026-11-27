@@ -299,18 +299,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                size: 20,
-                color: Color(0xFF000000),
-              ),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -345,9 +334,9 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
             children: [
@@ -489,7 +478,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFF142D4E)),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Column(
           children: [
@@ -549,9 +538,9 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [
@@ -643,7 +632,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(children: children),
     );
@@ -673,10 +662,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(7),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF142D4E),
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                   child: Icon(icon, size: 16, color: const Color(0xFF000000)),
                 ),
                 const SizedBox(width: 12),
@@ -746,7 +732,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
             ),
           ),
         ),
-        if (!isLast) const Divider(color: Color(0xFF142D4E), height: 1),
+        if (!isLast) Divider(color: const Color(0xFFE2E8F0), height: 1),
       ],
     );
   }
@@ -776,7 +762,7 @@ class _CustomerProfileHubScreenState extends State<CustomerProfileHubScreen> {
             decoration: BoxDecoration(
               color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFF142D4E), width: 1),
+              border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,

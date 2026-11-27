@@ -406,7 +406,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         decoration: BoxDecoration(
                           color: isActive
                               ? const Color(0xFF142D4E)
-                              : const Color(0xFF142D4E),
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(3),
                         ),
                       );

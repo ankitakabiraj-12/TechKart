@@ -243,7 +243,7 @@ class _AiChatSessionsScreenState extends State<AiChatSessionsScreen> {
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? const Color(0xFF142D4E)
-                                  : const Color(0xFF142D4E),
+                                  : const Color(0xFFE2E8F0),
                               borderRadius: BorderRadius.circular(18),
                             ),
                             child: Row(

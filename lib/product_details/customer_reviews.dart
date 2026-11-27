@@ -536,10 +536,7 @@ class _CustomerReviewsScreenState extends State<CustomerReviewsScreen> {
                                     Container(
                                       width: 34,
                                       height: 34,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFF142D4E),
-                                        shape: BoxShape.circle,
-                                      ),
+                                      decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                       child: Center(
                                         child: Text(
                                           r['initials'] as String,

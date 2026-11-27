@@ -144,14 +144,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -265,9 +258,9 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,7 +364,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Row(
             children: [
@@ -510,7 +503,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Column(
             children: [
@@ -519,19 +512,19 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
                 title: 'Defective / Item Not Working',
                 icon: Icons.electric_bolt_outlined,
               ),
-              const Divider(color: Color(0xFF142D4E), height: 1),
+              Divider(color: const Color(0xFFE2E8F0), height: 1),
               _buildReasonItem(
                 id: 'wrong_item',
                 title: 'Wrong Item Delivered',
                 icon: Icons.swap_horiz,
               ),
-              const Divider(color: Color(0xFF142D4E), height: 1),
+              Divider(color: const Color(0xFFE2E8F0), height: 1),
               _buildReasonItem(
                 id: 'performance',
                 title: 'Performance Not as Expected',
                 icon: Icons.speed,
               ),
-              const Divider(color: Color(0xFF142D4E), height: 1),
+              Divider(color: const Color(0xFFE2E8F0), height: 1),
               _buildReasonItem(
                 id: 'changed_mind',
                 title: 'Changed Mind / No Longer Needed',
@@ -581,7 +574,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
                 color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                 ),
               ),
               child: isSelected
@@ -604,7 +597,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
                 style: GoogleFonts.literata(
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                 ),
               ),
             ),
@@ -652,7 +645,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
               border: Border.all(
                 color: _resolutionPreference == 'original'
                     ? const Color(0xFF142D4E)
-                    : const Color(0xFF142D4E),
+                    : const Color(0xFFE2E8F0),
               ),
             ),
             child: Row(
@@ -670,7 +663,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
                     border: Border.all(
                       color: _resolutionPreference == 'original'
                           ? const Color(0xFF142D4E)
-                          : const Color(0xFF142D4E),
+                          : const Color(0xFFE2E8F0),
                     ),
                   ),
                   child: _resolutionPreference == 'original'
@@ -734,7 +727,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
               border: Border.all(
                 color: _resolutionPreference == 'wallet'
                     ? const Color(0xFF142D4E)
-                    : const Color(0xFF142D4E),
+                    : const Color(0xFFE2E8F0),
               ),
             ),
             child: Row(
@@ -752,7 +745,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
                     border: Border.all(
                       color: _resolutionPreference == 'wallet'
                           ? const Color(0xFF142D4E)
-                          : const Color(0xFF142D4E),
+                          : const Color(0xFFE2E8F0),
                     ),
                   ),
                   child: _resolutionPreference == 'wallet'
@@ -851,7 +844,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: TextField(
             controller: _symptomsController,
@@ -935,7 +928,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF142D4E)),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -962,7 +955,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xFF142D4E),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF142D4E)),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -996,7 +989,7 @@ class _ReturnRequestScreenState extends State<ReturnRequestScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -392,7 +392,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFEBF4FD),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -599,7 +599,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFF142D4E)),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -724,7 +724,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: TextField(
         controller: _searchController,
@@ -839,7 +839,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -863,7 +863,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF142D4E),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF142D4E)),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Image.asset(
@@ -1040,7 +1040,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       decoration: BoxDecoration(
                         color: const Color(0xFFF8FAFC),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFF142D4E)),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
                       ),
                       child: Row(
                         children: [
@@ -1090,7 +1090,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF142D4E),
-                          foregroundColor: const Color(0xFF142D4E),
+                          foregroundColor: const Color(0xFFFFFFFF),
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                           minimumSize: const Size(80, 32),
@@ -1156,7 +1156,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                             style: TextStyle(
                               color: item.rightFooterIcon != null
                                   ? const Color(0xFF142D4E)
-                                  : const Color(0xFF142D4E),
+                                  : const Color(0xFFE2E8F0),
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
                             ),

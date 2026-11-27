@@ -213,7 +213,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     () => AppNavigator.toHome(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF142D4E),
-                  foregroundColor: const Color(0xFF142D4E),
+                  foregroundColor: const Color(0xFFFFFFFF),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -244,7 +244,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         children: [
@@ -309,18 +309,11 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: Color(0xFF142D4E), height: 1),
+            child: Divider(color: const Color(0xFFE2E8F0), height: 1),
           ),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.credit_card, size: 16, color: Color(0xFF000000)),
-              ),
+              Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
@@ -389,21 +382,14 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.local_shipping, size: 16, color: Color(0xFF000000)),
-              ),
+              Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
@@ -462,8 +448,9 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Row(
               children: [
@@ -535,7 +522,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
             decoration: BoxDecoration(
               color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF142D4E)),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Row(
               children: [
@@ -599,8 +586,9 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF142D4E),
+        color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [

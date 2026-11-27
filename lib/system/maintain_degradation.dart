@@ -382,7 +382,7 @@ class _MaintainDegradationScreenState extends State<MaintainDegradationScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFEEF6FD),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

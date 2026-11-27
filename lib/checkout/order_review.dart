@@ -145,14 +145,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
         children: [
           GestureDetector(
             onTap: widget.onBack ?? () => Navigator.of(context).maybePop(),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
-            ),
+            child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -268,7 +261,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           decoration: BoxDecoration(
             color: isActive || isCompleted
                 ? const Color(0xFF142D4E)
-                : const Color(0xFF142D4E),
+                : const Color(0xFFE2E8F0),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -285,7 +278,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
             fontWeight: FontWeight.w700,
             color: isActive || isCompleted
                 ? const Color(0xFF142D4E)
-                : const Color(0xFF142D4E),
+                : const Color(0xFFE2E8F0),
           ),
         ),
       ],
@@ -296,7 +289,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     return Container(
       width: 48,
       height: 2,
-      color: isDone ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+      color: isDone ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
     );
   }
 
@@ -337,7 +330,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -426,8 +419,9 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Row(
               children: [
@@ -471,7 +465,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -485,14 +479,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
         children: [
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.bolt, size: 16, color: Color(0xFF000000)),
-              ),
+              Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle), child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000))),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -608,7 +595,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x04000000),
@@ -737,7 +724,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -801,13 +788,14 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
-            child: Divider(color: Color(0xFF142D4E), height: 1),
+            child: Divider(color: const Color(0xFFE2E8F0), height: 1),
           ),
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF142D4E),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

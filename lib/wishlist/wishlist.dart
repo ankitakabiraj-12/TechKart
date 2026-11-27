@@ -113,11 +113,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'Chronos Ultra 2 (49mm GPS)',
       'subtitle': 'Titanium Smartwatch • LTPO',
       'status': '• In Stock (3 units left)',
-      'statusColor': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF107C41),
       'price': '₹35,499.00',
       'cutPrice': '₹39,999.00',
       'badge': '↓ Price dropped by ₹5,800 since saved',
-      'badgeBg': const Color(0xFF142D4E),
+      'badgeBg': const Color(0xFFE8F2FD),
       'badgeColor': const Color(0xFF142D4E),
       'footer': 'Grade 5 Titanium • 3000 Nit LTPO',
       'image': 'asset/chronos_ultra_2.jpg',
@@ -129,11 +129,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'VoltFast 65W GaN Dual USB-C',
       'subtitle': 'Ultra-compact • 45W+20W split',
       'status': '• In Stock',
-      'statusColor': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF107C41),
       'price': '₹3,999.00',
       'cutPrice': null,
       'badge': 'Next-day dispatch',
-      'badgeBg': const Color(0xFF142D4E),
+      'badgeBg': const Color(0xFFE8F2FD),
       'badgeColor': const Color(0xFF142D4E),
       'badgeIcon': Icons.local_shipping_outlined,
       'footer': 'Dual charging • Foldable pins',
@@ -150,7 +150,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'price': '₹9,899.00',
       'cutPrice': '₹11,499.00',
       'badge': '↓ Price drop (₹1,650 saved)',
-      'badgeBg': const Color(0xFF142D4E),
+      'badgeBg': const Color(0xFFE8F2FD),
       'badgeColor': const Color(0xFF142D4E),
       'badge2': 'Only 2 left',
       'badge2Bg': const Color(0xFFFFECEC),
@@ -165,11 +165,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
       'title': 'Aura Fold Pro Smartphone',
       'subtitle': '7.9" Foldable OLED • 512GB',
       'status': '• In Stock',
-      'statusColor': const Color(0xFF142D4E),
+      'statusColor': const Color(0xFF107C41),
       'price': '₹1,24,999.00',
       'cutPrice': null,
       'badge': 'TechKart Verified Care Included',
-      'badgeBg': const Color(0xFF142D4E),
+      'badgeBg': const Color(0xFFE8F2FD),
       'badgeColor': const Color(0xFF142D4E),
       'badgeIcon': Icons.verified_user_outlined,
       'footer': 'Titanium Grey • 120Hz LTPO',
@@ -231,7 +231,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       final priceDiff = priceDrop ? (item.mrp! - item.price).toInt() : 0;
 
       String badgeText = '';
-      Color badgeBg = const Color(0xFF142D4E);
+      Color badgeBg = const Color(0xFFE8F2FD);
       Color badgeColor = const Color(0xFF142D4E);
       IconData? badgeIcon;
 
@@ -688,7 +688,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? const Color(0xFF142D4E)
-                              : const Color(0xFF142D4E),
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -759,10 +759,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                 Container(
                                   width: 64,
                                   height: 64,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF142D4E),
-                                    shape: BoxShape.circle,
-                                  ),
+                                  decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                                   child: const Center(
                                     child: Icon(
                                       Icons.favorite_border_rounded,

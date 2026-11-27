@@ -436,10 +436,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               child: Container(
                 width: 38,
                 height: 38,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF142D4E),
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
                 child: const Icon(
                   Icons.qr_code_scanner,
                   color: Color(0xFF142D4E),
@@ -482,7 +479,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: TextField(
         controller: _searchController,
@@ -541,7 +538,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -585,7 +582,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFF142D4E),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -673,7 +670,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF142D4E), width: 1),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.015),
@@ -694,7 +691,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFF142D4E),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFF142D4E)),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(
@@ -1050,10 +1047,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
       child: Container(
         width: 32,
         height: 32,
-        decoration: const BoxDecoration(
-          color: Color(0xFF142D4E),
-          shape: BoxShape.circle,
-        ),
+        decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
         child: Icon(icon, size: 16, color: const Color(0xFF000000)),
       ),
     );
@@ -1072,7 +1066,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
         decoration: BoxDecoration(
           color: isActive ? const Color(0xFF142D4E) : const Color(0xFFF8FAFC),
           shape: BoxShape.circle,
-          border: isActive ? null : Border.all(color: const Color(0xFF142D4E)),
+          border: isActive ? null : Border.all(color: const Color(0xFFE2E8F0)),
         ),
         alignment: Alignment.center,
         child: Text(
@@ -1109,10 +1103,7 @@ class _ProductManagementScreenState extends State<ProductManagementScreen> {
           Container(
             width: 7,
             height: 7,
-            decoration: const BoxDecoration(
-              color: Color(0xFF142D4E),
-              shape: BoxShape.circle,
-            ),
+            decoration: const BoxDecoration(color: Color(0xFFF1F5F9), shape: BoxShape.circle),
           ),
           const SizedBox(width: 6),
           const Text(

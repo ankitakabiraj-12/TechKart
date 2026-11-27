@@ -302,10 +302,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
             onTap: () => Navigator.of(context).maybePop(),
             child: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF142D4E),
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: const Color(0xFFF1F5F9), shape: BoxShape.circle),
               child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF000000)),
             ),
           ),
@@ -360,7 +357,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x06000000),
@@ -449,7 +446,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x06000000),
@@ -568,10 +565,10 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 duration: const Duration(milliseconds: 150),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                  color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: isSelected ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                    color: isSelected ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                   ),
                 ),
                 child: Row(
@@ -632,7 +629,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: TextField(
             controller: _titleController,
@@ -688,7 +685,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF142D4E)),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
           ),
           child: Column(
             children: [
@@ -853,7 +850,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF142D4E)),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [
@@ -887,7 +884,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
-                    color: _wouldRecommend ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                    color: _wouldRecommend ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -906,7 +903,7 @@ class _WriteReviewsScreenState extends State<WriteReviewsScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
-                    color: !_wouldRecommend ? const Color(0xFF142D4E) : const Color(0xFF142D4E),
+                    color: !_wouldRecommend ? const Color(0xFF142D4E) : const Color(0xFFE2E8F0),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
